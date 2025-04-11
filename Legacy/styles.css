@@ -1,0 +1,114 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+
+/* Apply Outfit as the main font */
+body {
+    font-family: 'Outfit', sans-serif;
+}
+
+/* Ensure all text inherits the global font */
+* {
+    --sidebar-width: 250px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 18px;
+}
+
+#sidebar {
+    display: flex;
+    flex-direction: column;
+    width: var(--sidebar-width);
+    height: 100%;
+    background-color: #f4f5f7; /* Fixed missing color */
+    position: fixed;
+    top: 0;
+    left: 0;
+    transition: all 0.3s ease-in-out;
+    z-index: 1000;
+    border-right: 1.5px solid #ccc;
+    min-width: 60px; /* Fixed missing colon */
+}
+
+#sidebar.expand {
+    width: 250px;
+}
+
+#sidebar .logo-sidebar {
+    display: flex;
+    align-items: left;
+    justify-content: left;
+    margin: 10px 0px 0px 30px;
+    padding: 20px 0;
+    background-color: #f4f5f7;
+}
+
+#sidebar .logo-sidebar .sidebar-logo img {
+    width: 100%;
+    max-width: 180px;
+    height: auto;
+}
+
+.sidebar-logo a {
+    cursor: pointer;
+}
+
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 16px;
+    gap: 12px;
+}
+
+.sidebar-item {
+    list-style: none;
+}
+
+.sidebar-link {
+    display: flex;
+    align-items: center;
+    padding: 10px 16px;
+    border-radius: 5px;
+    gap: 15px;
+    color: #000;
+    text-decoration: none;
+    background-color: transparent;
+    transition: background-color 0.3s ease;
+}
+
+.sidebar-link:hover {
+    background-color: lightgray;
+}
+
+.sidebar-link img {
+    margin-right: 10px;
+    height: 24px;
+    width: 24px;
+}
+
+.more-button {
+    position: sticky;
+    background-color: #f4f5f7; /* Match sidebar background */
+    margin-top: auto; /* Push to bottom */
+    z-index: 1; /* Keep above scrolling content */
+}
+
+.more-button .dropdown-toggle::after {
+    content: none;
+}
+
+.dropdown-menu {
+    width: 215px;
+    max-width: none;
+
+
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
+}
+
+.dropdown-item {
+    font-size: 0.9rem;
+}
+
+#content {
+    margin-left: calc(var(--sidebar-width) + 10px);
+    padding: 20px; /* Adds spacing for readability */
+    transition: margin-left 0.3s ease-in-out; /* Smooth transition when sidebar expands */
+}
