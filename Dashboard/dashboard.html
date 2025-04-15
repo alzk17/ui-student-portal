@@ -6,20 +6,179 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Page title -->
-    <title>Lambda</title>
-    <!-- Base URL for relative links -->
-    <base href="https://lambda.in.th/th">
+    <title>Dashboard • Lambda</title>
     <!-- External CSS stylesheets -->
     <link rel="stylesheet" href="https://lambda.in.th/assets_dashboard/css/bootstrap.css?v=1744393116" />
     <link rel="stylesheet" href="https://cdn.lineicons.com/5.0/lineicons.css" />
     <link rel="stylesheet" href="https://lambda.in.th/assets_dashboard/css/icofont.css?v=1744393116" />
-    <link rel="stylesheet" href="https://lambda.in.th/assets_dashboard/css/style.css?v=1744393116" />
+    <link rel="stylesheet" href="styles.css" />
     <link rel="stylesheet" href="https://lambda.in.th/assets_dashboard/css/font-icon.css?v=1744393116">
     <link rel="stylesheet" href="https://lambda.in.th/assets_dashboard/css/slick.min.css?v=1744393116">
     <link rel="stylesheet" href="https://lambda.in.th/assets_dashboard/css/slick-custom.css?v=1744393116">
     <link rel="stylesheet" href="https://lambda.in.th/assets/cusmike/sweet2/sweetalert2.min.css?v=1744393116">
     <link rel="stylesheet" href="https://lambda.in.th/assets/cusmike/toastr/toastr.min.css?v=1744393116">
     <style>
+    
+    .portal-mg {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        gap: 32px;
+        flex-wrap: wrap;
+        margin: 0 auto;
+        max-width: 972px;
+    }
+
+    .portal-pc {
+        max-width: 560px;
+        flex: 1;
+        min-width: 460px; /* Change to smaller value later */
+    }
+
+    .portal-sc {
+        max-width: 350px;
+        flex: 1;
+        min-width: 320px; /* Change to smaller value later */
+    }
+
+    .portal-card {
+        background-color: #ffffff;
+        border: 2px solid #e5e5e5;
+        border-radius: 8px;
+        padding: 16px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        color: inherit;
+        text-decoration: none;
+        transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        outline: none;
+    }
+
+    /* --- Tasks --- */
+    .portal-tasks {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .portal-section-header {
+        margin-bottom: 12px;
+    }
+
+    .portal-section-title {
+        font-size: 1.4rem;
+        font-weight: 700;
+        margin: 0;
+        color: var(--blacks);
+    }
+
+    /* Task Card */
+    .task-card {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background-color: #ffffff;
+        border: 2px solid #E5e5e5;
+        border-radius: 8px;
+        padding: 16px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        gap: 16px;
+        cursor: pointer;
+        text-decoration: none;
+        color: inherit;
+        outline: none; /* Remove default focus outline */
+    }
+
+    .task-card:focus-visible {
+        border-color: #375ce3;
+    }
+
+    /* Left icon */
+    .task-icon img {
+        width: 60px;
+        height: 60px;
+    }
+
+    /* Middle info */
+    .task-info {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 50px;
+    }
+
+    .task-title {
+        font-size: 18px;
+        font-weight: 600;
+        margin: 0;
+        color: #141414;
+    }
+
+    .task-meta {
+        font-size: 16px;
+        margin: 0;
+        color: #666666;
+    }
+
+    .task-card:hover {
+        border-color: #ccc;
+    }
+
+.task-hover-icon {
+  margin-left: auto;
+  font-size: 1.5rem;
+  opacity: 0;
+  transform: translateX(-4px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  color: #375ce3; /* Adjust colour as needed */
+}
+
+.task-card:hover .task-hover-icon {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+
+    /*--- Secondary Content ---*/
+
+        .quick-stats {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px; /* spacing between stat items */
+    padding-bottom: 12px;
+    }
+
+    .stat-item {
+    display: flex;
+    align-items: center;
+    gap: 8px; /* spacing between icon and value */
+    }
+
+    .stat-icon {
+    font-size: 24px; /* size of the icon */
+    display: inline-block;
+    }
+
+    .stat-value {
+    font-size: 16px;
+    font-weight: 600;
+    display: inline-block;
+    }
+
+
+
+
+    .stat-icon i {
+        font-size: 20px;
+        color: #375ce3; /* Adjust per icon if needed */
+        display: inline-block;
+    }
+
+
+
+
+
     </style>
 </head>
 
@@ -39,13 +198,13 @@
             <ul class="sidebar-nav">
                 <li class="sidebar-item">
                     <a href="https://lambda.in.th/dashboard-child" class="sidebar-link">
-                        <img src="https://lambda.in.th/assets_dashboard/img/icon-menu/1.svg" class="img-fluid img-icon" alt=""> <span>DashBoard</span>
+                        <img src="https://lambda.in.th/assets_dashboard/img/icon-menu/1.svg" class="img-fluid img-icon" alt=""> <span>Dashboard</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
                     <a href="https://lambda.in.th/dashboard-child/journey" class="sidebar-link">
                         <img src="https://lambda.in.th/assets_dashboard/img/icon-menu/2.svg" class="img-fluid img-icon" alt="">
-                        <span>Journeys</span>
+                        <span>Learn</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
@@ -62,7 +221,7 @@
                 <li class="sidebar-item">
                     <a href="https://lambda.in.th/dashboard-child/worksheet" class="sidebar-link">
                         <img src="https://lambda.in.th/assets_dashboard/img/icon-menu/5.svg" class="img-fluid img-icon" alt="">
-                        <span>WorkSheet</span>
+                        <span>Resources</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
@@ -78,8 +237,6 @@
                     </a>
                 </li>
             </ul>
-
-
 
             <!-- Sidebar footer with dropdown menu -->
             <div class="sidebar-footer">
@@ -131,152 +288,97 @@
 
             <!-- Main content container -->
             <div class="container-custom main-content">
-                <div class="row main-grid">
-                    <!-- Tasks section -->
-                    <div class="col-xxl-6 col-xl-6 col-md-6 col-sm-6">
-                        <div class="accordion-task">
-                            <div class="accordion" id="accordion_main">
-                                <div class="accordion-item">
-                                    <h2 class="accordion-header">
-                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                            Task
-                                        </button>
-                                    </h2>
+                <div class="portal-mg">
 
-                                    <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordion_main">
-                                        <div class="accordion-body">
-                                            <div class="row">
-                                                <div class="col-lg-12">
-                                                    <div class="box-task">
-                                                        <div class="row">
-                                                            <!-- Task item -->
-                                                            <div class="col-lg-12 col-md-12 col-12">
-                                                                <div class="box-item-task">
-                                                                    <div class="row">
-                                                                        <div class="col-xxl-9 col-xl-8 col-lg-9 col-md-10 col-9">
-                                                                            <div class="box-content">
-                                                                                <div class="row">
-                                                                                    <div class="col-xxl-2 col-xl-6 col-lg-3 col-md-3 col-3">
-                                                                                        <img src="https://atbvjicwbo.cloudimg.io/v7/lambda.in.th/upload/subject/subject07022025-214410.png" class="img-fluid img-task" alt="">
-                                                                                    </div>
-                                                                                    <div class="col-xxl-10 col-xl-6 col-lg-7 col-md-9 col-12">
-                                                                                        <h6 class="title-box">
-                                                                                            test
-                                                                                        </h6>
-                                                                                        <p class="sub-title-box">100 Questions | 0 Min. </p>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-xxl-3 col-xl-4 col-lg-3 col-md-2 col-3">
-                                                                            <div class="box-button">
-                                                                                <a href="https://lambda.in.th/dashboard-child/practice/4ce11179-e415-4315-a129-09f80a2d1178?sku=P3-Maths-WAM02-006" class="btn-circle">
-                                                                                    <i class="fa-solid fa-chevron-right"></i>
-                                                                                </a>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <!-- Task item -->
-                                                            <div class="col-lg-12 col-md-12 col-12">
-                                                                <div class="box-item-task">
-                                                                    <div class="row">
-                                                                        <div class="col-xxl-9 col-xl-8 col-lg-9 col-md-10 col-9">
-                                                                            <div class="box-content">
-                                                                                <div class="row">
-                                                                                    <div class="col-xxl-2 col-xl-6 col-lg-3 col-md-3 col-3">
-                                                                                        <img src="https://atbvjicwbo.cloudimg.io/v7/lambda.in.th/upload/subject/subject07022025-214410.png" class="img-fluid img-task" alt="">
-                                                                                    </div>
-                                                                                    <div class="col-xxl-10 col-xl-6 col-lg-7 col-md-9 col-12">
-                                                                                        <h6 class="title-box">
-                                                                                            mixed practice
-                                                                                        </h6>
-                                                                                        <p class="sub-title-box">50 Questions | 0 Min. </p>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-xxl-3 col-xl-4 col-lg-3 col-md-2 col-3">
-                                                                            <div class="box-button">
-                                                                                <a href="https://lambda.in.th/dashboard-child/practice/b3103ee0-39c1-4c91-a82d-a3f012151791?sku=P3-Maths-WMM03-008" class="btn-circle">
-                                                                                    <i class="fa-solid fa-chevron-right"></i>
-                                                                                </a>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <!-- Task item -->
-                                                            <div class="col-lg-12 col-md-12 col-12">
-                                                                <div class="box-item-task">
-                                                                    <div class="row">
-                                                                        <div class="col-xxl-9 col-xl-8 col-lg-9 col-md-10 col-9">
-                                                                            <div class="box-content">
-                                                                                <div class="row">
-                                                                                    <div class="col-xxl-2 col-xl-6 col-lg-3 col-md-3 col-3">
-                                                                                        <img src="https://atbvjicwbo.cloudimg.io/v7/lambda.in.th/upload/subject/subject07022025-214410.png" class="img-fluid img-task" alt="">
-                                                                                    </div>
-                                                                                    <div class="col-xxl-10 col-xl-6 col-lg-7 col-md-9 col-12">
-                                                                                        <h6 class="title-box">
-                                                                                            asdfasdf
-                                                                                        </h6>
-                                                                                        <p class="sub-title-box">5 Questions | 0 Min. </p>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-xxl-3 col-xl-4 col-lg-3 col-md-2 col-3">
-                                                                            <div class="box-button">
-                                                                                <a href="https://lambda.in.th/dashboard-child/practice/d2def83e-0933-4e5d-ab50-6452c8c5968d?sku=Testing 1" class="btn-circle">
-                                                                                    <i class="fa-solid fa-chevron-right"></i>
-                                                                                </a>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <!-- Task item -->
-                                                            <div class="col-lg-12 col-md-12 col-12">
-                                                                <div class="box-item-task">
-                                                                    <div class="row">
-                                                                        <div class="col-xxl-9 col-xl-8 col-lg-9 col-md-10 col-9">
-                                                                            <div class="box-content">
-                                                                                <div class="row">
-                                                                                    <div class="col-xxl-2 col-xl-6 col-lg-3 col-md-3 col-3">
-                                                                                        <img src="https://atbvjicwbo.cloudimg.io/v7/lambda.in.th/upload/subject/subject07022025-214410.png" class="img-fluid img-task" alt="">
-                                                                                    </div>
-                                                                                    <div class="col-xxl-10 col-xl-6 col-lg-7 col-md-9 col-12">
-                                                                                        <h6 class="title-box">
-                                                                                            asdfasdf
-                                                                                        </h6>
-                                                                                        <p class="sub-title-box">5 Questions | 0 Min. </p>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-xxl-3 col-xl-4 col-lg-3 col-md-2 col-3">
-                                                                            <div class="box-button">
-                                                                                <a href="https://lambda.in.th/dashboard-child/practice/39dc59e4-b217-41a3-a33d-c668a0e312ba?sku=Testing 1" class="btn-circle">
-                                                                                    <i class="fa-solid fa-chevron-right"></i>
-                                                                                </a>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                    <!-- Tasks section old -->
+                    <div class="portal-pc">
+                    
+                    <!-- New tasks section -->
+                    <div class="portal-section-header">
+                        <h2 class="portal-section-title">Task</h2>
+                    </div>
+                    <div class="portal-tasks">
+                        <a href="https://lambda.in.th/dashboard-child/practice/4ce11179-e415-4315-a129-09f80a2d1178?sku=P3-Maths-AP01-003" class="task-card">
+                            <div class="task-icon">
+                            <img src="test-icon.svg" alt="icon" />
                             </div>
-                        </div>
+                            <div class="task-info">
+                            <h6 class="task-title">Mixed Practice 1</h6>
+                            <p class="task-meta">35 questions&nbsp;&nbsp;•&nbsp;&nbsp;25 minutes</p>
+                            </div>
+                            <div class="task-hover-icon">
+                                <i class="fa-solid fa-arrow-right-long"></i>
+                            </div>
+                        </a>
+
+                        <a href="https://lambda.in.th/dashboard-child/practice/4ce11179-e415-4315-a129-09f80a2d1178?sku=P3-Maths-AP01-003" class="task-card">
+                            <div class="task-icon">
+                            <img src="test-icon.svg" alt="icon" />
+                            </div>
+                            <div class="task-info">
+                            <h6 class="task-title">Science Practice</h6>
+                            <p class="task-meta">20 questions&nbsp;&nbsp;•&nbsp;&nbsp;15 minutes</p>
+                            </div>
+                            <div class="task-hover-icon">
+                                <i class="fa-solid fa-arrow-right-long"></i>
+                            </div>
+                        </a>
+
+                        <a href="https://lambda.in.th/dashboard-child/practice/4ce11179-e415-4315-a129-09f80a2d1178?sku=P3-Maths-AP01-003" class="task-card">
+                            <div class="task-icon">
+                            <img src="test-icon.svg" alt="icon" />
+                            </div>
+                            <div class="task-info">
+                            <h6 class="task-title">แบบฝึกหัดให้ขวัญ</h6>
+                            <p class="task-meta">20 questions</p>
+                            </div>
+                            <div class="task-hover-icon">
+                                <i class="fa-solid fa-arrow-right-long"></i>
+                            </div>
+                        </a>
+
+                        <a href="https://lambda.in.th/dashboard-child/practice/4ce11179-e415-4315-a129-09f80a2d1178?sku=P3-Maths-AP01-003" class="task-card">
+                            <div class="task-icon">
+                            <img src="test-icon.svg" alt="icon" />
+                            </div>
+                            <div class="task-info">
+                            <h6 class="task-title">Primary 1 Entrance Paper</h6>
+                            <p class="task-meta">30 questions&nbsp;&nbsp;•&nbsp;&nbsp;30 minutes</p>
+                            </div>
+                            <div class="task-hover-icon">
+                                <i class="fa-solid fa-arrow-right-long"></i>
+                            </div>
+                        </a>
+
+                    </div>
+
                     </div>
                     <!-- Streaks and rewards section -->
-                    <aside class="secondary-content col-xxl-5 col-xl-5 col-md-5 col-sm-5">
+                    <aside class="portal-sc">
+
+                        <div class="quick-stats">
+                            <div class="stat-item">
+                              <div class="stat-icon">
+                                <i class="fa-solid fa-bolt-lightning"></i>
+                              </div>
+                              <div class="stat-value">8</div>
+                            </div>
+                          
+                            <div class="stat-item">
+                              <div class="stat-icon">
+                                <i class="fa-solid fa-gem"></i>
+                              </div>
+                              <div class="stat-value">28</div>
+                            </div>
+                          
+                            <div class="stat-item">
+                              <div class="stat-icon">
+                                <i class="fa-solid fa-gift"></i>
+                              </div>
+                            </div>
+                        </div>
+                          
+
                         <!-- Streaks box -->
                         <div class="box-streaks">
                             <h2 class="title-streaks">Streaks</h2>
@@ -358,6 +460,7 @@
             </div>
         </div>
     </div>
+    
     <!-- Question modal -->
     <div class="modal fade" id="myQuestionModal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
@@ -395,7 +498,7 @@
     <script>
         $(document).ready(function() {
             const handleSidebar = () => {
-                if (window.matchMedia("screen and (max-width: 1024px)").matches) {
+                if (window.matchMedia("screen and (max-width: 1179px)").matches) {
                     const _sidebar = $("#sidebar");
                     if (_sidebar.length) {
                         _sidebar.removeClass("expand");
