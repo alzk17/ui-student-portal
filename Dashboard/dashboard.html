@@ -36,6 +36,9 @@
     }
 
     .portal-sc {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
         max-width: 350px;
         flex: 1;
         min-width: 320px; /* Change to smaller value later */
@@ -46,11 +49,19 @@
         border: 2px solid #e5e5e5;
         border-radius: 8px;
         padding: 16px;
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
         color: inherit;
         text-decoration: none;
-        transition: border-color 0.2s ease, box-shadow 0.2s ease;
         outline: none;
+        transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .portal-card.clickable {
+        cursor: pointer;
+        transition: border-color 0.2s ease;
+    }
+
+    .portal-card.clickable:hover {
+        border-color: #ccc;
     }
 
     /* --- Tasks --- */
@@ -77,10 +88,9 @@
         align-items: center;
         justify-content: space-between;
         background-color: #ffffff;
-        border: 2px solid #E5e5e5;
+        border: 2px solid #e5e5e5;
         border-radius: 8px;
-        padding: 16px;
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        padding: 10px 16px;
         gap: 16px;
         cursor: pointer;
         text-decoration: none;
@@ -124,29 +134,30 @@
         border-color: #ccc;
     }
 
-.task-hover-icon {
-  margin-left: auto;
-  font-size: 1.5rem;
-  opacity: 0;
-  transform: translateX(-4px);
-  transition: opacity 0.2s ease, transform 0.2s ease;
-  color: #375ce3; /* Adjust colour as needed */
-}
+    .task-hover-icon {
+    margin-left: auto;
+    font-size: 1.5rem;
+    opacity: 0;
+    transform: translateX(-4px);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    color: #375ce3; /* Adjust colour as needed */
+    }
 
-.task-card:hover .task-hover-icon {
-  opacity: 1;
-  transform: translateX(0);
-}
+    .task-card:hover .task-hover-icon {
+    opacity: 1;
+    transform: translateX(0);
+    }
 
 
     /*--- Secondary Content ---*/
 
-        .quick-stats {
+    .quick-stats {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 24px; /* spacing between stat items */
-    padding-bottom: 12px;
+        justify-content: space-between;
+        align-items: center;
+        gap: 24px; /* spacing between stat items */
+        padding-bottom: 12px;
+        border: 2px solid transparent;
     }
 
     .stat-item {
@@ -166,16 +177,106 @@
     display: inline-block;
     }
 
-
-
-
     .stat-icon i {
         font-size: 20px;
         color: #375ce3; /* Adjust per icon if needed */
         display: inline-block;
     }
 
+    /*--- Quest Card ---*/
 
+    /* Overall quest card */
+.quest-card {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Header section */
+.quest-header {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.quest-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin: 0;
+  color: #141414;
+}
+
+.quest-subtitle {
+  font-size: 0.95rem;
+  color: #666666;
+  margin: 0;
+}
+
+/* Quest item */
+.quest-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  background-color: #ffffff;
+}
+
+/* Quest info: description + progress */
+.quest-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.quest-description {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #141414;
+  margin: 0;
+}
+
+/* Progress bar container */
+.quest-progress-container {
+  position: relative;
+  height: 18px;
+  background-color: #f0f0f0;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.quest-progress-bar {
+  width: 100%;
+  height: 100%;
+  background-color: #f0f0f0;
+  position: relative;
+  border-radius: 10px;
+}
+
+.quest-progress-fill {
+  height: 100%;
+  background-color: #5271ff;
+  border-radius: 10px 0 0 10px;
+  transition: width 0.3s ease;
+}
+
+/* Progress text on top */
+.quest-progress-text {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #141414;
+  line-height: 18px;
+}
+
+/* Right icon */
+.quest-status-icon i {
+  font-size: 1.25rem;
+  color: #5271ff;
+}
 
 
 
@@ -377,84 +478,63 @@
                               </div>
                             </div>
                         </div>
+
+                        <div class="portal-card quest-card">
+                            <div class="quest-header">
+                              <h3 class="quest-title">Daily Quests</h3>
+                              <p class="quest-subtitle">Complete daily quests to earn bonus gems.</p>
+                            </div>
+                          
+                            <div class="quest-item">
+                              <div class="quest-info">
+                                <p class="quest-description">Complete 10 questions</p>
+                                <div class="quest-progress-container">
+                                  <div class="quest-progress-bar">
+                                    <div class="quest-progress-fill" style="width: 60%"></div>
+                                  </div>
+                                  <span class="quest-progress-text">3 / 5</span>
+                                </div>
+                              </div>
+                              <div class="quest-status-icon">
+                                <i class="fa-solid fa-arrow-right-long"></i> <!-- use fa-check if completed -->
+                              </div>
+                            </div>
+
+                            <div class="quest-item">
+                                <div class="quest-info">
+                                  <p class="quest-description">Spend 10 minutes learning</p>
+                                  <div class="quest-progress-container">
+                                    <div class="quest-progress-bar">
+                                      <div class="quest-progress-fill" style="width: 40%"></div>
+                                    </div>
+                                    <span class="quest-progress-text">4 / 10</span>
+                                  </div>
+                                </div>
+                                <div class="quest-status-icon">
+                                  <i class="fa-solid fa-arrow-right-long"></i> <!-- use fa-check if completed -->
+                                </div>
+                            </div>
+
+                            <div class="quest-item">
+                                <div class="quest-info">
+                                  <p class="quest-description">Get 5 questions correct</p>
+                                  <div class="quest-progress-container">
+                                    <div class="quest-progress-bar">
+                                      <div class="quest-progress-fill" style="width: 40%"></div>
+                                    </div>
+                                    <span class="quest-progress-text">4 / 10</span>
+                                  </div>
+                                </div>
+                                <div class="quest-status-icon">
+                                  <i class="fa-solid fa-arrow-right-long"></i> <!-- use fa-check if completed -->
+                                </div>
+                            </div>
+
+                        </div>
+                          
                           
 
-                        <!-- Streaks box -->
-                        <div class="box-streaks">
-                            <h2 class="title-streaks">Streaks</h2>
-                            <h1 class="total-streaks">3 <img src="https://lambda.in.th/assets_dashboard/img/icon/icon-thunder.svg" class="img-fluid" /></h1>
-                            <p class="description-streaks">Complete a task to earn streak!</p>
 
-                            <div class="box-days">
-                                <!-- Day item -->
-                                <div class="item-day">
-                                    <div class="box-icon">
-                                        <img src="https://lambda.in.th/assets_dashboard/img/icon/icon-thunder.svg" class="img-fluid" alt="">
-                                    </div>
-                                    <p class="text-item-day">Su</p>
-                                </div>
-                                <!-- Day item -->
-                                <div class="item-day">
-                                    <div class="box-icon">
-                                        <img src="https://lambda.in.th/assets_dashboard/img/icon/icon-thunder.svg" class="img-fluid" alt="">
-                                    </div>
-                                    <p class="text-item-day">M</p>
-                                </div>
-                                <!-- Day item -->
-                                <div class="item-day">
-                                    <div class="box-icon">
-                                        <img src="https://lambda.in.th/assets_dashboard/img/icon/icon-thunder.svg" class="img-fluid" alt="">
-                                    </div>
-                                    <p class="text-item-day">T</p>
-                                </div>
-                                <!-- Day item -->
-                                <div class="item-day">
-                                    <div class="box-icon">
-                                        <img src="https://lambda.in.th/assets_dashboard/img/icon/icon-thunder-nocolor.svg" class="img-fluid" alt="">
-                                    </div>
-                                    <p class="text-item-day">W</p>
-                                </div>
-                                <!-- Day item -->
-                                <div class="item-day">
-                                    <div class="box-icon">
-                                        <img src="https://lambda.in.th/assets_dashboard/img/icon/icon-thunder.svg" class="img-fluid" alt="">
-                                    </div>
-                                    <p class="text-item-day">Th</p>
-                                </div>
-                                <!-- Day item -->
-                                <div class="item-day">
-                                    <div class="box-icon">
-                                        <img src="https://lambda.in.th/assets_dashboard/img/icon/icon-thunder.svg" class="img-fluid" alt="">
-                                    </div>
-                                    <p class="text-item-day">F</p>
-                                </div>
-                                <!-- Day item -->
-                                <div class="item-day">
-                                    <div class="box-icon">
-                                        <img src="https://lambda.in.th/assets_dashboard/img/icon/icon-thunder-nocolor.svg" class="img-fluid" alt="">
-                                    </div>
-                                    <p class="text-item-day">S</p>
-                                </div>
-                            </div>
-
-                            <a href="https://lambda.in.th/dashboard-child/set-work" class="btn btn-set-task">Set Task</a>
-                        </div>
-
-                        <!-- Next reward box -->
-                        <div class="box-next-reward">
-                            <h2>Next Streak Reward</h2>
-                            <div class="box-content-next">
-                                <div class="box-item-content">
-                                    <p>Unlock Pepe the price portrait.</p>
-                                    <div class="progress" style="height: 20px;">
-                                        <div class="progress-bar progress-bar-custom" role="progressbar" style="width: 55%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">12/50</div>
-                                    </div>
-                                </div>
-                                <div class="box-item-image">
-                                    <img src="./assets_dashboard/img/mascot2.png" class="img-fluid" alt="">
-                                </div>
-                            </div>
-                        </div>
                     </aside>
                 </div>
             </div>
