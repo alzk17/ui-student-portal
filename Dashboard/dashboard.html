@@ -32,17 +32,25 @@
     .portal-pc {
         max-width: 560px;
         flex: 1;
-        min-width: 460px; /* Change to smaller value later */
-    }
-
-    .portal-sc {
+        min-width: 460px;
         display: flex;
         flex-direction: column;
-        gap: 12px;
-        max-width: 350px;
-        flex: 1;
-        min-width: 320px; /* Change to smaller value later */
+        gap: 24px; /* or 16px, depending on your vertical rhythm */
     }
+
+
+    .portal-sc {
+  max-width: 350px;
+  flex: 1;
+  min-width: 320px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: sticky;
+  top: 24px;
+  min-height: calc(100vh - 48px);
+}
+
 
     .portal-card {
         background-color: #ffffff;
@@ -147,6 +155,60 @@
     opacity: 1;
     transform: translateX(0);
     }
+
+    /*- Weekly Summary Stats -*/
+
+        .weekly-summary-card {
+    padding: 18px;
+    background-color: #ffffff;
+    }
+
+    .weekly-summary-header {
+    margin-bottom: 20px;
+    }
+
+    .weekly-summary-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin: 0;
+    color: #141414;
+    }
+
+    .weekly-summary-stats {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    }
+
+    .weekly-stat-item {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px;
+    background-color: #f9f9f9;
+    border-radius: 6px;
+    }
+
+    .weekly-stat-item .stat-icon i {
+    font-size: 1.5rem;
+    color: #375ce3;
+    }
+
+    .stat-info .stat-label {
+    font-size: 14px;
+    margin: 0;
+    color: #666666;
+    }
+
+    .stat-info .stat-value {
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0;
+    color: #141414;
+    }
+
+
 
 
     /*--- Secondary Content ---*/
@@ -278,9 +340,8 @@
   color: #5271ff;
 }
 
-
-
     </style>
+
 </head>
 
 <body>
@@ -393,8 +454,47 @@
 
                     <!-- Tasks section old -->
                     <div class="portal-pc">
-                    
+
+                    <div class="portal-card weekly-summary-card">
+                        <div class="weekly-summary-header">
+                            <h3 class="weekly-summary-title">Your Weekly Activity</h3>
+                        </div>
+                        
+                        <div class="weekly-summary-stats">
+                            <div class="weekly-stat-item">
+                            <div class="stat-icon">
+                                <i class="fa-solid fa-check"></i>
+                            </div>
+                            <div class="stat-info">
+                                <p class="stat-label">Total correct</p>
+                                <p class="stat-value">132</p>
+                            </div>
+                            </div>
+                        
+                            <div class="weekly-stat-item">
+                            <div class="stat-icon">
+                                <i class="fa-solid fa-hourglass-half"></i>
+                            </div>
+                            <div class="stat-info">
+                                <p class="stat-label">Time spent</p>
+                                <p class="stat-value">5h 45m</p>
+                            </div>
+                            </div>
+                        
+                            <div class="weekly-stat-item">
+                            <div class="stat-icon">
+                                <i class="fa-solid fa-briefcase"></i>
+                            </div>
+                            <div class="stat-info">
+                                <p class="stat-label">Tasks done</p>
+                                <p class="stat-value">4</p>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                          
                     <!-- New tasks section -->
+                    <div>
                     <div class="portal-section-header">
                         <h2 class="portal-section-title">Task</h2>
                     </div>
@@ -451,6 +551,46 @@
                             </div>
                         </a>
 
+                        <a href="https://lambda.in.th/dashboard-child/practice/4ce11179-e415-4315-a129-09f80a2d1178?sku=P3-Maths-AP01-003" class="task-card">
+                            <div class="task-icon">
+                            <img src="test-icon.svg" alt="icon" />
+                            </div>
+                            <div class="task-info">
+                            <h6 class="task-title">Primary 1 Entrance Paper</h6>
+                            <p class="task-meta">30 questions&nbsp;&nbsp;•&nbsp;&nbsp;30 minutes</p>
+                            </div>
+                            <div class="task-hover-icon">
+                                <i class="fa-solid fa-arrow-right-long"></i>
+                            </div>
+                        </a>
+
+                        <a href="https://lambda.in.th/dashboard-child/practice/4ce11179-e415-4315-a129-09f80a2d1178?sku=P3-Maths-AP01-003" class="task-card">
+                            <div class="task-icon">
+                            <img src="test-icon.svg" alt="icon" />
+                            </div>
+                            <div class="task-info">
+                            <h6 class="task-title">Primary 1 Entrance Paper</h6>
+                            <p class="task-meta">30 questions&nbsp;&nbsp;•&nbsp;&nbsp;30 minutes</p>
+                            </div>
+                            <div class="task-hover-icon">
+                                <i class="fa-solid fa-arrow-right-long"></i>
+                            </div>
+                        </a>
+
+                        <a href="https://lambda.in.th/dashboard-child/practice/4ce11179-e415-4315-a129-09f80a2d1178?sku=P3-Maths-AP01-003" class="task-card">
+                            <div class="task-icon">
+                            <img src="test-icon.svg" alt="icon" />
+                            </div>
+                            <div class="task-info">
+                            <h6 class="task-title">Primary 1 Entrance Paper</h6>
+                            <p class="task-meta">30 questions&nbsp;&nbsp;•&nbsp;&nbsp;30 minutes</p>
+                            </div>
+                            <div class="task-hover-icon">
+                                <i class="fa-solid fa-arrow-right-long"></i>
+                            </div>
+                        </a>
+
+                    </div>
                     </div>
 
                     </div>
@@ -531,10 +671,33 @@
                             </div>
 
                         </div>
-                          
-                          
 
-
+                        <div class="portal-card league-card">
+                            <div class="league-header">
+                              <h3 class="league-title">Quantum League</h3>
+                              <p class="league-subtitle">Compete weekly to climb the leaderboard and earn rewards.</p>
+                            </div>
+                          
+                            <div class="league-body">
+                              <div class="league-tier-badge">
+                                <i class="fa-solid fa-lock"></i> <!-- Placeholder for tier badge -->
+                                <span class="tier-name">Bronze League</span>
+                              </div>
+                          
+                              <div class="league-xp-info">
+                                <p class="xp-label">Your XP this week:</p>
+                                <strong class="xp-value">84</strong>
+                              </div>
+                          
+                              <div class="league-progress-container">
+                                <div class="league-progress-bar">
+                                  <div class="league-progress-fill" style="width: 0%"></div> <!-- No fill since it's locked -->
+                                </div>
+                                <span class="league-progress-text">Coming soon</span>
+                              </div>
+                            </div>
+                        </div>
+                          
                     </aside>
                 </div>
             </div>
