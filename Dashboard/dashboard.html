@@ -1,366 +1,45 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <!-- Meta tags for character encoding and responsive viewport -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Page title -->
-    <title>Dashboard • Lambda</title>
-    <!-- External CSS stylesheets -->
-    <link rel="stylesheet" href="https://lambda.in.th/assets_dashboard/css/bootstrap.css?v=1744393116" />
-    <link rel="stylesheet" href="https://cdn.lineicons.com/5.0/lineicons.css" />
-    <link rel="stylesheet" href="https://lambda.in.th/assets_dashboard/css/icofont.css?v=1744393116" />
-    <link rel="stylesheet" href="styles.css" />
-    <link rel="stylesheet" href="https://lambda.in.th/assets_dashboard/css/font-icon.css?v=1744393116">
-    <link rel="stylesheet" href="https://lambda.in.th/assets_dashboard/css/slick.min.css?v=1744393116">
-    <link rel="stylesheet" href="https://lambda.in.th/assets_dashboard/css/slick-custom.css?v=1744393116">
-    <link rel="stylesheet" href="https://lambda.in.th/assets/cusmike/sweet2/sweetalert2.min.css?v=1744393116">
-    <link rel="stylesheet" href="https://lambda.in.th/assets/cusmike/toastr/toastr.min.css?v=1744393116">
-    <style>
-    
-    .portal-mg {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        gap: 32px;
-        flex-wrap: wrap;
-        margin: 0 auto;
-        max-width: 972px;
-    }
+    <title>Lambda</title>
+<link rel="stylesheet" href="https://lambda.in.th/assets_dashboard/css/bootstrap.css?v=1745898912" />
+ <link rel="stylesheet" href="https://cdn.lineicons.com/5.0/lineicons.css" />
+ <link rel="stylesheet" href="https://lambda.in.th/assets_dashboard/css/icofont.css?v=1745898912" />
+ <link rel="stylesheet" href="styles.css" />
+ <link rel="stylesheet" href="https://lambda.in.th/assets_dashboard/css/font-icon.css?v=1745898912">
+ <link rel="stylesheet" href="https://lambda.in.th/assets_dashboard/css/slick.min.css?v=1745898912">
+ <link rel="stylesheet" href="https://lambda.in.th/assets_dashboard/css/slick-custom.css?v=1745898912">
+ <link rel="stylesheet" href="https://lambda.in.th/assets/cusmike/sweet2/sweetalert2.min.css?v=1745898912">
+ <link rel="stylesheet" href="https://lambda.in.th/assets/cusmike/toastr/toastr.min.css?v=1745898912">
 
-    .portal-pc {
-        max-width: 560px;
-        flex: 1;
-        min-width: 460px;
-        display: flex;
-        flex-direction: column;
-        gap: 24px; /* or 16px, depending on your vertical rhythm */
-    }
-
-
-    .portal-sc {
-  max-width: 350px;
-  flex: 1;
-  min-width: 320px;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  position: sticky;
-  top: 24px;
-  min-height: calc(100vh - 48px);
-}
-
-
-    .portal-card {
-        background-color: #ffffff;
-        border: 2px solid #e5e5e5;
-        border-radius: 8px;
-        padding: 16px;
-        color: inherit;
-        text-decoration: none;
-        outline: none;
-        transition: border-color 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    .portal-card.clickable {
-        cursor: pointer;
-        transition: border-color 0.2s ease;
-    }
-
-    .portal-card.clickable:hover {
-        border-color: #ccc;
-    }
-
-    /* --- Tasks --- */
-    .portal-tasks {
-        display: flex;
-        flex-direction: column;
-        gap: 16px;
-    }
-
-    .portal-section-header {
-        margin-bottom: 12px;
-    }
-
-    .portal-section-title {
-        font-size: 1.4rem;
-        font-weight: 700;
-        margin: 0;
-        color: var(--blacks);
-    }
-
-    /* Task Card */
-    .task-card {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        background-color: #ffffff;
-        border: 2px solid #e5e5e5;
-        border-radius: 8px;
-        padding: 10px 16px;
-        gap: 16px;
-        cursor: pointer;
-        text-decoration: none;
-        color: inherit;
-        outline: none; /* Remove default focus outline */
-    }
-
-    .task-card:focus-visible {
-        border-color: #375ce3;
-    }
-
-    /* Left icon */
-    .task-icon img {
-        width: 60px;
-        height: 60px;
-    }
-
-    /* Middle info */
-    .task-info {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        height: 50px;
-    }
-
-    .task-title {
-        font-size: 18px;
-        font-weight: 600;
-        margin: 0;
-        color: #141414;
-    }
-
-    .task-meta {
-        font-size: 16px;
-        margin: 0;
-        color: #666666;
-    }
-
-    .task-card:hover {
-        border-color: #ccc;
-    }
-
-    .task-hover-icon {
-    margin-left: auto;
-    font-size: 1.5rem;
-    opacity: 0;
-    transform: translateX(-4px);
-    transition: opacity 0.2s ease, transform 0.2s ease;
-    color: #375ce3; /* Adjust colour as needed */
-    }
-
-    .task-card:hover .task-hover-icon {
-    opacity: 1;
-    transform: translateX(0);
-    }
-
-    /*- Weekly Summary Stats -*/
-
-        .weekly-summary-card {
-    padding: 18px;
-    background-color: #ffffff;
-    }
-
-    .weekly-summary-header {
-    margin-bottom: 20px;
-    }
-
-    .weekly-summary-title {
-    font-size: 1.2rem;
-    font-weight: 700;
-    margin: 0;
-    color: #141414;
-    }
-
-    .weekly-summary-stats {
-    display: flex;
-    justify-content: space-between;
-    gap: 16px;
-    }
-
-    .weekly-stat-item {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 12px;
-    background-color: #f9f9f9;
-    border-radius: 6px;
-    }
-
-    .weekly-stat-item .stat-icon i {
-    font-size: 1.5rem;
-    color: #375ce3;
-    }
-
-    .stat-info .stat-label {
-    font-size: 14px;
-    margin: 0;
-    color: #666666;
-    }
-
-    .stat-info .stat-value {
-    font-size: 16px;
-    font-weight: 600;
-    margin: 0;
-    color: #141414;
-    }
-
-
-
-
-    /*--- Secondary Content ---*/
-
-    .quick-stats {
-    display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: 24px; /* spacing between stat items */
-        padding-bottom: 12px;
-        border: 2px solid transparent;
-    }
-
-    .stat-item {
-    display: flex;
-    align-items: center;
-    gap: 8px; /* spacing between icon and value */
-    }
-
-    .stat-icon {
-    font-size: 24px; /* size of the icon */
-    display: inline-block;
-    }
-
-    .stat-value {
-    font-size: 16px;
-    font-weight: 600;
-    display: inline-block;
-    }
-
-    .stat-icon i {
-        font-size: 20px;
-        color: #375ce3; /* Adjust per icon if needed */
-        display: inline-block;
-    }
-
-    /*--- Quest Card ---*/
-
-    /* Overall quest card */
-.quest-card {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-/* Header section */
-.quest-header {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.quest-title {
-  font-size: 1.2rem;
-  font-weight: 700;
-  margin: 0;
-  color: #141414;
-}
-
-.quest-subtitle {
-  font-size: 0.95rem;
-  color: #666666;
-  margin: 0;
-}
-
-/* Quest item */
-.quest-item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 12px 16px;
-  background-color: #ffffff;
-}
-
-/* Quest info: description + progress */
-.quest-info {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
-
-.quest-description {
-  font-size: 1rem;
-  font-weight: 600;
-  color: #141414;
-  margin: 0;
-}
-
-/* Progress bar container */
-.quest-progress-container {
-  position: relative;
-  height: 18px;
-  background-color: #f0f0f0;
-  border-radius: 10px;
-  overflow: hidden;
-}
-
-.quest-progress-bar {
-  width: 100%;
-  height: 100%;
-  background-color: #f0f0f0;
-  position: relative;
-  border-radius: 10px;
-}
-
-.quest-progress-fill {
-  height: 100%;
-  background-color: #5271ff;
-  border-radius: 10px 0 0 10px;
-  transition: width 0.3s ease;
-}
-
-/* Progress text on top */
-.quest-progress-text {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: #141414;
-  line-height: 18px;
-}
-
-/* Right icon */
-.quest-status-icon i {
-  font-size: 1.25rem;
-  color: #5271ff;
-}
-
-    </style>
-
+ <style>
+    /* @import  url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Sarabun:wght@300;400;500;600&display=swap'); */
+    @import  url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Sarabun:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
+ </style>
 </head>
 
 <body>
     <div class="wrapper">
-        <!-- Sidebar navigation -->
         <aside id="sidebar" class="expand">
             <!-- Sidebar logo section -->
             <div class="logo-sidebar">
                 <div class="sidebar-logo">
                     <a href="https://lambda.in.th/dashboard-child">
-                        <img src="https://lambda.in.th/assets_dashboard/img/logo-new-lambda.png" class="img-fluid" alt="">
+                        <img src="test-logo-big.svg" class="logo-expanded" alt="">
+                        <img src="test-logo-small.svg" class="logo-collapsed" alt="Small Logo">
                     </a>
                 </div>
             </div>
             <!-- Sidebar navigation menu -->
             <ul class="sidebar-nav">
-                <li class="sidebar-item">
+                <li class="sidebar-item active">
                     <a href="https://lambda.in.th/dashboard-child" class="sidebar-link">
-                        <img src="https://lambda.in.th/assets_dashboard/img/icon-menu/1.svg" class="img-fluid img-icon" alt=""> <span>Dashboard</span>
+                        <img src="https://lambda.in.th/assets_dashboard/img/icon-menu/1.svg" class="img-fluid img-icon" alt=""> <span>Home</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
@@ -389,7 +68,7 @@
                 <li class="sidebar-item">
                     <a href="https://lambda.in.th/dashboard-child/hangouts" class="sidebar-link">
                         <img src="https://lambda.in.th/assets_dashboard/img/icon-menu/6.svg" class="img-fluid img-icon-step2" alt="">
-                        <span>Hangouts</span>
+                        <span>Shop</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
@@ -408,412 +87,440 @@
                     </a>
 
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="javascript:void(0)" onclick="logoutChild();"><i class="lni lni-user-multiple-4"></i> <span>Switch to parent account</span></a></li>
-                        <li><a class="dropdown-item" href="javascript:void(0)" onclick="logoutChild();"> <i class="lni lni-exit"></i> <span>Logout</span></a></li>
+                        <li><a class="dropdown-item" href="javascript:void(0)" onclick="logoutChild();"><span>Help</span></a></li>
+                        <li><div class="dropdown-divider"></div></li>
+                        <li><a class="dropdown-item" href="javascript:void(0)" onclick="logoutChild();"><span>Switch to parent account</span></a></li>
+                        <li><a class="dropdown-item" href="javascript:void(0)" onclick="logoutChild();"><span>Log out</span></a></li>
                     </ul>
                 </div>
             </div>
         </aside>
-        <!-- Main content area -->
-        <div class="main">
-            <!-- Header section -->
+  
+  
+  <div class="main">
             <div class="border-header-page">
                 <div class="container-custom">
                     <div class="box-headerpage">
-                        <!-- Header title and image -->
-                        <div class="box-group-title">
-                            <div class="box-image">
-                                <img src="https://lambda.in.th/uploads/child/child27012025-141619.jpeg" class="img-fluid" alt="">
-                            </div>
+    <div class="box-group-title">
+        <div class="box-image">
+            <img src="https://lambda.in.th/uploads/child/child27012025-141619.jpeg" class="img-fluid" alt="">
+        </div>
 
-                            <div class="box-item-content">
-                                <h1 class="title-page"></h1>
-                                <h6 class="sub-title-page"></h6>
-                            </div>
-                        </div>
-
-                        <!-- Points display -->
-                        <div class="box-point">
-                            <div class="box-coin">
-                                <div class="number-coins">3 </div>
-                                <div> <img src="https://lambda.in.th/assets_dashboard/img/icon/icon-thunder.svg" class="img-fluid" alt=""> </div>
-                            </div>
-
-                            <div class="box-coin">
-                                <div class="number-coins">3 </div>
-                                <div> <img src="https://lambda.in.th/assets_dashboard/img/icon-menu/9.png" class="img-fluid" alt=""> </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Main content container -->
-            <div class="container-custom main-content">
-                <div class="portal-mg">
-
-                    <!-- Tasks section old -->
-                    <div class="portal-pc">
-
-                    <div class="portal-card weekly-summary-card">
-                        <div class="weekly-summary-header">
-                            <h3 class="weekly-summary-title">Your Weekly Activity</h3>
-                        </div>
-                        
-                        <div class="weekly-summary-stats">
-                            <div class="weekly-stat-item">
-                            <div class="stat-icon">
-                                <i class="fa-solid fa-check"></i>
-                            </div>
-                            <div class="stat-info">
-                                <p class="stat-label">Total correct</p>
-                                <p class="stat-value">132</p>
-                            </div>
-                            </div>
-                        
-                            <div class="weekly-stat-item">
-                            <div class="stat-icon">
-                                <i class="fa-solid fa-hourglass-half"></i>
-                            </div>
-                            <div class="stat-info">
-                                <p class="stat-label">Time spent</p>
-                                <p class="stat-value">5h 45m</p>
-                            </div>
-                            </div>
-                        
-                            <div class="weekly-stat-item">
-                            <div class="stat-icon">
-                                <i class="fa-solid fa-briefcase"></i>
-                            </div>
-                            <div class="stat-info">
-                                <p class="stat-label">Tasks done</p>
-                                <p class="stat-value">4</p>
-                            </div>
-                            </div>
-                        </div>
-                    </div>
-                          
-                    <!-- New tasks section -->
-                    <div>
-                    <div class="portal-section-header">
-                        <h2 class="portal-section-title">Task</h2>
-                    </div>
-                    <div class="portal-tasks">
-                        <a href="https://lambda.in.th/dashboard-child/practice/4ce11179-e415-4315-a129-09f80a2d1178?sku=P3-Maths-AP01-003" class="task-card">
-                            <div class="task-icon">
-                            <img src="test-icon.svg" alt="icon" />
-                            </div>
-                            <div class="task-info">
-                            <h6 class="task-title">Mixed Practice 1</h6>
-                            <p class="task-meta">35 questions&nbsp;&nbsp;•&nbsp;&nbsp;25 minutes</p>
-                            </div>
-                            <div class="task-hover-icon">
-                                <i class="fa-solid fa-arrow-right-long"></i>
-                            </div>
-                        </a>
-
-                        <a href="https://lambda.in.th/dashboard-child/practice/4ce11179-e415-4315-a129-09f80a2d1178?sku=P3-Maths-AP01-003" class="task-card">
-                            <div class="task-icon">
-                            <img src="test-icon.svg" alt="icon" />
-                            </div>
-                            <div class="task-info">
-                            <h6 class="task-title">Science Practice</h6>
-                            <p class="task-meta">20 questions&nbsp;&nbsp;•&nbsp;&nbsp;15 minutes</p>
-                            </div>
-                            <div class="task-hover-icon">
-                                <i class="fa-solid fa-arrow-right-long"></i>
-                            </div>
-                        </a>
-
-                        <a href="https://lambda.in.th/dashboard-child/practice/4ce11179-e415-4315-a129-09f80a2d1178?sku=P3-Maths-AP01-003" class="task-card">
-                            <div class="task-icon">
-                            <img src="test-icon.svg" alt="icon" />
-                            </div>
-                            <div class="task-info">
-                            <h6 class="task-title">แบบฝึกหัดให้ขวัญ</h6>
-                            <p class="task-meta">20 questions</p>
-                            </div>
-                            <div class="task-hover-icon">
-                                <i class="fa-solid fa-arrow-right-long"></i>
-                            </div>
-                        </a>
-
-                        <a href="https://lambda.in.th/dashboard-child/practice/4ce11179-e415-4315-a129-09f80a2d1178?sku=P3-Maths-AP01-003" class="task-card">
-                            <div class="task-icon">
-                            <img src="test-icon.svg" alt="icon" />
-                            </div>
-                            <div class="task-info">
-                            <h6 class="task-title">Primary 1 Entrance Paper</h6>
-                            <p class="task-meta">30 questions&nbsp;&nbsp;•&nbsp;&nbsp;30 minutes</p>
-                            </div>
-                            <div class="task-hover-icon">
-                                <i class="fa-solid fa-arrow-right-long"></i>
-                            </div>
-                        </a>
-
-                        <a href="https://lambda.in.th/dashboard-child/practice/4ce11179-e415-4315-a129-09f80a2d1178?sku=P3-Maths-AP01-003" class="task-card">
-                            <div class="task-icon">
-                            <img src="test-icon.svg" alt="icon" />
-                            </div>
-                            <div class="task-info">
-                            <h6 class="task-title">Primary 1 Entrance Paper</h6>
-                            <p class="task-meta">30 questions&nbsp;&nbsp;•&nbsp;&nbsp;30 minutes</p>
-                            </div>
-                            <div class="task-hover-icon">
-                                <i class="fa-solid fa-arrow-right-long"></i>
-                            </div>
-                        </a>
-
-                        <a href="https://lambda.in.th/dashboard-child/practice/4ce11179-e415-4315-a129-09f80a2d1178?sku=P3-Maths-AP01-003" class="task-card">
-                            <div class="task-icon">
-                            <img src="test-icon.svg" alt="icon" />
-                            </div>
-                            <div class="task-info">
-                            <h6 class="task-title">Primary 1 Entrance Paper</h6>
-                            <p class="task-meta">30 questions&nbsp;&nbsp;•&nbsp;&nbsp;30 minutes</p>
-                            </div>
-                            <div class="task-hover-icon">
-                                <i class="fa-solid fa-arrow-right-long"></i>
-                            </div>
-                        </a>
-
-                        <a href="https://lambda.in.th/dashboard-child/practice/4ce11179-e415-4315-a129-09f80a2d1178?sku=P3-Maths-AP01-003" class="task-card">
-                            <div class="task-icon">
-                            <img src="test-icon.svg" alt="icon" />
-                            </div>
-                            <div class="task-info">
-                            <h6 class="task-title">Primary 1 Entrance Paper</h6>
-                            <p class="task-meta">30 questions&nbsp;&nbsp;•&nbsp;&nbsp;30 minutes</p>
-                            </div>
-                            <div class="task-hover-icon">
-                                <i class="fa-solid fa-arrow-right-long"></i>
-                            </div>
-                        </a>
-
-                    </div>
-                    </div>
-
-                    </div>
-                    <!-- Streaks and rewards section -->
-                    <aside class="portal-sc">
-
-                        <div class="quick-stats">
-                            <div class="stat-item">
-                              <div class="stat-icon">
-                                <i class="fa-solid fa-bolt-lightning"></i>
-                              </div>
-                              <div class="stat-value">8</div>
-                            </div>
-                          
-                            <div class="stat-item">
-                              <div class="stat-icon">
-                                <i class="fa-solid fa-gem"></i>
-                              </div>
-                              <div class="stat-value">28</div>
-                            </div>
-                          
-                            <div class="stat-item">
-                              <div class="stat-icon">
-                                <i class="fa-solid fa-gift"></i>
-                              </div>
-                            </div>
-                        </div>
-
-                        <div class="portal-card quest-card">
-                            <div class="quest-header">
-                              <h3 class="quest-title">Daily Quests</h3>
-                              <p class="quest-subtitle">Complete daily quests to earn bonus gems.</p>
-                            </div>
-                          
-                            <div class="quest-item">
-                              <div class="quest-info">
-                                <p class="quest-description">Complete 10 questions</p>
-                                <div class="quest-progress-container">
-                                  <div class="quest-progress-bar">
-                                    <div class="quest-progress-fill" style="width: 60%"></div>
-                                  </div>
-                                  <span class="quest-progress-text">3 / 5</span>
-                                </div>
-                              </div>
-                              <div class="quest-status-icon">
-                                <i class="fa-solid fa-arrow-right-long"></i> <!-- use fa-check if completed -->
-                              </div>
-                            </div>
-
-                            <div class="quest-item">
-                                <div class="quest-info">
-                                  <p class="quest-description">Spend 10 minutes learning</p>
-                                  <div class="quest-progress-container">
-                                    <div class="quest-progress-bar">
-                                      <div class="quest-progress-fill" style="width: 40%"></div>
-                                    </div>
-                                    <span class="quest-progress-text">4 / 10</span>
-                                  </div>
-                                </div>
-                                <div class="quest-status-icon">
-                                  <i class="fa-solid fa-arrow-right-long"></i> <!-- use fa-check if completed -->
-                                </div>
-                            </div>
-
-                            <div class="quest-item">
-                                <div class="quest-info">
-                                  <p class="quest-description">Get 5 questions correct</p>
-                                  <div class="quest-progress-container">
-                                    <div class="quest-progress-bar">
-                                      <div class="quest-progress-fill" style="width: 40%"></div>
-                                    </div>
-                                    <span class="quest-progress-text">4 / 10</span>
-                                  </div>
-                                </div>
-                                <div class="quest-status-icon">
-                                  <i class="fa-solid fa-arrow-right-long"></i> <!-- use fa-check if completed -->
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <div class="portal-card league-card">
-                            <div class="league-header">
-                              <h3 class="league-title">Quantum League</h3>
-                              <p class="league-subtitle">Compete weekly to climb the leaderboard and earn rewards.</p>
-                            </div>
-                          
-                            <div class="league-body">
-                              <div class="league-tier-badge">
-                                <i class="fa-solid fa-lock"></i> <!-- Placeholder for tier badge -->
-                                <span class="tier-name">Bronze League</span>
-                              </div>
-                          
-                              <div class="league-xp-info">
-                                <p class="xp-label">Your XP this week:</p>
-                                <strong class="xp-value">84</strong>
-                              </div>
-                          
-                              <div class="league-progress-container">
-                                <div class="league-progress-bar">
-                                  <div class="league-progress-fill" style="width: 0%"></div> <!-- No fill since it's locked -->
-                                </div>
-                                <span class="league-progress-text">Coming soon</span>
-                              </div>
-                            </div>
-                        </div>
-                          
-                    </aside>
-                </div>
-            </div>
+        <div class="box-item-content">
+            <h1 class="title-page"></h1>
+            <h6 class="sub-title-page"></h6>
         </div>
     </div>
+
+    <div class="box-point">
+        <div class="box-coin">
+            <div class="number-coins">3 </div>
+            <div> <img src="https://lambda.in.th/assets_dashboard/img/icon/icon-thunder.svg" class="img-fluid" alt=""> </div>
+        </div>
+
+        <div class="box-coin">
+            <div class="number-coins">3 </div>
+            <div> <img src="https://lambda.in.th/assets_dashboard/img/icon-menu/9.png" class="img-fluid" alt=""> </div>
+        </div>
+    </div>
+</div>                </div>
+            </div>
+
+            <div class="container-custom">
+               
+                <div class="row">
+                    <div class="col-xxl-6 col-xl-6 col-md-6 col-sm-6">
+
+                        <div class="accordion-task">
+
+                            <div class="accordion" id="accordion_main">
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                            Task
+                                        </button>
+                                    </h2>
     
-    <!-- Question modal -->
-    <div class="modal fade" id="myQuestionModal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="feature-box fbox-center fbox-lg border-0 mb-0" style="padding: 30px;">
-                        <div class="fbox-icon"> 
-                            <i class="bi-display bi-info-circle"></i> 
+                                    <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordion_main">
+                                        <div class="accordion-body">
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <div class="box-task">
+                                                        <div class="row">
+    
+                                                                                                                                                                                                                                                        <div class="col-lg-12 col-md-12 col-12">
+                                                                    <div class="box-item-task">
+                                                                        <div class="row">
+                                                                            <div
+                                                                                class="col-xxl-9 col-xl-8 col-lg-9 col-md-10 col-9">
+                                                                                <div class="box-content">
+                                                                                    <div class="row">
+                                                                                        <div
+                                                                                            class="col-xxl-2 col-xl-6 col-lg-3 col-md-3 col-3">
+                                                                                            <img src="https://atbvjicwbo.cloudimg.io/v7/lambda.in.th/upload/subject/subject07022025-214410.png" class="img-fluid img-task" alt="">
+                                                                                        </div>
+                                                                                        <div class="col-xxl-10 col-xl-6 col-lg-7 col-md-9 col-12">
+                                                                                            <h6 class="title-box">
+                                                                                                ,,,,
+                                                                                            </h6>
+                                                                                            <p class="sub-title-box">5 Questions | 0 Min. </p>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div
+                                                                                class="col-xxl-3 col-xl-4 col-lg-3 col-md-2 col-3">
+                                                                                <div class="box-button">
+                                                                                    <a href="https://lambda.in.th/dashboard-child/practice/aa26e8b8-627e-4560-936d-46bceefb3350?sku=Testing 5" class="btn-circle">
+                                                                                        <i class="fa-solid fa-chevron-right"></i>
+                                                                                    </a>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                                                                                                                                                <div class="col-lg-12 col-md-12 col-12">
+                                                                    <div class="box-item-task">
+                                                                        <div class="row">
+                                                                            <div
+                                                                                class="col-xxl-9 col-xl-8 col-lg-9 col-md-10 col-9">
+                                                                                <div class="box-content">
+                                                                                    <div class="row">
+                                                                                        <div
+                                                                                            class="col-xxl-2 col-xl-6 col-lg-3 col-md-3 col-3">
+                                                                                            <img src="https://atbvjicwbo.cloudimg.io/v7/lambda.in.th/upload/subject/subject07022025-214410.png" class="img-fluid img-task" alt="">
+                                                                                        </div>
+                                                                                        <div class="col-xxl-10 col-xl-6 col-lg-7 col-md-9 col-12">
+                                                                                            <h6 class="title-box">
+                                                                                                test
+                                                                                            </h6>
+                                                                                            <p class="sub-title-box">100 Questions | 0 Min. </p>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div
+                                                                                class="col-xxl-3 col-xl-4 col-lg-3 col-md-2 col-3">
+                                                                                <div class="box-button">
+                                                                                    <a href="https://lambda.in.th/dashboard-child/practice/4ce11179-e415-4315-a129-09f80a2d1178?sku=P3-Maths-IntF07-009" class="btn-circle">
+                                                                                        <i class="fa-solid fa-chevron-right"></i>
+                                                                                    </a>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                                                                                                                                                <div class="col-lg-12 col-md-12 col-12">
+                                                                    <div class="box-item-task">
+                                                                        <div class="row">
+                                                                            <div
+                                                                                class="col-xxl-9 col-xl-8 col-lg-9 col-md-10 col-9">
+                                                                                <div class="box-content">
+                                                                                    <div class="row">
+                                                                                        <div
+                                                                                            class="col-xxl-2 col-xl-6 col-lg-3 col-md-3 col-3">
+                                                                                            <img src="https://atbvjicwbo.cloudimg.io/v7/lambda.in.th/upload/subject/subject07022025-214410.png" class="img-fluid img-task" alt="">
+                                                                                        </div>
+                                                                                        <div class="col-xxl-10 col-xl-6 col-lg-7 col-md-9 col-12">
+                                                                                            <h6 class="title-box">
+                                                                                                mixed practice
+                                                                                            </h6>
+                                                                                            <p class="sub-title-box">50 Questions | 0 Min. </p>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div
+                                                                                class="col-xxl-3 col-xl-4 col-lg-3 col-md-2 col-3">
+                                                                                <div class="box-button">
+                                                                                    <a href="https://lambda.in.th/dashboard-child/practice/b3103ee0-39c1-4c91-a82d-a3f012151791?sku=P3-Maths-WMM03-008" class="btn-circle">
+                                                                                        <i class="fa-solid fa-chevron-right"></i>
+                                                                                    </a>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                                                                                                                                                <div class="col-lg-12 col-md-12 col-12">
+                                                                    <div class="box-item-task">
+                                                                        <div class="row">
+                                                                            <div
+                                                                                class="col-xxl-9 col-xl-8 col-lg-9 col-md-10 col-9">
+                                                                                <div class="box-content">
+                                                                                    <div class="row">
+                                                                                        <div
+                                                                                            class="col-xxl-2 col-xl-6 col-lg-3 col-md-3 col-3">
+                                                                                            <img src="https://atbvjicwbo.cloudimg.io/v7/lambda.in.th/upload/subject/subject07022025-214410.png" class="img-fluid img-task" alt="">
+                                                                                        </div>
+                                                                                        <div class="col-xxl-10 col-xl-6 col-lg-7 col-md-9 col-12">
+                                                                                            <h6 class="title-box">
+                                                                                                asdfasdf
+                                                                                            </h6>
+                                                                                            <p class="sub-title-box">5 Questions | 0 Min. </p>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div
+                                                                                class="col-xxl-3 col-xl-4 col-lg-3 col-md-2 col-3">
+                                                                                <div class="box-button">
+                                                                                    <a href="https://lambda.in.th/dashboard-child/practice/d2def83e-0933-4e5d-ab50-6452c8c5968d?sku=Testing 1" class="btn-circle">
+                                                                                        <i class="fa-solid fa-chevron-right"></i>
+                                                                                    </a>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                                                                                                                                                <div class="col-lg-12 col-md-12 col-12">
+                                                                    <div class="box-item-task">
+                                                                        <div class="row">
+                                                                            <div
+                                                                                class="col-xxl-9 col-xl-8 col-lg-9 col-md-10 col-9">
+                                                                                <div class="box-content">
+                                                                                    <div class="row">
+                                                                                        <div
+                                                                                            class="col-xxl-2 col-xl-6 col-lg-3 col-md-3 col-3">
+                                                                                            <img src="https://atbvjicwbo.cloudimg.io/v7/lambda.in.th/upload/subject/subject07022025-214410.png" class="img-fluid img-task" alt="">
+                                                                                        </div>
+                                                                                        <div class="col-xxl-10 col-xl-6 col-lg-7 col-md-9 col-12">
+                                                                                            <h6 class="title-box">
+                                                                                                asdfasdf
+                                                                                            </h6>
+                                                                                            <p class="sub-title-box">5 Questions | 0 Min. </p>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div
+                                                                                class="col-xxl-3 col-xl-4 col-lg-3 col-md-2 col-3">
+                                                                                <div class="box-button">
+                                                                                    <a href="https://lambda.in.th/dashboard-child/practice/39dc59e4-b217-41a3-a33d-c668a0e312ba?sku=Testing 1" class="btn-circle">
+                                                                                        <i class="fa-solid fa-chevron-right"></i>
+                                                                                    </a>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                                                                                                                                          
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+    
+    
+                                </div>
+                            </div>
+    
                         </div>
-                        <div class="fbox-content">
-                            <script src="https://static.elfsight.com/platform/platform.js" data-use-service-core defer></script>
-                            <div class="elfsight-app-f346732a-c738-46a2-b54f-60fa27c671d1" data-elfsight-app-lazy></div>
+                        
+
+                    </div>
+                    <div class="col-1"></div>
+                    <div class="col-xxl-5 col-xl-5 col-md-5 col-sm-5">
+                        
+                        <div class="box-streaks">
+                            <h2 class="title-streaks">Streaks</h2>
+                            <h1 class="total-streaks">3 <img src="https://lambda.in.th/assets_dashboard/img/icon/icon-thunder.svg" class="img-fluid" /></h1>
+                            <p class="description-streaks">Complete a task to earn streak!</p>
+
+                            <div class="box-days">
+                                                                                                        <div class="item-day">
+                                        <div class="box-icon">
+                                            <img src="https://lambda.in.th/assets_dashboard/img/icon/icon-thunder-nocolor.svg" class="img-fluid" alt="">
+                                        </div>
+                                        <p class="text-item-day">Su</p>
+                                        
+                                    </div>
+                                                                                                        <div class="item-day">
+                                        <div class="box-icon">
+                                            <img src="https://lambda.in.th/assets_dashboard/img/icon/icon-thunder-nocolor.svg" class="img-fluid" alt="">
+                                        </div>
+                                        <p class="text-item-day">M</p>
+                                        
+                                    </div>
+                                                                                                        <div class="item-day">
+                                        <div class="box-icon">
+                                            <img src="https://lambda.in.th/assets_dashboard/img/icon/icon-thunder.svg" class="img-fluid" alt="">
+                                        </div>
+                                        <p class="text-item-day">T</p>
+                                        
+                                    </div>
+                                                                                                        <div class="item-day">
+                                        <div class="box-icon">
+                                            <img src="https://lambda.in.th/assets_dashboard/img/icon/icon-thunder-nocolor.svg" class="img-fluid" alt="">
+                                        </div>
+                                        <p class="text-item-day">W</p>
+                                        
+                                    </div>
+                                                                                                        <div class="item-day">
+                                        <div class="box-icon">
+                                            <img src="https://lambda.in.th/assets_dashboard/img/icon/icon-thunder-nocolor.svg" class="img-fluid" alt="">
+                                        </div>
+                                        <p class="text-item-day">Th</p>
+                                        
+                                    </div>
+                                                                                                        <div class="item-day">
+                                        <div class="box-icon">
+                                            <img src="https://lambda.in.th/assets_dashboard/img/icon/icon-thunder-nocolor.svg" class="img-fluid" alt="">
+                                        </div>
+                                        <p class="text-item-day">F</p>
+                                        
+                                    </div>
+                                                                                                        <div class="item-day">
+                                        <div class="box-icon">
+                                            <img src="https://lambda.in.th/assets_dashboard/img/icon/icon-thunder-nocolor.svg" class="img-fluid" alt="">
+                                        </div>
+                                        <p class="text-item-day">S</p>
+                                        
+                                    </div>
+                                                            </div>
+
+                            <a href="https://lambda.in.th/dashboard-child/set-work" class="btn btn-set-task">Set Task</a>
                         </div>
-                    </div> 
+
+                        <!-- End Box Streaks -->
+
+                        <!-- Box Next Reward -->
+                        <div class="box-next-reward">
+                            <h2>Next Streak Reward</h2>
+                            <div class="box-content-next">
+                                <div class="box-item-content">
+                                    <p>Unlock Pepe the price portrait.</p>
+                                    <div class="progress" style="height: 20px;">
+                                        <div class="progress-bar progress-bar-custom" role="progressbar"
+                                            style="width: 55%;" aria-valuenow="25" aria-valuemin="0"
+                                            aria-valuemax="100">12/50</div>
+                                    </div>
+                                </div>
+                                <div class="box-item-image">
+                                    <img src="./assets_dashboard/img/mascot2.png" class="img-fluid" alt="">
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End Box Next Reward -->
+                    </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ปิด</button>
-                </div>
+
             </div>
         </div>
     </div>
+    <div class="modal fade" id="myQuestionModal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="feature-box fbox-center fbox-lg border-0 mb-0" style="padding: 30px;">
+                    <div class="fbox-icon"> 
+                         <i class="bi-display bi-info-circle"></i> 
+                    </div>
+                    <div class="fbox-content">
+                        <script src="https://static.elfsight.com/platform/platform.js" data-use-service-core defer></script>
+                        <div class="elfsight-app-f346732a-c738-46a2-b54f-60fa27c671d1" data-elfsight-app-lazy></div>
+                    </div>
+                </div> 
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ปิด</button>
+            </div>
+        </div>
+    </div>
+</div>
 
-    <!-- External JavaScript libraries -->
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-    <script src="https://lambda.in.th/assets_dashboard/js/bootstrap.min.js?v=1744393116"></script>
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script src="https://lambda.in.th/assets_dashboard/js/slick.min.js?v=1744393116"></script>
-    <script src="https://lambda.in.th/assets_dashboard/js/main.js?v=1744393116"></script>
-    <script src="https://lambda.in.th/assets/cusmike/sweet2/sweetalert2.min.js?v=1744393116"></script>
-    <script src="https://lambda.in.th/assets/cusmike/toastr/toastr.min.js?v=1744393116"></script>
-    <!-- Inline JavaScript for interactivity -->
-    <script>
-        $(document).ready(function() {
-            const handleSidebar = () => {
-                if (window.matchMedia("screen and (max-width: 1179px)").matches) {
-                    const _sidebar = $("#sidebar");
-                    if (_sidebar.length) {
-                        _sidebar.removeClass("expand");
-                    }
-                } else {
-                    const _sidebar = $("#sidebar");
-                    if (_sidebar.length) {
-                        _sidebar.addClass("expand");
+
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+    integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous">
+</script>
+<script src="https://lambda.in.th/assets_dashboard/js/bootstrap.min.js?v=1745898912"></script>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="https://lambda.in.th/assets_dashboard/js/slick.min.js?v=1745898912"></script>
+<script src="https://lambda.in.th/assets_dashboard/js/main.js?v=1745898912"></script>
+<script src="https://lambda.in.th/assets/cusmike/sweet2/sweetalert2.min.js?v=1745898912"></script>
+<script src="https://lambda.in.th/assets/cusmike/toastr/toastr.min.js?v=1745898912"></script>
+<script>
+    $(document).ready(function() {
+        const handleSidebar = () => {
+            if (window.matchMedia("screen and (max-width: 1024px)").matches) {
+                const _sidebar = $("#sidebar");
+                if (_sidebar.length) {
+                    _sidebar.removeClass("expand");
+                }
+            } else {
+                const _sidebar = $("#sidebar");
+                if (_sidebar.length) {
+                    _sidebar.addClass("expand");
+                }
+            }
+        };
+
+        handleSidebar();
+
+        $(window).resize(function() {
+            handleSidebar();
+        });
+    });
+
+    const _boxJourneys = document.querySelectorAll('.box-item-journey');
+    _boxJourneys.forEach(box => {
+        box.addEventListener('click', () => {
+            _boxJourneys.forEach(b => b.classList.remove('active-journey'));
+            box.classList.add('active-journey');
+        });
+    });
+
+
+    const _boxContentChoices = document.querySelectorAll('.box-content-choice');
+    _boxContentChoices.forEach(box => {
+        box.addEventListener('click', () => {
+            _boxContentChoices.forEach(b => b.classList.remove('answer-success'));
+            box.classList.add('answer-success');
+        });
+    });
+
+    const _boxContentFilterReview = document.querySelectorAll('.box-border');
+    _boxContentFilterReview.forEach(box => {
+        box.addEventListener('click', () => {
+            _boxContentFilterReview.forEach(b => b.classList.remove('active-box-filter-review'));
+            box.classList.add('active-box-filter-review');
+        });
+    });
+
+    function logoutChild() {
+        var parent_id = localStorage.getItem('parent_id');
+        if (parent_id != 0) {
+            $.ajax({
+                type: 'POST',
+                url: "dashboard-child/parent/logout",
+                data: {
+                    "_token": "cgMsMHQe1D9PTcHhtdl24TmOnwFXRKktoaqATDuK",
+                    parent_id: parent_id,
+                },
+                dataType: 'json',
+                success: function(data) {
+                    if (data.status == 200) {
+                        localStorage.removeItem('parent_id');
+                        location.href = "https://lambda.in.th/dashboard";
+                    } else {
+                        localStorage.removeItem('parent_id');
+                        location.reload();
                     }
                 }
-            };
-
-            handleSidebar();
-
-            $(window).resize(function() {
-                handleSidebar();
             });
-        });
-
-        const _boxJourneys = document.querySelectorAll('.box-item-journey');
-        _boxJourneys.forEach(box => {
-            box.addEventListener('click', () => {
-                _boxJourneys.forEach(b => b.classList.remove('active-journey'));
-                box.classList.add('active-journey');
-            });
-        });
-
-        const _boxContentChoices = document.querySelectorAll('.box-content-choice');
-        _boxContentChoices.forEach(box => {
-            box.addEventListener('click', () => {
-                _boxContentChoices.forEach(b => b.classList.remove('answer-success'));
-                box.classList.add('answer-success');
-            });
-        });
-
-        const _boxContentFilterReview = document.querySelectorAll('.box-border');
-        _boxContentFilterReview.forEach(box => {
-            box.addEventListener('click', () => {
-                _boxContentFilterReview.forEach(b => b.classList.remove('active-box-filter-review'));
-                box.classList.add('active-box-filter-review');
-            });
-        });
-
-        function logoutChild() {
-            var parent_id = localStorage.getItem('parent_id');
-            if (parent_id != 0) {
-                $.ajax({
-                    type: 'POST',
-                    url: "dashboard-child/parent/logout",
-                    data: {
-                        "_token": "6PtnIq8JxZS40zVDlQqGcbAgceqZxCqiEoRUhEIq",
-                        parent_id: parent_id,
-                    },
-                    dataType: 'json',
-                    success: function(data) {
-                        if (data.status == 200) {
-                            localStorage.removeItem('parent_id');
-                            location.href = "https://lambda.in.th/dashboard";
-                        } else {
-                            localStorage.removeItem('parent_id');
-                            location.reload();
-                        }
-                    }
-                });
-            }
         }
 
-        function openQuestionModal() {
-            var myModal = new bootstrap.Modal(document.getElementById('myQuestionModal'));
-            myModal.show();
-        }
-    </script>
+    }
+
+    function openQuestionModal() {
+        var myModal = new bootstrap.Modal(document.getElementById('myQuestionModal'));
+        myModal.show();
+    }
+</script>
 </body>
 
 </html>
