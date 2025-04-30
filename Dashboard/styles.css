@@ -1,7 +1,7 @@
 @import url("https://use.typekit.net/amp0tkv.css");
 @import url("https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
 :root {
-  --whites: #fff;
+  --whites: #ffffff;
   --blacks: #141414;
   --cMain: #bd1e2b;
   --cBackAvtiveSetWorkMain: rgba(225, 78, 104, 0.07);
@@ -31,6 +31,12 @@
   --cInfo: rgb(0, 104, 198);
   --cBgCardLearningJourney: rgba(255, 255, 255, 0.45);
   --cImageSubAnswerAccrodien: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%235271ff'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+
+
+
+  --radius-button: 8px;
+  --radius-card: 12px;
+  --radius-large-card: 16px;
 }
 
 .learning-journey .entry-title p a:hover, .learning-journey .entry-title p a, .learning-journey .post-timeline .entry-timeline .timeline-divider, .hangouts-section .tab-section .box-group-item .box-hideoutroom .box-item-hideoutroom:hover .box-item-content .box-streak, .hangouts-section .tab-section .box-group-item .box-hideoutroom .box-item-hideoutroom:focus .box-item-content .box-streak, .hangouts-section .tab-section .box-group-item .box-hideoutroom .box-item-hideoutroom:hover, .hangouts-section .tab-section .box-group-item .box-hideoutroom .box-item-hideoutroom:focus, .hangouts-section .tab-section .box-group-item .box-hideoutroom .box-item-hideoutroom, .hangouts-section .tab-section .box-group-item .box-compainons .box-icon-content .box-border:hover, .hangouts-section .tab-section .box-group-item .box-compainons .box-icon-content .box-border:focus, .hangouts-section .tab-section .box-group-item .box-compainons .box-sub-item:hover, .hangouts-section .tab-section .box-group-item .box-compainons .box-sub-item:focus, .hangouts-section .tab-section .box-group-item .box-compainons .box-sub-item, .hangouts-section .tab-section .box-group-item .box-compainons .box-item-main:hover, .hangouts-section .tab-section .box-group-item .box-compainons .box-item-main, .profile .form-update-profile .btn-save:hover, .profile .form-update-profile .btn-save, .dashboard-child .box-child-user .box-item-user .box-detail-package .btn-update-package:hover, .dashboard-child .box-child-user .box-item-user .box-detail-package .btn-topup:hover, .dashboard-child .box-child-user .box-item-user .box-detail-package .btn-update-package, .dashboard-child .box-child-user .box-item-user .box-detail-package .btn-topup, .dashboard-child .box-child-user .box-item-user .box-buy-package .btn-package:hover, .dashboard-child .box-child-user .box-item-user .box-buy-package .btn-package, .dashboard-child .box-child-user .box-item-user .box-item-child .box-name-child .btn-setwork:hover, .dashboard-child .box-child-user .box-item-user .box-item-child .box-name-child .btn-setwork, .dashboard-child .box-btn-create-child .btn-create:hover, .dashboard-child .box-btn-create-child .btn-create, .box-task-review .box-item-filter .box-button-filter .box-border:hover, .box-task-review .box-item-filter .box-button-filter .box-border:focus, .box-task-review .box-item-filter .box-button-filter .box-border:active, .box-task-review .box-item-filter .box-button-filter .box-border, .box-set-work-main .modal-settest .content-set-test .btn-starttest, .box-set-work-main .box-content-style1 .box-btn .btn-settest,
@@ -177,8 +183,9 @@ form input::placeholder {
 }
 
 .container-custom {
-  max-width: 1400px;
-  padding: 1rem 2rem 1rem 2rem;
+  max-width: 972px;
+  margin: 0 auto;
+  padding: 1rem 1.5rem;
 }
 @media screen and (max-width: 768px) {
   .container-custom {
@@ -271,11 +278,13 @@ form input::placeholder {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 100%; /* 🔑 ensures it fills the container */
 }
 
 /* Wraps the search bar */
 .search-bar-wrapper {
   flex: 1;
+  max-width: 560px; /* same as .portal-main */
 }
 
 /* Search input */
@@ -292,8 +301,8 @@ form input::placeholder {
 /* Wraps avatar, streak, and coin neatly */
 .right-icons-wrapper {
   display: flex;
-  align-items: center;
-  gap: 10px;
+  gap: 12px;
+  max-width: 350px; /* same as .portal-side */
 }
 
 /* Hide the search bar on small screens */
@@ -327,7 +336,373 @@ form input::placeholder {
   font-size: 1rem;
 }
 
+/*---Main Content + primary and secondary columns---*/
+.portal-layout {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 32px;
+  flex-wrap: wrap;
+  margin: 0 auto;
+  max-width: 972px;
+}
 
+.portal-main {
+  max-width: 560px;
+  flex: 1;
+  min-width: 460px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px; /* or 16px, depending on your vertical rhythm */
+}
+
+.portal-main--fullwidth {
+  max-width: 972px;
+  min-width: auto;
+  width: 100%;
+}
+
+.portal-side {
+  max-width: 350px;
+  flex: 1;
+  min-width: 320px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: sticky;
+  top: 24px;
+  min-height: calc(100vh - 48px);
+}
+
+/* --- Task Section --- */
+
+.task-section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px; /* optional gap around section content */
+}
+
+/* Section header reused across portal */
+.portal-section-header {
+  margin-bottom: 0px;
+}
+
+.portal-section-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin: 0;
+  color: var(--blacks);
+}
+
+/* List of tasks */
+.task-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Task Card */
+.task-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #ffffff;
+  border: 2px solid #e5e5e5;
+  border-radius: var(--radius-card);
+  padding: 10px 16px;
+  gap: 16px;
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.task-card:focus-visible {
+  border-color: #375ce3;
+}
+
+/* Icon container */
+.task-icon img {
+  width: 60px;
+  height: 60px;
+}
+
+/* Text content */
+.task-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 50px;
+}
+
+.task-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0;
+  color: #141414;
+}
+
+.task-meta {
+  font-size: 16px;
+  margin: 0;
+  color: #666666;
+}
+
+/* Hover effects */
+.task-card:hover {
+  border-color: #ccc;
+}
+
+.task-hover-icon {
+  margin-left: auto;
+  font-size: 1.5rem;
+  opacity: 0;
+  transform: translateX(-4px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  color: #375ce3;
+}
+
+.task-card:hover .task-hover-icon {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* --- Portal Cards --- */
+.portal-card {
+  background-color: var(--whites);
+  border: 2px solid #e5e5e5;
+  border-radius: var(--radius-card);
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  color: inherit;
+  text-decoration: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Welcome card (main column) */
+.welcome-banner {
+  background-color: #fff5e5; /* warm amber tone */
+  border: none;
+  display: flex;
+  padding: 20px;
+  border-radius: var(--radius-card);
+  color: #141414;
+}
+
+.welcome-banner-content {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.welcome-mascot img {
+  height: 80px;
+  width: auto;
+}
+
+.welcome-text {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.welcome-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.welcome-subtitle {
+  font-size: 1rem;
+  margin: 0;
+  color: #444444;
+}
+
+.btn-set-task {
+  display: inline-block;
+  background-color: #375ce3;
+  color: #ffffff;
+  font-weight: 500;
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-size: 16px;
+  text-decoration: none;
+  width: fit-content;
+  transition: background-color 0.2s ease;
+}
+
+.btn-set-task:hover {
+  background-color: #294bc6;
+}
+
+.welcome-text .btn-set-task {
+  margin-top: 8px;
+}
+
+/* Locked appearance */
+.league-card--locked {
+  opacity: 0.85;
+  pointer-events: none;
+}
+
+/* Header */
+.league-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.league-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #141414;
+  margin: 0;
+}
+
+/* Body: icon and text side by side */
+.league-body {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.league-description p {
+  font-size: 16px;
+  color: #666666;
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* Lock icon */
+.league-lock-icon img {
+  width: 60px;
+  height: 60px;
+}
+
+.league-badge {
+  display: inline-block;
+  background-color: #edf2ff;
+  color: #375ce3;
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 4px;
+  line-height: 1;
+}
+
+/* Weekly Stats Card */
+.weekly-summary-card {
+  padding: 18px;
+  background-color: #ffffff;
+}
+
+.weekly-summary-header {
+  margin-bottom: 16px;
+}
+
+.weekly-summary-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin: 0;
+  color: #141414;
+}
+
+.weekly-summary-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.weekly-stat-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.stat-icon {
+  font-size: 1.4rem;
+  color: #375ce3;
+}
+
+.stat-info .stat-label {
+  font-size: 0.9rem;
+  color: #666666;
+  margin: 0;
+}
+
+.stat-info .stat-value {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #141414;
+  margin: 0;
+}
+
+/* Lesson Card */
+.lesson-cta-card {
+  background-color: #fef9ff;
+  border-radius: var(--radius-card);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.lesson-cta-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+}
+
+.lesson-cta-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.lesson-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin: 0;
+  color: #141414;
+}
+
+.lesson-description {
+  font-size: 1rem;
+  color: #666666;
+  margin: 0;
+}
+
+.lesson-cta-mascot img {
+  height: 80px;
+  width: auto;
+  display: block;
+}
+
+/* Full-width CTA button */
+.btn-cta-full {
+  display: block;
+  width: 100%;
+  text-align: center;
+  background-color: #d04040;
+  color: white;
+  font-weight: 600;
+  padding: 10px 0;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+}
+
+.btn-cta-full:hover {
+  background-color: #bb2d2d;
+}
 
 
 /*---Sidebar Section---*/
@@ -417,7 +792,7 @@ form input::placeholder {
   flex: 1 1 auto;
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 8px;
   padding: 0;
   margin: 0;
 }
@@ -435,7 +810,7 @@ a.sidebar-link {
 }
 
 a.sidebar-link:hover {
-  border-radius: 8px;
+  border-radius: var(--radius-button);
   background-color: #e5e5e599;
 }
 
@@ -457,7 +832,7 @@ a.sidebar-link:hover {
 .img-icon,
 .img-icon-step2 {
   width: 32px;
-  margin-right: 10px;
+  margin-right: 18px;
   margin-top: -1px;
 }
 
