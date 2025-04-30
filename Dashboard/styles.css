@@ -317,8 +317,8 @@ form input::placeholder {
 
 /* Icon inside streak or gem */
 .box-streak img, .box-gem img {
-  width: 32px;
-  height: 32px;
+  width: 28px;
+  height: 28px;
 }
 
 /* Counter text */
@@ -427,7 +427,7 @@ a.sidebar-link {
   display: flex;
   align-items: center;
   white-space: nowrap;
-  font-weight: 500;
+  font-weight: 600;
   width: 100%;
   font-size: 18px;
   border: 2px solid transparent;
