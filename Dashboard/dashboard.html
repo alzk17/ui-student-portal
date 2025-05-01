@@ -105,12 +105,17 @@
                         <!-- Profile + Streak + Coin (Right Side) -->
                         <div class="right-icons-wrapper">
                             <!-- Streak -->
-                            <div class="box-streak">
-                                <div>
-                                    <img src="Icons/bolt-1.svg" class="img-fluid" alt="Streak Icon">
-                                </div>
+                            <div class="box-streak" onclick="toggleTooltip('streak-tooltip')">
+                                <div><img src="Icons/bolt-2.svg" alt="Streak Icon" /></div>
                                 <div class="streak-counter">32</div>
+                            
+                                <!-- Tooltip -->
+                                <div class="portal-tooltip" id="streak-tooltip">
+                                <p>You’re on a 3-day streak!</p>
+                                <p>Complete a task today to keep it going 🔥</p>
+                                </div>
                             </div>
+  
         
                             <!-- Coin -->
                             <div class="box-gem">
@@ -149,7 +154,7 @@
                             </div>
                           
                             </div>
-                          </div>
+                        </div>
                                                    
                         <div class="task-section">
                             <div class="portal-section-header">
@@ -243,31 +248,43 @@
                             </div>
                           
                             <div class="weekly-summary-stats">
+                          
+                              <!-- Stat 1: Correct answers -->
                               <div class="weekly-stat-item">
-                                <div class="stat-icon"><i class="fa-solid fa-check"></i></div>
+                                <div class="stat-icon">
+                                  <img src="Icons/aim-1.svg" alt="Correct answers" />
+                                </div>
                                 <div class="stat-info">
                                   <p class="stat-label">Correct answers</p>
                                   <p class="stat-value">132</p>
                                 </div>
                               </div>
                           
+                              <!-- Stat 2: Time spent (will have borders) -->
                               <div class="weekly-stat-item">
-                                <div class="stat-icon"><i class="fa-solid fa-hourglass-half"></i></div>
+                                <div class="stat-icon">
+                                  <img src="Icons/hourglass-3.svg" alt="Time spent" />
+                                </div>
                                 <div class="stat-info">
-                                  <p class="stat-label">Time spent</p>
-                                  <p class="stat-value">5h 45m</p>
+                                  <p class="stat-label">Time spent learning</p>
+                                  <p class="stat-value">5 hours 45 minutes</p>
                                 </div>
                               </div>
                           
+                              <!-- Stat 3: Tasks done -->
                               <div class="weekly-stat-item">
-                                <div class="stat-icon"><i class="fa-solid fa-briefcase"></i></div>
+                                <div class="stat-icon">
+                                  <img src="Icons/done-1.svg" alt="Tasks done" />
+                                </div>
                                 <div class="stat-info">
-                                  <p class="stat-label">Tasks done</p>
-                                  <p class="stat-value">4</p>
+                                  <p class="stat-label">Tasks completed</p>
+                                  <p class="stat-value">21</p>
                                 </div>
                               </div>
+                          
                             </div>
-                          </div>
+                        </div>
+                          
                                                    
                     </div>
                 </div>
@@ -387,6 +404,32 @@
         var myModal = new bootstrap.Modal(document.getElementById('myQuestionModal'));
         myModal.show();
     }
+</script>
+<script>
+    function toggleTooltip(id) {
+  const tooltip = document.getElementById(id);
+  const isVisible = tooltip.style.display === 'block';
+
+  // Close all open tooltips
+  document.querySelectorAll('.portal-tooltip').forEach(t => {
+    t.style.display = 'none';
+  });
+
+  // Toggle this one
+  if (!isVisible) {
+    tooltip.style.display = 'block';
+  }
+}
+
+// Close on outside click
+document.addEventListener('click', function (e) {
+  if (!e.target.closest('.box-streak') && !e.target.closest('.box-gem')) {
+    document.querySelectorAll('.portal-tooltip').forEach(t => {
+      t.style.display = 'none';
+    });
+  }
+});
+
 </script>
 </body>
 

@@ -273,7 +273,7 @@ form input::placeholder {
   color: var(--cPink);
 }
 
-/*---Header---*/
+/*--- Main Content Header ---*/
 .box-headerpage {
   display: flex;
   justify-content: space-between;
@@ -317,11 +317,16 @@ form input::placeholder {
   display: flex;
   align-items: center;
   gap: 6px;
-  border: 2px solid var(--cBorder);
+  border: 2px solid transparent
   border-radius: 8px;
   padding: 6px 12px;
   height: 40px;
   background-color: var(--whites);
+}
+
+.box-streak:hover, .box-gem:hover {
+  background-color: #e5e5e599;
+  border-radius: 8px;
 }
 
 /* Icon inside streak or gem */
@@ -335,6 +340,42 @@ form input::placeholder {
   font-weight: 600;
   font-size: 1rem;
 }
+
+.box-streak,
+.box-gem {
+  position: relative;
+}
+
+/* Portal Tooltips */
+.portal-tooltip {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: -180%;
+  background-color: #fff;
+  color: #141414;
+  padding: 12px 16px;
+  font-size: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 100;
+  display: none;
+  white-space: normal;
+  width: 350px;
+}
+
+.portal-tooltip::after {
+  content: '';
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 6px;
+  border-style: solid;
+  border-color: transparent transparent #141414 transparent; /* match tooltip bg */
+}
+
+
+
 
 /*---Main Content + primary and secondary columns---*/
 .portal-layout {
@@ -373,6 +414,11 @@ form input::placeholder {
   top: 24px;
   min-height: calc(100vh - 48px);
 }
+
+
+
+
+
 
 /* --- Task Section --- */
 
@@ -600,10 +646,9 @@ form input::placeholder {
 .weekly-summary-card {
   padding: 18px;
   background-color: #ffffff;
-}
-
-.weekly-summary-header {
-  margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
 
 .weekly-summary-title {
@@ -616,18 +661,24 @@ form input::placeholder {
 .weekly-summary-stats {
   display: flex;
   flex-direction: column;
-  gap: 12px;
 }
 
 .weekly-stat-item {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 20px;
+  padding: 12px 0;
 }
 
-.stat-icon {
-  font-size: 1.4rem;
-  color: #375ce3;
+.weekly-stat-item:nth-child(2) {
+  border-top: 1px solid #e5e5e5;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.stat-icon img {
+  width: 40px;
+  height: 40px;
+  display: block;
 }
 
 .stat-info .stat-label {
