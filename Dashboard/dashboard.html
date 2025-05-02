@@ -19,6 +19,7 @@
 
 </head>
 
+
 <body>
     <div class="wrapper">
         <aside id="sidebar" class="expand">
@@ -109,11 +110,43 @@
                                 <div><img src="Icons/bolt-2.svg" alt="Streak Icon" /></div>
                                 <div class="streak-counter">32</div>
                             
-                                <!-- Tooltip -->
-                                <div class="portal-tooltip" id="streak-tooltip">
-                                <p>You’re on a 3-day streak!</p>
-                                <p>Complete a task today to keep it going 🔥</p>
-                                </div>
+                                <!-- Streak Tooltip -->
+                                <div class="portal-tooltip portal-tooltip--streak" id="streak-tooltip">
+  
+                                    <!-- Streak Title -->
+                                    <div class="tooltip-header">
+                                        <div class="tooltip-title-with-icon">
+                                          <span class="tooltip-title-text">32-day streak</span>
+                                        </div>
+                                      
+                                        <div class="tooltip-shield-status">
+                                          <img src="Icons/heart.svg"/>
+                                          <img src="Icons/heart.svg"/>
+                                          <div class="portal-tooltip portal-tooltip--shield" id="shield-info">
+                                            <p class="tooltip-info">
+                                              You have <strong>2</strong> streak shields.
+                                            </p>
+                                          </div>                                          
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Summary Message -->
+                                    <p class="tooltip-info">
+                                      Complete <strong>2</strong> more tasks to extend your streak!
+                                    </p>
+
+                                    <!-- Streak Progress Tracker -->
+                                    <div class="streak-week">
+                                      <div class="streak-day streak-success">Su</div>
+                                      <div class="streak-day streak-success">Mo</div>
+                                      <div class="streak-day streak-shield">Tu</div>
+                                      <div class="streak-day streak-success">We</div>
+                                      <div class="streak-day streak-neutral is-today">Th</div>
+                                      <div class="streak-day streak-neutral">Fr</div>
+                                      <div class="streak-day streak-neutral">Sa</div>
+                                    </div>
+                                  
+                                </div>  
                             </div>
   
         
@@ -122,7 +155,28 @@
                                 <div>
                                     <img src="Icons/gem-2.svg" class="img-fluid" alt="Gem Icon">
                                 </div>
-                                <div class="gem-counter">1.3k</div>
+                                <div class="gem-counter">22.5k</div>
+                                
+                                <!-- Gem Tooltip -->
+                                <div class="portal-tooltip portal-tooltip--gem" id="gem-tooltip">
+                                    <div class="tooltip-gem-content">
+                                  
+                                      <!-- Gem Icon (left side) -->
+                                      <div class="tooltip-gem-icon">
+                                        <img src="Icons/gem-2.svg" alt="Gem Icon" />
+                                      </div>
+                                  
+                                      <!-- Info (right side) -->
+                                      <div class="tooltip-gem-text">
+                                        <p class="gem-count"><span style="color: #375ce3">22,475</span> Gems</p>
+                                        <p class="tooltip-info" style="margin: 0;">
+                                            Use them to buy streak shields or items at the
+                                            <a href="/dashboard-child/hangouts" class="tooltip-link">Shop</a>.
+                                        </p>
+                                      </div>
+                                  
+                                    </div>
+                                  </div>                                  
                             </div>
         
                             <!-- Profile Image -->
@@ -405,32 +459,84 @@
         myModal.show();
     }
 </script>
+
 <script>
-    function toggleTooltip(id) {
-  const tooltip = document.getElementById(id);
-  const isVisible = tooltip.style.display === 'block';
-
-  // Close all open tooltips
-  document.querySelectorAll('.portal-tooltip').forEach(t => {
-    t.style.display = 'none';
-  });
-
-  // Toggle this one
-  if (!isVisible) {
-    tooltip.style.display = 'block';
-  }
-}
-
-// Close on outside click
-document.addEventListener('click', function (e) {
-  if (!e.target.closest('.box-streak') && !e.target.closest('.box-gem')) {
-    document.querySelectorAll('.portal-tooltip').forEach(t => {
-      t.style.display = 'none';
+    document.addEventListener("DOMContentLoaded", function () {
+      // Generic toggle function using ID
+      function toggleTooltip(id) {
+        const tooltip = document.getElementById(id);
+        const isVisible = tooltip.style.display === 'block';
+  
+        // Close all tooltips
+        document.querySelectorAll('.portal-tooltip').forEach(t => {
+          t.style.display = 'none';
+        });
+  
+        // Toggle the selected one
+        if (!isVisible) {
+          tooltip.style.display = 'block';
+        }
+      }
+  
+      // --- Shield tooltip logic ---
+      const shieldStatus = document.querySelector('.tooltip-shield-status');
+      const shieldTooltip = document.getElementById('shield-info');
+  
+      if (shieldStatus && shieldTooltip) {
+        shieldStatus.addEventListener('click', function (event) {
+          event.stopPropagation(); // prevent outer close
+          const isVisible = shieldTooltip.style.display === 'block';
+  
+          // Close all other tooltips
+          document.querySelectorAll('.portal-tooltip').forEach(t => {
+            t.style.display = 'none';
+          });
+  
+          if (!isVisible) {
+            shieldTooltip.style.display = 'block';
+          }
+        });
+      }
+  
+      // --- Gem tooltip logic ---
+      const gemStatus = document.querySelector('.box-gem');
+      const gemTooltip = document.getElementById('gem-tooltip');
+  
+      if (gemStatus && gemTooltip) {
+        gemStatus.addEventListener('click', function (event) {
+          event.stopPropagation();
+          const isVisible = gemTooltip.style.display === 'block';
+  
+          document.querySelectorAll('.portal-tooltip').forEach(t => {
+            t.style.display = 'none';
+          });
+  
+          if (!isVisible) {
+            gemTooltip.style.display = 'block';
+          }
+        });
+      }
+  
+      // --- Close on outside click ---
+      document.addEventListener('click', function (e) {
+        if (
+          !e.target.closest('.tooltip-shield-status') &&
+          !e.target.closest('.box-gem') &&
+          !e.target.closest('.box-streak')
+        ) {
+          document.querySelectorAll('.portal-tooltip').forEach(t => {
+            t.style.display = 'none';
+          });
+        }
+      });
+  
+      // Optional: expose toggleTooltip globally
+      window.toggleTooltip = toggleTooltip;
     });
-  }
-});
+  </script>
+  
+  
 
-</script>
 </body>
 
 </html>

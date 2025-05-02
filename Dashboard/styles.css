@@ -2,7 +2,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
 :root {
   --whites: #ffffff;
-  --blacks: #141414;
+  --blacks: #141414;  
   --cMain: #bd1e2b;
   --cBackAvtiveSetWorkMain: rgba(225, 78, 104, 0.07);
   --cBgMain: #fafbfc;
@@ -317,7 +317,7 @@ form input::placeholder {
   display: flex;
   align-items: center;
   gap: 6px;
-  border: 2px solid transparent
+  border: 2px solid transparent;
   border-radius: 8px;
   padding: 6px 12px;
   height: 40px;
@@ -339,6 +339,7 @@ form input::placeholder {
 .streak-counter, .gem-counter {
   font-weight: 600;
   font-size: 1rem;
+  pointer-events: none;
 }
 
 .box-streak,
@@ -350,31 +351,204 @@ form input::placeholder {
 .portal-tooltip {
   position: absolute;
   top: calc(100% + 8px);
-  left: -180%;
   background-color: #fff;
   color: #141414;
-  padding: 12px 16px;
+  padding: 16px;
   font-size: 1rem;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border: 2px solid #e5e5e5;
+  border-radius: 10px;
   z-index: 100;
   display: none;
   white-space: normal;
-  width: 350px;
 }
 
 .portal-tooltip::after {
   content: '';
   position: absolute;
-  top: -12px;
+  top: -7.5px;
   left: 50%;
-  transform: translateX(-50%);
-  border-width: 6px;
-  border-style: solid;
-  border-color: transparent transparent #141414 transparent; /* match tooltip bg */
+  transform: translateX(-50%) rotate(135deg);
+  width: 12px;
+  height: 12px;
+  background-color: #fff; /* same as tooltip background */
+  border-left: 2px solid #e5e5e5;  /* left edge of triangle */
+  border-bottom: 2px solid #e5e5e5; /* right edge of triangle */
+  z-index: 0;
+  border-radius: 1.5px;
 }
 
+.tooltip-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin: 0 0 8px;
+}
 
+.tooltip-info {
+  font-size: 0.95rem;
+  color: #333333;
+}
+
+.tooltip-note {
+  font-size: 0.85rem;
+  color: #888888;
+  margin: 0 0 12px;
+}
+
+.tooltip-link {
+  color: #5271ff;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.tooltip-link:hover {
+  color: #375ce3;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.tooltip-link:hover {
+  text-decoration: none;
+}
+
+/* Streak Tooltip */
+.portal-tooltip--streak {
+  left: -180%;
+  padding: 24px;
+  width: 350px;
+}
+
+.portal-tooltip--streak::after {
+  left: 80%; /* or custom */
+}
+
+.tooltip-title-with-icon {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tooltip-title-with-icon img {
+  width: 28.8px;
+  height: 28.8px;
+}
+
+.tooltip-title-text {
+  font-weight: 700;
+  font-size: 1.2rem;
+}
+
+.tooltip-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 0 16px 0;
+}
+
+.tooltip-shield-status {
+  position: relative;
+  cursor: pointer;
+}
+
+.portal-tooltip--shield {
+  width: 220px;
+  right: 0;
+  top: calc(100% + 6px);
+  padding: 8px
+}
+
+.streak-week {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.streak-day {
+  width: 36px;
+  height: 36px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #e0e0e0;
+  background-color: #f8f8f8;
+  color: #666666;
+  position: relative;
+}
+
+/* Task completed */
+.streak-success {
+  background-color: #eafaf1;
+  border-color: #22a95b;
+  color: #168a45;
+}
+
+/* Shield used */
+.streak-shield {
+  background-color: #edf4ff;
+  border-color: #5271ff;
+  color: #375ce3;
+}
+
+/* Streak failed */
+.streak-fail {
+  background-color: #fff3f3;
+  border-color: #ef5350;
+  color: #d04040;
+}
+
+/* Upcoming / neutral */
+.streak-neutral {
+  background-color: #f2f2f2;
+  border-color: #e0e0e0;
+  color: #999999;
+}
+
+/* Today indicator (additive) */
+.streak-day.is-today {
+  box-shadow: 0 0 0 2px #375ce3;
+}
+
+/* Gem Tooltip */
+.portal-tooltip--gem {
+  width: 350px;
+  top: calc(100% + 9px);
+  right: -54px;
+  padding: 24px;
+  background-color: #edf2ff;
+}
+
+.portal-tooltip--gem::after {
+  left: 250px;
+  background-color: #edf2ff;
+}
+
+.tooltip-gem-content {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.tooltip-gem-icon img {
+  width: 80px;
+  height: 80px;
+}
+
+.tooltip-gem-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.gem-count {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #141414;
+  margin: 0;
+}
 
 
 /*---Main Content + primary and secondary columns---*/
@@ -421,7 +595,6 @@ form input::placeholder {
 
 
 /* --- Task Section --- */
-
 .task-section {
   display: flex;
   flex-direction: column;
@@ -429,15 +602,20 @@ form input::placeholder {
 }
 
 /* Section header reused across portal */
-.portal-section-header {
+.portal-section {
   margin-bottom: 0px;
 }
 
 .portal-section-title {
   font-size: 1.4rem;
   font-weight: 700;
-  margin: 0;
+  margin: 0 0 12px 0;
   color: var(--blacks);
+}
+
+.portal-section-text {
+  font-size: 1rem;
+  font-weight: 400;
 }
 
 /* List of tasks */
