@@ -109,14 +109,6 @@ input[type="radio"]:checked + .subject-card {
   background-color: #edf4ff;
 }
 
-.setwork-label {
-  font-weight: 500;
-  font-size: 1rem;
-  margin-bottom: 0.5rem;
-  display: block;
-  color: var(--blacks);
-}
-
 .grade-filter {
   margin-bottom: 20px;
   max-width: 280px;
@@ -303,6 +295,61 @@ input[type="radio"]:checked + .subject-card {
   border-color: #375ce3;
   background-color: #edf4ff;
 }
+
+/* Add Details (Input + Slider Rows) */
+.setwork-input-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+/* Row layout for sliders */
+.setwork-slider-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+
+/* Group wrapper for each input */
+.setwork-input-group {
+  flex: 1 1 300px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Label styling */
+.setwork-label {
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 6px;
+  color: #141414;
+}
+
+/* Input styling */
+.lmd-input {
+  height: 40px;
+  padding: 6px 12px;
+  font-size: 16px;
+  border: 1px solid #dcdcdc;
+  border-radius: 6px;
+  color: #141414;
+  background-color: #fff;
+}
+
+/* Date input tweaks */
+input[type="date"].lmd-input {
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+/* Range output display */
+.setwork-slider-output {
+  font-size: 14px;
+  color: #666;
+  margin-top: 6px;
+}
+
 
 
 
@@ -803,6 +850,84 @@ input[type="radio"]:checked + .subject-card {
 
 
                                   <!-- Step 3: Add Details -->
+                                  <div class="setwork-section">
+                                    <h3 class="setwork-section-title">Step 3: Add details</h3>
+                                  
+                                    <!-- Title and Due Date Row -->
+                                    <div class="setwork-input-row">
+                                      <!-- Title -->
+                                      <div class="setwork-input-group">
+                                        <label for="practice_name" class="setwork-label">Title</label>
+                                        <input
+                                          type="text"
+                                          id="practice_name"
+                                          name="practice_name"
+                                          class="lmd-input"
+                                          placeholder="Enter a name"
+                                        />
+                                      </div>
+                                  
+                                      <!-- Due Date -->
+                                      <div class="setwork-input-group">
+                                        <label for="due_date" class="setwork-label">Due date</label>
+                                        <input
+                                          type="date"
+                                          id="due_date"
+                                          name="due_date"
+                                          class="lmd-input"
+                                        />
+                                      </div>
+                                    </div>
+                                  
+                                    <!-- Time Limit and Question Count Sliders -->
+                                    <div class="setwork-slider-row">
+                                      <!-- Time Limit -->
+                                      <div class="setwork-input-group">
+                                        <label for="range-time" class="setwork-label">Time limit</label>
+                                        <input
+                                          type="range"
+                                          class="form-range"
+                                          id="range-time"
+                                          name="time_limit"
+                                          min="0"
+                                          max="200"
+                                          step="5"
+                                          value="0"
+                                        />
+                                        <p id="value-range-time" class="setwork-slider-output">No time limit</p>
+                                      </div>
+                                  
+                                      <!-- Number of Questions -->
+                                      <div class="setwork-input-group">
+                                        <label for="range-question" class="setwork-label">Number of questions</label>
+                                        <input
+                                          type="range"
+                                          class="form-range"
+                                          id="range-question"
+                                          name="number_question"
+                                          min="5"
+                                          max="100"
+                                          step="5"
+                                          value="0"
+                                        />
+                                        <p id="value-range-question" class="setwork-slider-output">0 Question</p>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  
+                                  
+
+
+
+
+
+
+
+
+
+
+
+
                                   <!-- Submit Button -->
                                 </form>
                             </div>
