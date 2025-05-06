@@ -8,7 +8,7 @@
   --cBgMain: #fafbfc;
   --cBorder: #eee;
   --cPink: #f0759f;
-  --cTextSub: #9a9898;
+  --cTextSub: #999999;
   --cColorCircle: #5271ff;
   --mwImageLogoSidebar: 150px;
   --mgTopLogoSidebarAndMainSection: 2rem;
@@ -164,17 +164,19 @@ body {
 form label {
   font-weight: 500;
 }
-form input {
-  border: 2px solid var(--cBorder) !important;
-  border-radius: 5px !important;
-  font-size: 0.95rem !important;
-}
+
+/* form input {
+  border: 2px solid #e5e5e5;
+  border-radius: 8px !important;
+  font-size: 1rem !important;
+} */
+
 form input::-moz-placeholder {
-  font-size: 0.9rem;
+  font-size: 1rem;
   color: var(--cTextSub) !important;
 }
 form input::placeholder {
-  font-size: 0.9rem;
+  font-size: 1rem;
   color: var(--cTextSub) !important;
 }
 
@@ -206,11 +208,13 @@ form input::placeholder {
 
 .main {
   min-height: 100vh;
-  overflow-x: scroll;
+  overflow-x: hidden;
+  overflow-y: auto;
   transition: all 0.35s ease-in-out;
   width: 100%;
   height: 100vh;
 }
+
 .main .border-header-page {
   border-bottom: 1px solid var(--cBorder);
   background-color: var(--whites);
@@ -3603,24 +3607,39 @@ a.sub-dropdown {
 .box-set-work-main .box-set-work4 .form-label {
   font-weight: 500;
 }
-.box-set-work-main .box-set-work4 .form-range::-webkit-slider-thumb {
-  background: var(--cMain);
+
+/* Sliders */
+.form-range::-webkit-slider-thumb {
+  background: #375ce3;
 }
-.box-set-work-main .box-set-work4 .form-range::-moz-range-thumb {
-  background: var(--cMain);
+ .form-range::-moz-range-thumb {
+  background: #375ce3;
 }
-.box-set-work-main .box-set-work4 .form-range::-ms-thumb {
-  background: var(--cMain);
+.form-range::-ms-thumb {
+  background: #375ce3;
 }
-.box-set-work-main .box-set-work4 .form-range:focus {
+.form-range:focus {
   box-shadow: none;
 }
-.box-set-work-main .box-set-work4 .form-range::-webkit-slider-runnable-track {
-  background-color: var(--cBorder);
+.form-range::-webkit-slider-runnable-track {
+  background-color: #e5e5e5;
 }
-.box-set-work-main .box-set-work4 .form-range::-moz-range-track {
-  background-color: var(--cBorder);
+ .form-range::-moz-range-track {
+  background-color: #e5e5e5;
 }
+
+.form-range::-webkit-slider-thumb:active {
+  background-color: #375ce3; /* Or whatever you want */
+}
+
+.form-range::-moz-range-thumb:active {
+  background-color: #375ce3;
+}
+
+
+
+/* Sliders END */
+
 .box-set-work-main .box-set-work4 #value-range-time,
 .box-set-work-main .box-set-work4 #value-range-question {
   color: var(--cTextSub);

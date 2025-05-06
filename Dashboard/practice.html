@@ -16,7 +16,9 @@
  <link rel="stylesheet" href="https://lambda.in.th/assets_dashboard/css/slick-custom.css?v=1746105587">
  <link rel="stylesheet" href="https://lambda.in.th/assets/cusmike/sweet2/sweetalert2.min.css?v=1746105587">
  <link rel="stylesheet" href="https://lambda.in.th/assets/cusmike/toastr/toastr.min.css?v=1746105587">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
 </head>
 
@@ -329,13 +331,18 @@ input[type="radio"]:checked + .subject-card {
 /* Input styling */
 .lmd-input {
   height: 40px;
-  padding: 6px 12px;
+  padding: 8px 10px;
   font-size: 16px;
-  border: 1px solid #dcdcdc;
-  border-radius: 6px;
+  border: 2px solid #e5e5e5;
+  border-radius: 8px;
   color: #141414;
   background-color: #fff;
 }
+
+.lmd-input:focus {
+  border: 2px solid #375ce3;
+}
+
 
 /* Date input tweaks */
 input[type="date"].lmd-input {
@@ -345,11 +352,72 @@ input[type="date"].lmd-input {
 
 /* Range output display */
 .setwork-slider-output {
-  font-size: 14px;
+  font-size: 16px;
   color: #666;
-  margin-top: 6px;
+  margin: 6px 0 0 0;
 }
 
+/* Toggle Row */
+.setwork-toggle-row {
+  margin: 0 0 30px 0;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.toggle-placeholder {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.toggle-placeholder input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--cMain);
+  cursor: not-allowed;
+}
+
+.toggle-note {
+  font-size: 16px;
+  color: #999999;
+  font-style: italic;
+}
+
+.setwork-toggle-row .setwork-label {
+  margin: 0;
+}
+
+/* Button Row */
+.setwork-submit-row {
+  display: flex;
+  justify-content: flex-end;
+  margin: 32px 0 30px 0;
+}
+
+.btn-setwork-submit {
+  background-color: #375ce3;
+  color: #fff;
+  height: 40px;
+  padding: 0 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btn-setwork-submit:hover {
+  background-color: #4f71ea;
+  color: #fff;
+}
+
+.btn-setwork-submit:active {
+  background-color: #294bc6 !important;
+  color: #fff !important;
+}
 
 
 
@@ -763,6 +831,12 @@ input[type="date"].lmd-input {
                                                               <label for="63">Place Value</label>
                                                             </div>
                                                             </li>
+                                                            <li>
+                                                              <div class="tree-row">
+                                                                <input type="checkbox" id="65" name="group[]" value="65">
+                                                                <label for="65">Comparing and Ordering</label>
+                                                              </div>
+                                                              </li>
                                                           </ul>
                                                       </li>
 
@@ -909,13 +983,9 @@ input[type="date"].lmd-input {
 
                                   </div>
 
-
-
-
-
                                   <!-- Step 3: Add Details -->
                                   <div class="setwork-section">
-                                    <h3 class="setwork-section-title">Step 3: Add details</h3>
+                                    <h3 class="setwork-section-title">Step 3: Add practice details (Optional)</h3>
                                   
                                     <!-- Title and Due Date Row -->
                                     <div class="setwork-input-row">
@@ -935,11 +1005,12 @@ input[type="date"].lmd-input {
                                       <div class="setwork-input-group">
                                         <label for="due_date" class="setwork-label">Due date</label>
                                         <input
-                                          type="date"
-                                          id="due_date"
-                                          name="due_date"
-                                          class="lmd-input"
-                                        />
+                                        type="text"
+                                        id="due_date"
+                                        name="due_date"
+                                        class="lmd-input"
+                                        placeholder=""
+                                      />                                      
                                       </div>
                                     </div>
                                   
@@ -954,7 +1025,7 @@ input[type="date"].lmd-input {
                                           id="range-time"
                                           name="time_limit"
                                           min="0"
-                                          max="200"
+                                          max="90"
                                           step="5"
                                           value="0"
                                         />
@@ -970,30 +1041,33 @@ input[type="date"].lmd-input {
                                           id="range-question"
                                           name="number_question"
                                           min="5"
-                                          max="100"
+                                          max="60"
                                           step="5"
-                                          value="0"
+                                          value="5"
                                         />
-                                        <p id="value-range-question" class="setwork-slider-output">0 Question</p>
+                                        <p id="value-range-question" class="setwork-slider-output">5 questions</p>
                                       </div>
                                     </div>
                                   </div>
-                                  
-                                  
 
-
-
-
-
-
-
-
-
-
-
+                                  <!-- Score Inclusion Toggle (Placeholder) -->
+                                  <div class="setwork-toggle-row">
+                                    <label class="setwork-label" for="count_score_toggle">
+                                      Include this practice in performance tracking
+                                    </label>
+                                    <div class="toggle-placeholder">
+                                      <input type="checkbox" id="count_score_toggle" name="count_score" disabled />
+                                      <span class="toggle-note">(Coming soon)</span>
+                                    </div>
+                                  </div>
 
                                   <!-- Submit Button -->
+                                  <div class="setwork-submit-row">
+                                    <button type="button" onclick="submit_practice();" class="btn btn-setwork-submit"><i class="fa-solid fa-plus"></i><span style="margin-left: 6px;">Set Task</span></button>
+                                  </div>                                  
+
                                 </form>
+
                             </div>
                         
                         </div>
@@ -1002,7 +1076,6 @@ input[type="date"].lmd-input {
                     </div>
                 </div>
             </div>
-
         </div>
 
 
@@ -1152,16 +1225,16 @@ input[type="date"].lmd-input {
             }
          });
       }
-        $.each(events, function(k, v) {
-            $('#range-time').on(v, function() {
-                const value = $('#range-time').val()
-                $('#value-range-time').text(`Time limit ${value} mins`)
-            });
+      $.each(events, function(k, v) {
+    $('#range-time').on(v, function() {
+        const value = parseInt(this.value, 10);
+        $('#value-range-time').text(value === 0 ? 'No time limit' : `${value} minutes`);
+    });
 
-            $('#range-question').on(v, function() {
-                const value = $('#range-question').val()
-                $('#value-range-question').text(`${value} Question `)
-            });
+    $('#range-question').on(v, function() {
+        const value = parseInt(this.value, 10);
+        $('#value-range-question').text(`${value} question${value === 1 ? '' : 's'}`);
+    });
         })
         jQuery(".bt-switch").bootstrapSwitch(); 
 
@@ -1368,6 +1441,16 @@ input[type="date"].lmd-input {
     });
   </script>
   
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+  flatpickr("#due_date", {
+    dateFormat: "d/m/Y", // Sets to DD/MM/YYYY format
+    minDate: "today",     // Optional: disallow past dates
+    defaultDate: null     // Optional: no pre-filled date
+  });
+});
+
+</script>
 
 </body>
 
