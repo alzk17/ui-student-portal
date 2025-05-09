@@ -1,15 +1,14 @@
 $(document).ready(function () {
+  // Show only first level
   $('.tree > ul').show();
   $('.tree > ul ul').hide();
 
-  // Set initial rotation states
-  $('.tree-toggle-btn').each(function () {
-    const $icon = $(this).find('i');
+  // Set initial icon states
+  $('.tree-toggle-btn i').each(function () {
     const $li = $(this).closest('li');
     const $nestedList = $li.children('ul');
-    $icon.toggleClass('rotated', $nestedList.is(':visible'));
-    // Ensure we only use fa-plus
-    $icon.removeClass('fa-minus').addClass('fa-plus');
+    $(this).toggleClass('fa-minus', $nestedList.is(':visible'))
+           .toggleClass('fa-plus', !$nestedList.is(':visible'));
   });
 
   // Expand/Collapse toggle
@@ -17,15 +16,13 @@ $(document).ready(function () {
     const $icon = $(this).find('i');
     const $li = $(this).closest('li');
     const $nestedList = $li.children('ul');
-    const wasVisible = $nestedList.is(':visible');
-
-    // Toggle rotation immediately
-    $icon.toggleClass('rotated', !wasVisible);
-
-    $nestedList.slideToggle(300);
+    
+    // Toggle icon immediately with animation
+    $icon.toggleClass('fa-plus fa-minus');
+    
+    $nestedList.slideToggle(400);
   });
-  
-
+ 
   // Checkbox change handler
   $('.tree input[type="checkbox"]').on('change', function () {
     const $checkbox = $(this);

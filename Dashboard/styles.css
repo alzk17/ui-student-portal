@@ -71,7 +71,7 @@ h2 {
 }
 
 body {
-  font-family: "soleil" !important;
+  font-family: "soleil", "sarabun" !important;
   background-color: var(--cBgMain);
   font-size: 0.9rem;
 }
@@ -4704,3 +4704,404 @@ a.sub-dropdown {
   background-color: #00a5ff;
   box-shadow: 2px 2px 5px #ccc;
 }/*# sourceMappingURL=style.css.map */
+
+
+/* Custom Practice Page */
+/* Practice Type Selector */
+.practice-tab-buttons {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding: 8px 0 0 0;
+}
+
+.tab-button {
+  flex: 1 1 300px; /* Responsive: take half the space on large, full width on small */
+  padding: 1.25rem;
+  border: 2px solid #e5e5e5;
+  border-radius: var(--radius-card);
+  background-color: var(--whites);
+  text-align: left;
+  transition: 0.2s ease all;
+}
+
+.tab-button h5 {
+  margin-bottom: 0.25rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--blacks);
+}
+
+.tab-button p {
+  color: var(--cTextSub);
+  font-size: 1rem;
+  margin: 0;
+}
+
+.tab-button.active {
+  border-color: #375ce3;
+  background-color: #edf4ff;
+}
+
+/*--- Tab Elements ---*/
+.setwork-section {
+ margin: 0 0 30px 0;
+}
+
+.setwork-section-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: var(--blacks);
+}
+
+.setwork-subject-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.subject-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+  border: 2px solid #e5e5e5;
+  border-radius: var(--radius-card);
+  background-color: var(--whites);
+  padding: 1rem;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.2s ease all;
+  min-width: 145px;
+  min-height: 145px;
+}
+
+.subject-card img {
+  width: 80px;
+  height: auto;
+}
+
+.subject-card span {
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--blacks);
+}
+
+input[type="radio"]:checked + .subject-card {
+  border-color: #375ce3;
+  background-color: #edf4ff;
+}
+
+.grade-filter {
+  margin-bottom: 20px;
+  max-width: 280px;
+}
+
+.grade-filter select.form-select {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  border: 1px solid var(--cBorder);
+  font-size: 1rem;
+  color: var(--blacks);
+}
+
+/* Custom select styling */
+.lmd-select {
+  width: 100%;
+  padding: 0 12px 0 12px;
+  font-size: 1rem;
+  height: 2.5rem;
+  font-weight: 400;
+  color: var(--blacks);
+  background-color: var(--whites);
+  border: 2px solid #e5e5e5;
+  border-radius: 8px;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml,<svg fill='none' stroke='%23666' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'><path d='M19 9l-7 7-7-7'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 1em;
+  transition: border-color 0.2s ease;
+}
+
+.lmd-select:focus {
+  outline: none;
+  border-color: #375ce3;
+}
+
+/* Topic Tree */
+.topic-tree-wrapper {
+  margin: 0 0 20px 0;
+}
+
+.tree {
+  font-family: inherit;
+  font-size: 16px;
+  color: var(--cText);
+  padding-left: 0;
+}
+
+.tree > ul {
+  list-style: none;
+  margin-left: 0;
+  padding: 0;
+  display: block;
+}
+
+.tree ul ul {
+  list-style: none;
+  padding: 0;
+  display: none;
+}
+
+/* Indentation for nested levels */
+.tree ul ul li {
+  padding-left: 1.75rem;
+}
+
+.tree ul ul ul li {
+  padding-left: 3.75rem;
+}
+
+/* List item and row container */
+.tree li {
+  margin: 0;
+  padding: 4px 0;
+}
+
+.tree-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0;
+}
+
+/* Toggle button */
+.tree-toggle-btn {
+  width: 24px;
+  height: 24px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.tree-toggle-btn:hover {
+  background-color: #e5e5e599;
+}
+
+.tree-toggle-btn i {
+  font-size: 0.9rem;
+}
+
+/* Checkbox */
+.tree input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  margin: 0;
+  margin-right: 4px;
+  vertical-align: middle;
+}
+
+/* Label */
+.tree label {
+  cursor: pointer;
+  color: #141414;
+  font-weight: 400;
+  margin: 0;
+  white-space: nowrap;
+}
+
+.tree-toggle-btn i {
+  transition: transform 0.4s ease-in-out;
+  display: inline-block;
+  transform-origin: center;
+}
+
+/* Rotate plus when expanded */
+.tree-toggle-btn i.fa-minus {
+  transform: rotate(180deg);
+}
+
+/* Difficulty Card */
+.difficulty-filter {
+  margin-bottom: 20px;
+}
+
+.difficulty-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14.25px;
+}
+
+.difficulty-card {
+  flex: 1 1 160px;
+  max-width: 160px;
+  font-size: 16px;
+}
+
+.difficulty-card label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  border: 2px solid #e5e5e5;
+  border-radius: 8px;
+  background-color: var(--whites);
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+/* .difficulty-card label:hover {
+  border-color: #375ce3;
+  background-color: #f7f9ff;
+} */
+
+.difficulty-card input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  margin-left: 0.8rem;
+}
+
+.difficulty-card .star {
+  color: #e6b800;
+  font-size: 0.9rem;
+  margin: 0;
+  white-space: nowrap;
+}
+
+/* Highlight if checked */
+.difficulty-card:has(input[type="checkbox"]:checked) label {
+  border-color: #375ce3;
+  background-color: #edf4ff;
+}
+
+/* Add Details (Input + Slider Rows) */
+.setwork-input-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+/* Row layout for sliders */
+.setwork-slider-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+
+/* Group wrapper for each input */
+.setwork-input-group {
+  flex: 1 1 300px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Label styling */
+.setwork-label {
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 8px;
+  color: #141414;
+}
+
+/* Input styling */
+.lmd-input {
+  height: 40px;
+  padding: 8px 10px;
+  font-size: 16px;
+  border: 2px solid #e5e5e5;
+  border-radius: 8px;
+  color: #141414;
+  background-color: #fff;
+}
+
+.lmd-input:focus {
+  border: 2px solid #375ce3;
+}
+
+
+/* Date input tweaks */
+input[type="date"].lmd-input {
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+/* Range output display */
+.setwork-slider-output {
+  font-size: 16px;
+  color: #666;
+  margin: 6px 0 0 0;
+}
+
+/* Toggle Row */
+.setwork-toggle-row {
+  margin: 0 0 30px 0;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.toggle-placeholder {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.toggle-placeholder input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--cMain);
+  cursor: not-allowed;
+}
+
+.toggle-note {
+  font-size: 16px;
+  color: #999999;
+  font-style: italic;
+}
+
+.setwork-toggle-row .setwork-label {
+  margin: 0;
+}
+
+/* Button Row */
+.setwork-submit-row {
+  display: flex;
+  justify-content: flex-end;
+  margin: 32px 0 30px 0;
+}
+
+.btn-setwork-submit {
+  background-color: #375ce3;
+  color: #fff;
+  height: 40px;
+  padding: 0 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btn-setwork-submit:hover {
+  background-color: #4f71ea;
+  color: #fff;
+}
+
+.btn-setwork-submit:active {
+  background-color: #294bc6 !important;
+  color: #fff !important;
+}
+
+/* Mock Test Tab */
