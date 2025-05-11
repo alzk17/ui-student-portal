@@ -119,12 +119,149 @@
   margin-right: 6px;
 }
 
+/* Modals */
+/* Overlay */
+.portal-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 9997 !important;
+  display: none;
+}
 
+/* Modal Container */
+.portal-modal {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 9998;
+}
 
+/* Modal Box */
+.portal-modal-content {
+  background-color: #ffffff;
+  width: 90%;
+  max-width: 420px;
+  border-radius: var(--radius-card);
+  padding: 18px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
 
+/* Close Button */
+.btn-close-modal {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: none;
+  border: none;
+  font-size: 1.25rem;
+  color: #888;
+  cursor: pointer;
+}
 
+/* Title */
+.portal-modal-title {
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #141414;
+  margin: 0 0 8px 0;
+}
 
+/* Meta Info */
+.portal-modal-meta {
+  font-size: 14px;
+  color: #666;
+  margin: 0;
+}
 
+/* Description */
+.portal-modal-description {
+  color: #141414;
+  font-size: 1rem;
+  margin: 0;
+}
+
+/* Due Date */
+.portal-modal-due {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 0.85rem;
+  color: #444;
+}
+
+.input-due-date {
+  padding: 8px 12px;
+  border: 1px solid #dcdcdc;
+  border-radius: 6px;
+  font-size: 0.95rem;
+}
+
+/* CTA Button */
+.portal-modal-btn {
+  margin-top: 8px;
+  padding: 12px;
+  background-color: #375ce3;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.portal-modal-btn:hover {
+  background-color: #294bc6;
+}
+
+.portal-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  padding: 0 20px 20px;
+  flex-wrap: wrap;
+}
+
+/* Exit (Cancel) Button */
+.btn-portal-exit {
+  padding: 10px 16px;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #666666;
+  background-color: #f2f2f2;
+  border: 1px solid #dcdcdc;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.btn-portal-exit:hover {
+  background-color: #e5e5e5;
+}
+
+/* Primary CTA Button */
+.btn-portal-primary {
+  padding: 10px 16px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #ffffff;
+  background-color: #375ce3;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.btn-portal-primary:hover {
+  background-color: #294bc6;
+}
 
 
 
@@ -820,9 +957,18 @@
                               </div>
 
                               <div class="mock-card-action">
-                                <button type="button" class="btn btn-setwork-submit" data-bs-toggle="modal" data-bs-target="#modalSetTest-0" style="font-size: 1rem !important;">
-                                  <i class="fa-regular fa-plus"></i> Add to task list
-                                </button>
+                            <button
+                              type="button"
+                              class="btn btn-setwork-submit"
+                              onclick="openModal(this)"
+                              data-title="Lambda Foundation: English Primary 5"
+                              data-questions="35"
+                              data-minutes="30"
+                              data-subject="Eng"
+                            >
+                              <i class="fa-regular fa-plus"></i> Add to task list
+                            </button>
+
                               </div>
 
                             </div>
@@ -925,7 +1071,6 @@
     </div>
 
 
-
     <div class="modal fade" id="myQuestionModal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -949,6 +1094,49 @@
         </div>
     </div>
     </div>
+
+    <!-- Overlay -->
+    <div class="portal-modal-overlay" id="modal-overlay"></div>
+
+    <!-- Modal Container -->
+    <div class="portal-modal" id="mocktest-modal">
+      <div class="portal-modal-content">
+
+        <!-- Modal Body -->
+        <div class="portal-modal-body">
+          
+          <h2 class="portal-modal-title">Lambda Foundation: Maths Grade 4</h2>
+          
+          <p class="portal-modal-meta">50 questions • 35 minutes • Eng</p>
+          
+          <p class="portal-modal-description">
+            A short English grammar and vocabulary practice for Primary 5 students.
+          </p>
+
+          <p class="portal-modal-info" style="display: none;">
+            This mock test will be added to your task list. You can take it anytime.
+          </p>
+
+          <div class="portal-modal-due">
+            <label for="due-date">Due Date</label>
+            <input type="date" id="due-date" name="due_date" class="input-due-date">
+          </div>
+
+        </div>
+
+        <!-- Modal Actions -->
+        <div class="portal-modal-actions">
+          <button class="btn-portal-exit" onclick="closeModal()">Cancel</button>
+          <button class="btn-portal-primary" onclick="addMockTestToTaskList()">Add to Task List</button>
+        </div>
+
+      </div>
+    </div>
+
+
+
+
+    
 
 
 
@@ -1283,6 +1471,7 @@
     });
   </script>
   
+  <!--Date Picker Script-->
   <script>
     document.addEventListener('DOMContentLoaded', function () {
   flatpickr("#due_date", {
@@ -1292,7 +1481,44 @@
   });
 });
 
-</script>
+  </script>
+
+  <!--Modal Open/Close Script-->
+  <script>
+    function openModal() {
+  document.getElementById('mocktest-modal').style.display = 'flex';
+  document.getElementById('modal-overlay').style.display = 'block';
+}
+
+function closeModal() {
+  document.getElementById('mocktest-modal').style.display = 'none';
+  document.getElementById('modal-overlay').style.display = 'none';
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    const overlay = document.getElementById('modal-overlay');
+    const modal = document.getElementById('mocktest-modal');
+
+    if (modal) {
+        modal.addEventListener('click', function(event) {
+            // If the clicked element (event.target) is the modal container itself
+            // (and not one of its children like .portal-modal-content)
+            if (event.target === modal) {
+                closeModal();
+            }
+        });
+    } else {
+        console.error("Modal element (#mocktest-modal) not found!");
+    }
+
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape') {
+        closeModal();
+      }
+    });
+});
+  </script>
+
 
 </body>
 
