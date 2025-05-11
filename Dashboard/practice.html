@@ -120,7 +120,7 @@
 }
 
 /* Modals */
-/* Overlay */
+
 .portal-modal-overlay {
   position: fixed;
   inset: 0;
@@ -129,7 +129,6 @@
   display: none;
 }
 
-/* Modal Container */
 .portal-modal {
   position: fixed;
   inset: 0;
@@ -143,14 +142,14 @@
 .portal-modal-content {
   background-color: #ffffff;
   width: 90%;
-  max-width: 420px;
+  max-width: 480px;
   border-radius: var(--radius-card);
-  padding: 18px;
+  padding: 24px;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 24px;
 }
 
 /* Close Button */
@@ -175,16 +174,16 @@
 
 /* Meta Info */
 .portal-modal-meta {
-  font-size: 14px;
+  font-size: 1rem;
   color: #666;
-  margin: 0;
+  margin: 0 0 16px 0;
 }
 
 /* Description */
 .portal-modal-description {
   color: #141414;
   font-size: 1rem;
-  margin: 0;
+  margin: 0 0 24px 0;
 }
 
 /* Due Date */
@@ -192,8 +191,9 @@
   display: flex;
   flex-direction: column;
   gap: 6px;
-  font-size: 0.85rem;
-  color: #444;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #141414;
 }
 
 .input-due-date {
@@ -203,35 +203,18 @@
   font-size: 0.95rem;
 }
 
-/* CTA Button */
-.portal-modal-btn {
-  margin-top: 8px;
-  padding: 12px;
-  background-color: #375ce3;
-  color: #fff;
-  border: none;
-  border-radius: 8px;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background 0.2s ease;
-}
-
-.portal-modal-btn:hover {
-  background-color: #294bc6;
-}
-
 .portal-modal-actions {
   display: flex;
   justify-content: flex-end;
   gap: 12px;
-  padding: 0 20px 20px;
+  padding: 0;
   flex-wrap: wrap;
 }
 
 /* Exit (Cancel) Button */
 .btn-portal-exit {
-  padding: 10px 16px;
+  height: 40px;
+  padding: 0 16px;
   font-size: 1rem;
   font-weight: 500;
   color: #666666;
@@ -248,9 +231,10 @@
 
 /* Primary CTA Button */
 .btn-portal-primary {
-  padding: 10px 16px;
+  height: 40px;
+  padding: 0 16px;
   font-size: 1rem;
-  font-weight: 600;
+  font-weight: 500;
   color: #ffffff;
   background-color: #375ce3;
   border: none;
@@ -262,8 +246,6 @@
 .btn-portal-primary:hover {
   background-color: #294bc6;
 }
-
-
 
 </style>
 
@@ -1105,22 +1087,17 @@
         <!-- Modal Body -->
         <div class="portal-modal-body">
           
-          <h2 class="portal-modal-title">Lambda Foundation: Maths Grade 4</h2>
+          <h2 class="portal-modal-title">Lambda Foundation: Maths Grade 3</h2>
           
           <p class="portal-modal-meta">50 questions • 35 minutes • Eng</p>
           
           <p class="portal-modal-description">
-            A short English grammar and vocabulary practice for Primary 5 students.
+            A full-length mock test designed to review key Grade 3 maths concepts after completing the Lambda learning journey.
           </p>
 
-          <p class="portal-modal-info" style="display: none;">
+          <p class="portal-modal-info" >
             This mock test will be added to your task list. You can take it anytime.
           </p>
-
-          <div class="portal-modal-due">
-            <label for="due-date">Due Date</label>
-            <input type="date" id="due-date" name="due_date" class="input-due-date">
-          </div>
 
         </div>
 
