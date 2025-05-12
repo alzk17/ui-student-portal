@@ -99,6 +99,51 @@
   z-index: 1;
 }
 
+/* Pagination */
+.lmd-pagination-wrapper {
+  margin-top: 24px;
+  display: flex;
+  justify-content: center;
+}
+
+.lmd-pagination {
+  display: flex;
+  padding-left: 0;
+  list-style: none;
+}
+
+.lmd-pagination .page-link {
+  border: 1px solid #e5e5e5;
+  padding: 6px 12px;
+  background-color: #fff;
+  color: #141414;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.lmd-pagination .page-link:focus,
+.lmd-pagination .page-link:active:focus {
+  outline: 0 !important;
+  box-shadow: none !important;
+}
+
+.lmd-pagination .page-item.active .page-link {
+  background-color: #375ce3;
+  color: #fff;
+  border-color: #375ce3;
+}
+
+.lmd-pagination .page-item.disabled .page-link {
+    cursor: not-allowed !important;
+    pointer-events: auto !important;
+    opacity: 0.4 !important;
+
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;  
+}
+
     </style>
 
 
@@ -304,17 +349,17 @@
     </div>
 
     <!-- Search -->
-    <div class="review-searchbar">
-        <i class="fa fa-search search-icon"></i>
-        <input
+      <div class="review-searchbar">
+      <i class="fa fa-search search-icon"></i>
+      <input
             type="text"
-            id="searchreview"
+            id="searchreview" {/* Keep this ID */}
             name="searchreview"
             class="lmd-input"
             placeholder="Search tasks"
-            oninput="searchReviewTasks(this.value)"
-        />
-    </div>
+            {/* REMOVED oninput attribute from here */}
+      />
+      </div>
 
   </div>
 
@@ -322,64 +367,76 @@
   <div class="task-table box-table table-responsive">
     <table class="table box-table">
       <thead>
-        <tr>
-          <th>Title</th>
-          <th>Subject</th>
-          <th>Score</th>
-          <th>Due Date</th>
-          <th>Date Completed</th>
-          <th>Status</th>
-        </tr>
-      </thead>
-      <tbody>
+  <tr>
+    <th>Title</th>
+    <th>Subject</th>
+    <th>Score</th>
+    <th>Due Date</th>
+    <th>Date Completed</th>
+    <th>Status</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>English Practice 1</td>
+    <td>English</td>
+    <td>84%</td>
+    <td>-</td> <td>09/05/2025</td>
+    <td>
+      <a class="status-table" href="https://lambda.in.th/dashboard-child/practice-transcript/33b6eb5e-d88b-44e9-a040-8397ea27c961">
+        <span class="text-success">Check Transcript</span>
+      </a>
+    </td>
+  </tr>
+
+  <tr>
+    <td>1231234</td>
+    <td>Maths (EP)</td>
+    <td>75%</td>
+    <td>10/05/2025</td> <td>09/05/2025</td> <td>
+      <a class="status-table" href="https://lambda.in.th/dashboard-child/practice-transcript/21f9668b-622c-43f8-9065-ffb6a64fbc1a">
+        <span class="text-success">Check Transcript</span>
+      </a>
+    </td>
+  </tr>
+
+  <tr>
+    <td>dasfasdf</td>
+    <td>Maths (EP)</td>
+    <td>82%</td> <td>22/05/2025</td> <td>04/05/2025</td>
+    <td>
+      <a class="status-table" href="https://lambda.in.th/dashboard-child/practice-transcript/29a96d70-1bad-44cb-83fb-79b79b773b57">
+        <span class="text-success">Check Transcript</span>
+      </a>
+    </td>
+  </tr>
+
+      <tr>
+            <td>jkjjkkk</td>
+                  <td>Maths Contest</td>
+                  <td>97%</td> <td>-</td> <td>30/04/2025</td>
+            <td>
+            <a class="status-table" href="https://lambda.in.th/dashboard-child/practice-transcript/d85ed28f-89ff-4034-a1cd-fec35bdbfc74">
+            <span class="text-success">Check Transcript</span></a>
+            </td>
+      </tr>
+
+  
 
 
-        <tr>
-  <td>English Practice 1</td>
-  <td>English</td>
-  <td>84%</td>
-  <td>-</td> <!-- Due Date -->
-  <td>09/05/2025</td>
-  <td>
-    <a class="status-table" href="https://lambda.in.th/dashboard-child/practice-transcript/33b6eb5e-d88b-44e9-a040-8397ea27c961">
-      <span class="text-success">Check Transcript</span>
-    </a>
-  </td>
-        </tr>
 
-        <tr>
-  <td>`1231234</td>
-  <td>Maths (EP)</td>
-  <td>-</td> <!-- Due Date -->
-  <td>10/05/2025</td>
-  <td>
-    <a class="status-table" href="https://lambda.in.th/dashboard-child/practice-transcript/21f9668b-622c-43f8-9065-ffb6a64fbc1a">
-      <span class="text-success">Check Transcript</span>
-    </a>
-  </td>
-        </tr>
-        
-        <tr>
-        <td>dasfasdf</td>
-        <td>Maths (EP)</td>
-        <td>22/05/2025</td> <!-- Due Date -->
-        <td>04/05/2025</td>
-        <td>
-            <a class="status-table" href="https://lambda.in.th/dashboard-child/practice-transcript/29a96d70-1bad-44cb-83fb-79b79b773b57">
-            <span class="text-success">Check Transcript</span>
-            </a>
-        </td>
-        </tr>
-
-
-
-
-      </tbody>
+</tbody>
     </table>
   </div>
 
-  <!-- Pagination -->
-  <div id="pagination" class="pagination-container"></div>
+
+<nav class="lmd-pagination-wrapper" aria-label="Page navigation">
+<ul class="pagination lmd-pagination" id="pagination"></ul>
+</nav>
+
+
+
+
 </div>
 
 
@@ -2849,87 +2906,179 @@
         myModal.show();
     }
 </script>
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-          const searchInput = document.getElementById("search");
-          const tableRows = document.querySelectorAll(".box-table tbody tr");
-    
-          searchInput.addEventListener("keyup", function () {
-              let searchText = searchInput.value.toLowerCase();
-    
-              tableRows.forEach(row => {
-                  let title = row.cells[0].innerText.toLowerCase(); // คอลัมน์ Title
-                  let subject = row.cells[1].innerText.toLowerCase(); // คอลัมน์ Subject
-    
-                  if (title.includes(searchText) || subject.includes(searchText)) {
-                      row.style.display = "";
-                  } else {
-                      row.style.display = "none";
-                  }
-              });
-          });
-      });
-    </script>
+
 
 <script>
-  document.addEventListener("DOMContentLoaded", function () {
-      const searchInput = document.getElementById("search");
-      const tableRows = Array.from(document.querySelectorAll(".box-table tbody tr"));
-      const rowsPerPage = 20; // จำนวนแถวต่อหน้า
-      let currentPage = 1;
+      document.addEventListener("DOMContentLoaded", function () {
+    // Get the search input element by its new ID
+    const searchInput = document.getElementById("searchreview");
+    
+    // Get all table rows from the specific table structure
+    const allTableRows = Array.from(document.querySelectorAll(".box-table tbody tr"));
+    
+    // This array will hold the rows that are currently being displayed or paginated
+    // (it can be all rows or a filtered subset)
+    let currentDisplayableRows = allTableRows;
+    
+    const rowsPerPage = 20; // Set how many rows you want per page
+    let currentPage = 1;
+    
+    // Get the container where pagination buttons will be placed
+    const paginationContainer = document.getElementById("pagination");
 
-      function displayTableRows() {
-          let startIndex = (currentPage - 1) * rowsPerPage;
-          let endIndex = startIndex + rowsPerPage;
+    /**
+     * Hides all rows and then displays only the rows for the current page
+     * from the currentDisplayableRows array. Also updates pagination buttons.
+     */
+    function displayTableRows() {
+        let startIndex = (currentPage - 1) * rowsPerPage;
+        let endIndex = startIndex + rowsPerPage;
 
-          tableRows.forEach((row, index) => {
-              if (index >= startIndex && index < endIndex) {
-                  row.style.display = "";
-              } else {
-                  row.style.display = "none";
-              }
-          });
+        // Hide all rows that were originally in the table's tbody
+        allTableRows.forEach(row => {
+            if (row) { // Ensure row exists
+                row.style.display = "none";
+            }
+        });
 
-          updatePaginationButtons();
-      }
+        // Show only the rows from the current (possibly filtered) set for the current page
+        // Use slice to get only the items for the current page from the displayable set
+        currentDisplayableRows.slice(startIndex, endIndex).forEach(row => {
+            if (row) { // Ensure row exists
+                row.style.display = ""; // Revert to default display (e.g., 'table-row')
+            }
+        });
 
-      function updatePaginationButtons() {
-          let totalPages = Math.ceil(tableRows.length / rowsPerPage);
-          let paginationContainer = document.getElementById("pagination");
-          paginationContainer.innerHTML = "";
+        updatePaginationButtons();
+    }
 
-          for (let i = 1; i <= totalPages; i++) {
-              let button = document.createElement("button");
-              button.innerText = i;
-              button.classList.add("pagination-btn");
-              if (i === currentPage) button.classList.add("active");
+    /**
+     * Creates a single pagination list item (<li><a>...</a></li>)
+     * @param {string} text - Text for the link (e.g., "Previous", "1", "Next")
+     * @param {number|string} pageNum - Page number or control type ("prev", "next")
+     * @param {boolean} isActive - If this link represents the current page
+     * @param {boolean} isDisabled - If this link should be disabled
+     * @param {boolean} isControl - If this is a "Previous" or "Next" control
+     * @returns {HTMLLIElement} The created list item element
+     */
+    function createPageLink(text, pageNum, isActive, isDisabled, isControl = false) {
+        const li = document.createElement("li");
+        li.classList.add("page-item");
+        if (isActive) li.classList.add("active");
+        if (isDisabled) li.classList.add("disabled");
 
-              button.addEventListener("click", function () {
-                  currentPage = i;
-                  displayTableRows();
-              });
+        const a = document.createElement("a");
+        a.classList.add("page-link");
+        a.innerText = text;
 
-              paginationContainer.appendChild(button);
-          }
-      }
+        if (isDisabled) {
+            a.href = "javascript:void(0);"; // Prevents navigation for disabled links
+            // Apply styles for disabled links if not purely handled by Bootstrap's .disabled
+            a.style.opacity = "0.4";
+            a.style.cursor = "not-allowed";
+            a.style.webkitUserSelect = "none";
+            a.style.mozUserSelect = "none";
+            a.style.msUserSelect = "none";
+            a.style.userSelect = "none";
+        } else {
+            a.href = "#"; // For active links, still prevent default below
+            a.addEventListener("click", function (e) {
+                e.preventDefault(); // Prevent default link behavior (page jump)
+                
+                let newPage = currentPage;
+                if (isControl) {
+                    if (pageNum === "prev" && currentPage > 1) {
+                        newPage = currentPage - 1;
+                    } else if (pageNum === "next" && currentPage < Math.ceil(currentDisplayableRows.length / rowsPerPage)) {
+                        newPage = currentPage + 1;
+                    }
+                } else {
+                    newPage = pageNum;
+                }
 
-      searchInput.addEventListener("keyup", function () {
-          let searchText = searchInput.value.toLowerCase();
-          let filteredRows = tableRows.filter(row => {
-              let title = row.cells[0].innerText.toLowerCase();
-              let subject = row.cells[1].innerText.toLowerCase();
-              return title.includes(searchText) || subject.includes(searchText);
-          });
+                if (newPage !== currentPage) {
+                    currentPage = newPage;
+                    displayTableRows();
+                }
+            });
+        }
+        li.appendChild(a);
+        return li;
+    }
 
-          tableRows.forEach(row => row.style.display = "none");
-          filteredRows.forEach(row => row.style.display = "");
+    /**
+     * Clears and rebuilds the pagination buttons based on the
+     * currentDisplayableRows and currentPage.
+     */
+    function updatePaginationButtons() {
+        if (!paginationContainer) return; // Exit if pagination container doesn't exist
 
-          currentPage = 1;
-          displayTableRows();
-      });
+        let totalPages = Math.ceil(currentDisplayableRows.length / rowsPerPage);
+        paginationContainer.innerHTML = ""; // Clear existing buttons
 
-      displayTableRows();
-  });
+        // Handle cases with no results or only one page
+        if (currentDisplayableRows.length === 0 && searchInput && searchInput.value.trim() !== "") {
+            // Optionally display a "No results found" message
+            // For now, it will show disabled Prev/Next and no page numbers
+        }
+        
+        if (totalPages === 0 && currentDisplayableRows.length > 0) {
+            // This handles if all results fit on one page, but rowsPerPage is larger
+            totalPages = 1;
+        }
+
+        // Add "Previous" button
+        paginationContainer.appendChild(
+            createPageLink("Previous", "prev", false, currentPage === 1, true)
+        );
+
+        // Add page number buttons
+        // For a large number of pages, you'd implement more complex logic here
+        // (e.g., showing a window of pages with ellipses: 1 ... 5 6 7 ... 100)
+        // This basic version shows all page numbers.
+        for (let i = 1; i <= totalPages; i++) {
+            paginationContainer.appendChild(
+                createPageLink(i, i, i === currentPage, false, false)
+            );
+        }
+
+        // Add "Next" button
+        paginationContainer.appendChild(
+            createPageLink("Next", "next", false, currentPage === totalPages || totalPages === 0, true)
+        );
+    }
+
+    // --- Search Input Event Listener ---
+    if (searchInput) {
+        // Use "input" event for more responsive filtering (catches paste, cut, etc.)
+        searchInput.addEventListener("input", function () {
+            let searchText = searchInput.value.toLowerCase().trim();
+
+            if (searchText === "") {
+                currentDisplayableRows = allTableRows; // Reset to show all rows
+            } else {
+                currentDisplayableRows = allTableRows.filter(row => {
+                    const titleCell = row.cells[0];
+                    const subjectCell = row.cells[1];
+
+                    // Use textContent and trim for robust matching
+                    const title = titleCell ? titleCell.textContent.trim().toLowerCase() : "";
+                    const subject = subjectCell ? subjectCell.textContent.trim().toLowerCase() : "";
+
+                    return title.includes(searchText) || subject.includes(searchText);
+                });
+            }
+
+            currentPage = 1; // Reset to the first page after search
+            displayTableRows(); // Update table display and pagination buttons
+        });
+    } else {
+        console.warn("Search input with id 'searchreview' not found. Search functionality will not work.");
+    }
+
+    // Initial display of table rows and pagination
+    displayTableRows();
+});
 </script>
 
 </body>
