@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -115,9 +113,21 @@
       user-select: none;
     }
 
-    th .sort-icon {
-      font-size: 0.8em;
+    .sortable {
+        cursor: pointer;
     }
+
+    th i {
+      font-size: 1rem;
+      margin-left: 6px;
+      cursor: pointer;
+      transition: color 0.2s ease;
+    }
+
+    .box-table {
+        font-size: 1rem;
+    }
+    
   </style>
 </head>
 
@@ -277,24 +287,48 @@
                 <table class="table box-table">
                   <thead>
                     <tr>
-                      <th class="sortable" data-sort="title" data-type="text">Title <i class="fas fa-sort"></i></th>
-                      <th class="sortable" data-sort="subject" data-type="text">Subject <i class="fas fa-sort"></i></th>
-                      <th>Score</th>
-                      <th class="sortable" data-sort="due-date" data-type="date">Due Date <i class="fas fa-sort"></i></th>
-                      <th class="sortable" data-sort="completed-date" data-type="date">Date Completed <i class="fas fa-sort"></i></th>
-                      <th>Status</th>
+                      <th class="sortable" data-sort="title" data-type="text">Title <i class="fas fa-sort" style="display:none;"></i></th>
+                      <th class="sortable" data-sort="subject" data-type="text">Subject <i class="fas fa-sort" style="display:none;"></i></th>
+                      <th class="sortable" data-sort="score" data-type="score">Score <i class="fas fa-sort" style="display:none;"></i></th>
+                      <th class="sortable" data-sort="due-date" data-type="date">Due <i class="fas fa-sort" style="display:none;"></i></th>
+                      <th class="sortable" data-sort="completed-date" data-type="date">Completed <i class="fas fa-sort" style="display:none;"></i></th>
+                      <th class="sortable" data-sort="status" data-type="status">Status <i class="fas fa-sort" style="display:none;"></i></th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
-                      <td>English Practice 1</td>
-                      <td>English</td>
-                      <td>84%</td>
+                      <td>Maths Contest Practice</td>
+                      <td>Maths Contest</td>
                       <td>-</td>
-                      <td>09/05/2025</td>
+                      <td>16/05/2025</td>
+                      <td>-</td>
                       <td>
                         <a class="status-table" href="https://lambda.in.th/dashboard-child/practice-transcript/33b6eb5e-d88b-44e9-a040-8397ea27c961">
-                          <span class="text-success">Check Transcript</span>
+                          <span class="text-success">Continue</span>
+                        </a>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Maths Practice 1</td>
+                      <td>Maths</td>
+                      <td>-</td>
+                      <td>22/05/2025</td>
+                      <td>-</td>
+                      <td>
+                        <a class="status-table" href="https://lambda.in.th/dashboard-child/practice-transcript/33b6eb5e-d88b-44e9-a040-8397ea27c961">
+                          <span class="text-success">Start</span>
+                        </a>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>English Practice 1</td>
+                      <td>English</td>
+                      <td>-</td>
+                      <td>18/05/2025</td>
+                      <td>-</td>
+                      <td>
+                        <a class="status-table" href="https://lambda.in.th/dashboard-child/practice-transcript/33b6eb5e-d88b-44e9-a040-8397ea27c961">
+                          <span class="text-success">Start</span>
                         </a>
                       </td>
                     </tr>
@@ -306,7 +340,7 @@
                       <td>09/05/2025</td>
                       <td>
                         <a class="status-table" href="https://lambda.in.th/dashboard-child/practice-transcript/21f9668b-622c-43f8-9065-ffb6a64fbc1a">
-                          <span class="text-success">Check Transcript</span>
+                          <span class="text-success">Review</span>
                         </a>
                       </td>
                     </tr>
@@ -318,7 +352,7 @@
                       <td>04/05/2025</td>
                       <td>
                         <a class="status-table" href="https://lambda.in.th/dashboard-child/practice-transcript/29a96d70-1bad-44cb-83fb-79b79b773b57">
-                          <span class="text-success">Check Transcript</span>
+                          <span class="text-success">Review</span>
                         </a>
                       </td>
                     </tr>
@@ -330,7 +364,7 @@
                       <td>30/04/2025</td>
                       <td>
                         <a class="status-table" href="https://lambda.in.th/dashboard-child/practice-transcript/d85ed28f-89ff-4034-a1cd-fec35bdbfc74">
-                          <span class="text-success">Check Transcript</span>
+                          <span class="text-success">Review</span>
                         </a>
                       </td>
                     </tr>
@@ -342,22 +376,217 @@
                       <td>28/04/2025</td>
                       <td>
                         <a class="status-table" href="https://lambda.in.th/dashboard-child/practice-transcript/d85ed28f-89ff-4034-a1cd-fec35bdbfc74">
-                          <span class="text-success">Check Transcript</span>
+                          <span class="text-success">Review</span>
                         </a>
                       </td>
                     </tr>
                     <tr>
                       <td>Thai Practice</td>
                       <td>Thai</td>
-                      <td>55%</td>
+                      <td>84%</td>
                       <td>-</td>
                       <td>25/04/2025</td>
                       <td>
                         <a class="status-table" href="https://lambda.in.th/dashboard-child/practice-transcript/d85ed28f-89ff-4034-a1cd-fec35bdbfc74">
-                          <span class="text-success">Check Transcript</span>
+                          <span class="text-success">Review</span>
                         </a>
                       </td>
                     </tr>
+                    <tr>
+                      <td>Mixed Practice 6 Apr 2025</td>
+                      <td>Thai</td>
+                      <td>55%</td>
+                      <td>-</td>
+                      <td>6/04/2025</td>
+                      <td>
+                        <a class="status-table" href="https://lambda.in.th/dashboard-child/practice-transcript/d85ed28f-89ff-4034-a1cd-fec35bdbfc74">
+                          <span class="text-success">Review</span>
+                        </a>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Mathematics EP Primary 1</td>
+                      <td>Thai</td>
+                      <td>100%</td>
+                      <td>-</td>
+                      <td>5/04/2025</td>
+                      <td>
+                        <a class="status-table" href="https://lambda.in.th/dashboard-child/practice-transcript/d85ed28f-89ff-4034-a1cd-fec35bdbfc74">
+                          <span class="text-success">Review</span>
+                        </a>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Force and Motion</td>
+                      <td>Science Contest</td>
+                      <td>100%</td>
+                      <td>-</td>
+                      <td>5/04/2025</td>
+                      <td>
+                        <a class="status-table" href="https://lambda.in.th/dashboard-child/practice-transcript/d85ed28f-89ff-4034-a1cd-fec35bdbfc74">
+                          <span class="text-success">Review</span>
+                        </a>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Light</td>
+                      <td>Science</td>
+                      <td>100%</td>
+                      <td>-</td>
+                      <td>3/04/2025</td>
+                      <td>
+                        <a class="status-table" href="https://lambda.in.th/dashboard-child/practice-transcript/d85ed28f-89ff-4034-a1cd-fec35bdbfc74">
+                          <span class="text-success">Review</span>
+                        </a>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Nouns and Adjectives</td>
+                      <td>English</td>
+                      <td>100%</td>
+                      <td>-</td>
+                      <td>31/03/2025</td>
+                      <td>
+                        <a class="status-table" href="https://lambda.in.th/dashboard-child/practice-transcript/d85ed28f-89ff-4034-a1cd-fec35bdbfc74">
+                          <span class="text-success">Review</span>
+                        </a>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Maths Contest Practice</td>
+                      <td>Maths Contest</td>
+                      <td>100%</td>
+                      <td>-</td>
+                      <td>31/03/2025</td>
+                      <td>
+                        <a class="status-table" href="https://lambda.in.th/dashboard-child/practice-transcript/d85ed28f-89ff-4034-a1cd-fec35bdbfc74">
+                          <span class="text-success">Review</span>
+                        </a>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Column Multiplication 1</td>
+                      <td>Maths</td>
+                      <td>95%</td>
+                      <td>-</td>
+                      <td>31/03/2025</td>
+                      <td>
+                        <a class="status-table" href="https://lambda.in.th/dashboard-child/practice-transcript/d85ed28f-89ff-4034-a1cd-fec35bdbfc74">
+                          <span class="text-success">Review</span>
+                        </a>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>แบบฝึกหัด 1</td>
+                      <td>Maths (TH)</td>
+                      <td>95%</td>
+                      <td>-</td>
+                      <td>28/03/2025</td>
+                      <td>
+                        <a class="status-table" href="https://lambda.in.th/dashboard-child/practice-transcript/d85ed28f-89ff-4034-a1cd-fec35bdbfc74">
+                          <span class="text-success">Review</span>
+                        </a>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>แบบฝึกหัด</td>
+                      <td>Maths (TH)</td>
+                      <td>95%</td>
+                      <td>-</td>
+                      <td>27/03/2025</td>
+                      <td>
+                        <a class="status-table" href="https://lambda.in.th/dashboard-child/practice-transcript/d85ed28f-89ff-4034-a1cd-fec35bdbfc74">
+                          <span class="text-success">Review</span>
+                        </a>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>แบบฝึกคิดเลขในใจ</td>
+                      <td>Maths (TH)</td>
+                      <td>75%</td>
+                      <td>-</td>
+                      <td>27/03/2025</td>
+                      <td>
+                        <a class="status-table" href="https://lambda.in.th/dashboard-child/practice-transcript/d85ed28f-89ff-4034-a1cd-fec35bdbfc74">
+                          <span class="text-success">Review</span>
+                        </a>
+                      </td>
+                    </tr>
+                                        <tr>
+                      <td>แบบฝึกคิดเลขในใจ</td>
+                      <td>Maths (TH)</td>
+                      <td>75%</td>
+                      <td>-</td>
+                      <td>27/03/2025</td>
+                      <td>
+                        <a class="status-table" href="https://lambda.in.th/dashboard-child/practice-transcript/d85ed28f-89ff-4034-a1cd-fec35bdbfc74">
+                          <span class="text-success">Review</span>
+                        </a>
+                      </td>
+                    </tr>
+                                        <tr>
+                      <td>แบบฝึกคิดเลขในใจ</td>
+                      <td>Maths (TH)</td>
+                      <td>75%</td>
+                      <td>-</td>
+                      <td>27/03/2025</td>
+                      <td>
+                        <a class="status-table" href="https://lambda.in.th/dashboard-child/practice-transcript/d85ed28f-89ff-4034-a1cd-fec35bdbfc74">
+                          <span class="text-success">Review</span>
+                        </a>
+                      </td>
+                    </tr>
+                                        <tr>
+                      <td>แบบฝึกคิดเลขในใจ</td>
+                      <td>Maths (TH)</td>
+                      <td>75%</td>
+                      <td>-</td>
+                      <td>27/03/2025</td>
+                      <td>
+                        <a class="status-table" href="https://lambda.in.th/dashboard-child/practice-transcript/d85ed28f-89ff-4034-a1cd-fec35bdbfc74">
+                          <span class="text-success">Review</span>
+                        </a>
+                      </td>
+                    </tr>
+                                        <tr>
+                      <td>แบบฝึกคิดเลขในใจ</td>
+                      <td>Maths (TH)</td>
+                      <td>75%</td>
+                      <td>-</td>
+                      <td>27/03/2025</td>
+                      <td>
+                        <a class="status-table" href="https://lambda.in.th/dashboard-child/practice-transcript/d85ed28f-89ff-4034-a1cd-fec35bdbfc74">
+                          <span class="text-success">Review</span>
+                        </a>
+                      </td>
+                    </tr>
+                                        <tr>
+                      <td>แบบฝึกคิดเลขในใจ</td>
+                      <td>Maths (TH)</td>
+                      <td>75%</td>
+                      <td>-</td>
+                      <td>27/03/2025</td>
+                      <td>
+                        <a class="status-table" href="https://lambda.in.th/dashboard-child/practice-transcript/d85ed28f-89ff-4034-a1cd-fec35bdbfc74">
+                          <span class="text-success">Review</span>
+                        </a>
+                      </td>
+                    </tr>
+                                        <tr>
+                      <td>แบบฝึกคิดเลขในใจ</td>
+                      <td>Maths (TH)</td>
+                      <td>75%</td>
+                      <td>-</td>
+                      <td>27/03/2025</td>
+                      <td>
+                        <a class="status-table" href="https://lambda.in.th/dashboard-child/practice-transcript/d85ed28f-89ff-4034-a1cd-fec35bdbfc74">
+                          <span class="text-success">Review</span>
+                        </a>
+                      </td>
+                    </tr>
+                    
+
+
                   </tbody>
                 </table>
               </div>
@@ -553,22 +782,32 @@
   } else {
     console.warn("Search input with id 'searchreview' not found. Search functionality will not work.");
   }
-
+  
   document.querySelectorAll('.sortable').forEach(header => {
-    header.addEventListener('click', () => {
-      const isAsc = header.classList.contains('asc');
-      const sortType = header.dataset.type;
-      const columnIndex = Array.from(header.parentNode.children).indexOf(header);
+  header.addEventListener('click', () => {
+    const isAsc = header.classList.contains('asc');
+    const sortType = header.dataset.type;
+    const columnIndex = Array.from(header.parentNode.children).indexOf(header);
 
-      document.querySelectorAll('.sortable i').forEach(icon => icon.className = 'fas fa-sort');
-      document.querySelectorAll('.sortable').forEach(h => h.classList.remove('asc', 'desc'));
-
-      header.classList.add(isAsc ? 'desc' : 'asc');
-      header.querySelector('i').className = isAsc ? 'fas fa-sort-down' : 'fas fa-sort-up';
-
-      sortColumn(columnIndex, sortType, !isAsc);
+    // Remove sort state from all headers
+    document.querySelectorAll('.sortable').forEach(h => {
+      h.classList.remove('asc', 'desc');
+      const icon = h.querySelector('i');
+      icon.style.display = 'none';
+      icon.className = 'fas fa-sort sort-icon';
     });
-  });
+
+    // Apply new sort state
+    header.classList.add(isAsc ? 'desc' : 'asc');
+    const icon = header.querySelector('i');
+    icon.style.display = 'inline-block';
+    icon.className = isAsc ? 'fas fa-sort-down sort-icon' : 'fas fa-sort-up sort-icon';
+
+    // Sort rows
+    sortColumn(columnIndex, sortType, !isAsc);
+      });
+    });
+
 
   function sortColumn(columnIndex, type, isAsc) {
     const rows = Array.from(document.querySelector('.task-table tbody').querySelectorAll('tr'));
@@ -576,7 +815,10 @@
     rows.sort((a, b) => {
       const aVal = a.cells[columnIndex].textContent.trim();
       const bVal = b.cells[columnIndex].textContent.trim();
-      return type === 'date' ? compareDates(aVal, bVal, isAsc) : compareText(aVal, bVal, isAsc);
+      return type === 'date' ? compareDates(aVal, bVal, isAsc) :
+       type === 'score' ? compareScore(aVal, bVal, isAsc) :
+       type === 'status' ? compareStatus(aVal, bVal, isAsc) :
+       compareText(aVal, bVal, isAsc);
     });
 
     const tbody = document.querySelector('.task-table tbody');
@@ -599,6 +841,22 @@
     const dateB = parseDate(b);
     return (dateA - dateB) * (isAsc ? 1 : -1);
   }
+
+    function compareScore(a, b, isAsc) {
+    const parseScore = s => s === '-' ? -1 : parseInt(s.replace('%', ''));
+    return (parseScore(a) - parseScore(b)) * (isAsc ? 1 : -1);
+    }
+
+    function compareStatus(a, b, isAsc) {
+    const rank = {
+        'Start': 1,
+        'Continue': 2,
+        'Check Transcript': 3,
+        'Review': 3 // just in case you still use this label
+    };
+    return ((rank[a] || 99) - (rank[b] || 99)) * (isAsc ? 1 : -1);
+    }
+
 
   displayTableRows();
 });
