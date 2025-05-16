@@ -1,0 +1,1125 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lambda</title>
+    <base href="https://lambda.in.th/th">
+<link rel="stylesheet" href="https://lambda.in.th/assets_dashboard/css/bootstrap.css?v=1746105587" />
+ <link rel="stylesheet" href="https://cdn.lineicons.com/5.0/lineicons.css" />
+ <link rel="stylesheet" href="https://lambda.in.th/assets_dashboard/css/icofont.css?v=1746105587" />
+ <link rel="stylesheet" href="https://lambda.in.th/assets_dashboard/css/style.css?v=1746105587" />
+ <link rel="stylesheet" href="https://lambda.in.th/assets_dashboard/css/font-icon.css?v=1746105587">
+ <link rel="stylesheet" href="https://lambda.in.th/assets_dashboard/css/slick.min.css?v=1746105587">
+ <link rel="stylesheet" href="https://lambda.in.th/assets_dashboard/css/slick-custom.css?v=1746105587">
+ <link rel="stylesheet" href="https://lambda.in.th/assets/cusmike/sweet2/sweetalert2.min.css?v=1746105587">
+ <link rel="stylesheet" href="https://lambda.in.th/assets/cusmike/toastr/toastr.min.css?v=1746105587">
+
+ <style>
+    /* @import  url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Sarabun:wght@300;400;500;600&display=swap'); */
+    @import  url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Sarabun:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
+ </style>
+</head>
+
+<body>
+      <div class="wrapper">
+        <aside id="sidebar" class="expand">
+      <div class="logo-sidebar">
+          <div class="sidebar-logo">
+              <a href="https://lambda.in.th/dashboard-child">
+                  <img src="https://lambda.in.th/assets_dashboard/img/logo-new-lambda.png" class="img-fluid" alt="">
+              </a>
+          </div>
+      </div>
+      <ul class="sidebar-nav">
+          <li class="sidebar-item">
+              <a href="https://lambda.in.th/dashboard-child" class="sidebar-link">
+                  <img src="https://lambda.in.th/assets_dashboard/img/icon-menu/1.svg" class="img-fluid img-icon" alt=""> <span>DashBoard</span>
+              </a>
+          </li>
+          <li class="sidebar-item">
+              <a href="https://lambda.in.th/dashboard-child/journey" class="sidebar-link">
+                  <img src="https://lambda.in.th/assets_dashboard/img/icon-menu/2.svg" class="img-fluid img-icon" alt="">
+                  <span>Journeys</span>
+              </a>
+          </li>
+          <li class="sidebar-item">
+              <a href="https://lambda.in.th/dashboard-child/set-work" class="sidebar-link">
+                  <img src="https://lambda.in.th/assets_dashboard/img/icon-menu/3.svg" class="img-fluid img-icon" alt=""> <span>Set Tasks</span>
+              </a>
+          </li>
+          <li class="sidebar-item">
+              <a href="https://lambda.in.th/dashboard-child/review" class="sidebar-link">
+                  <img src="https://lambda.in.th/assets_dashboard/img/icon-menu/4.svg" class="img-fluid img-icon" alt="">
+                  <span>Review</span>
+              </a>
+          </li>
+          <li class="sidebar-item">
+              <a href="https://lambda.in.th/dashboard-child/worksheet" class="sidebar-link">
+                  <img src="https://lambda.in.th/assets_dashboard/img/icon-menu/5.svg" class="img-fluid img-icon" alt="">
+                  <span>WorkSheet</span>
+              </a>
+          </li>
+          <li class="sidebar-item">
+              <a href="https://lambda.in.th/dashboard-child/hangouts" class="sidebar-link">
+                  <img src="https://lambda.in.th/assets_dashboard/img/icon-menu/6.svg" class="img-fluid img-icon-step2" alt="">
+                  <span>Hangouts</span>
+              </a>
+          </li>
+          <li class="sidebar-item">
+            <a href="https://lambda.in.th/dashboard-child/profile" class="sidebar-link">
+                <img src="https://lambda.in.th/assets_dashboard/img/icon-menu/7.svg" class="img-fluid img-icon-step2" alt="">
+                <span>Profile</span>
+            </a>
+        </li>
+      </ul>
+
+    <div class="sidebar-footer">
+        <a href="javascript:void(0)" onclick="openQuestionModal()" class="sidebar-link">
+            <img src="https://lambda.in.th/assets_dashboard/img/icon-menu/8.svg" class="img-fluid img-icon-step2" alt="">
+        </a>
+    </div>
+
+      <div class="sidebar-footer">
+          <div class="dropdown ">
+              <a class=" dropdown-toggle sidebar-link" href="javascript:void(0)" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <img src="https://lambda.in.th/assets_dashboard/img/icon-menu/9.svg" class="img-fluid img-icon" alt=""> <span>More</span>
+              </a>
+
+              <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="javascript:void(0)" onclick="logoutChild();"><i class="lni lni-user-multiple-4"></i> <span>Switch to parent account</span></a></li>
+                  <li><a class="dropdown-item" href="javascript:void(0)" onclick="logoutChild();"> <i class="lni lni-exit"></i> <span>Logout</span></a></li>
+              </ul>
+          </div>
+
+      </div>
+  </aside>         <div class="main">
+            <div class="border-header-page">
+                <div class="container-custom">
+                    <div class="box-headerpage">
+    <div class="box-group-title">
+        <div class="box-image">
+            <img src="https://lambda.in.th/uploads/child/child27012025-141619.jpeg" class="img-fluid" alt="">
+        </div>
+
+        <div class="box-item-content">
+            <h1 class="title-page"></h1>
+            <h6 class="sub-title-page"></h6>
+        </div>
+    </div>
+
+    <div class="box-point">
+        <div class="box-coin">
+            <div class="number-coins">4 </div>
+            <div> <img src="https://lambda.in.th/assets_dashboard/img/icon/icon-thunder.svg" class="img-fluid" alt=""> </div>
+        </div>
+
+        <div class="box-coin">
+            <div class="number-coins">4 </div>
+            <div> <img src="https://lambda.in.th/assets_dashboard/img/icon-menu/9.png" class="img-fluid" alt=""> </div>
+        </div>
+    </div>
+</div>                </div>
+              </div>
+
+              <div class="container-custom">
+                <div class="box-set-work-main">
+                    
+                    <div class="box-set-work1">
+                      <h2 class="heading-setwork">Choose type of practice</h2>
+                      <ul class="row nav nav-pills mb-3 " id="pills-tab-setwork" role="tablist">
+                        <li class="col-md-6 col-12 nav-item" role="presentation">
+                          <button class="nav-link active" id="custom-practice-tab" data-bs-toggle="pill" data-bs-target="#custom-practice" type="button" role="tab" aria-controls="custom-practice" aria-selected="true">
+                            <h5> Custom Practice</h5>
+                            <p>Set some practice question to improve in a topic</p>
+                          </button>
+                        </li>
+                        <li class="col-md-6 col-12 nav-item" role="presentation">
+                          <button class="nav-link" id="mock-test-tab" data-bs-toggle="pill" data-bs-target="#mock-test" type="button" role="tab" aria-controls="mock-test" aria-selected="false" tabindex="-1">
+                            <h5> Mock Test</h5>
+                            <p>Set an extra test to build exam skills and confidence.</p>
+                          </button>
+                        </li>
+                      </ul>
+          
+                      <!-- Tab -->
+                    <div class="tab-content" id="pills-tabContent-setwork">
+                    
+                    
+                        <!-- Tab1 -->
+                        <div class="tab-pane fade show active" id="custom-practice" role="tabpanel" aria-labelledby="custom-practice-tab" tabindex="0">
+                          <form id="form_submit" method="POST" enctype="multipart/form-data" class="">
+                          <input type="hidden" name="_token" value="N5yyTQEdxZ4KZlt5hWeiThe4vo87XZFQldFDFcl3">
+                          
+                          <!-- 01. Choose Subject -->
+                              <div class="box-set-work2">
+                                  <div class="question">
+                                      <h4 class="heading-setwork">01. Choose Subject</h4>
+                                      <div class="show_subject"><div class="row"><div class="col-xl-2 col-4" style="width:20% !important;">
+                              <input type="radio" class="btn-check subject-radio" name="subject_id" id="subject3" data-subject-id="3" value="3" checked="" autocomplete="off">
+                              <label class="btn btn-outline-checkbox" for="subject3">
+                                  <img src="https://atbvjicwbo.cloudimg.io/v7/lambda.in.th/upload/subject/subject07022025-214410.png" class="img-fluid icon-setwork" alt="">
+                              Maths (EP)
+                              </label>
+                          </div><div class="col-xl-2 col-4" style="width:20% !important;">
+                              <input type="radio" class="btn-check subject-radio" name="subject_id" id="subject9" data-subject-id="9" value="9" autocomplete="off">
+                              <label class="btn btn-outline-checkbox" for="subject9">
+                                  <img src="https://atbvjicwbo.cloudimg.io/v7/lambda.in.th/upload/subject/subject06022025-193159.png" class="img-fluid icon-setwork" alt="">
+                              Maths (TH)
+                              </label>
+                          </div></div></div>
+                                  </div>
+                              </div>
+                              <!--02. Choose Topics  -->
+                              <div class="box-set-work3">
+                                  <div class="question">
+                                      <h4 class="heading-setwork">02. Choose Topics</h4>
+                                      <div class="show_data">
+  <div class="form-group ">
+                                                   
+     <label for="form-select">Difficulty</label> 
+     
+        <div id="difficulty" class="row col-mb-10 mb-0">
+             
+                 <div class="col-xl-2 col-12 set-work-size">
+                 <div class="border-box">
+                       <div class="round">
+                          <input type="checkbox" class="checkbox-style ml-2" id="checkbox-1" name="level_id[]" value="1">
+                          <label for="checkbox-1" class="checkbox-style-1-label"></label>
+                          <div>
+                             Beginner
+                             <div class="star">
+                                   <i class="fa-solid fa-star"></i>                           </div>
+                          </div>
+                       </div>
+                 </div>
+                 </div>
+             
+                 <div class="col-xl-2 col-12 set-work-size">
+                 <div class="border-box">
+                       <div class="round">
+                          <input type="checkbox" class="checkbox-style ml-2" id="checkbox-2" name="level_id[]" value="2">
+                          <label for="checkbox-2" class="checkbox-style-1-label"></label>
+                          <div>
+                             Novice
+                             <div class="star">
+                                   <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>                           </div>
+                          </div>
+                       </div>
+                 </div>
+                 </div>
+             
+                 <div class="col-xl-2 col-12 set-work-size">
+                 <div class="border-box">
+                       <div class="round">
+                          <input type="checkbox" class="checkbox-style ml-2" id="checkbox-3" name="level_id[]" value="3">
+                          <label for="checkbox-3" class="checkbox-style-1-label"></label>
+                          <div>
+                             Balance
+                             <div class="star">
+                                   <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>                           </div>
+                          </div>
+                       </div>
+                 </div>
+                 </div>
+             
+                 <div class="col-xl-2 col-12 set-work-size">
+                 <div class="border-box">
+                       <div class="round">
+                          <input type="checkbox" class="checkbox-style ml-2" id="checkbox-4" name="level_id[]" value="4">
+                          <label for="checkbox-4" class="checkbox-style-1-label"></label>
+                          <div>
+                             Challenge
+                             <div class="star">
+                                   <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>                           </div>
+                          </div>
+                       </div>
+                 </div>
+                 </div>
+             
+                 <div class="col-xl-2 col-12 set-work-size">
+                 <div class="border-box">
+                       <div class="round">
+                          <input type="checkbox" class="checkbox-style ml-2" id="checkbox-5" name="level_id[]" value="5">
+                          <label for="checkbox-5" class="checkbox-style-1-label"></label>
+                          <div>
+                             God Mode
+                             <div class="star">
+                                   <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>                           </div>
+                          </div>
+                       </div>
+                 </div>
+                 </div>
+        </div>
+  
+  
+  
+    </div>
+  
+  
+  <div class="row">
+     <div class="col-md-4 col-12">
+         <div class="form-group form-select-set-work">
+             <label for="form-select">Year Group</label>
+             <select class="form-select" id="grade_id" name="grade_id">
+              <option value="">กรุณาเลือกชั้นศึกษา</option>
+                                    <option value="1" selected="">Grade 1</option>
+                                   <option value="2">Grade 2</option>
+                                   <option value="3">Grade 3</option>
+                                   <option value="4">Grade 4</option>
+                                   <option value="5">Grade 5</option>
+                                   <option value="6">Grade 6</option>
+                                      </select>
+         </div>
+     </div>
+  </div>
+  
+  <div class="show_topic_option">
+  <div class="row">
+      <div class="col-md-12">
+          <div class="form-check-box-set-work topic-options">
+          <label for="multi-select" class="form-label">Topic Options</label>
+  
+           <div class="tree">
+              <ul>
+  
+                    <li>
+                          <span class="toggle-btn" style="font-size:20px;">+</span>
+                          <input type="checkbox" id="parent1_55" value="55" name="group[]">
+                          <label for="parent1_55">Number and Algebra</label>
+                          <ul style="display: none;">
+                                                                                                                              <li>
+                                      <span class="toggle-btn" style="font-size:20px;">+</span>
+                                      <input type="checkbox" id="parent55_child_61" value="61" name="group[]">
+                                      <label for="parent55_child_61">Algebra</label>
+  
+                                                                          <ul>
+                                                                                                                          <li style="margin-left:15px;">
+                                              <input type="checkbox" id="172" value="172" name="group[]">
+                                              <label for="172">Patterns and Sequences</label>
+                                          </li>
+                                                                              </ul>
+                                                                      </li>
+                                                                                                  <li>
+                                      <span class="toggle-btn" style="font-size:20px;">+</span>
+                                      <input type="checkbox" id="parent55_child_59" value="59" name="group[]">
+                                      <label for="parent55_child_59">Operations</label>
+  
+                                                                          <ul>
+                                                                                                                          <li style="margin-left:15px;">
+                                              <input type="checkbox" id="166" value="166" name="group[]">
+                                              <label for="166">Mental Addition and Subtraction</label>
+                                          </li>
+                                                                                                                          <li style="margin-left:15px;">
+                                              <input type="checkbox" id="171" value="171" name="group[]">
+                                              <label for="171">Mental Multiplication and Division</label>
+                                          </li>
+                                                                                                                          <li style="margin-left:15px;">
+                                              <input type="checkbox" id="169" value="169" name="group[]">
+                                              <label for="169">Written Addition Methods</label>
+                                          </li>
+                                                                                                                          <li style="margin-left:15px;">
+                                              <input type="checkbox" id="75" value="75" name="group[]">
+                                              <label for="75">Written Division Methods</label>
+                                          </li>
+                                                                                                                          <li style="margin-left:15px;">
+                                              <input type="checkbox" id="170" value="170" name="group[]">
+                                              <label for="170">Written Subtraction Methods</label>
+                                          </li>
+                                                                                                                          <li style="margin-left:15px;">
+                                              <input type="checkbox" id="73" value="73" name="group[]">
+                                              <label for="73">Written Multiplication Methods</label>
+                                          </li>
+                                                                                                                          <li style="margin-left:15px;">
+                                              <input type="checkbox" id="176" value="176" name="group[]">
+                                              <label for="176">Mixed Operations</label>
+                                          </li>
+                                                                                                                          <li style="margin-left:15px;">
+                                              <input type="checkbox" id="77" value="77" name="group[]">
+                                              <label for="77">Word Problems</label>
+                                          </li>
+                                                                              </ul>
+                                                                      </li>
+                                                                                                  <li>
+                                      <span class="toggle-btn" style="font-size:20px;">+</span>
+                                      <input type="checkbox" id="parent55_child_60" value="60" name="group[]">
+                                      <label for="parent55_child_60">Fractions</label>
+  
+                                                                          <ul>
+                                                                                                                          <li style="margin-left:15px;">
+                                              <input type="checkbox" id="79" value="79" name="group[]">
+                                              <label for="79">Intro to Fractions</label>
+                                          </li>
+                                                                                                                          <li style="margin-left:15px;">
+                                              <input type="checkbox" id="179" value="179" name="group[]">
+                                              <label for="179">Equivalent Fractions</label>
+                                          </li>
+                                                                              </ul>
+                                                                      </li>
+                                                                                                  <li>
+                                      <span class="toggle-btn" style="font-size:20px;">+</span>
+                                      <input type="checkbox" id="parent55_child_58" value="58" name="group[]">
+                                      <label for="parent55_child_58">Place Value</label>
+  
+                                                                          <ul>
+                                                                                                                          <li style="margin-left:15px;">
+                                              <input type="checkbox" id="63" value="63" name="group[]">
+                                              <label for="63">Place Value</label>
+                                          </li>
+                                                                                                                          <li style="margin-left:15px;">
+                                              <input type="checkbox" id="65" value="65" name="group[]">
+                                              <label for="65">Comparing and Ordering</label>
+                                          </li>
+                                                                              </ul>
+                                                                      </li>
+                                                                                     </ul>
+                    </li>
+                    <li>
+                          <span class="toggle-btn" style="font-size:20px;">+</span>
+                          <input type="checkbox" id="parent1_56" value="56" name="group[]">
+                          <label for="parent1_56">Measurement and Geometry</label>
+                          <ul style="display: none;">
+                            <li>
+    <span class="toggle-btn" style="font-size:20px;">+</span>
+    <input type="checkbox" id="parent56_child_84" value="84" name="group[]">
+    <label for="parent56_child_84">Measurement</label>
+
+                                <ul>
+                                                                                <li style="margin-left:15px;">
+    <input type="checkbox" id="177" value="177" name="group[]">
+    <label for="177">Length and Distance</label>
+    </li>
+                                                                                <li style="margin-left:15px;">
+    <input type="checkbox" id="180" value="180" name="group[]">
+    <label for="180">Area and Perimeter</label>
+    </li>
+                                                                                <li style="margin-left:15px;">
+    <input type="checkbox" id="178" value="178" name="group[]">
+    <label for="178">Time</label>
+    </li>
+                                    </ul>
+                            </li>
+                          </ul>
+                    </li>
+                                                      
+              </ul>
+          </div>
+  
+        </div>
+     </div>
+  </div>
+  
+  <script>
+      $(document).ready(function() {
+        $('.toggle-btn').on('click', function() {
+           var $this = $(this);
+           $this.text($this.text() == '+' ? '-' : '+');
+           $this.siblings('ul').toggle();
+        });
+        $('.tree input[type="checkbox"]').on('change', function() {
+           $(this).siblings('ul').find('input[type="checkbox"]').prop('checked', this.checked);
+        });
+     });
+  </script></div>
+  
+  <script>
+    
+     $(document).ready(function() {
+        checkAndSendData();
+        $('input[name="level_id[]"], #grade_id').on('change', function() { checkAndSendData();});
+     });
+  
+     function checkAndSendData() {
+        var selectedLevels = $('input[name="level_id[]"]:checked').map(function() {
+           return $(this).val();
+        }).get();
+  
+        var selectedGradeId = $('#grade_id').val();
+        $.ajax({
+           type: 'GET',
+           url: 'get/subject/practice/topic_option',
+           data: {
+              subject_id: 3,
+              level_ids: selectedLevels,
+              grade_id: selectedGradeId
+           },
+           dataType: 'html',
+           success: function(response) {
+              $('.show_topic_option').html(response);
+           }
+     });
+  
+     }
+  
+     function toggleCheckbox(element) {
+          const checkbox = element.querySelector('input[type="checkbox"]');
+          checkbox.checked = !checkbox.checked;
+      }
+  </script></div>
+                                  </div>
+                              </div>
+  
+                              
+              
+                              
+                              <!--  Detail -->
+                              <div class="box-set-work4">
+                                  <div class="question">
+                                      <h4 class="heading-setwork">03. Add Details</h4>
+                                      <div class="row">
+                                          <div class="col-xl-6 col-lg-6 col-md-6 col-12">
+                                              <div class="mb-3">
+                                                  <label for="input-name" class="form-label">Title</label>
+                                                  <input type="text" class="form-control" id="practice_name" name="practice_name" placeholder="Enter a name">
+                                              </div>
+                                          </div>
+                                          <div class="col-xl-6 col-lg-6 col-md-6 col-12"></div>
+                                          <div class="col-xl-6 col-lg-6 col-md-6 col-12">
+                                              <div class="mb-3">
+                                                  <label for="range-time" class="form-label">Time Limit</label>
+                                                  <input type="range" class="form-range" id="range-time" name="time_limit" min="0" max="200" step="5" value="0">
+                                                  <p id="value-range-time">No time limit</p>
+                                              </div>
+                                          </div>
+                                          <div class="col-xl-6 col-lg-6 col-md-6 col-12">
+                                              <div class="mb-3">
+                                                  <label for="range-question" class="form-label">Number of question</label>
+                                                      <input type="range" class="form-range" id="range-question" name="number_question" min="5" max="100" step="5" value="0">
+                                                      <p id="value-range-question">0 Question</p>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                              <!--  -->
+              
+                              <div class="row">
+                              <div class=" col-12">
+                                  <div class="box-btn">
+                                  <button type="button" onclick="submit_pratice();" class="btn btn-grays btn-set-practice">Set practice</button>
+                                  </div>
+                              </div>
+                              </div>
+                              
+                          </form>
+                        </div>
+          
+                        <!-- Tab2 -->
+                        <div class="tab-pane fade" id="mock-test" role="tabpanel" aria-labelledby="mock-test-tab" tabindex="0">
+          
+                            <div class="row">
+                              <div class="col-12">
+                                <div class="box-item-filter">
+                                  <div class="box-input">
+                                    <div class="search">
+                                      <input type="text" id="searchmocktest" name="searchmocktest" oninput="searchMockTest(this.value)" class="form-control" placeholder="คำค้นหา">
+                                      <i class="fa fa-search"></i>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+  
+                            <div id="show_search_mocktest" class="show_search_mocktest mb-5"> </div>
+          
+                          <!-- Level 2 -->
+                          
+  
+                          <ul id="show_topic_01" class="nav nav-tabs nav-level2" role="tablist">
+                                                                                                  <li class="nav-item" role="presentation">
+                                          <button onclick="top_nav(1);" class="nav-link link-under  active " id="mock-tab-1" data-bs-toggle="tab" data-bs-target="#mock-tab-pane-1" type="button" role="tab" aria-controls="mock-tab-pane-1" aria-selected="true">
+                                              Lambda Foundation
+                                          </button>
+                                      </li>
+                                                                      <li class="nav-item" role="presentation">
+                                          <button onclick="top_nav(2);" class="nav-link link-under " id="mock-tab-2" data-bs-toggle="tab" data-bs-target="#mock-tab-pane-2" type="button" role="tab" aria-controls="mock-tab-pane-2" aria-selected="false" tabindex="-1">
+                                              International
+                                          </button>
+                                      </li>
+                                                                      <li class="nav-item" role="presentation">
+                                          <button onclick="top_nav(3);" class="nav-link link-under " id="mock-tab-3" data-bs-toggle="tab" data-bs-target="#mock-tab-pane-3" type="button" role="tab" aria-controls="mock-tab-pane-3" aria-selected="false" tabindex="-1">
+                                              RT Primary 1
+                                          </button>
+                                      </li>
+                                                                      <li class="nav-item" role="presentation">
+                                          <button onclick="top_nav(4);" class="nav-link link-under " id="mock-tab-4" data-bs-toggle="tab" data-bs-target="#mock-tab-pane-4" type="button" role="tab" aria-controls="mock-tab-pane-4" aria-selected="false" tabindex="-1">
+                                              National Test (NT)
+                                          </button>
+                                      </li>
+                                                                      <li class="nav-item" role="presentation">
+                                          <button onclick="top_nav(5);" class="nav-link link-under " id="mock-tab-5" data-bs-toggle="tab" data-bs-target="#mock-tab-pane-5" type="button" role="tab" aria-controls="mock-tab-pane-5" aria-selected="false" tabindex="-1">
+                                              IPST
+                                          </button>
+                                      </li>
+                                                                      <li class="nav-item" role="presentation">
+                                          <button onclick="top_nav(6);" class="nav-link link-under " id="mock-tab-6" data-bs-toggle="tab" data-bs-target="#mock-tab-pane-6" type="button" role="tab" aria-controls="mock-tab-pane-6" aria-selected="false" tabindex="-1">
+                                              Reading Test (RT)
+                                          </button>
+                                      </li>
+                                                                                      </ul>
+                          <input type="hidden" id="mocktests_topic_id" name="mocktests_topic_id" value="1">
+                          <div id="show_item_topic" class="show_item_topic">
+  <div class="box-content-style2">
+          <div class="row">
+              <div class="col-xl-1 col-lg-2 col-md-2 col-12">
+                  <img src="https://atbvjicwbo.cloudimg.io/v7/lambda.in.th/upload/mocktest-topic/mocktest-topic05032024-181241.png" class="img-fluid" alt="">
+              </div>
+              <div class="col-xl-8 col-lg-7 col-md-7 col-12">
+                  <h5 class="title-subject">English (เติมคำตอบในช่องว่าง)</h5>
+                  <span class="detail-subject"><i class="fa-regular fa-question-circle"></i> 2 Questions </span>
+                  <span class="detail-subject"><i class="fa-regular fa-clock" style="margin-left:5px;"></i> 5 mins</span>
+              </div>
+              <div class="col-xl-3 col-lg-3 col-md-3 col-12">
+                  <div class="box-btn">
+                      <button type="button" class="btn btn-outline-primary btn-settest" data-bs-toggle="modal" data-bs-target="#modalSetTest-0">
+                          + Add to do list
+                       </button>
+                  </div>
+              </div>
+          </div>
+      </div>
+  
+      <div class="modal fade modal-settest" id="modalSetTest-0" tabindex="-1" aria-labelledby="modalSetTest-0" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered">
+             <div class="modal-content content-set-test">
+                <div class="modal-body">
+                <form id="form_submit_start_test_0" method="POST" enctype="multipart/form-data" class="">
+                  <input type="hidden" name="_token" value="N5yyTQEdxZ4KZlt5hWeiThe4vo87XZFQldFDFcl3">                    <input type="hidden" id="question_topic_id" name="question_topic_id" value="1">
+                      <img src="https://atbvjicwbo.cloudimg.io/v7/lambda.in.th/upload/mocktest-topic/mocktest-topic05032024-181241.png" class="img-fluid" alt="">
+                      <h5 class="title-subject">English (เติมคำตอบในช่องว่าง)</h5>
+                      <span class="detail-subject">2 Questions 5 mins  </span>
+                      <button onclick="start_test(0);" type="button" class="btn btn-blue btn-starttest">
+                          Start Test
+                      </button>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                   <button type="button" class="btn btn-exit" data-bs-dismiss="modal">
+                      <i class="fa-regular fa-circle-xmark"></i> </button>
+                </div>
+             </div>
+          </div>
+       </div>
+          <div class="box-content-style2">
+          <div class="row">
+              <div class="col-xl-1 col-lg-2 col-md-2 col-12">
+                  <img src="https://atbvjicwbo.cloudimg.io/v7/lambda.in.th/upload/mocktest-topic/mocktest-topic01072024-212334.png" class="img-fluid" alt="">
+              </div>
+              <div class="col-xl-8 col-lg-7 col-md-7 col-12">
+                  <h5 class="title-subject">Mathematics EP Primary 1</h5>
+                  <span class="detail-subject"><i class="fa-regular fa-question-circle"></i> 10 Questions </span>
+                  <span class="detail-subject"><i class="fa-regular fa-clock" style="margin-left:5px;"></i> 15 mins</span>
+              </div>
+              <div class="col-xl-3 col-lg-3 col-md-3 col-12">
+                  <div class="box-btn">
+                      <button type="button" class="btn btn-outline-primary btn-settest" data-bs-toggle="modal" data-bs-target="#modalSetTest-1">
+                          + Add to do list
+                       </button>
+                  </div>
+              </div>
+          </div>
+      </div>
+  
+      <div class="modal fade modal-settest" id="modalSetTest-1" tabindex="-1" aria-labelledby="modalSetTest-1" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered">
+             <div class="modal-content content-set-test">
+                <div class="modal-body">
+                <form id="form_submit_start_test_1" method="POST" enctype="multipart/form-data" class="">
+                  <input type="hidden" name="_token" value="N5yyTQEdxZ4KZlt5hWeiThe4vo87XZFQldFDFcl3">                    <input type="hidden" id="question_topic_id" name="question_topic_id" value="2">
+                      <img src="https://atbvjicwbo.cloudimg.io/v7/lambda.in.th/upload/mocktest-topic/mocktest-topic01072024-212334.png" class="img-fluid" alt="">
+                      <h5 class="title-subject">Mathematics EP Primary 1</h5>
+                      <span class="detail-subject">10 Questions 15 mins  </span>
+                      <button onclick="start_test(1);" type="button" class="btn btn-blue btn-starttest">
+                          Start Test
+                      </button>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                   <button type="button" class="btn btn-exit" data-bs-dismiss="modal">
+                      <i class="fa-regular fa-circle-xmark"></i> </button>
+                </div>
+             </div>
+          </div>
+       </div>
+          <div class="box-content-style2">
+          <div class="row">
+              <div class="col-xl-1 col-lg-2 col-md-2 col-12">
+                  <img src="https://atbvjicwbo.cloudimg.io/v7/lambda.in.th/upload/mocktest-topic/mocktest-topic01072024-212307.png" class="img-fluid" alt="">
+              </div>
+              <div class="col-xl-8 col-lg-7 col-md-7 col-12">
+                  <h5 class="title-subject">Maths EP Primary 2</h5>
+                  <span class="detail-subject"><i class="fa-regular fa-question-circle"></i> 10 Questions </span>
+                  <span class="detail-subject"><i class="fa-regular fa-clock" style="margin-left:5px;"></i> 5 mins</span>
+              </div>
+              <div class="col-xl-3 col-lg-3 col-md-3 col-12">
+                  <div class="box-btn">
+                      <button type="button" class="btn btn-outline-primary btn-settest" data-bs-toggle="modal" data-bs-target="#modalSetTest-2">
+                          + Add to do list
+                       </button>
+                  </div>
+              </div>
+          </div>
+      </div>
+  
+      <div class="modal fade modal-settest" id="modalSetTest-2" tabindex="-1" aria-labelledby="modalSetTest-2" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered">
+             <div class="modal-content content-set-test">
+                <div class="modal-body">
+                <form id="form_submit_start_test_2" method="POST" enctype="multipart/form-data" class="">
+                  <input type="hidden" name="_token" value="N5yyTQEdxZ4KZlt5hWeiThe4vo87XZFQldFDFcl3">                    <input type="hidden" id="question_topic_id" name="question_topic_id" value="3">
+                      <img src="https://atbvjicwbo.cloudimg.io/v7/lambda.in.th/upload/mocktest-topic/mocktest-topic01072024-212307.png" class="img-fluid" alt="">
+                      <h5 class="title-subject">Maths EP Primary 2</h5>
+                      <span class="detail-subject">10 Questions 5 mins  </span>
+                      <button onclick="start_test(2);" type="button" class="btn btn-blue btn-starttest">
+                          Start Test
+                      </button>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                   <button type="button" class="btn btn-exit" data-bs-dismiss="modal">
+                      <i class="fa-regular fa-circle-xmark"></i> </button>
+                </div>
+             </div>
+          </div>
+       </div>
+          <div class="box-content-style2">
+          <div class="row">
+              <div class="col-xl-1 col-lg-2 col-md-2 col-12">
+                  <img src="https://atbvjicwbo.cloudimg.io/v7/lambda.in.th/upload/mocktest-topic/mocktest-topic23072024-133349.png" class="img-fluid" alt="">
+              </div>
+              <div class="col-xl-8 col-lg-7 col-md-7 col-12">
+                  <h5 class="title-subject">Test-วิทยาศาสตร์</h5>
+                  <span class="detail-subject"><i class="fa-regular fa-question-circle"></i> 10 Questions </span>
+                  <span class="detail-subject"><i class="fa-regular fa-clock" style="margin-left:5px;"></i> 5 mins</span>
+              </div>
+              <div class="col-xl-3 col-lg-3 col-md-3 col-12">
+                  <div class="box-btn">
+                      <button type="button" class="btn btn-outline-primary btn-settest" data-bs-toggle="modal" data-bs-target="#modalSetTest-3">
+                          + Add to do list
+                       </button>
+                  </div>
+              </div>
+          </div>
+      </div>
+  
+      <div class="modal fade modal-settest" id="modalSetTest-3" tabindex="-1" aria-labelledby="modalSetTest-3" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered">
+             <div class="modal-content content-set-test">
+                <div class="modal-body">
+                <form id="form_submit_start_test_3" method="POST" enctype="multipart/form-data" class="">
+                  <input type="hidden" name="_token" value="N5yyTQEdxZ4KZlt5hWeiThe4vo87XZFQldFDFcl3">                    <input type="hidden" id="question_topic_id" name="question_topic_id" value="4">
+                      <img src="https://atbvjicwbo.cloudimg.io/v7/lambda.in.th/upload/mocktest-topic/mocktest-topic23072024-133349.png" class="img-fluid" alt="">
+                      <h5 class="title-subject">Test-วิทยาศาสตร์</h5>
+                      <span class="detail-subject">10 Questions 5 mins  </span>
+                      <button onclick="start_test(3);" type="button" class="btn btn-blue btn-starttest">
+                          Start Test
+                      </button>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                   <button type="button" class="btn btn-exit" data-bs-dismiss="modal">
+                      <i class="fa-regular fa-circle-xmark"></i> </button>
+                </div>
+             </div>
+          </div>
+       </div>
+          <div class="box-content-style2">
+          <div class="row">
+              <div class="col-xl-1 col-lg-2 col-md-2 col-12">
+                  <img src="https://atbvjicwbo.cloudimg.io/v7/lambda.in.th/upload/mocktest-topic/mocktest-topic02092024-093235.png" class="img-fluid" alt="">
+              </div>
+              <div class="col-xl-8 col-lg-7 col-md-7 col-12">
+                  <h5 class="title-subject">Spec FIg - Math 5 ข้อ</h5>
+                  <span class="detail-subject"><i class="fa-regular fa-question-circle"></i> 5 Questions </span>
+                  <span class="detail-subject"><i class="fa-regular fa-clock" style="margin-left:5px;"></i> 5 mins</span>
+              </div>
+              <div class="col-xl-3 col-lg-3 col-md-3 col-12">
+                  <div class="box-btn">
+                      <button type="button" class="btn btn-outline-primary btn-settest" data-bs-toggle="modal" data-bs-target="#modalSetTest-4">
+                          + Add to do list
+                       </button>
+                  </div>
+              </div>
+          </div>
+      </div>
+  
+      <div class="modal fade modal-settest" id="modalSetTest-4" tabindex="-1" aria-labelledby="modalSetTest-4" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered">
+             <div class="modal-content content-set-test">
+                <div class="modal-body">
+                <form id="form_submit_start_test_4" method="POST" enctype="multipart/form-data" class="">
+                  <input type="hidden" name="_token" value="N5yyTQEdxZ4KZlt5hWeiThe4vo87XZFQldFDFcl3">                    <input type="hidden" id="question_topic_id" name="question_topic_id" value="5">
+                      <img src="https://atbvjicwbo.cloudimg.io/v7/lambda.in.th/upload/mocktest-topic/mocktest-topic02092024-093235.png" class="img-fluid" alt="">
+                      <h5 class="title-subject">Spec FIg - Math 5 ข้อ</h5>
+                      <span class="detail-subject">5 Questions 5 mins  </span>
+                      <button onclick="start_test(4);" type="button" class="btn btn-blue btn-starttest">
+                          Start Test
+                      </button>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                   <button type="button" class="btn btn-exit" data-bs-dismiss="modal">
+                      <i class="fa-regular fa-circle-xmark"></i> </button>
+                </div>
+             </div>
+          </div>
+       </div>
+      
+  
+  </div>
+  
+                          
+          
+                        /div>
+                    
+                    
+                        </div>
+
+                  </div>
+                </div>
+              </div>
+
+
+
+      </div>
+    <div class="modal fade" id="myQuestionModal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="feature-box fbox-center fbox-lg border-0 mb-0" style="padding: 30px;">
+                    <div class="fbox-icon"> 
+                         <i class="bi-display bi-info-circle"></i> 
+                    </div>
+                    <div class="fbox-content">
+                        <script src="https://static.elfsight.com/platform/platform.js" data-use-service-core defer></script>
+                        <div class="elfsight-app-f346732a-c738-46a2-b54f-60fa27c671d1" data-elfsight-app-lazy></div>
+                    </div>
+                </div> 
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ปิด</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+    integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous">
+</script>
+<script src="https://lambda.in.th/assets_dashboard/js/bootstrap.min.js?v=1746105587"></script>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="https://lambda.in.th/assets_dashboard/js/slick.min.js?v=1746105587"></script>
+<script src="https://lambda.in.th/assets_dashboard/js/main.js?v=1746105587"></script>
+<script src="https://lambda.in.th/assets/cusmike/sweet2/sweetalert2.min.js?v=1746105587"></script>
+<script src="https://lambda.in.th/assets/cusmike/toastr/toastr.min.js?v=1746105587"></script>
+<script>
+    $(document).ready(function() {
+        const handleSidebar = () => {
+            if (window.matchMedia("screen and (max-width: 1024px)").matches) {
+                const _sidebar = $("#sidebar");
+                if (_sidebar.length) {
+                    _sidebar.removeClass("expand");
+                }
+            } else {
+                const _sidebar = $("#sidebar");
+                if (_sidebar.length) {
+                    _sidebar.addClass("expand");
+                }
+            }
+        };
+
+        handleSidebar();
+
+        $(window).resize(function() {
+            handleSidebar();
+        });
+    });
+
+    const _boxJourneys = document.querySelectorAll('.box-item-journey');
+    _boxJourneys.forEach(box => {
+        box.addEventListener('click', () => {
+            _boxJourneys.forEach(b => b.classList.remove('active-journey'));
+            box.classList.add('active-journey');
+        });
+    });
+
+
+    const _boxContentChoices = document.querySelectorAll('.box-content-choice');
+    _boxContentChoices.forEach(box => {
+        box.addEventListener('click', () => {
+            _boxContentChoices.forEach(b => b.classList.remove('answer-success'));
+            box.classList.add('answer-success');
+        });
+    });
+
+    const _boxContentFilterReview = document.querySelectorAll('.box-border');
+    _boxContentFilterReview.forEach(box => {
+        box.addEventListener('click', () => {
+            _boxContentFilterReview.forEach(b => b.classList.remove('active-box-filter-review'));
+            box.classList.add('active-box-filter-review');
+        });
+    });
+
+    function logoutChild() {
+        var parent_id = localStorage.getItem('parent_id');
+        if (parent_id != 0) {
+            $.ajax({
+                type: 'POST',
+                url: "dashboard-child/parent/logout",
+                data: {
+                    "_token": "N5yyTQEdxZ4KZlt5hWeiThe4vo87XZFQldFDFcl3",
+                    parent_id: parent_id,
+                },
+                dataType: 'json',
+                success: function(data) {
+                    if (data.status == 200) {
+                        localStorage.removeItem('parent_id');
+                        location.href = "https://lambda.in.th/dashboard";
+                    } else {
+                        localStorage.removeItem('parent_id');
+                        location.reload();
+                    }
+                }
+            });
+        }
+
+    }
+
+    function openQuestionModal() {
+        var myModal = new bootstrap.Modal(document.getElementById('myQuestionModal'));
+        myModal.show();
+    }
+</script>
+    <script src="https://lambda.in.th/assets_dashboard/js/bs-switches.js"></script>
+    <script>
+        const events = ['mousemove', 'touchmove']
+        $( document ).ready(function() {
+          top_nav(1);
+        });
+        function top_nav(mocktest_topic_id){
+         var mocktests_topic_id = $('#mocktests_topic_id').val(mocktest_topic_id);
+         $.ajax({
+            type: 'GET',
+            url: "dashboard-child/mocktest-subject-get",
+            data: {
+               "_token": "N5yyTQEdxZ4KZlt5hWeiThe4vo87XZFQldFDFcl3",
+               mocktest_topic_id:mocktest_topic_id,
+            },
+            dataType: 'html',
+            success: function(data) {
+               $('#searchmocktest').val(null);
+               // $('#show_topic_01').attr("hidden",false);
+               // $('#show_topic_02').attr("hidden",true);
+               $('.show_item_topic').html(data);
+            }
+         });
+      }
+        $.each(events, function(k, v) {
+            $('#range-time').on(v, function() {
+                const value = $('#range-time').val()
+                $('#value-range-time').text(`Time limit ${value} mins`)
+            });
+
+            $('#range-question').on(v, function() {
+                const value = $('#range-question').val()
+                $('#value-range-question').text(`${value} Question `)
+            });
+        })
+        jQuery(".bt-switch").bootstrapSwitch();
+        $(document).ready(function() {
+            $('.toggle-btn').on('click', function() {
+                var $this = $(this);
+                $this.text($this.text() == '+' ? '-' : '+');
+                $this.siblings('ul').toggle();
+            });
+            $('.tree input[type="checkbox"]').on('change', function() {
+                $(this).siblings('ul').find('input[type="checkbox"]').prop('checked', this.checked);
+            });
+        });
+
+
+        // Script 
+
+            function submit_pratice() {
+            var formData = new FormData($("#form_submit")[0]);
+            var level_id = $('#level_id').val();
+            var practice_name = $('#practice_name').val();
+            if(practice_name == "" || level_id == ""){
+                toastr.error("Sorry, please complete the information.");
+                return false;
+            }
+            Swal.fire({
+                icon: 'warning',
+                title: 'Please press confirm to complete the transaction.',
+                showCancelButton: true,
+                confirmButtonText: 'Confirm',
+                cancelButtonText: `Cancel`,
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        type: 'POST',
+                        url: "dashboard-child/create-pratice",
+                        data: formData,
+                        processData: false,
+                        contentType: false,
+                        dataType: 'json',
+                        success: function(data) {
+                        if (data.status == 200) {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: data.message,
+                                    text: data.desc,
+                                    showCancelButton: false,
+                                    confirmButtonText: 'Close',
+                                }).then((result) => {
+                                    location.href = "https://lambda.in.th/dashboard-child";
+                                });
+                            } 
+                            else if (data.status == 500) {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: data.message,
+                                    text: data.desc,
+                                    showCancelButton: false,
+                                    confirmButtonText: 'Close',
+                                });
+                            }
+                            else if (data.status == 501) {
+                                Swal.close();
+                                $('#show_duplicate').attr('hidden',false);
+                            }
+                        }
+                    })
+                }else{
+                    return false;
+                }
+            });
+    
+            return false;
+        }
+
+        $(document).ready(function() {
+            selectChild();
+            $(document).on('click', '.subject-radio', function () {
+               var selectedSubjectId = $(this).data('subject-id');
+               $.ajax({
+                     type: 'GET',
+                     url: "get/subject/practice",
+                     data: {
+                        subject_id: selectedSubjectId,
+                     },
+                     dataType: 'html',
+                     success: function(data) {
+                        $('.show_data').html(data);
+                     }
+               });
+            });
+        });
+        function selectChild(){
+           var practice_child_id = 16;
+           $.ajax({
+              type: 'GET',
+              url: "dashboard-child/check-subject",
+              data: {
+                 practice_child_id:practice_child_id,
+              },
+              dataType: 'json',
+              success: function(data) {
+                  $('.show_subject').html(data.data);
+                  $('input.subject-radio:checked').each(function () {
+                     select_radio.call(this);
+                  });
+              }
+           });
+        }
+        function select_radio(){
+            var selectedSubjectId = $(this).data('subject-id');
+                $.ajax({type: 'GET', url: "get/subject/practice",
+                  data: {
+                     subject_id: selectedSubjectId,
+                  },
+                  dataType: 'html',
+                  success: function(data) {
+                     $('.show_data').html(data);
+                  }
+            });
+         }
+
+         function searchMockTest(query) {
+         var mocktests_topic_id = $('#mocktests_topic_id').val();
+         if(query == ""){
+            top_nav(mocktests_topic_id);
+            // $('#show_topic_01').attr("hidden",false);
+            // $('#show_topic_02').attr("hidden",true);
+         }else{
+            $.ajax({
+               type: 'GET',
+               url: "dashboard-child/searchKeywordMocktest",
+               data: {
+                  'keyword' : query,
+                  'mocktests_topic_id' : mocktests_topic_id,
+               },
+               dataType: 'json',
+               success: function(data) {
+                  if (data.status === 'empty') {
+                     $('.show_item_topic').html(null);
+                  } else if (data.status === 'success') {
+                     // $('#show_topic_01').attr("hidden",true);
+                     // $('#show_topic_02').attr("hidden",false);
+                     $('.show_item_topic').html(data.view);
+                  }
+               }
+            });
+         }
+        
+      }
+
+      function start_test(key){
+         var formData = new FormData($("#form_submit_start_test_"+key)[0]);
+         $.ajax({
+            type: 'POST',
+            url: "dashboard-child/startmocktest",
+            data: formData,
+            processData: false,
+            contentType: false,
+            dataType: 'json',
+            success: function(data) {
+               if (data.status == 200) {
+                     Swal.fire({
+                        icon: 'success',
+                        title: data.message,
+                        text: data.desc,
+                        showCancelButton: false,
+                        confirmButtonText: 'Close',
+                     }).then((result) => {
+                        location.reload();
+                     });
+               } 
+               else if (data.status == 500) {
+                     Swal.fire({
+                        icon: 'error',
+                        title: data.message,
+                        text: data.desc,
+                        showCancelButton: false,
+                        confirmButtonText: 'Close',
+                     });
+               }
+               else if (data.status == 501) {
+                  $('#show_duplicate').attr('hidden',false);
+               }
+            }
+         });
+      }
+      
+    </script>
+</body>
+
+</html>

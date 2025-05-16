@@ -1,0 +1,41 @@
+/* ================================
+   Portal Component: Section Header
+   (used above cards, tasks, widgets)
+=================================== */
+
+.portal-section {
+  margin-bottom: 0;
+}
+
+.portal-section-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: var(--black-main);
+}
+
+.portal-section-text {
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+
+/* ================================
+   Portal Component: Card
+   Reusable wrapper for widgets, tasks, banners, etc.
+=================================== */
+
+.portal-card {
+  background-color: var(--white-main);
+  border: 2px solid var(--grey-200);
+  border-radius: var(--radius-card);
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  color: inherit;
+  text-decoration: none;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}

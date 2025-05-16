@@ -1,0 +1,113 @@
+/* =====================
+   Header Bar (Top of .main)
+   ===================== */
+
+/* Main header container */
+.box-headerpage {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Stack vertically on very narrow screens */
+@media screen and (max-width: 430px) {
+  .box-headerpage {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+/* =====================
+   Search Bar (Left)
+   ===================== */
+
+.search-bar-wrapper {
+  flex: 1;
+  max-width: 560px;  /* matches .portal-main */
+}
+
+/* Hide on small tablets and below */
+@media screen and (max-width: 768px) {
+  .search-bar-wrapper {
+    display: none;
+  }
+}
+
+.search-bar {
+  width: 300px;
+  max-width: 100%;
+  padding: 8px 12px;
+  border: 2px solid var(--grey-200);
+  border-radius: 8px;
+  font-size: 1rem;
+  background-color: var(--white-main);
+  transition: border-color 0.2s ease-in-out;
+}
+
+.search-bar:focus {
+  border-color: var(--blue-500);
+  outline: none;
+}
+
+/* =====================
+   Profile / Streak / Gem (Right)
+   ===================== */
+
+.right-icons-wrapper {
+  display: flex;
+  gap: 12px;
+  max-width: 350px;  /* matches .portal-side */
+  align-items: center;
+}
+
+/* Profile image container */
+.box-image {
+  height: 40px;
+  width: 40px;
+}
+
+.box-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 1px solid var(--grey-200);
+}
+
+/* =====================
+   Streak & Gem Boxes
+   ===================== */
+
+.box-streak,
+.box-gem {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  height: 40px;
+  background-color: var(--white-main);
+  border: 2px solid transparent;
+  border-radius: 8px;
+  position: relative;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.box-streak:hover,
+.box-gem:hover {
+  background-color: var(--grey-100);
+}
+
+.box-streak img,
+.box-gem img {
+  width: 28px;
+  height: 28px;
+}
+
+.streak-counter,
+.gem-counter {
+  font-weight: 600;
+  font-size: 1rem;
+  pointer-events: none;
+}

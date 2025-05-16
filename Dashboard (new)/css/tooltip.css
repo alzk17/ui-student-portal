@@ -1,0 +1,63 @@
+
+/* Portal Tooltips */
+.portal-tooltip {
+  position: absolute;
+  top: calc(100% + 8px);
+  background-color: #fff;
+  color: #141414;
+  padding: 16px;
+  font-size: 1rem;
+  border: 2px solid #e5e5e5;
+  border-radius: 10px;
+  z-index: 100;
+  display: none;
+  white-space: normal;
+}
+
+.portal-tooltip::after {
+  content: '';
+  position: absolute;
+  top: -7.5px;
+  left: 50%;
+  transform: translateX(-50%) rotate(135deg);
+  width: 12px;
+  height: 12px;
+  background-color: #fff; /* same as tooltip background */
+  border-left: 2px solid #e5e5e5;  /* left edge of triangle */
+  border-bottom: 2px solid #e5e5e5; /* right edge of triangle */
+  z-index: 0;
+  border-radius: 1.5px;
+}
+
+.tooltip-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin: 0 0 8px;
+}
+
+.tooltip-info {
+  font-size: 0.95rem;
+  color: #333333;
+}
+
+.tooltip-note {
+  font-size: 0.85rem;
+  color: #888888;
+  margin: 0 0 12px;
+}
+
+.tooltip-link {
+  color: #5271ff;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.tooltip-link:hover {
+  color: #375ce3;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.tooltip-link:hover {
+  text-decoration: none;
+}

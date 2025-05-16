@@ -1,0 +1,140 @@
+/* Streak Tooltip */
+.portal-tooltip--streak {
+  left: -180%;
+  padding: 24px;
+  width: 350px;
+}
+
+.portal-tooltip--streak::after {
+  left: 80%; /* or custom */
+}
+
+.tooltip-title-with-icon {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tooltip-title-with-icon img {
+  width: 28.8px;
+  height: 28.8px;
+}
+
+.tooltip-title-text {
+  font-weight: 700;
+  font-size: 1.2rem;
+}
+
+.tooltip-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 0 16px 0;
+}
+
+.tooltip-shield-status {
+  position: relative;
+  cursor: pointer;
+}
+
+.portal-tooltip--shield {
+  width: 220px;
+  right: 0;
+  top: calc(100% + 6px);
+  padding: 8px
+}
+
+.streak-week {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.streak-day {
+  width: 36px;
+  height: 36px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #e0e0e0;
+  background-color: #f8f8f8;
+  color: #666666;
+  position: relative;
+}
+
+/* Task completed */
+.streak-success {
+  background-color: #eafaf1;
+  border-color: #22a95b;
+  color: #168a45;
+}
+
+/* Shield used */
+.streak-shield {
+  background-color: #edf4ff;
+  border-color: #5271ff;
+  color: #375ce3;
+}
+
+/* Streak failed */
+.streak-fail {
+  background-color: #fff3f3;
+  border-color: #ef5350;
+  color: #d04040;
+}
+
+/* Upcoming / neutral */
+.streak-neutral {
+  background-color: #f2f2f2;
+  border-color: #e0e0e0;
+  color: #999999;
+}
+
+/* Today indicator (additive) */
+.streak-day.is-today {
+  box-shadow: 0 0 0 2px #375ce3;
+}
+
+/* Gem Tooltip */
+.portal-tooltip--gem {
+  width: 350px;
+  top: calc(100% + 9px);
+  right: -54px;
+  padding: 24px;
+  background-color: #edf2ff;
+}
+
+.portal-tooltip--gem::after {
+  left: 250px;
+  background-color: #edf2ff;
+}
+
+.tooltip-gem-content {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.tooltip-gem-icon img {
+  width: 80px;
+  height: 80px;
+}
+
+.tooltip-gem-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.gem-count {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #141414;
+  margin: 0;
+}
+
