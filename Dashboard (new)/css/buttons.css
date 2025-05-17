@@ -11,6 +11,7 @@
   cursor: pointer;
   border: none;
   padding: 10px 16px;
+  min-height: 40px;
   transition:
     background-color 0.2s ease,
     border-color 0.2s ease;
@@ -24,9 +25,9 @@
   background-color: var(--blue-500);
   color: var(--white-main);
   font-weight: 500;
-  padding: 8px 14px;
+  padding: 8px 16px;
   width: fit-content;
-  margin-top: 8px;
+  margin: 0;
 }
 
 .portal-btn--primary:hover {
@@ -44,8 +45,8 @@
 .portal-btn--cta {
   background-color: var(--red-600);
   color: var(--white-main);
-  padding: 10px 0;
-  font-size: 0.95rem;
+  padding: 8px 0;
+  font-weight: 500;
   width: 100%;
 }
 
