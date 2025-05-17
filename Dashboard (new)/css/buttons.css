@@ -79,3 +79,107 @@
   outline: 3px solid var(--blue-400);
   outline-offset: 2px;
 }
+
+/* ================================
+   Portal Buttons: 3D Style
+================================= */
+
+.portal-btn3d {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 1rem;
+  min-width: 3rem;
+  min-height: 45px;
+  background-color: var(--btn-color);
+  color: var(--btn-color-text);
+  box-shadow: 0 4px 0 0 var(--btn-color-lip);
+  border: var(--btn-border, none);
+  border-color: var(--btn-border-color, transparent);
+  transition:
+    transform 0.1s ease-in-out,
+    box-shadow 0.1s ease-in-out,
+    background-color 0.1s ease-in-out,
+    border-color 0.1s ease-in-out;
+  transform: translateY(-2px);
+}
+
+.portal-btn3d:hover {
+  background-color: var(--btn-color-hover);
+  border-color: var(--btn-border-hover, var(--btn-border-color, transparent));
+  box-shadow: 0 4px 0 0 var(--btn-color-lip-hover, var(--btn-color-lip));
+}
+
+.portal-btn3d:active {
+  transform: translateY(2px);
+  box-shadow: 0 0 0 0 var(--btn-color-lip);
+}
+
+
+/* ================================
+   3D Color Variants
+================================= */
+
+/* Red */
+.portal-btn3d--red {
+  --btn-color: #d04040;
+  --btn-color-hover: #ef5350;
+  --btn-color-lip: #b71c1c;
+  --btn-color-text: #ffffff;
+}
+
+/* Blue */
+.portal-btn3d--blue {
+  --btn-color: #375ce3;
+  --btn-color-hover: #4f71ea;
+  --btn-color-lip: #294bc6;
+  --btn-color-text: #ffffff;
+}
+
+/* Green */
+.portal-btn3d--green {
+  --btn-color: #34b233;
+  --btn-color-hover: #52c457;
+  --btn-color-lip: #288428;
+  --btn-color-text: #ffffff;
+}
+
+/* Grey */
+.portal-btn3d--grey {
+  --btn-color: #e5e5e5;
+  --btn-color-hover: #ececec;
+  --btn-color-lip: #c4c4c4;
+  --btn-color-text: #141414;
+}
+
+/* White */
+.portal-btn3d--white {
+  --btn-color: #ffffff;
+  --btn-color-hover: #ffffff;
+  --btn-color-text: #141414;
+  --btn-border: 1.5px solid #e5e5e5;
+  --btn-color-lip: #e5e5e5;
+  --btn-color-lip-hover: #999999;
+  --btn-border-color: #e5e5e5;
+  --btn-border-hover: #999999;
+}
+
+/* Black */
+.portal-btn3d--black {
+  --btn-color: #303030;
+  --btn-color-hover: #383838;
+  --btn-color-lip: #141414;
+  --btn-color-text: #ffffff;
+}
+
+
+/* =====================================
+   Accessibility: Focus Ring
+===================================== */
+
+.portal-btn3d:focus-visible {
+  outline: 3px solid var(--blue-400);
+  outline-offset: 2px;
+}

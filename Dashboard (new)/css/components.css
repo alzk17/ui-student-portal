@@ -28,7 +28,7 @@
 .portal-card {
   background-color: var(--white-main);
   border: 2px solid var(--grey-200);
-  border-radius: var(--radius-card);
+  border-radius: var(--radius-lg);
   padding: 18px;
   display: flex;
   flex-direction: column;

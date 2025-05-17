@@ -27,7 +27,12 @@
   text-decoration: none;
   color: inherit;
   outline: none;
-  transition: border-color 0.2s ease;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
+  box-shadow: 0 3px 0 0 var(--grey-200); /* ✨ Soft elevation */
+  transform: translateY(-1.5px);           /* Optional lift */
 }
 
 .task-card:focus-visible {
@@ -35,7 +40,17 @@
 }
 
 .task-card:hover {
-  border-color: #ccc;
+  border-color: var(--grey-400);
+  box-shadow: 0 3px 0 0 var(--grey-400);
+  background: var(--grey-50);
+}
+
+.task-card:active {
+  transform: translateY(1.5px);
+}
+
+.task-card:focus-visible {
+  border-color: var(--blue-500);
 }
 
 .task-icon img {
