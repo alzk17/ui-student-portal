@@ -4003,7 +4003,6 @@ input[type="radio"]:checked + .subject-card {
   border: 2px solid #375ce3;
 }
 
-
 /* Date input tweaks */
 input[type="date"].lmd-input {
   appearance: none;

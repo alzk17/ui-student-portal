@@ -19,6 +19,36 @@
   }
 }
 
+.main .border-header-page {
+  border-bottom: 2px solid var(--cBorder);
+  background-color: var(--whites);
+}
+
+.main .border-header-page .box-headerpage {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@media screen and (max-width: 430px) {
+  .main .border-header-page .box-headerpage {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+.main .border-header-page .box-headerpage .box-image {
+  height: 40px;
+  width: 40px;
+}
+
+.main .border-header-page .box-headerpage .box-image img {
+  height: 40px;
+  border-radius: 50px;
+  border: 1px solid var(--grey-200); /* updated for consistency */
+}
+
+
 /* =====================
    Search Bar (Left)
    ===================== */
