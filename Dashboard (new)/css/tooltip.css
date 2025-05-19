@@ -22,9 +22,9 @@
   transform: translateX(-50%) rotate(135deg);
   width: 12px;
   height: 12px;
-  background-color: #fff; /* same as tooltip background */
-  border-left: 2px solid #e5e5e5;  /* left edge of triangle */
-  border-bottom: 2px solid #e5e5e5; /* right edge of triangle */
+  background-color: #fff;
+  border-left: 2px solid #e5e5e5;
+  border-bottom: 2px solid #e5e5e5;
   z-index: 0;
   border-radius: 1.5px;
 }

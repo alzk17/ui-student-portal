@@ -92,7 +92,9 @@
                     </a>
 
                     <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="javascript:void(0)" onclick="logoutChild();"><span>Settings</span></a></li>
                         <li><a class="dropdown-item" href="javascript:void(0)" onclick="logoutChild();"><span>Help</span></a></li>
+                        <li><a class="dropdown-item" href="javascript:void(0)" onclick="logoutChild();"><span>Report a problem</span></a></li>
                         <li><div class="dropdown-divider"></div></li>
                         <li><a class="dropdown-item" href="javascript:void(0)" onclick="logoutChild();"><span>Switch to parent account</span></a></li>
                         <li><a class="dropdown-item" href="javascript:void(0)" onclick="logoutChild();"><span>Log out</span></a></li>
@@ -108,12 +110,20 @@
                     <div class="box-headerpage">
                         <!-- Search Bar (Left Side) -->
                         <div class="search-bar-wrapper">
-                            <h3 class="portal-page-title" style="margin: 0; font-size: 1.4rem; font-weight: 600;">Student Portal</h1>
-                            <!--<p class="portal-page-subtext" style="margin: 0; font-size: 14px; font-weight: 400; color: #666;">Quickly find the information you're looking for.</p>-->
+                          <div class="profile-mini">
+                            <div class="box-image">
+                              <img src="https://lambda.in.th/uploads/child/child27012025-141619.jpeg" class="img-fluid" alt="Profile">
+                            </div>
+                            <div class="profile-name">
+                              Kwannpat
+                            </div>
+                          </div>
                         </div>
+
         
                         <!-- Profile + Streak + Coin (Right Side) -->
                         <div class="right-icons-wrapper">
+
                             <!-- Streak -->
                             <div class="box-streak" onclick="toggleTooltip('streak-tooltip')">
                                 <div><img src="Icons/bolt-2.svg" alt="Streak Icon" /></div>
@@ -157,8 +167,7 @@
                                   
                                 </div>  
                             </div>
-  
-        
+          
                             <!-- Coin -->
                             <div class="box-gem">
                                 <div>
@@ -187,11 +196,12 @@
                                     </div>
                                   </div>                                  
                             </div>
-        
-                            <!-- Profile Image -->
-                            <div class="box-image">
-                                <img src="https://lambda.in.th/uploads/child/child27012025-141619.jpeg" class="img-fluid" alt="Profile">
+
+                            <!-- Notification Button -->
+                            <div class="box-notification has-unread" onclick="toggleTooltip('notification-tooltip')">
+                              <img src="Icons/bell.svg" alt="Notification Icon" />
                             </div>
+
                         </div>
                     </div>
                 </div>
