@@ -23,7 +23,7 @@
 <link rel="stylesheet" href="css/sidebar.css">
 <link rel="stylesheet" href="css/tooltip.css">
 <link rel="stylesheet" href="css/variables.css">
-<link rel="stylesheet" href="css/widgets.css">
+<link rel="stylesheet" href="css/tooltip-widgets.css">
 <link rel="stylesheet" href="css/home.css">
 </head>
 
@@ -110,7 +110,7 @@
                     <div class="box-headerpage">
                         <!-- Search Bar (Left Side) -->
                         <div class="search-bar-wrapper">
-                          <div class="profile-mini">
+                          <div class="profile-mini" data-tooltip-id="profile-tooltip">
                             <div class="box-image">
                               <img src="https://lambda.in.th/uploads/child/child27012025-141619.jpeg" class="img-fluid" alt="Profile">
                             </div>
@@ -125,7 +125,7 @@
                         <div class="right-icons-wrapper">
 
                             <!-- Streak -->
-                            <div class="box-streak" onclick="toggleTooltip('streak-tooltip')">
+                            <div class="box-streak" data-tooltip-id="streak-tooltip">
                                 <div><img src="Icons/bolt-2.svg" alt="Streak Icon" /></div>
                                 <div class="streak-counter">32</div>
                             
@@ -169,7 +169,7 @@
                             </div>
           
                             <!-- Coin -->
-                            <div class="box-gem">
+                            <div class="box-gem" data-tooltip-id="gem-tooltip">
                                 <div>
                                     <img src="Icons/gem-2.svg" class="img-fluid" alt="Gem Icon">
                                 </div>
@@ -198,7 +198,7 @@
                             </div>
 
                             <!-- Notification Button -->
-                            <div class="box-notification has-unread" onclick="toggleTooltip('notification-tooltip')">
+                            <div class="box-notification has-unread" data-tooltip-id="notification-tooltip">
                               <img src="Icons/bell.svg" alt="Notification Icon" />
                             </div>
 
@@ -454,80 +454,49 @@
 </script>
 
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      // Generic toggle function using ID
-      function toggleTooltip(id) {
-        const tooltip = document.getElementById(id);
-        const isVisible = tooltip.style.display === 'block';
-  
-        // Close all tooltips
-        document.querySelectorAll('.portal-tooltip').forEach(t => {
-          t.style.display = 'none';
-        });
-  
-        // Toggle the selected one
-        if (!isVisible) {
-          tooltip.style.display = 'block';
-        }
-      }
-  
-      // --- Shield tooltip logic ---
-      const shieldStatus = document.querySelector('.tooltip-shield-status');
-      const shieldTooltip = document.getElementById('shield-info');
-  
-      if (shieldStatus && shieldTooltip) {
-        shieldStatus.addEventListener('click', function (event) {
-          event.stopPropagation(); // prevent outer close
-          const isVisible = shieldTooltip.style.display === 'block';
-  
-          // Close all other tooltips
-          document.querySelectorAll('.portal-tooltip').forEach(t => {
-            t.style.display = 'none';
-          });
-  
-          if (!isVisible) {
-            shieldTooltip.style.display = 'block';
-          }
-        });
-      }
-  
-      // --- Gem tooltip logic ---
-      const gemStatus = document.querySelector('.box-gem');
-      const gemTooltip = document.getElementById('gem-tooltip');
-  
-      if (gemStatus && gemTooltip) {
-        gemStatus.addEventListener('click', function (event) {
-          event.stopPropagation();
-          const isVisible = gemTooltip.style.display === 'block';
-  
-          document.querySelectorAll('.portal-tooltip').forEach(t => {
-            t.style.display = 'none';
-          });
-  
-          if (!isVisible) {
-            gemTooltip.style.display = 'block';
-          }
-        });
-      }
-  
-      // --- Close on outside click ---
-      document.addEventListener('click', function (e) {
-        if (
-          !e.target.closest('.tooltip-shield-status') &&
-          !e.target.closest('.box-gem') &&
-          !e.target.closest('.box-streak')
-        ) {
-          document.querySelectorAll('.portal-tooltip').forEach(t => {
-            t.style.display = 'none';
-          });
-        }
+  document.addEventListener("DOMContentLoaded", function () {
+    // Utility: Close all tooltips
+    function closeAllTooltips() {
+      document.querySelectorAll('.portal-tooltip').forEach(t => {
+        t.style.display = 'none';
       });
-  
-      // Optional: expose toggleTooltip globally
-      window.toggleTooltip = toggleTooltip;
+    }
+
+    // General-purpose toggleTooltip by ID
+    function toggleTooltip(id) {
+      const tooltip = document.getElementById(id);
+      if (!tooltip) return;
+
+      const isVisible = tooltip.style.display === 'block';
+      closeAllTooltips();
+      if (!isVisible) tooltip.style.display = 'block';
+    }
+
+    // Attach toggle logic to any element with [data-tooltip-id]
+    document.querySelectorAll('[data-tooltip-id]').forEach(trigger => {
+      const tooltipId = trigger.getAttribute('data-tooltip-id');
+      const tooltip = document.getElementById(tooltipId);
+
+      if (tooltip) {
+        trigger.addEventListener('click', function (event) {
+          event.stopPropagation();
+          toggleTooltip(tooltipId);
+        });
+      }
     });
+
+    // Close on outside click
+    document.addEventListener('click', function (e) {
+      if (!e.target.closest('.portal-tooltip')) {
+        closeAllTooltips();
+      }
+    });
+
+    // Expose global toggle (optional)
+    window.toggleTooltip = toggleTooltip;
+  });
 </script>
-  
+
   
 
 </body>
