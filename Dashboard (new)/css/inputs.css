@@ -41,3 +41,69 @@ input[type="date"].lmd-input {
   outline: none;
   border-color: #375ce3;
 }
+
+/*--- Sliders ---*/
+.lmd-slider {
+  width: 100%;
+  height: 8px;
+  border-radius: 9999px;
+  background: linear-gradient(
+    to right,
+    #375ce3 0%,
+    #375ce3 0%,     /* JS updates this stop */
+    #e5e5e5 0%,
+    #e5e5e5 100%
+  );
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+  transition: background 0.2s;
+}
+
+/* Chrome, Safari, Edge Chromium */
+.lmd-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #375ce3;      /* Solid blue thumb */
+  border: none;             /* No outline/border */
+  cursor: pointer;
+  box-shadow: 0 1px 2px #aaa2;
+  transition: background 0.2s;
+}
+
+/* Firefox */
+.lmd-slider::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #375ce3;      /* Solid blue thumb */
+  border: none;             /* No outline/border */
+  cursor: pointer;
+  box-shadow: 0 1px 2px #aaa2;
+}
+.lmd-slider::-moz-range-track {
+  background: transparent;  /* Use input's background */
+  height: 4px;
+  border-radius: 2px;
+}
+
+/* IE/Edge legacy */
+.lmd-slider::-ms-fill-lower {
+  background: #375ce3;
+}
+.lmd-slider::-ms-fill-upper {
+  background: #e5e5e5;
+}
+
+.lmd-slider:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.lmd-slider:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}

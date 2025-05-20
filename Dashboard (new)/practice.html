@@ -629,7 +629,7 @@
                                   <label for="range-time" class="setwork-label">Time limit</label>
                                   <input
                                     type="range"
-                                    class="form-range"
+                                    class="lmd-slider"
                                     id="range-time"
                                     name="time_limit"
                                     min="0"
@@ -645,7 +645,7 @@
                                   <label for="range-question" class="setwork-label">Number of questions</label>
                                   <input
                                     type="range"
-                                    class="form-range"
+                                    class="lmd-slider"
                                     id="range-question"
                                     name="number_question"
                                     min="5"
@@ -1318,6 +1318,26 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
 });
+  </script>
+
+  <!--Input Sliders-->
+  <script>
+
+  function updateSliderBg(slider) {
+    const min = Number(slider.min) || 0;
+    const max = Number(slider.max) || 100;
+    const val = Number(slider.value);
+    const percent = ((val - min) / (max - min)) * 100;
+    slider.style.background = `linear-gradient(to right, #375ce3 0%, #375ce3 ${percent}%, #e5e5e5 ${percent}%, #e5e5e5 100%)`;
+  }
+
+  document.querySelectorAll('.lmd-slider').forEach(slider => {
+    updateSliderBg(slider); // Initial fill
+    slider.addEventListener('input', function() {
+      updateSliderBg(this);
+    });
+  });
+  
   </script>
 
 
