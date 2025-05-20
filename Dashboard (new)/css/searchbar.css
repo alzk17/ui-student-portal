@@ -1,0 +1,16 @@
+.setwork-searchbar {
+  position: relative;
+  max-width: 480px;
+}
+.setwork-searchbar .search-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #999;
+  pointer-events: none;
+}
+.setwork-searchbar input {
+  width: 100%;
+  padding-left: 34px;
+}

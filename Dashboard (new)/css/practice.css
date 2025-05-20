@@ -1,0 +1,67 @@
+.setwork-filter-tabs {
+  display: flex;
+  gap: 10px;
+  padding: 0;
+  margin: 16px 0 24px 0;
+  flex-wrap: wrap;
+  border: none;
+}
+.setwork-filter-tabs .nav-link {
+  border-radius: 8px;
+  padding: 6px 12px;
+  font-size: 14px;
+  font-weight: 500;
+  border: 2px solid #e5e5e5;
+  background: #ffffff;
+  color: #141414;
+}
+.setwork-filter-tabs .nav-link.active {
+  background: #edf2ff;
+  color: #141414;
+  border-color: #375ce3;
+}
+
+/* Mock Test Card */
+.setwork-mock-card {
+  display: flex;
+  align-items: center;
+  padding: 16px 20px;
+  border: 2px solid #e5e5e5;
+  border-radius: var(--radius-card);
+  background-color: #fff;
+  margin-bottom: 16px;
+  gap: 20px;
+}
+.mock-card-image img {
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+.mock-card-info {
+  flex-grow: 1;
+}
+.mock-card-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #141414;
+  margin: 0 0 8px;
+}
+.mock-card-action {
+  flex-shrink: 0;
+}
+.mock-card-meta span {
+  font-size: 14px;
+  color: #666;
+  margin-right: 4px;
+}
+.mock-card-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  font-size: 14px;
+  color: #666666;
+}
+.mock-meta-item i {
+  margin-right: 6px;
+}

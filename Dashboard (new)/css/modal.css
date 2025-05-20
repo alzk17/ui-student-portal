@@ -1,0 +1,109 @@
+.portal-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 9997 !important;
+  display: none;
+}
+.portal-modal {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 9998;
+}
+.portal-modal-content {
+  background-color: #ffffff;
+  width: 90%;
+  max-width: 480px;
+  border-radius: var(--radius-card);
+  padding: 24px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.btn-close-modal {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: none;
+  border: none;
+  font-size: 1.25rem;
+  color: #888;
+  cursor: pointer;
+}
+.portal-modal-title {
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #141414;
+  margin: 0 0 8px 0;
+}
+.portal-modal-meta {
+  font-size: 1rem;
+  color: #666;
+  margin: 0 0 16px 0;
+}
+.portal-modal-description {
+  color: #141414;
+  font-size: 1rem;
+  margin: 0 0 16px 0;
+}
+.portal-modal-info {
+  font-style: italic;
+  color: #666;
+  font-size: 16px;
+}
+.portal-modal-due {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #141414;
+}
+.input-due-date {
+  padding: 8px 12px;
+  border: 1px solid #dcdcdc;
+  border-radius: 6px;
+  font-size: 0.95rem;
+}
+.portal-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  padding: 0;
+  flex-wrap: wrap;
+}
+.btn-portal-exit {
+  height: 40px;
+  padding: 0 16px;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #666666;
+  background-color: #f2f2f2;
+  border: 1px solid #dcdcdc;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+.btn-portal-exit:hover {
+  background-color: #e5e5e5;
+}
+.btn-portal-primary {
+  height: 40px;
+  padding: 0 16px;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #ffffff;
+  background-color: #375ce3;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+.btn-portal-primary:hover {
+  background-color: #294bc6;
+}
