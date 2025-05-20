@@ -1,0 +1,43 @@
+.lmd-input {
+  height: 40px;
+  padding: 8px 10px;
+  font-size: 16px;
+  border: 2px solid #e5e5e5;
+  border-radius: 8px;
+  color: #141414;
+  background-color: #fff;
+}
+
+.lmd-input:focus {
+  border: 2px solid #375ce3;
+}
+
+input[type="date"].lmd-input {
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.lmd-select {
+  width: 100%;
+  padding: 0 12px 0 12px;
+  font-size: 1rem;
+  height: 2.5rem;
+  font-weight: 400;
+  color: var(--blacks);
+  background-color: var(--whites);
+  border: 2px solid #e5e5e5;
+  border-radius: 8px;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml,<svg fill='none' stroke='%23666' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'><path d='M19 9l-7 7-7-7'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 1em;
+  transition: border-color 0.2s ease;
+}
+
+.lmd-select:focus {
+  outline: none;
+  border-color: #375ce3;
+}

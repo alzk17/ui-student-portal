@@ -152,6 +152,20 @@ input[type="radio"]:checked + .subject-card {
   margin-right: 6px;
 }
 
+.grade-filter {
+  margin-bottom: 20px;
+  max-width: 280px;
+}
+
+.grade-filter select.form-select {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  border: 1px solid var(--cBorder);
+  font-size: 1rem;
+  color: var(--blacks);
+}
+
 /*--- Topic Tree ---*/
 .topic-tree-wrapper {
   margin: 0 0 20px 0;
@@ -246,4 +260,127 @@ input[type="radio"]:checked + .subject-card {
 /* Rotate plus when expanded */
 .tree-toggle-btn i.fa-minus {
   transform: rotate(180deg);
+}
+
+/* Difficulty Card */
+.difficulty-filter {
+  margin-bottom: 20px;
+}
+
+.difficulty-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14.25px;
+}
+
+.difficulty-card {
+  flex: 1 1 160px;
+  max-width: 160px;
+  font-size: 16px;
+}
+
+.difficulty-card label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  border: 2px solid #e5e5e5;
+  border-radius: 8px;
+  background-color: var(--whites);
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+/* .difficulty-card label:hover {
+  border-color: #375ce3;
+  background-color: #f7f9ff;
+} */
+
+.difficulty-card input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  margin-left: 0.8rem;
+}
+
+.difficulty-card .star {
+  color: #e6b800;
+  font-size: 0.9rem;
+  margin: 0;
+  white-space: nowrap;
+}
+
+/* Highlight if checked */
+.difficulty-card:has(input[type="checkbox"]:checked) label {
+  border-color: #375ce3;
+  background-color: #edf4ff;
+}
+
+.setwork-input-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.setwork-slider-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+
+.setwork-input-group {
+  flex: 1 1 300px;
+  display: flex;
+  flex-direction: column;
+}
+
+.setwork-label {
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 8px;
+  color: #141414;
+  cursor: pointer;
+}
+
+.setwork-slider-output {
+  font-size: 16px;
+  color: #666;
+  margin: 6px 0 0 0;
+}
+
+.setwork-toggle-row {
+  margin: 0 0 30px 0;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.toggle-placeholder {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.toggle-placeholder input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--cMain);
+  cursor: not-allowed;
+}
+
+.toggle-note {
+  font-size: 16px;
+  color: #999999;
+  font-style: italic;
+}
+
+.setwork-toggle-row .setwork-label {
+  margin: 0;
+}
+
+.setwork-submit-row {
+  display: flex;
+  justify-content: flex-end;
+  margin: 0 0 30px 0;
 }
