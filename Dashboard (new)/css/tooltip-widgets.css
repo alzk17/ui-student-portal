@@ -138,3 +138,81 @@
   margin: 0;
 }
 
+/* Tooltip container remains the same */
+.portal-tooltip--profile {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 80px;
+  min-width: 260px;
+  background-color: var(--white-main);
+  border: 2px solid var(--grey-200);
+  border-radius: 10px;
+  z-index: 2000;
+  padding: 16px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  display: none;
+}
+
+/* Flex row: avatar left, info right */
+.tooltip-profile-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+/* Image on the left */
+.tooltip-profile-image {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1.5px solid var(--grey-200);
+}
+
+/* Right-hand column */
+.tooltip-profile-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* Name (title) */
+.tooltip-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin: 0;
+  color: var(--black-main);
+  padding: 0;
+  line-height: 1;
+}
+
+/* Secondary text (plan, days) */
+.tooltip-text {
+  font-size: 0.9rem;
+  color: var(--grey-600);
+  margin: 0;
+}
+
+/* Button wrapper and CTA */
+.tooltip-cta-wrapper {
+  margin-top: 12px;
+}
+
+.tooltip-cta-btn {
+  display: block;
+  width: 100%;
+  text-align: center;
+  background-color: var(--blue-500);
+  color: var(--white-main);
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 8px 14px;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+}
+
+.tooltip-cta-btn:hover {
+  background-color: var(--blue-700);
+}
