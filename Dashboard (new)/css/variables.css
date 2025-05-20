@@ -34,6 +34,9 @@
   --grey-400:       #c4c4c4;   /* Borders / lips */
   --grey-500:       #999999;   /* Muted text */
   --grey-600:       #666666;   /* Stronger border or dark muted text */
+  --grey-700:       #4a4a4a;   /* Dark strong grey for labels or headings */
+
+  --grey-200-alpha60: #e5e5e599;
 
   /* === Typography === */
   --font-main:      'Lato', sans-serif;

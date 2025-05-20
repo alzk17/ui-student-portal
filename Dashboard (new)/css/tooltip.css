@@ -2,7 +2,7 @@
 /* Portal Tooltips */
 .portal-tooltip {
   position: absolute;
-  top: calc(100% + 8px);
+  top: calc(100% + 9.4px);
   background-color: #fff;
   color: #141414;
   padding: 16px;
@@ -26,13 +26,19 @@
   border-left: 2px solid #e5e5e5;
   border-bottom: 2px solid #e5e5e5;
   z-index: 0;
-  border-radius: 1.5px;
+  border-radius: 2px;
 }
 
 .tooltip-title {
-  font-size: 1.1rem;
+  font-size: 1.125rem;
   font-weight: 700;
   margin: 0 0 8px;
+}
+
+.tooltip-text {
+  font-size: 1rem;
+  color: var(--black-main);
+  margin: 0;
 }
 
 .tooltip-info {

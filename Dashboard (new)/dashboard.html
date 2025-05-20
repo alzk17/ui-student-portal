@@ -118,23 +118,28 @@
                               Kwannpat
                             </div>
 
-<div class="portal-tooltip portal-tooltip--profile" id="profile-tooltip">
-  <div class="tooltip-profile-header">
-    <img src="https://lambda.in.th/uploads/child/child27012025-141619.jpeg" alt="Profile" class="tooltip-profile-image" />
-    
-    <div class="tooltip-profile-info">
-      <p class="tooltip-title">Kwannpat Kotiram</p>
-      <p class="tooltip-text">Plan: Lambda Pro</p>
-      <p class="tooltip-text" style="color: var(--red-500);">12 days remaining</p>
-    </div>
-  </div>
+                          <div class="portal-tooltip portal-tooltip--profile" id="profile-tooltip">
+                            <div class="tooltip-profile-header">
+                              <img src="https://lambda.in.th/uploads/child/child27012025-141619.jpeg" alt="Profile" class="tooltip-profile-image" />
+                              
+                              <div class="tooltip-profile-info">
+                                <p class="tooltip-title">Kwannpat Kotiram</p>
+                                <div class="tooltip-info-pair">
+                                  <span class="tooltip-label">Age:</span>
+                                  <span class="tooltip-value">8</span>
+                                </div>
+                                <div class="tooltip-info-pair">
+                                  <span class="tooltip-label">Plan:</span>
+                                  <span class="tooltip-value">Lambda Pro</span>
+                                </div>
+                                <p class="tooltip-value">You have 38 days remaining.</p>
+                              </div>
+                            </div>
 
-  <div class="tooltip-cta-wrapper">
-    <a href="/top-up" class="tooltip-cta-btn">Top up now</a>
-  </div>
-</div>
-
-
+                            <div class="tooltip-cta-wrapper">
+                              <a href="/top-up" class="portal-btn portal-btn--primary" style="width: 100%;">Top up now</a>
+                            </div>
+                          </div>
 
                           </div>
                         </div>
@@ -237,7 +242,7 @@
                               <div class="welcome-text">
                                 <h3 class="welcome-title">Welcome back, Kwan 👋</h3>
                                 <p class="welcome-subtitle">I hope you're doing great — why not set your next task and earn some gems?</p>
-                                <a href="#set-task" class="portal-btn portal-btn--primary">Set Task</a>
+                                <a href="#set-task" class="portal-btn portal-btn--primary" style="margin-top: 16px;">Set Task</a>
                               </div>
 
                             <!-- Mascot -->
@@ -259,7 +264,7 @@
                                     </div>
                                     <div class="task-info">
                                     <h6 class="task-title">Nouns, adjectives, and adverbs</h6>
-                                    <p class="task-meta">35 questions&nbsp;&nbsp;•&nbsp;&nbsp;25 minutes</p>
+                                    <p class="task-meta">35 questions&nbsp;•&nbsp;25 minutes</p>
                                     </div>
                                     <div class="task-hover-icon">
                                         <i class="fa-solid fa-arrow-right-long"></i>
@@ -272,7 +277,7 @@
                                     </div>
                                     <div class="task-info">
                                     <h6 class="task-title">Science practice</h6>
-                                    <p class="task-meta">20 questions&nbsp;&nbsp;•&nbsp;&nbsp;15 minutes</p>
+                                    <p class="task-meta">20 questions&nbsp;•&nbsp;15 minutes</p>
                                     </div>
                                     <div class="task-hover-icon">
                                         <i class="fa-solid fa-arrow-right-long"></i>
@@ -474,24 +479,36 @@
 
 <script>
   document.addEventListener("DOMContentLoaded", function () {
-    // Utility: Close all tooltips
+    let currentTrigger = null; // <-- track which trigger is active
+
     function closeAllTooltips() {
       document.querySelectorAll('.portal-tooltip').forEach(t => {
         t.style.display = 'none';
       });
+      document.querySelectorAll('[data-tooltip-id]').forEach(el => {
+        el.classList.remove('active');
+      });
+      currentTrigger = null;
     }
 
-    // General-purpose toggleTooltip by ID
-    function toggleTooltip(id) {
+    function toggleTooltip(id, triggerEl) {
       const tooltip = document.getElementById(id);
-      if (!tooltip) return;
+      const isVisible = tooltip && tooltip.style.display === 'block';
 
-      const isVisible = tooltip.style.display === 'block';
-      closeAllTooltips();
-      if (!isVisible) tooltip.style.display = 'block';
+      if (isVisible) {
+        closeAllTooltips();
+        return;
+      }
+
+      closeAllTooltips(); // first close others
+
+      if (tooltip) {
+        tooltip.style.display = 'block';
+        triggerEl.classList.add('active');
+        currentTrigger = triggerEl;
+      }
     }
 
-    // Attach toggle logic to any element with [data-tooltip-id]
     document.querySelectorAll('[data-tooltip-id]').forEach(trigger => {
       const tooltipId = trigger.getAttribute('data-tooltip-id');
       const tooltip = document.getElementById(tooltipId);
@@ -499,24 +516,27 @@
       if (tooltip) {
         trigger.addEventListener('click', function (event) {
           event.stopPropagation();
-          toggleTooltip(tooltipId);
+          toggleTooltip(tooltipId, trigger);
         });
       }
     });
 
-    // Close on outside click
     document.addEventListener('click', function (e) {
-      if (!e.target.closest('.portal-tooltip')) {
+      // Only close if click is outside both tooltip AND trigger
+      const clickedInsideTooltip = e.target.closest('.portal-tooltip');
+      const clickedTrigger = e.target.closest('[data-tooltip-id]');
+
+      if (!clickedInsideTooltip && !clickedTrigger) {
         closeAllTooltips();
       }
     });
 
-    // Expose global toggle (optional)
+    // Optional: expose globally
     window.toggleTooltip = toggleTooltip;
   });
 </script>
 
-  
+
 
 </body>
 

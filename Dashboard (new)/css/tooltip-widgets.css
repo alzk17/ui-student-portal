@@ -6,7 +6,7 @@
 }
 
 .portal-tooltip--streak::after {
-  left: 80%; /* or custom */
+  left: 43%;
 }
 
 .tooltip-title-with-icon {
@@ -102,7 +102,6 @@
 /* Gem Tooltip */
 .portal-tooltip--gem {
   width: 350px;
-  top: calc(100% + 9px);
   right: -54px;
   padding: 24px;
   background-color: #edf2ff;
@@ -141,9 +140,8 @@
 /* Tooltip container remains the same */
 .portal-tooltip--profile {
   position: absolute;
-  top: calc(100% + 8px);
-  left: 80px;
-  min-width: 260px;
+  left: -2.5px;
+  min-width: 320px;
   background-color: var(--white-main);
   border: 2px solid var(--grey-200);
   border-radius: 10px;
@@ -151,6 +149,7 @@
   padding: 16px;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
   display: none;
+  color: #303030;
 }
 
 /* Flex row: avatar left, info right */
@@ -167,7 +166,6 @@
   height: 42px;
   border-radius: 50%;
   object-fit: cover;
-  border: 1.5px solid var(--grey-200);
 }
 
 /* Right-hand column */
@@ -177,42 +175,35 @@
   gap: 4px;
 }
 
-/* Name (title) */
-.tooltip-title {
-  font-size: 1.1rem;
+.portal-tooltip--profile::after {
+  left: 70px;
+  transform: rotate(135deg);
+}
+
+.tooltip-profile-info .tooltip-title {
+  font-size: 1.125rem;
   font-weight: 700;
   margin: 0;
-  color: var(--black-main);
-  padding: 0;
+  padding: 0;  
   line-height: 1;
 }
 
-/* Secondary text (plan, days) */
-.tooltip-text {
-  font-size: 0.9rem;
-  color: var(--grey-600);
+.tooltip-info-pair {
+  display: flex;
+  gap: 8px;
   margin: 0;
 }
 
-/* Button wrapper and CTA */
-.tooltip-cta-wrapper {
-  margin-top: 12px;
+.tooltip-label {
+  width: 32px;
+  font-weight: 500;
+  flex-shrink: 0;
 }
 
-.tooltip-cta-btn {
-  display: block;
-  width: 100%;
-  text-align: center;
-  background-color: var(--blue-500);
-  color: var(--white-main);
-  font-weight: 600;
-  font-size: 0.95rem;
-  padding: 8px 14px;
-  border-radius: 8px;
-  text-decoration: none;
-  transition: background-color 0.2s ease;
+.tooltip-value {
+  font-weight: 500;
 }
 
-.tooltip-cta-btn:hover {
-  background-color: var(--blue-700);
+[data-tooltip-id].active {
+  background-color: var(--grey-100);
 }
