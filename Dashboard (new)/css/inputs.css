@@ -12,6 +12,10 @@
   border: 2px solid #375ce3;
 }
 
+input[type="checkbox"] {
+  accent-color: var(--blue-500);
+}
+
 input[type="date"].lmd-input {
   appearance: none;
   -webkit-appearance: none;
