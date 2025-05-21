@@ -104,7 +104,7 @@ input[type="radio"]:checked + .subject-card {
 }
 .setwork-filter-tabs .nav-link.active {
   background: #edf2ff;
-  color: #141414;
+  color: var(--blue-700);
   border-color: #375ce3;
 }
 
