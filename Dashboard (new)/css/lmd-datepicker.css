@@ -1,0 +1,105 @@
+.datepicker-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.lambda-datepicker {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #dcdcdc;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  background-color: #fff;
+}
+
+.lambda-calendar {
+  position: absolute;
+  top: 110%;
+  left: 0;
+  background: #fff;
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+  padding: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  min-width: 260px;
+}
+
+.lambda-calendar table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+  font-size: 1rem;
+}
+
+.lambda-calendar th {
+  font-weight: 600;
+  color: #555;
+  padding-bottom: 4px;
+}
+
+.lambda-calendar td {
+  padding: 6px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background 0.2s;
+}
+
+.lambda-calendar td:hover {
+  background: #edf2ff;
+}
+
+.lambda-calendar td.disabled {
+  color: #ccc;
+  pointer-events: none;
+}
+
+.lambda-calendar td.selected {
+  background: #375ce3;
+  color: #fff;
+}
+
+.lambda-calendar td.today {
+  border: 1px solid #375ce3;
+  font-weight: bold;
+}
+
+.lambda-calendar td.blank {
+  background: none;
+  pointer-events: none;
+  cursor: default;
+}
+
+.lambda-calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 600;
+  margin-bottom: 8px;
+  font-size: 16px;
+}
+
+.lambda-calendar-title {
+  font-size: 18px;
+  margin: 0;
+}
+
+.lambda-calendar-nav {
+  cursor: pointer;
+  user-select: none;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: background 0.2s;
+  font-size: 12px;
+}
+
+.lambda-calendar-nav:hover {
+  background: #edf2ff;
+}
+
+.lambda-calendar-nav.disabled {
+  opacity: 0.3;
+  cursor: default;
+  pointer-events: none;
+}

@@ -16,8 +16,6 @@
  <link rel="stylesheet" href="https://lambda.in.th/assets_dashboard/css/slick-custom.css?v=1746105587">
  <link rel="stylesheet" href="https://lambda.in.th/assets/cusmike/sweet2/sweetalert2.min.css?v=1746105587">
  <link rel="stylesheet" href="https://lambda.in.th/assets/cusmike/toastr/toastr.min.css?v=1746105587">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
 <link rel="stylesheet" href="css/components.css">
 <link rel="stylesheet" href="css/header.css">
@@ -612,13 +610,16 @@
                                 <!-- Due Date -->
                                 <div class="setwork-input-group">
                                   <label for="due_date" class="setwork-label">Due date</label>
-                                  <input
-                                  type="text"
-                                  id="due_date"
-                                  name="due_date"
-                                  class="lmd-input"
-                                  placeholder="Select a date (optional)"
-                                />                                      
+                                    <div class="datepicker-wrapper">
+                                    <input
+                                      type="text"
+                                      id="due_date"
+                                      name="due_date"
+                                      class="lmd-input lambda-datepicker"
+                                      placeholder="Select a date (optional)"
+                                    />
+                                    <div class="lambda-calendar" hidden></div>
+                                  </div>                     
                                 </div>
                               </div>
                             
@@ -677,6 +678,12 @@
                           </form>
 
                       </div>
+
+                      <div class="datepicker-wrapper">
+                        <input type="text" class="lambda-datepicker" placeholder="Select a due date" readonly />
+                        <div class="lambda-calendar" hidden></div>
+                      </div>
+
 
                       <!--Tab 2: Mock Test-->
                       <div class="tab-pane fade" id="mock-test" role="tabpanel" aria-labelledby="mock-test-tab" tabindex="0">
@@ -913,15 +920,19 @@
           </p>
 
           <div class="portal-modal-due">
-            <div for="due_date" class="setwork-label">Due date</div>
-            <input
-              type="text"
-              id="due_date"
-              name="due_date"
-              class="lmd-input"
-              placeholder="Select a date (optional)"
-            />
+            <label for="due_date_modal" class="setwork-label">Due date</label>
+            <div class="datepicker-wrapper">
+              <input
+                type="text"
+                id="due_date_modal"
+                name="due_date"
+                class="lmd-input lambda-datepicker"
+                placeholder="Select a date (optional)"
+              />
+              <div class="lambda-calendar" hidden></div>
+            </div>
           </div>
+
 
 
         </div>
@@ -936,12 +947,6 @@
     </div>
 
 
-
-
-    
-
-
-
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
     integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous">
 </script>
@@ -953,6 +958,7 @@
 <script src="https://lambda.in.th/assets/cusmike/toastr/toastr.min.js?v=1746105587"></script>
 <script src="js/prac.js"></script>
 <script src="js/tooltip.js"></script>
+<script src="js/lmd-datepicker.js"></script>
 
 
 
@@ -1034,7 +1040,9 @@
           myModal.show();
       }
   </script>
+
   <script src="https://lambda.in.th/assets_dashboard/js/bs-switches.js"></script>
+
   <script>
       const events = ['mousemove', 'touchmove']
       $( document ).ready(function() {
@@ -1339,6 +1347,8 @@ document.addEventListener('DOMContentLoaded', function() {
   });
   
   </script>
+
+
 
 
 </body>
