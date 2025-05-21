@@ -5,6 +5,7 @@
 
 .lambda-datepicker {
   width: 100%;
+  cursor: pointer;
 }
 
 .lambda-calendar {
