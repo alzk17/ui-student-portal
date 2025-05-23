@@ -328,3 +328,47 @@
   color: var(--black-main);
   margin: 0;
 }
+
+
+/* ============================
+   Section: Streak Summary
+============================= */
+
+.streak-summary-card {
+  padding: 20px;
+  background: #ffffff;
+  border-radius: 16px;
+}
+
+.streak-summary-header {
+  margin-bottom: 16px;
+}
+
+.streak-summary-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #141414;
+}
+
+.streak-summary-body {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.streak-icon img {
+  width: 48px;
+  height: 48px;
+}
+
+.streak-info .streak-value {
+  font-size: 24px;
+  font-weight: 700;
+  color: #ef5350; /* Red for visual pop */
+  margin-bottom: 4px;
+}
+
+.streak-info .streak-label {
+  font-size: 14px;
+  color: #666666;
+}
