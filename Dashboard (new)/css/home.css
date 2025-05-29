@@ -334,41 +334,55 @@
    Section: Streak Summary
 ============================= */
 
-.streak-summary-card {
-  padding: 20px;
-  background: #ffffff;
-  border-radius: 12px;
+.streak-summary {
+  width: 100%;
+  max-width: 768px;
 }
 
-.streak-summary-header {
-  margin-bottom: 16px;
-}
-
-.streak-summary-title {
-  font-size: 1.2rem;
-  font-weight: 600;
-  color: #141414;
-}
-
-.streak-summary-body {
+.streak-header {
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  gap: 16px;
+  font-size: 20px;
+  font-weight: 600;
 }
 
-.streak-icon img {
-  width: 48px;
-  height: 48px;
+.streak-count {
+  font-size: 18px;
+  color: #5271ff;
 }
 
-.streak-info .streak-value {
-  font-size: 24px;
-  font-weight: 700;
-  color: #ef5350; /* Red for visual pop */
-  margin-bottom: 4px;
+.streak-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 12px;
+  text-align: center;
 }
 
-.streak-info .streak-label {
+.day-label {
   font-size: 14px;
-  color: #666666;
+  font-weight: 500;
+  margin-bottom: 6px;
 }
+
+.day-icon {
+  font-size: 24px;
+  color: #dcdcdc;
+}
+
+.day-icon.filled {
+  color: #5271ff;
+}
+
+.streak-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  color: var(--grey-600, #666666);
+}
+
+.shield strong {
+  color: #168a45;
+}
+
