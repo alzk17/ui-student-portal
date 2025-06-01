@@ -100,7 +100,7 @@
 ============================= */
 
 .welcome-banner {
-  background-color: #fff5e5;
+  background-color: var(--blue-50);
   border: none;
   display: flex;
   padding: 20px;
@@ -337,14 +337,21 @@
 .streak-summary {
   width: 100%;
   max-width: 768px;
+  gap: 8px;
+  background: var(--green-50);
+  position: relative;
 }
 
 .streak-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 20px;
-  font-weight: 600;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.streak-title {
+  color: var(--green-500);
 }
 
 .streak-count {
@@ -355,19 +362,30 @@
 .streak-grid {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  gap: 12px;
+  gap: 8px;
   text-align: center;
+  background-color: #fff;
+  padding: 8px 12px 12px 12px;
+  border-radius: 8px;
+  margin: 16px 0 0 0;
 }
 
 .day-label {
-  font-size: 14px;
-  font-weight: 500;
-  margin-bottom: 6px;
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: var(--grey-500);
+}
+
+.day.is-today .day-label {
+  color: var(--main-black);
 }
 
 .day-icon {
-  font-size: 24px;
-  color: #dcdcdc;
+  width: 24px;
+  height: 24px;
+  display: block;
+  margin: 0 auto;
 }
 
 .day-icon.filled {
@@ -376,13 +394,35 @@
 
 .streak-footer {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column; /* Stack items vertically */
+  align-items: flex-start; /* Align items to the start (left) of the container */
+                            /* Use 'center' if you want them centered within the footer */
+  gap: 8px;                 /* Adds a small space between the shield line and the info line */
   font-size: 14px;
   color: var(--grey-600, #666666);
+}
+
+.shield {
+}
+
+.shield i {
+  margin-right: 6px;
+  color: #5271FF; /* Or your preferred icon color */
 }
 
 .shield strong {
   color: #168a45;
 }
 
+.info {
+  line-height: 1.4;
+  font-size: 1rem;
+}
+
+.streak-icon {
+  position: absolute;
+  top: 32px;
+  right: 18px;
+  width: 60px;
+  height: 60px;
+}

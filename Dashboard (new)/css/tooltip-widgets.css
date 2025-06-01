@@ -149,7 +149,7 @@
   padding: 16px;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
   display: none;
-  color: #303030;
+  color: var(--black-main);
 }
 
 /* Flex row: avatar left, info right */
