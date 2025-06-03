@@ -20,7 +20,7 @@
 <link rel="stylesheet" href="css/header.css">
 <link rel="stylesheet" href="css/buttons.css">
 <link rel="stylesheet" href="css/layout.css">
-<link rel="stylesheet" href="css/sidebar.css">
+<link rel="stylesheet" href="css/sidebar.css?v=123123123">
 <link rel="stylesheet" href="css/tooltip.css">
 <link rel="stylesheet" href="css/variables.css">
 <link rel="stylesheet" href="css/tooltip-widgets.css">
@@ -257,7 +257,7 @@
                                 <h2 class="portal-section-title">Task</h2>
                             </div>
                             <div class="task-list">
-                                <a href="https://lambda.in.th/dashboard-child/practice/4ce11179-e415-4315-a129-09f80a2d1178?sku=P3-Maths-AP01-003" class="task-card">
+                                <a href="https://lambda.in.th/dashboard-child/practice/4ce11179-e415-4315-a129-09f80a2d1178?sku=P3-Maths-AP01-003" class="task-card" role="button">
                                     <div class="task-icon">
                                     <img src="Icons/blackboard-1.svg" alt="icon" />
                                     </div>
@@ -524,6 +524,12 @@
         var myModal = new bootstrap.Modal(document.getElementById('myQuestionModal'));
         myModal.show();
     }
+</script>
+
+<script>
+  document.querySelectorAll('a.task-card').forEach(el => {
+    el.addEventListener('touchstart', () => {});
+  });
 </script>
 
 
