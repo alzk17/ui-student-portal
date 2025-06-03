@@ -50,6 +50,15 @@ class DashboardController extends Controller
         $child = ChildModel::findOrFail(Auth::guard('child')->id());
         $count_point = 0;
         $count_point = Child_pratice_mainModel::where("child_id",Auth::guard('child')->id())->where("isActive","S")->sum("correct_answer");
+        $streaks = [
+            ['label' => 'Mon', 'icon' => 'assets_dashboard/img/icons/streak-done.svg', 'status' => 'complete', 'is_today' => false],
+            ['label' => 'Tue', 'icon' => 'assets_dashboard/img/icons/streak-done.svg', 'status' => 'complete', 'is_today' => false],
+            ['label' => 'Wed', 'icon' => 'assets_dashboard/img/icons/streak-saved.svg', 'status' => 'today', 'is_today' => true],
+            ['label' => 'Thu', 'icon' => 'assets_dashboard/img/icons/streak-empty.svg', 'status' => 'empty', 'is_today' => false],
+            ['label' => 'Fri', 'icon' => 'assets_dashboard/img/icons/streak-empty.svg', 'status' => 'empty', 'is_today' => false],
+            ['label' => 'Sat', 'icon' => 'assets_dashboard/img/icons/streak-empty.svg', 'status' => 'empty', 'is_today' => false],
+            ['label' => 'Sun', 'icon' => 'assets_dashboard/img/icons/streak-empty.svg', 'status' => 'empty', 'is_today' => false],
+        ];
         return view("$this->prefix.$this->folder.index", [
             'prefix' => $this->prefix,
             'folder' => $this->folder,
@@ -61,9 +70,15 @@ class DashboardController extends Controller
                 ->whereIn('isActive',["W","I"])
                 ->orderby('id','desc')
             ->get(),
+            'practices' => Child_pratice_mainModel::where(['user_id'=>$child->user_id])
+            ->where('child_id',$child->id)
+                ->whereIn('isActive',["W","I"])
+                ->orderby('id','desc')
+            ->get(),
 
             'navbar_name' => "Hi, ".$child->fullname(),
             'navbar_detail' => 'Complete <a href="javascript:void(0)">a task today</a> to earn ten coins.',
+            'streaks' => $streaks,
         ]);
     }
 

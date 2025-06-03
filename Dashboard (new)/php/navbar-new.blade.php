@@ -1,22 +1,20 @@
-<div class="border-header-page">
-    <div class="container-custom">
         <div class="box-headerpage">
 
             {{-- Profile Section (Left Side) --}}
             <div class="search-bar-wrapper">
                 <div class="profile-mini" data-tooltip-id="profile-tooltip">
                     <div class="box-image">
-                        <img src="{{ asset($child->image ?? 'images/default-avatar.png') }}" class="img-fluid" alt="Profile">
+                        <img src="{{ asset($child->image ?? 'assets_dashboard/img/mascots/elephant.svg') }}" class="img-fluid" alt="Profile">
                     </div>
                     <div class="profile-name">
-                        {{ $child->name ?? '' }}
+                        {{ $child->firstname ?? '' }}
                     </div>
 
                     <div class="portal-tooltip portal-tooltip--profile" id="profile-tooltip">
                         <div class="tooltip-profile-header">
-                            <img src="{{ asset($child->image ?? 'images/default-avatar.png') }}" alt="Profile" class="tooltip-profile-image" />
+                            <img src="{{ asset($child->image ?? 'assets_dashboard/img/mascots/elephant.svg') }}" alt="Profile" class="tooltip-profile-image" />
                             <div class="tooltip-profile-info">
-                                <p class="tooltip-title">{{ $child->fullname ?? '' }}</p>
+                                <p class="tooltip-title">{{ $child->fullname() }}</p>
                                 <div class="tooltip-info-pair">
                                     <span class="tooltip-label">Age:</span>
                                     <span class="tooltip-value">{{ $child->age ?? '-' }}</span>
@@ -40,22 +38,22 @@
 
                 {{-- Streak --}}
                 <div class="box-streak">
-                    <div><img src="{{ asset('icons/bolt-2.svg') }}" alt="Streak Icon" /></div>
+                    <div><img src="{{ asset('assets_dashboard/img/icons/bolt.svg') }}" alt="Streak Icon" /></div>
                     <div class="streak-counter">{{ $child->streak_point ?? 0 }}</div>
                 </div>
 
                 {{-- Gems --}}
                 <div class="box-gem" data-tooltip-id="gem-tooltip">
                     <div>
-                        <img src="{{ asset('icons/gem-2.svg') }}" class="img-fluid" alt="Gem Icon">
+                        <img src="{{ asset('assets_dashboard/img/icons/gem.svg') }}" class="img-fluid" alt="Gem Icon">
                     </div>
-                    <div class="gem-counter">{{ \App\helpers\Helper::formatCompactNumber($child->wallet_point ?? 0) }}</div>
+                    <div class="gem-counter">{{ \App\Helpers\Helper::formatCompactNumber($child->wallet_point ?? 0) }}</div>
 
                     {{-- Gem Tooltip --}}
                     <div class="portal-tooltip portal-tooltip--gem" id="gem-tooltip">
                         <div class="tooltip-gem-content">
                             <div class="tooltip-gem-icon">
-                                <img src="{{ asset('icons/gem-2.svg') }}" alt="Gem Icon" />
+                                <img src="{{ asset('assets_dashboard/img/icons/gem.svg') }}" alt="Gem Icon" />
                             </div>
                             <div class="tooltip-gem-text">
                                 <p class="gem-count"><span style="color: #375ce3">{{ number_format($child->wallet_point ?? 0) }}</span> Gems</p>
@@ -70,11 +68,9 @@
 
                 {{-- Notification --}}
                 <div class="box-notification has-unread" data-tooltip-id="notification-tooltip">
-                    <img src="{{ asset('icons/bell.svg') }}" alt="Notification Icon" />
+                    <img src="{{ asset('assets_dashboard/img/icons/bell.svg') }}" alt="Notification Icon" />
                 </div>
 
             </div>
 
         </div>
-    </div>
-</div>
