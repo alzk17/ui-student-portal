@@ -155,19 +155,23 @@ a.sidebar-link:hover {
 }
 
 .sidebar-item.active .sidebar-link {
+  background-color: var(--blue-50);
   border-radius: 8px;
+  border: 2px solid var(--blue-200);
   color: var(--blue-200);
 }
 
 #sidebar:not(.expand) .sidebar-item.active .sidebar-link {
+  background-color: var(--blue-50);
   border-radius: 8px;
   color: var(--blue-200);
+  border: 2px solid var(--blue-200);
 }
 
 .sidebar-link:focus,
 .sidebar-link:active {
   outline: none;
-  border: 2px solid transparent; /* if needed */
+  border: 2px solid transparent;
 }
 
 
