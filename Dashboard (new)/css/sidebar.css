@@ -113,19 +113,22 @@ a.sidebar-link {
   padding: 6px 14px;
 }
 
-a.sidebar-link:hover {
-  border-radius: var(--radius-md);
-  background-color: var(--grey-100);
+/* FIXED: Only apply hover effects on devices that support hover */
+@media (hover: hover) {
+  a.sidebar-link:hover {
+    border-radius: var(--radius-md);
+    background-color: var(--grey-100);
+  }
+
+  #sidebar:not(.expand) a.sidebar-link:hover {
+    background-color: var(--grey-100);
+    border-radius: 8px;
+  }
 }
 
 #sidebar:not(.expand) a.sidebar-link {
   justify-content: center;
   border: none;
-}
-
-#sidebar:not(.expand) a.sidebar-link:hover {
-  background-color: var(--grey-100);
-  border-radius: 8px;
 }
 
 /* Icons */
@@ -174,7 +177,6 @@ a.sidebar-link:hover {
   border: 2px solid transparent;
 }
 
-
 /* Dropdown (Collapsed Mode Hover) */
 
 #sidebar:not(.expand) .sidebar-item .sidebar-dropdown {
@@ -187,11 +189,14 @@ a.sidebar-link:hover {
   top: 0;
 }
 
-#sidebar:not(.expand) .sidebar-item:hover .has-dropdown + .sidebar-dropdown {
-  display: block;
-  max-height: 15em;
-  opacity: 1;
-  width: 100%;
+/* FIXED: Only show dropdown hover on hover-capable devices */
+@media (hover: hover) {
+  #sidebar:not(.expand) .sidebar-item:hover .has-dropdown + .sidebar-dropdown {
+    display: block;
+    max-height: 15em;
+    opacity: 1;
+    width: 100%;
+  }
 }
 
 /* Collapse Icons */
@@ -241,10 +246,13 @@ a.sidebar-link:hover {
   gap: 10px;
 }
 
-.sidebar-footer .dropdown-item:hover {
-  background-color: var(--grey-100);
-  border-radius: 8px;
-  color: var(--black-main);
+/* FIXED: Only apply dropdown item hover on hover-capable devices */
+@media (hover: hover) {
+  .sidebar-footer .dropdown-item:hover {
+    background-color: var(--grey-100);
+    border-radius: 8px;
+    color: var(--black-main);
+  }
 }
 
 .sidebar-footer .dropdown-item i {
@@ -259,9 +267,18 @@ a.sidebar-link:hover {
   border-radius: 8px;
 }
 
+/* Keep dropdown active state on all devices (when tooltip is open) */
 .dropdown:has(.dropdown-menu.show) > .sidebar-link {
   background-color: var(--grey-100);
   border-radius: 8px;
+}
+
+/* FIXED: Only apply hover state on hover-capable devices */
+@media (hover: hover) {
+  .dropdown:not(:has(.dropdown-menu.show)):hover > .sidebar-link {
+    background-color: var(--grey-100);
+    border-radius: 8px;
+  }
 }
 
 .dropdown-divider {
