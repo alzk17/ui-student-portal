@@ -34,7 +34,7 @@
                         <div class="portal-card welcome-banner">
                             <div class="welcome-banner-content">
                                 <div class="welcome-text">
-                                    <h3 class="welcome-title">Welcome back, {{ @$child->first_name }} 👋</h3>
+                                    <h3 class="welcome-title">Welcome back, {{ $child->firstname ?? '' }} 👋</h3>
                                     <p class="welcome-subtitle">I hope you're doing great — why not set your next task and earn some gems?</p>
                                     <a href="{{ url('dashboard-child/set-work') }}" class="portal-btn portal-btn--primary" style="margin-top: 16px;">Set Task</a>
                                 </div>
@@ -75,14 +75,9 @@
                                         </div>
                                         <div class="task-info">
                                             <h6 class="task-title">{{ $pratice->title }}</h6>
-                                            <p class="task-meta">
-                                                {{ $pratice->number_question }} questions&nbsp;•&nbsp;
-                                                @if($pratice->time_limit)
-                                                    {{ $pratice->time_limit }} minutes
-                                                @else
-                                                    Untimed
-                                                @endif
-                                            </p>
+											<p class="task-meta">
+												{{ $pratice->number_question }} questions&nbsp;•&nbsp;{{ $pratice->time_limit ? $pratice->time_limit . ' minutes' : 'Untimed' }}
+											</p>
                                         </div>
                                         <div class="task-hover-icon">
                                             <i class="fa-solid fa-arrow-right-long"></i>
@@ -174,6 +169,11 @@
         </div>
     </div>
     @include("$prefix.dashboard-child.layout.javascript")
+	<script>
+	  document.querySelectorAll('a.task-card').forEach(el => {
+		el.addEventListener('touchstart', () => {});
+	  });
+	</script>
 </body>
 
 </html>
