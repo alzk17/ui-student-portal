@@ -25,7 +25,11 @@
   border-right: 2px solid var(--grey-200);
   padding: 16px 16px 12px 16px;
   transition: all 0.25s ease-in-out;
-  height: 100dvh;
+  height: 100vh;
+  height: 100dvh; /* Dynamic viewport height for modern browsers */
+  position: fixed;
+  top: 0;
+  left: 0;
 }
 
 #sidebar.expand {
@@ -283,7 +287,7 @@ a.sidebar-link {
 
 .dropdown-divider {
   height: 2px;
-  background-color: #d9d9d9;
+  background-color: var(--grey-300);
   margin: 8px -8px;
   width: auto;
   border: none;
@@ -307,5 +311,36 @@ a.sidebar-link {
   .sidebar-item {
     margin-left: 0;
     margin-right: 0;
+  }
+}
+
+/* =====================
+   Touch Device Fixes
+======================== */
+
+/* Fix for touch devices viewport issues */
+@supports (-webkit-touch-callout: none) {
+  #sidebar {
+    height: 100vh;
+    height: calc(var(--vh, 1vh) * 100);
+    min-height: 100vh;
+    min-height: calc(var(--vh, 1vh) * 100);
+  }
+}
+
+#sidebar.expand ~ .main {
+  margin-left: 256px;
+  padding-left: 0; /* Remove padding when expanded since sidebar is wider */
+}
+
+@media screen and (max-width: 1024px) {
+  .main {
+    margin-left: 60px;
+    padding-left: 24px; /* Maintain padding on mobile */
+  }
+  
+  #sidebar.expand ~ .main {
+    margin-left: 60px;
+    padding-left: 24px; /* Keep padding on mobile even when "expanded" */
   }
 }

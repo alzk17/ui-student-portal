@@ -12,16 +12,20 @@
   min-height: 100vh;
   overflow-x: hidden;
   overflow-y: auto;
-  transition: all 0.35s ease-in-out;
   width: 100%;
   height: 100vh;
+
+  /* Base layout for main content when sidebar is collapsed */
+  margin-left: 60px;
+  padding-left: 24px;
+  transition: all 0.35s ease-in-out, margin-left 0.25s ease-in-out, padding-left 0.25s ease-in-out;
 }
 
 /* === Shared Container === */
 .container-custom {
   max-width: 972px;
   margin: 0 auto;
-  padding: 1rem 1.5rem;
+  padding: 1.5rem;
 }
 
 @media screen and (max-width: 768px) {
