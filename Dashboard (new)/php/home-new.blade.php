@@ -26,6 +26,7 @@
                     @include("$prefix.dashboard-child.layout.navbar")
                 </div>
             </div>
+            
             <div class="container-custom">
                 <div class="portal-layout">
                     <div class="portal-main portal-main--fullwidth">

@@ -7,6 +7,7 @@
 <script src="{{ asset('assets_dashboard/js/main.js') }}?v={{ time() }}"></script>
 <script src="{{ asset('assets/cusmike/sweet2/sweetalert2.min.js') }}?v={{ time() }}"></script>
 <script src="{{ asset('assets/cusmike/toastr/toastr.min.js') }}?v={{ time() }}"></script>
+
 <script src="{{ asset('assets_dashboard/js/tooltip.js') }}?v={{ time() }}"></script>
 <script src="{{ asset('assets_dashboard/js/viewport-fix.js') }}?v={{ time() }}"></script>
 <script>
