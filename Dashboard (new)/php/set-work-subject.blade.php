@@ -61,7 +61,7 @@
 </div>
 
 <script>
-  
+
    $(document).ready(function() {
       checkAndSendData();
       $('input[name="level_id[]"], #grade_id').on('change', function() { checkAndSendData();});
@@ -84,6 +84,7 @@
          dataType: 'html',
          success: function(response) {
             $('.show_topic_option').html(response);
+            initTreeState();
          }
    });
 

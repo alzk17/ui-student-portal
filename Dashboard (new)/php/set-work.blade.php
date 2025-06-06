@@ -31,87 +31,222 @@
                     @include("$prefix.dashboard-child.layout.navbar")
                 </div>
             </div>
-
-            <div class="portal-layout">
-                <div class="portal-main portal-main--fullwidth">
-                    <!-- Set a task -->
-                    <div class="portal-section">
-                        <h2 class="portal-section-title">Set a task</h2>
-                        <p class="portal-section-text">
-                            After you set a task, it will appear in your Home page for easy access and tracking.
-                            <br>You can review completed tasks in the Review page.
-                        </p>
-                    </div>
-
-                    <!-- Practice type selector -->
-                    <div class="practice-type-selector" style="margin-bottom: 16px;">
-                        <h2 class="portal-section-title">Select a practice type</h2>
-                        <div class="practice-tab-buttons" id="pills-tab-setwork">
-                            <button
-                                class="tab-button active"
-                                id="custom-practice-tab"
-                                data-bs-target="#custom-practice"
-                                type="button"
-                                role="tab"
-                                aria-controls="custom-practice"
-                                aria-selected="true"
-                            >
-                                <h5>Custom practice</h5>
-                                <p>Choose topics you want to improve and get practising!</p>
-                            </button>
-                            <button
-                                class="tab-button"
-                                id="mock-test-tab"
-                                data-bs-target="#mock-test"
-                                type="button"
-                                role="tab"
-                                aria-controls="mock-test"
-                                aria-selected="false"
-                            >
-                                <h5>Mock test</h5>
-                                <p>Simulate a real test to build confidence and exam skills.</p>
-                            </button>
+            <div class="container-custom">
+                <div class="portal-layout">
+                    <div class="portal-main portal-main--fullwidth">
+                        <!-- Set a task -->
+                        <div class="portal-section">
+                            <h2 class="portal-section-title">Set a task</h2>
+                            <p class="portal-section-text">
+                                After you set a task, it will appear in your Home page for easy access and tracking.
+                                <br>You can review completed tasks in the Review page.
+                            </p>
                         </div>
-                    </div>
 
-                    <!-- Tab content -->
-                    <div class="tab-content" id="pills-tabContent-setwork">
-                        <!-- Tab 1: Custom Practice -->
-                        <div class="tab-pane active" id="custom-practice" role="tabpanel" aria-labelledby="custom-practice-tab">
-                            <form id="form_submit" method="POST" enctype="multipart/form-data">
-                                @csrf
-                                <!-- Step 1: Choose Subject -->
-                                <div class="setwork-section">
-                                    <h3 class="setwork-section-title">Step 1: Choose a subject to practise</h3>
-                                    <div class="show_subject"></div> <!-- Will be populated by JS -->
-                                </div>
+                        <!-- Practice type selector -->
+                        <div class="practice-type-selector" style="margin-bottom: 16px;">
+                            <h2 class="portal-section-title">Select a practice type</h2>
+                            <div class="practice-tab-buttons" id="pills-tab-setwork">
+                                <button
+                                    class="tab-button active"
+                                    id="custom-practice-tab"
+                                    data-bs-target="#custom-practice"
+                                    type="button"
+                                    role="tab"
+                                    aria-controls="custom-practice"
+                                    aria-selected="true"
+                                >
+                                    <h5>Custom practice</h5>
+                                    <p>Choose topics you want to improve and get practising!</p>
+                                </button>
+                                <button
+                                    class="tab-button"
+                                    id="mock-test-tab"
+                                    data-bs-target="#mock-test"
+                                    type="button"
+                                    role="tab"
+                                    aria-controls="mock-test"
+                                    aria-selected="false"
+                                >
+                                    <h5>Mock test</h5>
+                                    <p>Simulate a real test to build confidence and exam skills.</p>
+                                </button>
+                            </div>
+                        </div>
 
-                                <!-- Step 2: Choose Topics -->
-                                <div class="setwork-section">
-                                    <h3 class="setwork-section-title">Step 2: Choose practice topics</h3>
-                                    <div class="show_data"></div>
-                                </div>
+                        <!-- Tab content -->
+                        <div class="tab-content" id="pills-tabContent-setwork">
+                            <!-- Tab 1: Custom Practice -->
+                            <div class="tab-pane active" id="custom-practice" role="tabpanel" aria-labelledby="custom-practice-tab">
+                                <form id="form_submit" method="POST" enctype="multipart/form-data">
+                                    @csrf
+                                    <!-- Step 1: Choose Subject -->
+                                    <div class="setwork-section">
+                                        <h3 class="setwork-section-title">Step 1: Choose a subject to practise</h3>
+                                        <div class="show_subject"></div> <!-- Will be populated by JS -->
+                                    </div>
 
-                                <!-- Step 3: Add Details -->
-                                <div class="setwork-section">
-                                    <h3 class="setwork-section-title">Step 3: Add practice details (Optional)</h3>
-                                    <div class="setwork-input-row">
-                                        <div class="setwork-input-group">
-                                            <label for="practice_name" class="setwork-label">Title</label>
-                                            <input
-                                                type="text"
-                                                id="practice_name"
-                                                name="practice_name"
-                                                class="lmd-input"
-                                                placeholder="Enter a name"
-                                            />
+                                    <!-- Step 2: Choose Topics -->
+                                    <div class="setwork-section">
+                                        <h3 class="setwork-section-title">Step 2: Choose practice topics</h3>
+                                        <div class="show_data"></div>
+                                    </div>
+
+                                    <!-- Step 3: Add Details -->
+                                    <div class="setwork-section">
+                                        <h3 class="setwork-section-title">Step 3: Add practice details (Optional)</h3>
+                                        <div class="setwork-input-row">
+                                            <div class="setwork-input-group">
+                                                <label for="practice_name" class="setwork-label">Title</label>
+                                                <input
+                                                    type="text"
+                                                    id="practice_name"
+                                                    name="practice_name"
+                                                    class="lmd-input"
+                                                    placeholder="Enter a name"
+                                                />
+                                            </div>
+                                            <div class="setwork-input-group">
+                                                <label for="due_date" class="setwork-label">Due date</label>
+                                                <div class="datepicker-wrapper">
+                                                    <input
+                                                        type="text"
+                                                        id="due_date"
+                                                        name="due_date"
+                                                        class="lmd-input lambda-datepicker"
+                                                        placeholder="Select a date (optional)"
+                                                        readonly
+                                                    />
+                                                    <div class="lambda-calendar" hidden></div>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="setwork-input-group">
-                                            <label for="due_date" class="setwork-label">Due date</label>
+                                        <div class="setwork-slider-row">
+                                            <div class="setwork-input-group">
+                                                <label for="range-time" class="setwork-label">Time limit</label>
+                                                <input
+                                                    type="range"
+                                                    class="lmd-slider"
+                                                    id="range-time"
+                                                    name="time_limit"
+                                                    min="0"
+                                                    max="90"
+                                                    step="5"
+                                                    value="0"
+                                                />
+                                                <p id="value-range-time" class="setwork-slider-output">No time limit</p>
+                                            </div>
+                                            <div class="setwork-input-group">
+                                                <label for="range-question" class="setwork-label">Number of questions</label>
+                                                <input
+                                                    type="range"
+                                                    class="lmd-slider"
+                                                    id="range-question"
+                                                    name="number_question"
+                                                    min="5"
+                                                    max="60"
+                                                    step="5"
+                                                    value="5"
+                                                />
+                                                <p id="value-range-question" class="setwork-slider-output">5 questions</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="setwork-toggle-row">
+                                        <label class="setwork-label" for="count_score_toggle">
+                                            Include this practice in performance tracking
+                                        </label>
+                                        <div class="toggle-placeholder">
+                                            <input type="checkbox" id="count_score_toggle" name="count_score" disabled />
+                                            <span class="toggle-note">(Coming soon)</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="setwork-submit-row">
+                                        <button type="button" onclick="submit_pratice();" class="portal-btn portal-btn--primary">
+                                            <i class="fa-solid fa-plus"></i>
+                                            <span style="margin-left: 6px;">Set Task</span>
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+
+                            <!-- Tab 2: Mock Test -->
+                            <div class="tab-pane fade" id="mock-test" role="tabpanel" aria-labelledby="mock-test-tab" tabindex="0">
+                                <div class="setwork-section">
+                                    <h3 class="setwork-section-title">Mock Test Library</h3>
+                                    <!-- Search bar -->
+                                    <div class="setwork-searchbar">
+                                        <i class="fa fa-search search-icon"></i>
+                                        <input
+                                            type="text"
+                                            id="searchmocktest"
+                                            name="searchmocktest"
+                                            class="lmd-input"
+                                            placeholder="Search mock tests"
+                                            oninput="searchMockTest(this.value)"
+                                        />
+                                    </div>
+                                    <!-- Mock test category tabs -->
+                                    <ul id="show_topic_01" class="setwork-filter-tabs" role="tablist">
+                                        @if (@$mocktests)
+                                            @foreach (@$mocktests as $key => $item)
+                                                <li class="nav-item" role="presentation">
+                                                    <button
+                                                        onclick="top_nav({{ $item->id }});"
+                                                        class="nav-link link-under @if ($key == 0) active @endif"
+                                                        id="mock-tab-{{ $item->id }}"
+                                                        data-bs-toggle="tab"
+                                                        data-bs-target="#mock-tab-pane-{{ $item->id }}"
+                                                        type="button"
+                                                        role="tab"
+                                                        aria-controls="mock-tab-pane-{{ $item->id }}"
+                                                        aria-selected="{{ $key == 0 ? 'true' : 'false' }}"
+                                                    >
+                                                        {{ $item->name }}
+                                                    </button>
+                                                </li>
+                                            @endforeach
+                                        @endif
+                                    </ul>
+                                    <!-- Hidden input to track selected topic -->
+                                    <input
+                                        type="hidden"
+                                        id="mocktests_topic_id"
+                                        name="mocktests_topic_id"
+                                        value="{{ @$mocktests[0]->id }}"
+                                    >
+                                    <!-- Area where cards are injected via AJAX -->
+                                    <div class="show_item_topic" id="show_item_topic">
+                                        <!-- Populated by top_nav() or searchMockTest() -->
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Overlay -->
+                            <div class="portal-modal-overlay" id="modal-overlay"></div>
+
+                            <!-- Modal Container -->
+                            <div class="portal-modal" id="mocktest-modal">
+                                <div class="portal-modal-content">
+                                    <!-- Modal Body -->
+                                    <div class="portal-modal-body">
+                                        <h2 class="portal-modal-title" id="modal-test-title">Mock Test Title</h2>
+                                        <p class="portal-modal-meta" id="modal-test-meta">50 questions • 30 minutes • Eng</p>
+                                        <p class="portal-modal-description">
+                                            A full-length mock test designed to review key concepts. You can take this test anytime after it’s added to your task list.
+                                        </p>
+                                        <p class="portal-modal-info">
+                                            This mock test will be added to your task list. You can take it anytime.
+                                        </p>
+                                        <!-- Due Date Selector -->
+                                        <div class="portal-modal-due">
+                                            <label for="due_date_modal" class="setwork-label">Due date</label>
                                             <div class="datepicker-wrapper">
                                                 <input
                                                     type="text"
-                                                    id="due_date"
+                                                    id="due_date_modal"
                                                     name="due_date"
                                                     class="lmd-input lambda-datepicker"
                                                     placeholder="Select a date (optional)"
@@ -121,149 +256,15 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="setwork-slider-row">
-                                        <div class="setwork-input-group">
-                                            <label for="range-time" class="setwork-label">Time limit</label>
-                                            <input
-                                                type="range"
-                                                class="lmd-slider"
-                                                id="range-time"
-                                                name="time_limit"
-                                                min="0"
-                                                max="90"
-                                                step="5"
-                                                value="0"
-                                            />
-                                            <p id="value-range-time" class="setwork-slider-output">No time limit</p>
-                                        </div>
-                                        <div class="setwork-input-group">
-                                            <label for="range-question" class="setwork-label">Number of questions</label>
-                                            <input
-                                                type="range"
-                                                class="lmd-slider"
-                                                id="range-question"
-                                                name="number_question"
-                                                min="5"
-                                                max="60"
-                                                step="5"
-                                                value="5"
-                                            />
-                                            <p id="value-range-question" class="setwork-slider-output">5 questions</p>
-                                        </div>
+                                    <!-- Modal Actions -->
+                                    <div class="portal-modal-actions">
+                                        <button class="btn-portal-exit" onclick="closeModal()">Cancel</button>
+                                        <button class="btn-portal-primary" onclick="addMockTestToTaskList()">Add to Task List</button>
                                     </div>
-                                </div>
-
-                                <div class="setwork-toggle-row">
-                                    <label class="setwork-label" for="count_score_toggle">
-                                        Include this practice in performance tracking
-                                    </label>
-                                    <div class="toggle-placeholder">
-                                        <input type="checkbox" id="count_score_toggle" name="count_score" disabled />
-                                        <span class="toggle-note">(Coming soon)</span>
-                                    </div>
-                                </div>
-
-                                <div class="setwork-submit-row">
-                                    <button type="button" onclick="submit_pratice();" class="portal-btn portal-btn--primary">
-                                        <i class="fa-solid fa-plus"></i>
-                                        <span style="margin-left: 6px;">Set Task</span>
-                                    </button>
-                                </div>
-                            </form>
-                        </div>
-
-                        <!-- Tab 2: Mock Test -->
-                        <div class="tab-pane fade" id="mock-test" role="tabpanel" aria-labelledby="mock-test-tab" tabindex="0">
-                            <div class="setwork-section">
-                                <h3 class="setwork-section-title">Mock Test Library</h3>
-                                <!-- Search bar -->
-                                <div class="setwork-searchbar">
-                                    <i class="fa fa-search search-icon"></i>
-                                    <input
-                                        type="text"
-                                        id="searchmocktest"
-                                        name="searchmocktest"
-                                        class="lmd-input"
-                                        placeholder="Search mock tests"
-                                        oninput="searchMockTest(this.value)"
-                                    />
-                                </div>
-                                <!-- Mock test category tabs -->
-                                <ul id="show_topic_01" class="setwork-filter-tabs" role="tablist">
-                                    @if (@$mocktests)
-                                        @foreach (@$mocktests as $key => $item)
-                                            <li class="nav-item" role="presentation">
-                                                <button
-                                                    onclick="top_nav({{ $item->id }});"
-                                                    class="nav-link link-under @if ($key == 0) active @endif"
-                                                    id="mock-tab-{{ $item->id }}"
-                                                    data-bs-toggle="tab"
-                                                    data-bs-target="#mock-tab-pane-{{ $item->id }}"
-                                                    type="button"
-                                                    role="tab"
-                                                    aria-controls="mock-tab-pane-{{ $item->id }}"
-                                                    aria-selected="{{ $key == 0 ? 'true' : 'false' }}"
-                                                >
-                                                    {{ $item->name }}
-                                                </button>
-                                            </li>
-                                        @endforeach
-                                    @endif
-                                </ul>
-                                <!-- Hidden input to track selected topic -->
-                                <input
-                                    type="hidden"
-                                    id="mocktests_topic_id"
-                                    name="mocktests_topic_id"
-                                    value="{{ @$mocktests[0]->id }}"
-                                >
-                                <!-- Area where cards are injected via AJAX -->
-                                <div class="show_item_topic" id="show_item_topic">
-                                    <!-- Populated by top_nav() or searchMockTest() -->
                                 </div>
                             </div>
+                            
                         </div>
-
-                        <!-- Overlay -->
-                        <div class="portal-modal-overlay" id="modal-overlay"></div>
-
-                        <!-- Modal Container -->
-                        <div class="portal-modal" id="mocktest-modal">
-                            <div class="portal-modal-content">
-                                <!-- Modal Body -->
-                                <div class="portal-modal-body">
-                                    <h2 class="portal-modal-title" id="modal-test-title">Mock Test Title</h2>
-                                    <p class="portal-modal-meta" id="modal-test-meta">50 questions • 30 minutes • Eng</p>
-                                    <p class="portal-modal-description">
-                                        A full-length mock test designed to review key concepts. You can take this test anytime after it’s added to your task list.
-                                    </p>
-                                    <p class="portal-modal-info">
-                                        This mock test will be added to your task list. You can take it anytime.
-                                    </p>
-                                    <!-- Due Date Selector -->
-                                    <div class="portal-modal-due">
-                                        <label for="due_date_modal" class="setwork-label">Due date</label>
-                                        <div class="datepicker-wrapper">
-                                            <input
-                                                type="text"
-                                                id="due_date_modal"
-                                                name="due_date"
-                                                class="lmd-input lambda-datepicker"
-                                                placeholder="Select a date (optional)"
-                                                readonly
-                                            />
-                                            <div class="lambda-calendar" hidden></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Modal Actions -->
-                                <div class="portal-modal-actions">
-                                    <button class="btn-portal-exit" onclick="closeModal()">Cancel</button>
-                                    <button class="btn-portal-primary" onclick="addMockTestToTaskList()">Add to Task List</button>
-                                </div>
-                            </div>
-                        </div>
-                        
                     </div>
                 </div>
             </div>
@@ -360,13 +361,21 @@
         }
 
         $.each(events, function(k, v) {
-            $('#range-time').on(v, function() {
-                $('#value-range-time').text(`Time limit ${$(this).val()} mins`);
-            });
-            $('#range-question').on(v, function() {
-                $('#value-range-question').text(`${$(this).val()} Question`);
-            });
+        $('#range-time').on(v, function() {
+            const value = parseInt(this.value, 10);
+            $('#value-range-time').text(
+            value === 0 ? 'No time limit' : `${value} minutes`
+            );
         });
+
+        $('#range-question').on(v, function() {
+            const value = parseInt(this.value, 10);
+            $('#value-range-question').text(
+            `${value} question${value === 1 ? '' : 's'}`
+            );
+        });
+        });
+
 
         jQuery(".bt-switch").bootstrapSwitch();
 
