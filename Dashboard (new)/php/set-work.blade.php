@@ -321,7 +321,8 @@
         });
         
     </script>
-        <script>
+    
+    <script>
         const events = ['mousemove', 'touchmove'];
         $(document).ready(function() {
             top_nav({{ @$mocktests[0]->id }});
