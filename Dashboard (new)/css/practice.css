@@ -342,6 +342,12 @@ input[type="radio"]:checked + .subject-card {
   cursor: pointer;
 }
 
+.grade-filter > .setwork-label,
+.topic-tree-wrapper > .setwork-label,
+.difficulty-filter > .setwork-label {
+  cursor: text;
+}
+
 .setwork-slider-output {
   font-size: 16px;
   color: #666;
@@ -396,7 +402,7 @@ input[type="radio"]:checked + .subject-card {
   background: var(--white-main, #fff);
   box-shadow: -20px 0 var(--white-main, #fff), 20px 0 var(--white-main, #fff);
   box-sizing: border-box;
-  animation: shadowPulse 2s linear infinite;
+  animation: shadowPulse 1.5s linear infinite;
 }
 
 @keyframes shadowPulse {
