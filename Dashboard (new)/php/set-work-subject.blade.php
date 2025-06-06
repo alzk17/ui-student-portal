@@ -1,25 +1,10 @@
 @php
     $arritem = [
-        '1' => [
-            'name' => 'Beginner',
-            'star' => 1,
-        ],
-        '2' => [
-            'name' => 'Novice',
-            'star' => 2,
-        ],
-        '3' => [
-            'name' => 'Balance',
-            'star' => 3,
-        ],
-        '4' => [
-            'name' => 'Challenge',
-            'star' => 4,
-        ],
-        '5' => [
-            'name' => 'God Mode',
-            'star' => 5,
-        ],
+        '1' => ['name' => 'Beginner',  'star' => 1],
+        '2' => ['name' => 'Novice',    'star' => 2],
+        '3' => ['name' => 'Balance',   'star' => 3],
+        '4' => ['name' => 'Challenge', 'star' => 4],
+        '5' => ['name' => 'God Mode',  'star' => 5],
     ];
 @endphp
 
@@ -38,6 +23,7 @@
 <div class="topic-tree-wrapper">
     <label class="setwork-label">Topic options</label>
     <div class="topic-tree">
+        <span class="loader" id="loading-spinner" style="display:none"></span>
         <div class="show_topic_option"></div>
     </div>
 </div>
@@ -48,7 +34,7 @@
         @foreach ($arritem as $key => $item)
             <div class="difficulty-card">
                 <label for="checkbox-{{$key}}">
-                     <span class="star">
+                    <span class="star">
                         @for ($i = 1; $i <= $item['star']; $i++)
                             <i class="fa-solid fa-star"></i>
                         @endfor
@@ -61,36 +47,44 @@
 </div>
 
 <script>
+    $(document).ready(function() {
+        checkAndSendData();
+        $('#grade_id').on('change', function() { checkAndSendData(); });
+    });
 
-   $(document).ready(function() {
-      checkAndSendData();
-      $('input[name="level_id[]"], #grade_id').on('change', function() { checkAndSendData();});
-   });
+    function checkAndSendData() {
+        var selectedLevels = $('input[name="level_id[]"]:checked').map(function() {
+            return $(this).val();
+        }).get();
 
-   function checkAndSendData() {
-      var selectedLevels = $('input[name="level_id[]"]:checked').map(function() {
-         return $(this).val();
-      }).get();
+        var selectedGradeId = $('#grade_id').val();
 
-      var selectedGradeId = $('#grade_id').val();
-      $.ajax({
-         type: 'GET',
-         url: 'get/subject/practice/topic_option',
-         data: {
-            subject_id: {{$subject_id}},
-            level_ids: selectedLevels,
-            grade_id: selectedGradeId
-         },
-         dataType: 'html',
-         success: function(response) {
-            $('.show_topic_option').html(response);
-            initTreeState();
-         }
-   });
+        // Show spinner and clear the old tree
+        $('#loading-spinner').show();
+        $('.show_topic_option').html('');
 
-   }
+        $.ajax({
+            type: 'GET',
+            url: 'get/subject/practice/topic_option',
+            data: {
+                subject_id: {{$subject_id}},
+                level_ids: selectedLevels,
+                grade_id: selectedGradeId
+            },
+            dataType: 'html',
+            success: function(response) {
+                $('.show_topic_option').html(response);
+                $('#loading-spinner').hide();
+                if (typeof initTreeState === 'function') { initTreeState(); }
+            },
+            error: function() {
+                $('.show_topic_option').html('<div class="alert alert-danger">Error loading topics. Please try again.</div>');
+                $('#loading-spinner').hide();
+            }
+        });
+    }
 
-   function toggleCheckbox(element) {
+    function toggleCheckbox(element) {
         const checkbox = element.querySelector('input[type="checkbox"]');
         checkbox.checked = !checkbox.checked;
     }
