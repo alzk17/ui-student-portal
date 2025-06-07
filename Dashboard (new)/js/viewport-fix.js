@@ -1,34 +1,36 @@
-  // Fix for iOS Safari and other touch devices viewport height issues
-function setViewportHeight() {
-  // Get the actual viewport height
-  let vh = window.innerHeight * 0.01;
-  // Set the custom property to the root
-  document.documentElement.style.setProperty('--vh', `${vh}px`);
+function isiOS() {
+  return (
+    /iPad|iPhone|iPod/.test(navigator.userAgent) ||
+    (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)
+  );
 }
 
-// Set on initial load
-setViewportHeight();
-
-// Re-calculate on resize and orientation change
-window.addEventListener('resize', setViewportHeight);
-window.addEventListener('orientationchange', () => {
-  // Small delay to ensure the viewport has settled after orientation change
-  setTimeout(setViewportHeight, 100);
-});
-
-// For iOS Safari - handle viewport changes during scrolling
-let ticking = false;
-function handleScroll() {
-  if (!ticking) {
-    requestAnimationFrame(() => {
-      setViewportHeight();
-      ticking = false;
-    });
-    ticking = true;
+if (isiOS()) {
+  document.body.classList.add('ios-fix');
+} else {
+  // Only apply viewport hack for NON-iOS devices!
+  function setViewportHeight() {
+    let vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
   }
-}
 
-// Only add scroll listener on touch devices
-if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
-  window.addEventListener('scroll', handleScroll, { passive: true });
+  setViewportHeight();
+  window.addEventListener('resize', setViewportHeight);
+  window.addEventListener('orientationchange', () => {
+    setTimeout(setViewportHeight, 100);
+  });
+
+  let ticking = false;
+  function handleScroll() {
+    if (!ticking) {
+      requestAnimationFrame(() => {
+        setViewportHeight();
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }
+  if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
+    window.addEventListener('scroll', handleScroll, { passive: true });
+  }
 }

@@ -88,3 +88,17 @@ body {
   /* min-height: calc(100vh - 48px); REMOVE */
   min-height: calc((var(--vh, 1vh) * 100) - 48px); /* <-- ADD this line */
 }
+
+/* === iOS Fixes === */
+body.ios-fix {
+  overflow-y: auto !important;
+}
+body.ios-fix .wrapper {
+  height: auto !important;
+  min-height: 0 !important;
+}
+body.ios-fix .main {
+  height: auto !important;
+  min-height: 0 !important;
+  overflow-y: visible !important;
+}
