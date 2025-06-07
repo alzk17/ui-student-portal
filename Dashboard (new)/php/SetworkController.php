@@ -157,11 +157,20 @@ class SetworkController extends Controller
                         ];
                     }else{
                         $child = ChildModel::find(Auth::guard('child')->id());
-    
+
+                        $practice_name = trim($request->practice_name);
+                        if (empty($practice_name)) {
+                            $subject = SubjectModel::find($request->subject_id);
+                            $subjectName = $subject ? $subject->name : 'Practice';
+                            $date = date('j M');
+                            $practice_name = $subjectName . ' Practice – ' . $date;
+                        }
+
                         $data = new Child_pratice_mainModel();
                         $data->user_id = $child->user_id;
                         $data->child_id = Auth::guard('child')->id();
-                        $data->title = $request->practice_name;
+                        $data->title = $practice_name; // <--- (auto naming)!
+
                         $data->time_limit = $request->time_limit;
                         $data->number_question = $request->number_question;
                         $data->subject_id = $request->subject_id;

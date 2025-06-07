@@ -104,6 +104,7 @@
                                                     name="practice_name"
                                                     class="lmd-input"
                                                     placeholder="Enter a name"
+                                                    maxlength="45"
                                                 />
                                             </div>
                                             <div class="setwork-input-group">
@@ -384,7 +385,7 @@
             var level_id = $('#level_id').val();
             var practice_name = $('#practice_name').val();
 
-            if (practice_name == "" || level_id == "") {
+            if (level_id == "") {
                 toastr.error("Sorry, please complete the information.");
                 return false;
             }
