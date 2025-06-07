@@ -183,3 +183,35 @@
   outline: 3px solid var(--blue-400);
   outline-offset: 2px;
 }
+
+/* =====================================
+   Pill Toggle / Segmented Switch
+===================================== */
+
+.lmd-toggle-switch {
+    display: flex;
+    background: #fff;
+    border-radius: 2rem;
+    gap: 4px;
+    padding: 4px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+    width: fit-content;
+}
+
+.lmd-toggle-switch .toggle-option {
+    border: none;
+    padding: 0.3rem 1.2rem;
+    background: none;
+    border-radius: 2rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #141414;
+    cursor: pointer;
+    transition: background 0.18s, color 0.18s;
+    outline: none;
+}
+
+.lmd-toggle-switch .toggle-option.active {
+    background-color: #375ce3;
+    color: #fff;
+}
