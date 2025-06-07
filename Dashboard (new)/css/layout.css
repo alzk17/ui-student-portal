@@ -8,13 +8,15 @@ body {
   overflow: hidden;
 }
 
+/* CHANGE THIS: */
 .wrapper {
   display: flex;
-  height: 100vh; /* Fix: Add this line */
+  /* height: 100vh; REMOVE this line */
+  height: calc(var(--vh, 1vh) * 100); /* <-- ADD this line */
 }
 
 .main {
-  flex: 1; /* Fix: Use flex instead of fixed height */
+  flex: 1;
   overflow-x: hidden;
   overflow-y: auto;
   width: 100%;
@@ -82,5 +84,7 @@ body {
   gap: 20px;
   position: sticky;
   top: 24px;
-  min-height: calc(100vh - 48px);
+  /* CHANGE THIS: */
+  /* min-height: calc(100vh - 48px); REMOVE */
+  min-height: calc((var(--vh, 1vh) * 100) - 48px); /* <-- ADD this line */
 }
