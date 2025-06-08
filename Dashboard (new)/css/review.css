@@ -1,0 +1,120 @@
+/* Task Filter Row */
+.task-filter-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+/* Searchbar */
+.review-searchbar {
+  position: relative;
+  min-width: 320px;
+}
+
+.review-searchbar .search-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #999;
+  pointer-events: none;
+}
+
+.review-searchbar input {
+  width: 100%;
+  padding-left: 34px;
+}
+
+/* Pagination */
+.lmd-pagination-wrapper {
+  margin-top: 24px;
+  display: flex;
+  justify-content: center;
+}
+
+.lmd-pagination {
+  display: flex;
+  padding-left: 0;
+  list-style: none;
+}
+
+.lmd-pagination .page-link {
+  border: 1px solid #e5e5e5;
+  padding: 6px 12px;
+  background-color: #fff;
+  color: #141414;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.lmd-pagination .page-link:focus,
+.lmd-pagination .page-link:active:focus {
+  outline: 0;
+  box-shadow: none;
+}
+
+.lmd-pagination .page-item.active .page-link {
+  background-color: #375ce3;
+  color: #fff;
+  border-color: #375ce3;
+}
+
+.lmd-pagination .page-item.disabled .page-link {
+  cursor: not-allowed;
+  pointer-events: auto;
+  opacity: 0.4;
+  user-select: none;
+}
+
+/* Table Styles */
+.box-table {
+  font-size: 1rem;
+}
+
+.task-table.box-table.table-responsive {
+  border-radius: 8px;
+  background: var(--white-main);
+  box-shadow: var(--shadow-card, 0 4px 12px rgba(0, 0, 0, 0.05));
+  overflow: hidden;
+}
+
+.table.box-table {
+  background: transparent;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.table.box-table thead th {
+  background: var(--blue-50);
+  font-weight: 600;
+  color: var(--black-main);
+  border-bottom: 1px solid var(--grey-200);
+  padding: 12px 6px 12px 14px;
+}
+
+.table.box-table tbody tr {
+  background: var(--white-main);
+  transition: background 0.18s;
+}
+
+.table.box-table td {
+  padding: 12px 6px 12px 14px;
+  border-bottom: 1px solid var(--grey-200);
+  color: var(--black-main);
+  font-size: 1rem;
+}
+
+/* Sortable Elements */
+.sortable {
+  cursor: pointer;
+}
+
+th i {
+  font-size: 1rem;
+  margin-left: 6px;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
