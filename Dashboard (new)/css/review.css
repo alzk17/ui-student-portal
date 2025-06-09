@@ -318,10 +318,10 @@ th i {
 }
 .scorecard-explanation-body {
   display: none;
-  margin-top: 4px;
-  background: #f7faff;
+  margin-top: 1rem;
+  background: var(--grey-100);
   border-radius: 6px;
-  padding: 10px 14px;
+  padding: 1rem;
   font-size: 0.98rem;
   color: #222;
 }
@@ -447,7 +447,6 @@ math-field {
   height: 100%;
   z-index: 10;
   background: transparent;
-  cursor: not-allowed;
 }
 /* Correct State */
 .mathfield-correct {
@@ -487,7 +486,6 @@ math-field {
   font-size: 16px;
   color: #141414;
   flex: 0 0 auto;
-  cursor: pointer;
   user-select: none;
   transition: background-color 0.2s ease, box-shadow 0.2s ease;
   box-shadow: 0px 3px 0px #d9d9d9; 
