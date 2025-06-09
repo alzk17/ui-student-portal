@@ -2,224 +2,141 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>lambda</title>
-    @include("$prefix.dashboard-child.layout.stylesheet")
-    
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Review • Lambda</title>
+  @include("$prefix.dashboard-child.layout.stylesheet")
+  <link rel="stylesheet" href="{{ asset('assets_dashboard/css/variables.css') }}?v={{ time() }}">
+  <link rel="stylesheet" href="{{ asset('assets_dashboard/css/header.css') }}?v={{ time() }}">
+  <link rel="stylesheet" href="{{ asset('assets_dashboard/css/layout.css') }}?v={{ time() }}">
+  <link rel="stylesheet" href="{{ asset('assets_dashboard/css/components.css') }}?v={{ time() }}">
+  <link rel="stylesheet" href="{{ asset('assets_dashboard/css/sidebar.css') }}?v={{ time() }}">
+  <link rel="stylesheet" href="{{ asset('assets_dashboard/css/buttons.css') }}?v={{ time() }}">
+  <link rel="stylesheet" href="{{ asset('assets_dashboard/css/searchbar.css') }}?v={{ time() }}">
+  <link rel="stylesheet" href="{{ asset('assets_dashboard/css/inputs.css') }}?v={{ time() }}">
+  <link rel="stylesheet" href="{{ asset('assets_dashboard/css/tooltip.css') }}?v={{ time() }}">
+  <link rel="stylesheet" href="{{ asset('assets_dashboard/css/tooltip-widgets.css') }}?v={{ time() }}">
+  <link rel="stylesheet" href="{{ asset('assets_dashboard/css/review.css') }}?v={{ time() }}">
 </head>
 
 <body>
-    <div class="wrapper">
-        @include("$prefix.dashboard-child.layout.sidebar")
-        <div class="main">
-            <div class="border-header-page">
-              <div class="container-custom">
-                @include("$prefix.dashboard-child.layout.navbar")
-            </div>
-            </div>
-      
-            <div class="container-custom">
-              <div class="box-task-review">
-                <div class="row">
-                  <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                    <h2 class="title-page">Tasks review</h2>
+  <div class="wrapper">
+      @include("$prefix.dashboard-child.layout.sidebar")
+      <div class="main">
+        <div class="border-header-page">
+          <div class="container-custom">
+            @include("$prefix.dashboard-child.layout.navbar")
+          </div>
+        </div>
+
+        <div class="container-custom">
+          <div class="portal-layout">
+            <main class="portal-main portal-main--fullwidth">
+              
+              <section class="portal-section">
+                <h2 class="portal-section-title">Review and Reflect</h2>
+                <p class="portal-section-text">
+                  This page shows all the tasks you've completed or are still working on. You can check your performance, view scorecards, or continue any unfinished tasks.
+                </p>
+              </section>
+
+              <section class="portal-section">
+                <h2 class="portal-section-title">Your Tasks</h2>
+                
+                <!-- FILTER ROW: Place here, before the table! -->
+                <div class="task-filter-row">
+                  <div class="lmd-toggle-switch" data-toggle-name="tasktype">
+                    <button type="button" class="toggle-option {{ request('type') != 'mocktest' ? 'active' : '' }}" data-value="pratice"
+                        onclick="window.location.href='{{ url('dashboard-child/review?type=pratice') }}'">
+                        Practice
+                    </button>
+                    <button type="button" class="toggle-option {{ request('type') == 'mocktest' ? 'active' : '' }}" data-value="mock"
+                        onclick="window.location.href='{{ url('dashboard-child/review?type=mocktest') }}'">
+                        Mock Test
+                    </button>
                   </div>
-      
-                  <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                    <form>
-                      <div class="box-item-filter">
-                        <div class="box-input">
-                          <div class="search">
-                            <input type="text" id="search" name="search" class="form-control" placeholder="คำค้นหา">
-                            <i class="fa fa-search"></i>
-                          </div>
-                        </div>
-      
-                        <?php
-                        $data_filter = [
-                          1 => ['name_filter' => 'Practice', "type"=> "pratice"],
-                          2 => ['name_filter' => 'Mock test', "type"=> "mocktest"],
-                        ];
-                        ?>
-      
-                        <div class="box-button-filter">
-                          <div class="row">
-                              @foreach($data_filter as $key=>$item)
-                              <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6">
-                                <a href="{{url("dashboard-child/review?type=".$item['type'])}}" class="btn-filter">
-                                  <div class="box-border @if(Request::get('type') == $item['type'])) active-box-filter-review @endif">
-                                    <p>{{@$item['name_filter']}}</p>
-                                  </div>
-                                </a>
-                              </div>
-                              @endforeach
-                          </div>
-                        </div>
-                      </div>
-                    </form>
-      
-                    <!-- table -->
-                    <div class="box-table table-responsive">
-                      <table class="table">
+                  <div class="review-searchbar">
+                    <i class="fa fa-search search-icon"></i>
+                    <input
+                        type="text"
+                        id="searchreview"
+                        name="searchreview"
+                        class="lmd-input"
+                        placeholder="Search tasks"
+                    >
+                  </div>
+                </div>
+                <!-- END FILTER ROW -->
+
+                <div class="task-table box-table table-responsive">
+                    <table class="table box-table">
                         <thead>
-                          <tr>
-                            <th scope="col">Title <a href="javascript:void(0)"><i class="lni lni-sort-high-to-low icon-sort-custom"></i></a></th>
-                            <th scope="col">Subject</th>
-                            <th scope="col">Type</th>
-                            <th scope="col" class="text-center">Grade</th>
-                            {{-- <th scope="col" class="text-center">Performance <a href="javascript:void(0)"><i class="lni lni-sort-high-to-low icon-sort-custom"></i></a></th> --}}
-                            <th scope="col" class="text-center">Date Completed <a href="javascript:void(0)"><i class="lni lni-sort-high-to-low icon-sort-custom"></i></a></th>
-                            <th scope="col">Status <a href="javascript:void(0)"><i class="lni lni-sort-high-to-low icon-sort-custom"></i></a></th>
-                          </tr>
+                            <tr>
+                                <th class="sortable" data-sort="title" data-type="text">Title <i class="fas fa-sort" style="display:none;"></i></th>
+                                <th class="sortable" data-sort="subject" data-type="text">Subject <i class="fas fa-sort" style="display:none;"></i></th>
+                                <th class="sortable" data-sort="score" data-type="score">Score <i class="fas fa-sort" style="display:none;"></i></th>
+                                <th class="sortable" data-sort="due-date" data-type="date">Due <i class="fas fa-sort" style="display:none;"></i></th>
+                                <th class="sortable" data-sort="completed-date" data-type="date">Completed <i class="fas fa-sort" style="display:none;"></i></th>
+                                <th class="sortable" data-sort="status" data-type="status">Status <i class="fas fa-sort" style="display:none;"></i></th>
+                            </tr>
                         </thead>
                         <tbody>
-                          @if (@$pratices)
-                            @foreach (@$pratices as $item)
-                              @php 
-                              $type = "Mock test";
-                              if($item->isType == "pratice"){
-                                  $type = "Pratice";
-                              }
-
-                              $correct_answer = 0;
-                              if(@$item->correct_answer != null){
-                                  $correct_answer = $item->correct_answer;
-                              }
-
-                              $subject_name = "";
-
-                              if(@$item->isType == "pratice")
-                              {
-                                  if(@$item->subject_id != null){
-                                      $subject = \App\Models\Backend\SubjectModel::find($item->subject_id);
-                                      $subject_name = $subject->name;
-                                  }
-                              }elseif(@$item->isType == "mocktest"){
-                                  if(@$item->subject_id != null){
-                                      $subject = \App\Models\Backend\MocktestModel::find($item->subject_id);
-                                      $subject_name = $subject->name;
-                                  }
-                              }
-                              @endphp
+                            @forelse($pratices as $item)
                                 <tr>
-                                    <td>{{@$item->title}}</td>
-                                    <td>{{@$subject_name}}</td>
-                                    <td>{{@$type}}</td>
-                                    <td class="text-center">{{@$item->year->name ?? '-'}}</td>
-                                    {{-- <td class="text-center">-</td> --}}
-                                    <td class="text-center">{{date('d/m/Y',strtotime($item->complete_date))}}</td>
+                                    <td>{{ $item->title ?? '-' }}</td>
+                                    <td>{{ $item->subject->name ?? '-' }}</td>
                                     <td>
-                                      @if($item->isActive == "W")
-                                          <a class="status-table" href="{{url("$folder/practice/$item->uuid")}}"><span class="text-success">Start Task</span></a>
-                                      @elseif($item->isActive == "I")
-                                          <a class="status-table" href="{{url("$folder/practice/$item->uuid")}}"><span class="text-success">Continue Task</span></a>
-                                      @elseif($item->isActive == "S")
-                                          <a class="status-table" href="{{url("$folder/practice-transcript/$item->uuid")}}"><span class="text-success">Check Transcript</span></a>
-                                      @endif
+                                        @if($item->isActive == 'S' && $item->correct_answer !== null && $item->total_question > 0)
+                                            {{ round(($item->correct_answer / $item->total_question) * 100) . '%' }}
+                                        @else
+                                            -
+                                        @endif
+                                    </td>
+                                    <td>-</td>
+                                    <td>
+                                        @if($item->isActive == 'S' && $item->complete_date)
+                                            {{ \Carbon\Carbon::parse($item->complete_date)->format('d/m/Y') }}
+                                        @else
+                                            -
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if($item->isActive == 'W')
+                                            <a class="status-table" href="{{ url("$folder/practice/$item->uuid") }}">
+                                                <span class="text-success">Start</span>
+                                            </a>
+                                        @elseif($item->isActive == 'I')
+                                            <a class="status-table" href="{{ url("$folder/practice/$item->uuid") }}">
+                                                <span class="text-success">Continue</span>
+                                            </a>
+                                        @elseif($item->isActive == 'S')
+                                            <a class="status-table" href="{{ url("$folder/practice-transcript/$item->uuid") }}">
+                                                <span class="text-success">Review</span>
+                                            </a>
+                                        @else
+                                            <span>-</span>
+                                        @endif
                                     </td>
                                 </tr>
-                            @endforeach
-                        @endif
+                            @empty
+                                <tr><td colspan="6" style="text-align:center;">No data found.</td></tr>
+                            @endforelse
                         </tbody>
-                      </table>
-
-                      <div id="pagination" class="pagination-container"></div>
-                    </div>
-                    <!-- end table -->
-                  </div>
-      
-      
-      
+                    </table>
                 </div>
-              </div>
-            </div>
+                <nav class="lmd-pagination-wrapper" aria-label="Page navigation">
+                  <ul class="pagination lmd-pagination" id="pagination"></ul>
+                </nav>
+              </section>
+
+            </main>
           </div>
-    </div>
-    @include("$prefix.dashboard-child.layout.javascript")
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-          const searchInput = document.getElementById("search");
-          const tableRows = document.querySelectorAll(".box-table tbody tr");
-    
-          searchInput.addEventListener("keyup", function () {
-              let searchText = searchInput.value.toLowerCase();
-    
-              tableRows.forEach(row => {
-                  let title = row.cells[0].innerText.toLowerCase(); // คอลัมน์ Title
-                  let subject = row.cells[1].innerText.toLowerCase(); // คอลัมน์ Subject
-    
-                  if (title.includes(searchText) || subject.includes(searchText)) {
-                      row.style.display = "";
-                  } else {
-                      row.style.display = "none";
-                  }
-              });
-          });
-      });
-    </script>
+        </div>
 
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-      const searchInput = document.getElementById("search");
-      const tableRows = Array.from(document.querySelectorAll(".box-table tbody tr"));
-      const rowsPerPage = 20; // จำนวนแถวต่อหน้า
-      let currentPage = 1;
-
-      function displayTableRows() {
-          let startIndex = (currentPage - 1) * rowsPerPage;
-          let endIndex = startIndex + rowsPerPage;
-
-          tableRows.forEach((row, index) => {
-              if (index >= startIndex && index < endIndex) {
-                  row.style.display = "";
-              } else {
-                  row.style.display = "none";
-              }
-          });
-
-          updatePaginationButtons();
-      }
-
-      function updatePaginationButtons() {
-          let totalPages = Math.ceil(tableRows.length / rowsPerPage);
-          let paginationContainer = document.getElementById("pagination");
-          paginationContainer.innerHTML = "";
-
-          for (let i = 1; i <= totalPages; i++) {
-              let button = document.createElement("button");
-              button.innerText = i;
-              button.classList.add("pagination-btn");
-              if (i === currentPage) button.classList.add("active");
-
-              button.addEventListener("click", function () {
-                  currentPage = i;
-                  displayTableRows();
-              });
-
-              paginationContainer.appendChild(button);
-          }
-      }
-
-      searchInput.addEventListener("keyup", function () {
-          let searchText = searchInput.value.toLowerCase();
-          let filteredRows = tableRows.filter(row => {
-              let title = row.cells[0].innerText.toLowerCase();
-              let subject = row.cells[1].innerText.toLowerCase();
-              return title.includes(searchText) || subject.includes(searchText);
-          });
-
-          tableRows.forEach(row => row.style.display = "none");
-          filteredRows.forEach(row => row.style.display = "");
-
-          currentPage = 1;
-          displayTableRows();
-      });
-
-      displayTableRows();
-  });
-</script>
-
+        </div>
+  </div>
+  @include("$prefix.dashboard-child.layout.javascript")
+  <script src="{{ asset('assets_dashboard/js/modal-handler.js') }}?v={{ time() }}"></script>
+  <script src="{{ asset('assets_dashboard/js/review-table.js') }}?v={{ time() }}"></script>
 </body>
-
 </html>

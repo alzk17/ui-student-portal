@@ -151,10 +151,6 @@ body {
   display: none !important;
 }
 
-.btn {
-  font-size: 0.95rem !important;
-}
-
 .required {
   color: red;
 }

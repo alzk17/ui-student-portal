@@ -19,11 +19,24 @@
   <link rel="stylesheet" href="css/buttons.css">
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/inputs.css">
+  <link rel="stylesheet" href="css/modal.css">
   <link rel="stylesheet" href="css/sidebar.css?v=123123123">
   <link rel="stylesheet" href="css/tooltip.css">
   <link rel="stylesheet" href="css/variables.css">
   <link rel="stylesheet" href="css/tooltip-widgets.css">
   <link rel="stylesheet" href="css/review.css">
+
+  <script>
+    MathJax = {
+      options: {
+        enableMenu: false // Disables the MathJax context menu
+      },
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
 
 </head>
 
@@ -42,7 +55,7 @@
         </div>
         <!-- Sidebar navigation menu -->
         <ul class="sidebar-nav">
-            <li class="sidebar-item active">
+            <li class="sidebar-item">
                 <a href="https://lambda.in.th/dashboard-child" class="sidebar-link">
                     <img src="Icons/home-2.svg" class="img-fluid img-icon" alt=""> <span>Home</span>
                 </a>
@@ -58,7 +71,7 @@
                     <img src="Icons/target-2.svg" class="img-fluid img-icon" alt=""> <span>Set Tasks</span>
                 </a>
             </li>
-            <li class="sidebar-item">
+            <li class="sidebar-item active">
                 <a href="https://lambda.in.th/dashboard-child/review" class="sidebar-link">
                     <img src="Icons/magnifier-2.svg" class="img-fluid img-icon" alt="">
                     <span>Review</span>
@@ -308,13 +321,15 @@
                       </td>
                     </tr>
                     <tr>
-                      <td>1231234</td>
+                      <td>Kwan's Science Practice</td>
                       <td>Maths (EP)</td>
                       <td>75%</td>
                       <td>10/05/2025</td>
                       <td>09/05/2025</td>
                       <td>
-                        <a class="status-table" href="https://lambda.in.th/dashboard-child/practice-transcript/21f9668b-622c-43f8-9065-ffb6a64fbc1a">
+                        <a class="status-table"
+                          href="javascript:void(0);"
+                          onclick="openModal('scorecard-modal');">
                           <span class="text-success">Review</span>
                         </a>
                       </td>
@@ -439,128 +454,6 @@
                         </a>
                       </td>
                     </tr>
-                    <tr>
-                      <td>Column Multiplication 1</td>
-                      <td>Maths</td>
-                      <td>95%</td>
-                      <td>-</td>
-                      <td>31/03/2025</td>
-                      <td>
-                        <a class="status-table" href="https://lambda.in.th/dashboard-child/practice-transcript/d85ed28f-89ff-4034-a1cd-fec35bdbfc74">
-                          <span class="text-success">Review</span>
-                        </a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>แบบฝึกหัด 1</td>
-                      <td>Maths (TH)</td>
-                      <td>95%</td>
-                      <td>-</td>
-                      <td>28/03/2025</td>
-                      <td>
-                        <a class="status-table" href="https://lambda.in.th/dashboard-child/practice-transcript/d85ed28f-89ff-4034-a1cd-fec35bdbfc74">
-                          <span class="text-success">Review</span>
-                        </a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>แบบฝึกหัด</td>
-                      <td>Maths (TH)</td>
-                      <td>95%</td>
-                      <td>-</td>
-                      <td>27/03/2025</td>
-                      <td>
-                        <a class="status-table" href="https://lambda.in.th/dashboard-child/practice-transcript/d85ed28f-89ff-4034-a1cd-fec35bdbfc74">
-                          <span class="text-success">Review</span>
-                        </a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>แบบฝึกคิดเลขในใจ</td>
-                      <td>Maths (TH)</td>
-                      <td>75%</td>
-                      <td>-</td>
-                      <td>27/03/2025</td>
-                      <td>
-                        <a class="status-table" href="https://lambda.in.th/dashboard-child/practice-transcript/d85ed28f-89ff-4034-a1cd-fec35bdbfc74">
-                          <span class="text-success">Review</span>
-                        </a>
-                      </td>
-                    </tr>
-                                        <tr>
-                      <td>แบบฝึกคิดเลขในใจ</td>
-                      <td>Maths (TH)</td>
-                      <td>75%</td>
-                      <td>-</td>
-                      <td>27/03/2025</td>
-                      <td>
-                        <a class="status-table" href="https://lambda.in.th/dashboard-child/practice-transcript/d85ed28f-89ff-4034-a1cd-fec35bdbfc74">
-                          <span class="text-success">Review</span>
-                        </a>
-                      </td>
-                    </tr>
-                                        <tr>
-                      <td>แบบฝึกคิดเลขในใจ</td>
-                      <td>Maths (TH)</td>
-                      <td>75%</td>
-                      <td>-</td>
-                      <td>27/03/2025</td>
-                      <td>
-                        <a class="status-table" href="https://lambda.in.th/dashboard-child/practice-transcript/d85ed28f-89ff-4034-a1cd-fec35bdbfc74">
-                          <span class="text-success">Review</span>
-                        </a>
-                      </td>
-                    </tr>
-                                        <tr>
-                      <td>แบบฝึกคิดเลขในใจ</td>
-                      <td>Maths (TH)</td>
-                      <td>75%</td>
-                      <td>-</td>
-                      <td>27/03/2025</td>
-                      <td>
-                        <a class="status-table" href="https://lambda.in.th/dashboard-child/practice-transcript/d85ed28f-89ff-4034-a1cd-fec35bdbfc74">
-                          <span class="text-success">Review</span>
-                        </a>
-                      </td>
-                    </tr>
-                                        <tr>
-                      <td>แบบฝึกคิดเลขในใจ</td>
-                      <td>Maths (TH)</td>
-                      <td>75%</td>
-                      <td>-</td>
-                      <td>27/03/2025</td>
-                      <td>
-                        <a class="status-table" href="https://lambda.in.th/dashboard-child/practice-transcript/d85ed28f-89ff-4034-a1cd-fec35bdbfc74">
-                          <span class="text-success">Review</span>
-                        </a>
-                      </td>
-                    </tr>
-                                        <tr>
-                      <td>แบบฝึกคิดเลขในใจ</td>
-                      <td>Maths (TH)</td>
-                      <td>75%</td>
-                      <td>-</td>
-                      <td>27/03/2025</td>
-                      <td>
-                        <a class="status-table" href="https://lambda.in.th/dashboard-child/practice-transcript/d85ed28f-89ff-4034-a1cd-fec35bdbfc74">
-                          <span class="text-success">Review</span>
-                        </a>
-                      </td>
-                    </tr>
-                                        <tr>
-                      <td>แบบฝึกคิดเลขในใจ</td>
-                      <td>Maths (TH)</td>
-                      <td>75%</td>
-                      <td>-</td>
-                      <td>27/03/2025</td>
-                      <td>
-                        <a class="status-table" href="https://lambda.in.th/dashboard-child/practice-transcript/d85ed28f-89ff-4034-a1cd-fec35bdbfc74">
-                          <span class="text-success">Review</span>
-                        </a>
-                      </td>
-                    </tr>
-                    
-
 
                   </tbody>
                 </table>
@@ -575,6 +468,210 @@
     </div>
   </div>
 
+  <!-- Overlay and Modal Wrapper -->
+  <div id="modal-overlay" class="portal-modal-overlay"></div>
+  <div id="scorecard-modal" class="portal-modal scorecard-modal">
+    <div class="portal-modal-content scorecard-modal-content">
+
+      <div class="portal-modal-body">
+
+        <!-- Modal Header Row -->
+        <div class="modal-header-row">
+          <h2 class="portal-modal-title scorecard-modal-title">Kwan's Science Practice - Results</h2>
+          <div class="exit-button-wrapper">
+            <button type="button" class="btn-close-modal" aria-label="Close modal" onclick="closeModal();">
+              <i class="fa-solid fa-xmark"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Scorecard Summary Row -->
+        <div class="scorecard-summary-row">
+          <div class="scorecard-summary-card">
+            <img src="Icons/aim-1.svg" class="scorecard-summary-icon" alt="">
+            <div>
+              <div class="scorecard-summary-title">Correct questions</div>
+              <div class="scorecard-summary-value">2/3</div>
+            </div>
+          </div>
+          <div class="scorecard-summary-card">
+            <img src="Icons/hourglass-3.svg" class="scorecard-summary-icon" alt="">
+            <div>
+              <div class="scorecard-summary-title">Total time spent</div>
+              <div class="scorecard-summary-value">15m 23s</div>
+            </div>
+          </div>
+          <div class="scorecard-summary-card">
+            <img src="Icons/gem-2.svg" class="scorecard-summary-icon" alt="">
+            <div>
+              <div class="scorecard-summary-title">Gems earned</div>
+              <div class="scorecard-summary-value">15</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Answers Accordion -->
+        <div class="scorecard-answers-section">
+          <div class="scorecard-answers-title">Your answers</div>
+          <div class="scorecard-answers-list">
+
+            <!-- Q1: Correct -->
+            <div class="scorecard-accordion-item correct">
+              <button class="scorecard-accordion-header" onclick="toggleScorecardAccordion(this)">
+                <div class="scorecard-question-meta">
+                  <div class="scorecard-question-label-row">
+                    <i class="fa-solid fa-check icon-feedback"></i>
+                    <span class="scorecard-question-label">Question 1</span>
+                  </div>
+                  <span class="scorecard-question-time">
+                    <i class="fa-solid fa-clock"></i> &nbsp;33s
+                  </span>
+                </div>
+                <span class="scorecard-accordion-chevron">
+                  <i class="fa-solid fa-chevron-down"></i>
+                </span>
+              </button>
+              <div class="scorecard-accordion-body">
+                <div class="scorecard-question-text">
+                  <p>Arrange the numbers in descending order.</p>
+                </div>
+                <div class="scorecard-dnd-row">
+                  <!-- This displays the user’s answer as a static row -->
+                  <div class="drop-zone scorecard-drop-zone">
+                    <div class="answer-box answer-correct">\(15\)</div>
+                    <div class="answer-box answer-correct">\(14\)</div>
+                    <div class="answer-box answer-correct">\(12\)</div>
+                    <div class="answer-box answer-incorrect">\(28\)</div>
+                    <div class="answer-box answer-incorrect">\(29\)</div>
+                  </div>
+                </div>
+                <div class="scorecard-explanation-toggle-row">
+                  <button class="scorecard-explanation-toggle" onclick="toggleScorecardExplanation(this)">
+                    Answer Explanation
+                    <span class="scorecard-explanation-chevron">
+                      <i class="fa-solid fa-chevron-down"></i>
+                    </span>
+                  </button>
+                </div>
+                <div class="scorecard-explanation-body">
+                  <p>The correct order is: <strong>a, b, x, y, z</strong>.</p>
+                </div>
+              </div>
+            </div>
+
+
+            <!-- Q2: Correct -->
+            <div class="scorecard-accordion-item correct">
+              <button class="scorecard-accordion-header" onclick="toggleScorecardAccordion(this)">
+                <div class="scorecard-question-meta">
+                  <div class="scorecard-question-label-row">
+                    <i class="fa-solid fa-check icon-feedback"></i>
+                    <span class="scorecard-question-label">Question 2</span>
+                  </div>
+                  <span class="scorecard-question-time">
+                    <i class="fa-solid fa-clock"></i> &nbsp;1m 2s
+                  </span>
+                </div>
+                <span class="scorecard-accordion-chevron">
+                  <i class="fa-solid fa-chevron-down"></i>
+                </span>
+              </button>
+              <div class="scorecard-accordion-body">
+                <!-- Actual Question Text Here -->
+                <div class="scorecard-question-text">
+                  <p>Calculate the following:</p>
+                  <p style="text-align: center;">\(\large{8 + 8 = ?}\)</p>
+                </div>
+                <div class="scorecard-inp-row">
+                  <div class="mathfield-wrapper">
+                    <div class="mathfield-box">
+                      <span class="mathfield-prefix">\( x = \)</span>
+                      <math-field class="input-mathfield mathfield-correct" disabled>\(28\)</math-field>
+                      <span class="mathfield-suffix">cm</span>
+                      <i class="fa-solid fa-check icon-feedback" aria-label="Correct"></i>
+                      <div class="mathfield-blocker"></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="scorecard-explanation-toggle-row">
+                  <button class="scorecard-explanation-toggle" onclick="toggleScorecardExplanation(this)">
+                    Answer Explanation
+                    <span class="scorecard-explanation-chevron">
+                      <i class="fa-solid fa-chevron-down"></i>
+                    </span>
+                  </button>
+                </div>
+                <div class="scorecard-explanation-body">
+                  <p>test 2</p>
+                  <p>test 3</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Q3: Incorrect -->
+            <div class="scorecard-accordion-item incorrect">
+              <button class="scorecard-accordion-header" onclick="toggleScorecardAccordion(this)">
+                <div class="scorecard-question-meta">
+                  <div class="scorecard-question-label-row">
+                    <i class="fa-solid fa-xmark icon-feedback"></i>
+                    <span class="scorecard-question-label">Question 3</span>
+                  </div>
+                  <span class="scorecard-question-time">
+                    <i class="fa-solid fa-clock"></i> &nbsp;42s
+                  </span>
+                </div>
+                <span class="scorecard-accordion-chevron">
+                  <i class="fa-solid fa-chevron-down"></i>
+                </span>
+              </button>
+              <div class="scorecard-accordion-body">
+                <!-- Actual Question Text Here -->
+                <div class="scorecard-question-text">
+                  <p>Calculate the following:</p>
+                  <p style="text-align: center;">\(\large{8 + 8 = ?}\)</p>
+                </div>
+                <div class="mcq-answers-review">
+                  <div class="btn btn-outline-primary mcq-static">
+                    <kbd>A</kbd> \(28\)
+                  </div>
+                  <div class="btn btn-outline-primary mcq-static">
+                    <kbd>B</kbd> \(16\)
+                  </div>
+                  <div class="btn btn-outline-primary btn-danger mcq-static">
+                    <kbd>C</kbd> \(240\)
+                    <i class="fa-solid fa-xmark"></i>
+                  </div>
+                  <div class="btn btn-outline-primary mcq-static">
+                    <kbd>D</kbd> \(180\)
+                  </div>
+                  <div class="btn btn-outline-primary btn-reveal-correct mcq-static">
+                    <kbd>E</kbd> \(160\)
+                    <i class="fa-solid fa-check"></i>
+                  </div>
+                </div>
+                <div class="scorecard-explanation-toggle-row">
+                  <button class="scorecard-explanation-toggle" onclick="toggleScorecardExplanation(this)">
+                    Answer Explanation
+                    <span class="scorecard-explanation-chevron">
+                      <i class="fa-solid fa-chevron-down"></i>
+                    </span>
+                  </button>
+                </div>
+                <div class="scorecard-explanation-body">
+                  <p>test 2</p>
+                  <p>test 3</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
   <script src="https://lambda.in.th/assets_dashboard/js/bootstrap.min.js?v=1746996652"></script>
   <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
@@ -586,6 +683,20 @@
   <script src="js/pill-toggle.js" ></script>
   <script src="js/viewport-fix.js"></script> 
   <script src="js/review-table.js"></script> 
+  <script src="js/modal-handler.js"></script> 
+
+  <script>
+    function toggleScorecardAccordion(btn) {
+      const item = btn.closest('.scorecard-accordion-item');
+      item.classList.toggle('open');
+    }
+
+    function toggleScorecardExplanation(btn) {
+      const body = btn.closest('.scorecard-accordion-body').querySelector('.scorecard-explanation-body');
+      btn.classList.toggle('open');
+      body.classList.toggle('open');
+    }
+  </script>
   
   <script>
     $(document).ready(function() {

@@ -1,0 +1,677 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>lambda</title>
+    <base href="https://lambda.in.th/th">
+<link rel="stylesheet" href="https://lambda.in.th/assets_dashboard/css/bootstrap.css?v=1749417562" />
+<link rel="stylesheet" href="https://cdn.lineicons.com/5.0/lineicons.css" />
+<link rel="stylesheet" href="https://lambda.in.th/assets_dashboard/css/icofont.css?v=1749417562" />
+<link rel="stylesheet" href="https://lambda.in.th/assets_dashboard/css/styles.css?v=1749417562" />
+<link rel="stylesheet" href="https://lambda.in.th/assets_dashboard/css/font-icon.css?v=1749417562">
+<link rel="stylesheet" href="https://lambda.in.th/assets_dashboard/css/slick.min.css?v=1749417562">
+<link rel="stylesheet" href="https://lambda.in.th/assets_dashboard/css/slick-custom.css?v=1749417562">
+<link rel="stylesheet" href="https://lambda.in.th/assets/cusmike/sweet2/sweetalert2.min.css?v=1749417562">
+<link rel="stylesheet" href="https://lambda.in.th/assets/cusmike/toastr/toastr.min.css?v=1749417562"></head>
+
+<body>
+    <div class="wrapper">
+        <aside id="sidebar" class="expand">
+    <!-- Sidebar logo section -->
+    <div class="logo-sidebar">
+        <div class="sidebar-logo">
+            <a href="https://lambda.in.th/dashboard-child">
+              <img src="https://lambda.in.th/assets_dashboard/img/logos/logo-big.svg" class="logo-expanded" alt="">
+              <img src="https://lambda.in.th/assets_dashboard/img/logos/logo-small.svg" class="logo-collapsed" alt="Small Logo">
+            </a>
+        </div>
+    </div>
+
+    <!-- Sidebar navigation menu -->
+    <ul class="sidebar-nav">
+        <li class="sidebar-item ">
+            <a href="https://lambda.in.th/dashboard-child" class="sidebar-link">
+                <img src="https://lambda.in.th/assets_dashboard/img/icons/home.svg" class="img-fluid img-icon" alt=""> <span>Home</span>
+            </a>
+        </li>
+        <li class="sidebar-item ">
+            <a href="https://lambda.in.th/dashboard-child/journey" class="sidebar-link">
+                <img src="https://lambda.in.th/assets_dashboard/img/icons/hat.svg" class="img-fluid img-icon" alt="">
+                <span>Learn</span>
+            </a>
+        </li>
+        <li class="sidebar-item ">
+            <a href="https://lambda.in.th/dashboard-child/set-work" class="sidebar-link">
+                <img src="https://lambda.in.th/assets_dashboard/img/icons/target.svg" class="img-fluid img-icon" alt=""> <span>Set Tasks</span>
+            </a>
+        </li>
+        <li class="sidebar-item ">
+            <a href="https://lambda.in.th/dashboard-child/review" class="sidebar-link">
+                <img src="https://lambda.in.th/assets_dashboard/img/icons/magnifier.svg" class="img-fluid img-icon" alt="">
+                <span>Review</span>
+            </a>
+        </li>
+        <li class="sidebar-item ">
+            <a href="https://lambda.in.th/dashboard-child/worksheet" class="sidebar-link">
+                <img src="https://lambda.in.th/assets_dashboard/img/icons/binders.svg" class="img-fluid img-icon" alt="">
+                <span>Resources</span>
+            </a>
+        </li>
+        <li class="sidebar-item ">
+            <a href="https://lambda.in.th/dashboard-child/hangouts" class="sidebar-link">
+                <img src="https://lambda.in.th/assets_dashboard/img/icons/shop.svg" class="img-fluid img-icon-step2" alt="">
+                <span>Shop</span>
+            </a>
+        </li>
+        <li class="sidebar-item ">
+            <a href="https://lambda.in.th/dashboard-child/profile" class="sidebar-link">
+                <img src="https://lambda.in.th/assets_dashboard/img/icons/id.svg" class="img-fluid img-icon-step2" alt="">
+                <span>Profile</span>
+            </a>
+        </li>
+    </ul>
+
+    <!-- Sidebar footer with dropdown menu -->
+    <div class="sidebar-footer">
+        <div class="dropdown">
+            <a class="dropdown-toggle sidebar-link" href="javascript:void(0)" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <img src="https://lambda.in.th/assets_dashboard/img/icons/more-test.svg" class="img-fluid img-icon" alt=""> <span>More</span>
+            </a>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="https://lambda.in.th/dashboard-child/settings"><span>Settings</span></a></li>
+                <li><a class="dropdown-item" href="https://lambda.in.th/dashboard-child/help"><span>Help</span></a></li>
+                <li><a class="dropdown-item" href="#" onclick="openProblemReportModal();"><span>Report a problem</span></a></li>
+                <li><div class="dropdown-divider"></div></li>
+                <li><a class="dropdown-item" href="https://lambda.in.th/dashboard-parent"><span>Switch to parent account</span></a></li>
+                <li><a class="dropdown-item" href="javascript:void(0)" onclick="logoutChild();"><span>Log out</span></a></li>
+            </ul>
+        </div>
+    </div>
+</aside>        <div class="main">
+            <div class="border-header-page">
+                <div class="container-custom">
+                    <div class="box-headerpage">
+                        <div class="box-group-title">
+                            <h1 class="title-page">Result Summary</h1>
+                            <h6 class="sub-title-page">Check your practice and mock tests result</h6>
+                        </div>
+
+                        <div class="box-coin">
+                            <div class="number-coins">100 </div>
+                            <div>
+                                <img src="./assets/img/icon-menu/9.png" class="img-fluid" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container-custom">
+                <div class="result-summary">
+                    <div class="box-three-group-box">
+                        <div class="row">
+                            <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                <h2 class="title-page">Maths (EP) - results</h2>
+                            </div>
+
+                                                            <!-- 3 box -->
+                                <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12">
+                                    <div class="box-content">
+                                        <div class="row">
+                                            <div class="col-xxl-2 col-xl-2 col-lg-4 col-md-2 col-sm-2 col-2">
+                                                <div class="box-image-icon">
+                                                    <img src="assets/img/icon/icon-achievements-2.svg" class="img-fluid" alt="">
+                                                </div>
+                                            </div>
+                                            <div class="col-xxl-10 col-xl-10 col-lg-8 col-md-10 col-sm-10 col-10">
+                                                <div class="box-content-detail">
+                                                    <p class="title-content">Correct questions</p>
+                                                    <p class="result-content">3/5</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                                            <!-- 3 box -->
+                                <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12">
+                                    <div class="box-content">
+                                        <div class="row">
+                                            <div class="col-xxl-2 col-xl-2 col-lg-4 col-md-2 col-sm-2 col-2">
+                                                <div class="box-image-icon">
+                                                    <img src="assets/img/icon/icon-achievements-2.svg" class="img-fluid" alt="">
+                                                </div>
+                                            </div>
+                                            <div class="col-xxl-10 col-xl-10 col-lg-8 col-md-10 col-sm-10 col-10">
+                                                <div class="box-content-detail">
+                                                    <p class="title-content">Time spent</p>
+                                                    <p class="result-content">1 m 17 s</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                                            <!-- 3 box -->
+                                <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12">
+                                    <div class="box-content">
+                                        <div class="row">
+                                            <div class="col-xxl-2 col-xl-2 col-lg-4 col-md-2 col-sm-2 col-2">
+                                                <div class="box-image-icon">
+                                                    <img src="assets/img/icon-menu/9.png" class="img-fluid" alt="">
+                                                </div>
+                                            </div>
+                                            <div class="col-xxl-10 col-xl-10 col-lg-8 col-md-10 col-sm-10 col-10">
+                                                <div class="box-content-detail">
+                                                    <p class="title-content">Coins earned</p>
+                                                    <p class="result-content">0</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                                        <!-- end 3 box -->
+                        </div>
+                    </div>
+
+
+                    
+                    <div class="box-answer-summary">
+
+                        <div class="row">
+                            <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                <h2 class="title-page">Your answers</h2>
+
+                                                                                                                                                                                    <div class="accordion accordion-main-custom success-question" id="accordion">
+                                            <div class="accordion-item">
+                                                <h2 class="accordion-header">
+                                                    <div class="accordion-button " type="button" data-bs-toggle="collapse" data-bs-target="#collap0" aria-expanded="true" aria-controls="collap0">
+                                                        <div class="box-content-header">
+                                                            <div class="box-content-left">
+                                                                <i class="lni lni-check-circle-1 icon-answer-custom success-color"></i>
+                                                                <p class="">1.P3-Maths-PV02-013</p>
+                                                            </div>
+                                                            <div class="box-content-right">
+                                                                                                                                <p class=""><i class="icofont-history icon-answer-custom-time"></i> 
+                                                                                                                                        17 s
+                                                                                                                                
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </h2>
+                                                <div id="collap0" class="accordion-collapse collapse show" data-bs-parent="#accordion0">
+                                                    <div class="accordion-body">
+                                                        <p class="title-answer-text">The Correct answer is:</p>
+
+                                                                                                                    
+                                                            <div class="box-choice">
+                                                                                                                                    
+                                                                                                                                        <a href="javascript:void(0)" @disabled(true) class="box-content-choice  answer-danger ">
+                                                                        <div class="box-text">A.</div>
+                                                                        <div class="box-result"> E.\(30\)</div>
+                                                                    </a>
+                                                                                                                                                                                                        
+                                                                                                                                        <a href="javascript:void(0)" @disabled(true) class="box-content-choice  answer-success ">
+                                                                        <div class="box-text">B.</div>
+                                                                        <div class="box-result"> E.\(30,000\)</div>
+                                                                    </a>
+                                                                                                                                                                                                        
+                                                                                                                                        <a href="javascript:void(0)" @disabled(true) class="box-content-choice  answer-danger ">
+                                                                        <div class="box-text">C.</div>
+                                                                        <div class="box-result"> E.\(300\)</div>
+                                                                    </a>
+                                                                                                                                                                                                        
+                                                                                                                                        <a href="javascript:void(0)" @disabled(true) class="box-content-choice  answer-danger ">
+                                                                        <div class="box-text">D.</div>
+                                                                        <div class="box-result"> E.\(3,000\)</div>
+                                                                    </a>
+                                                                                                                                                                                                        
+                                                                                                                                        <a href="javascript:void(0)" @disabled(true) class="box-content-choice  answer-danger ">
+                                                                        <div class="box-text">E.</div>
+                                                                        <div class="box-result"> E.\(31,562\)</div>
+                                                                    </a>
+                                                                                                                                                                                                </div>
+                                                        
+                                                    </div>
+
+
+                                                    <div class="accordion-item accordion-sub-custom">
+                                                        <h2 class="accordion-header">
+                                                            <div class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapSub0" aria-expanded="false" aria-controls="collapSub0">
+                                                                Answer Explanation
+                                                            </div>
+                                                        </h2>
+                                                        <div id="collapSub0" class="accordion-collapse collapse" data-bs-parent="#accordionSub0">
+                                                            <div class="accordion-body">
+                                                                <p><p>.</p> </p>
+                                                                <p class="text-correct-blue"> B.\(30,000\)</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                               
+
+
+                                            </div>
+                                        </div>
+                                                                                                                <div class="accordion accordion-main-custom success-question" id="accordion">
+                                            <div class="accordion-item">
+                                                <h2 class="accordion-header">
+                                                    <div class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collap1" aria-expanded="true" aria-controls="collap1">
+                                                        <div class="box-content-header">
+                                                            <div class="box-content-left">
+                                                                <i class="lni lni-check-circle-1 icon-answer-custom success-color"></i>
+                                                                <p class="">2.P3-Maths-P&amp;S01-001</p>
+                                                            </div>
+                                                            <div class="box-content-right">
+                                                                                                                                <p class=""><i class="icofont-history icon-answer-custom-time"></i> 
+                                                                                                                                        24 s
+                                                                                                                                
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </h2>
+                                                <div id="collap1" class="accordion-collapse collapse" data-bs-parent="#accordion1">
+                                                    <div class="accordion-body">
+                                                        <p class="title-answer-text">The Correct answer is:</p>
+
+                                                                                                                    
+                                                            <div class="box-choice">
+                                                                                                                                    
+                                                                                                                                        <a href="javascript:void(0)" @disabled(true) class="box-content-choice  answer-danger ">
+                                                                        <div class="box-text">A.</div>
+                                                                        <div class="box-result"> E.\(188\)</div>
+                                                                    </a>
+                                                                                                                                                                                                        
+                                                                                                                                        <a href="javascript:void(0)" @disabled(true) class="box-content-choice  answer-success ">
+                                                                        <div class="box-text">B.</div>
+                                                                        <div class="box-result"> E.\(288\)</div>
+                                                                    </a>
+                                                                                                                                                                                                        
+                                                                                                                                        <a href="javascript:void(0)" @disabled(true) class="box-content-choice  answer-danger ">
+                                                                        <div class="box-text">C.</div>
+                                                                        <div class="box-result"> E.\(388\)</div>
+                                                                    </a>
+                                                                                                                                                                                                        
+                                                                                                                                        <a href="javascript:void(0)" @disabled(true) class="box-content-choice  answer-danger ">
+                                                                        <div class="box-text">D.</div>
+                                                                        <div class="box-result"> E.\(488\)</div>
+                                                                    </a>
+                                                                                                                                                                                                        
+                                                                                                                                        <a href="javascript:void(0)" @disabled(true) class="box-content-choice  answer-danger ">
+                                                                        <div class="box-text">E.</div>
+                                                                        <div class="box-result"> E.\(588\)</div>
+                                                                    </a>
+                                                                                                                                                                                                </div>
+                                                        
+                                                    </div>
+
+
+                                                    <div class="accordion-item accordion-sub-custom">
+                                                        <h2 class="accordion-header">
+                                                            <div class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapSub1" aria-expanded="false" aria-controls="collapSub1">
+                                                                Answer Explanation
+                                                            </div>
+                                                        </h2>
+                                                        <div id="collapSub1" class="accordion-collapse collapse" data-bs-parent="#accordionSub1">
+                                                            <div class="accordion-body">
+                                                                <p><p>.</p> </p>
+                                                                <p class="text-correct-blue"> B.\(288\)</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                               
+
+
+                                            </div>
+                                        </div>
+                                                                                                                <div class="accordion accordion-main-custom success-question" id="accordion">
+                                            <div class="accordion-item">
+                                                <h2 class="accordion-header">
+                                                    <div class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collap2" aria-expanded="true" aria-controls="collap2">
+                                                        <div class="box-content-header">
+                                                            <div class="box-content-left">
+                                                                <i class="lni lni-check-circle-1 icon-answer-custom success-color"></i>
+                                                                <p class="">3.P3-Maths-IntF01-038</p>
+                                                            </div>
+                                                            <div class="box-content-right">
+                                                                                                                                <p class=""><i class="icofont-history icon-answer-custom-time"></i> 
+                                                                                                                                        22 s
+                                                                                                                                
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </h2>
+                                                <div id="collap2" class="accordion-collapse collapse" data-bs-parent="#accordion2">
+                                                    <div class="accordion-body">
+                                                        <p class="title-answer-text">The Correct answer is:</p>
+
+                                                                                                                    
+                                                            <div class="box-choice">
+                                                                                                                                    
+                                                                                                                                        <a href="javascript:void(0)" @disabled(true) class="box-content-choice  answer-danger ">
+                                                                        <div class="box-text">A.</div>
+                                                                        <div class="box-result"> E.\(\dfrac{4}{13}\)</div>
+                                                                    </a>
+                                                                                                                                                                                                        
+                                                                                                                                        <a href="javascript:void(0)" @disabled(true) class="box-content-choice  answer-danger ">
+                                                                        <div class="box-text">B.</div>
+                                                                        <div class="box-result"> E.\(\dfrac{4}{7}\)</div>
+                                                                    </a>
+                                                                                                                                                                                                        
+                                                                                                                                        <a href="javascript:void(0)" @disabled(true) class="box-content-choice  answer-danger ">
+                                                                        <div class="box-text">C.</div>
+                                                                        <div class="box-result"> E.\(\dfrac{4}{10}\)</div>
+                                                                    </a>
+                                                                                                                                                                                                        
+                                                                                                                                        <a href="javascript:void(0)" @disabled(true) class="box-content-choice  answer-danger ">
+                                                                        <div class="box-text">D.</div>
+                                                                        <div class="box-result"> E.\(\dfrac{4}{14}\)</div>
+                                                                    </a>
+                                                                                                                                                                                                        
+                                                                                                                                        <a href="javascript:void(0)" @disabled(true) class="box-content-choice  answer-success ">
+                                                                        <div class="box-text">E.</div>
+                                                                        <div class="box-result"> E.\(\dfrac{5}{11}\)</div>
+                                                                    </a>
+                                                                                                                                                                                                </div>
+                                                        
+                                                    </div>
+
+
+                                                    <div class="accordion-item accordion-sub-custom">
+                                                        <h2 class="accordion-header">
+                                                            <div class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapSub2" aria-expanded="false" aria-controls="collapSub2">
+                                                                Answer Explanation
+                                                            </div>
+                                                        </h2>
+                                                        <div id="collapSub2" class="accordion-collapse collapse" data-bs-parent="#accordionSub2">
+                                                            <div class="accordion-body">
+                                                                <p><p>.</p> </p>
+                                                                <p class="text-correct-blue"> E.\(\dfrac{5}{11}\)</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                               
+
+
+                                            </div>
+                                        </div>
+                                                                                                                <div class="accordion accordion-main-custom danger-question" id="accordion">
+                                            <div class="accordion-item">
+                                                <h2 class="accordion-header">
+                                                    <div class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collap3" aria-expanded="true" aria-controls="collap3">
+                                                        <div class="box-content-header">
+                                                            <div class="box-content-left">
+                                                                <i class="lni lni-xmark-circle icon-answer-custom danger-color"></i>
+                                                                <p class="">4.P3-Maths-PV05-008</p>
+                                                            </div>
+                                                            <div class="box-content-right">
+                                                                                                                                <p class=""><i class="icofont-history icon-answer-custom-time"></i> 
+                                                                                                                                        9 s
+                                                                                                                                
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </h2>
+                                                <div id="collap3" class="accordion-collapse collapse" data-bs-parent="#accordion3">
+                                                    <div class="accordion-body">
+                                                        <p class="title-answer-text">The Correct answer is:</p>
+
+                                                                                                                    
+                                                            <div class="box-choice">
+                                                                                                                                    
+                                                                                                                                        <a href="javascript:void(0)" @disabled(true) class="box-content-choice  answer-danger ">
+                                                                        <div class="box-text">A.</div>
+                                                                        <div class="box-result"> E.\(238\)</div>
+                                                                    </a>
+                                                                                                                                                                                                        
+                                                                                                                                        <a href="javascript:void(0)" @disabled(true) class="box-content-choice  answer-danger ">
+                                                                        <div class="box-text">B.</div>
+                                                                        <div class="box-result"> E.\(230\)</div>
+                                                                    </a>
+                                                                                                                                                                                                        
+                                                                                                                                        <a href="javascript:void(0)" @disabled(true) class="box-content-choice  answer-success ">
+                                                                        <div class="box-text">C.</div>
+                                                                        <div class="box-result"> E.\(158\)</div>
+                                                                    </a>
+                                                                                                                                                                                                        
+                                                                                                                                        <a href="javascript:void(0)" @disabled(true) class="box-content-choice  answer-danger ">
+                                                                        <div class="box-text">D.</div>
+                                                                        <div class="box-result"> E.\(180\)</div>
+                                                                    </a>
+                                                                                                                                                                                                        
+                                                                                                                                        <a href="javascript:void(0)" @disabled(true) class="box-content-choice  answer-danger ">
+                                                                        <div class="box-text">E.</div>
+                                                                        <div class="box-result"> E.\(185\)</div>
+                                                                    </a>
+                                                                                                                                                                                                </div>
+                                                        
+                                                    </div>
+
+
+                                                    <div class="accordion-item accordion-sub-custom">
+                                                        <h2 class="accordion-header">
+                                                            <div class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapSub3" aria-expanded="false" aria-controls="collapSub3">
+                                                                Answer Explanation
+                                                            </div>
+                                                        </h2>
+                                                        <div id="collapSub3" class="accordion-collapse collapse" data-bs-parent="#accordionSub3">
+                                                            <div class="accordion-body">
+                                                                <p><p>.</p> </p>
+                                                                <p class="text-correct-blue"> C.\(158\)</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                               
+
+
+                                            </div>
+                                        </div>
+                                                                                                                <div class="accordion accordion-main-custom danger-question" id="accordion">
+                                            <div class="accordion-item">
+                                                <h2 class="accordion-header">
+                                                    <div class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collap4" aria-expanded="true" aria-controls="collap4">
+                                                        <div class="box-content-header">
+                                                            <div class="box-content-left">
+                                                                <i class="lni lni-xmark-circle icon-answer-custom danger-color"></i>
+                                                                <p class="">5.P3-Maths-WMM01-002</p>
+                                                            </div>
+                                                            <div class="box-content-right">
+                                                                                                                                <p class=""><i class="icofont-history icon-answer-custom-time"></i> 
+                                                                                                                                        2 s
+                                                                                                                                
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </h2>
+                                                <div id="collap4" class="accordion-collapse collapse" data-bs-parent="#accordion4">
+                                                    <div class="accordion-body">
+                                                        <p class="title-answer-text">The Correct answer is:</p>
+
+                                                                                                                    
+                                                            <div class="box-choice">
+                                                                                                                                    
+                                                                                                                                        <a href="javascript:void(0)" @disabled(true) class="box-content-choice  answer-danger ">
+                                                                        <div class="box-text">A.</div>
+                                                                        <div class="box-result"> E.\(6,435\)</div>
+                                                                    </a>
+                                                                                                                                                                                                        
+                                                                                                                                        <a href="javascript:void(0)" @disabled(true) class="box-content-choice  answer-success ">
+                                                                        <div class="box-text">B.</div>
+                                                                        <div class="box-result"> E.\(7,335\)</div>
+                                                                    </a>
+                                                                                                                                                                                                        
+                                                                                                                                        <a href="javascript:void(0)" @disabled(true) class="box-content-choice  answer-danger ">
+                                                                        <div class="box-text">C.</div>
+                                                                        <div class="box-result"> E.\(7,435\)</div>
+                                                                    </a>
+                                                                                                                                                                                                        
+                                                                                                                                        <a href="javascript:void(0)" @disabled(true) class="box-content-choice  answer-danger ">
+                                                                        <div class="box-text">D.</div>
+                                                                        <div class="box-result"> E.\(7,625\)</div>
+                                                                    </a>
+                                                                                                                                                                                                        
+                                                                                                                                        <a href="javascript:void(0)" @disabled(true) class="box-content-choice  answer-danger ">
+                                                                        <div class="box-text">E.</div>
+                                                                        <div class="box-result"> E.\(7,735\)</div>
+                                                                    </a>
+                                                                                                                                                                                                </div>
+                                                        
+                                                    </div>
+
+
+                                                    <div class="accordion-item accordion-sub-custom">
+                                                        <h2 class="accordion-header">
+                                                            <div class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapSub4" aria-expanded="false" aria-controls="collapSub4">
+                                                                Answer Explanation
+                                                            </div>
+                                                        </h2>
+                                                        <div id="collapSub4" class="accordion-collapse collapse" data-bs-parent="#accordionSub4">
+                                                            <div class="accordion-body">
+                                                                <p><p>.</p> </p>
+                                                                <p class="text-correct-blue"> B.\(7,335\)</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                               
+
+
+                                            </div>
+                                        </div>
+                                                                                                </div>
+                        </div>
+
+
+                        
+                    </div>
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+    integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous">
+</script>
+<script src="https://lambda.in.th/assets_dashboard/js/bootstrap.min.js?v=1749417562"></script>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="https://lambda.in.th/assets_dashboard/js/slick.min.js?v=1749417562"></script>
+<script src="https://lambda.in.th/assets_dashboard/js/main.js?v=1749417562"></script>
+<script src="https://lambda.in.th/assets/cusmike/sweet2/sweetalert2.min.js?v=1749417562"></script>
+<script src="https://lambda.in.th/assets/cusmike/toastr/toastr.min.js?v=1749417562"></script>
+<script src="https://lambda.in.th/assets_dashboard/js/tooltip.js?v=1749417562"></script>
+<script src="https://lambda.in.th/assets_dashboard/js/viewport-fix.js?v=1749417562"></script>
+<script>
+    $(document).ready(function() {
+        const handleSidebar = () => {
+            if (window.matchMedia("screen and (max-width: 1024px)").matches) {
+                const _sidebar = $("#sidebar");
+                if (_sidebar.length) {
+                    _sidebar.removeClass("expand");
+                }
+            } else {
+                const _sidebar = $("#sidebar");
+                if (_sidebar.length) {
+                    _sidebar.addClass("expand");
+                }
+            }
+        };
+
+        handleSidebar();
+
+        $(window).resize(function() {
+            handleSidebar();
+        });
+    });
+
+    const _boxJourneys = document.querySelectorAll('.box-item-journey');
+    _boxJourneys.forEach(box => {
+        box.addEventListener('click', () => {
+            _boxJourneys.forEach(b => b.classList.remove('active-journey'));
+            box.classList.add('active-journey');
+        });
+    });
+
+
+    const _boxContentChoices = document.querySelectorAll('.box-content-choice');
+    _boxContentChoices.forEach(box => {
+        box.addEventListener('click', () => {
+            _boxContentChoices.forEach(b => b.classList.remove('answer-success'));
+            box.classList.add('answer-success');
+        });
+    });
+
+    const _boxContentFilterReview = document.querySelectorAll('.box-border');
+    _boxContentFilterReview.forEach(box => {
+        box.addEventListener('click', () => {
+            _boxContentFilterReview.forEach(b => b.classList.remove('active-box-filter-review'));
+            box.classList.add('active-box-filter-review');
+        });
+    });
+
+    function logoutChild() {
+        var parent_id = localStorage.getItem('parent_id');
+        if (parent_id != 0) {
+            $.ajax({
+                type: 'POST',
+                url: "dashboard-child/parent/logout",
+                data: {
+                    "_token": "Oy9AoulKa2GDe4GuQDKmWhZNYHvYZWdA4emi7HKv",
+                    parent_id: parent_id,
+                },
+                dataType: 'json',
+                success: function(data) {
+                    if (data.status == 200) {
+                        localStorage.removeItem('parent_id');
+                        location.href = "https://lambda.in.th/dashboard";
+                    } else {
+                        localStorage.removeItem('parent_id');
+                        location.reload();
+                    }
+                }
+            });
+        }
+
+    }
+
+    function openQuestionModal() {
+        var myModal = new bootstrap.Modal(document.getElementById('myQuestionModal'));
+        myModal.show();
+    }
+</script>
+    <script>
+    MathJax = {
+      options: {
+        enableMenu: false // Disables the MathJax context menu
+      },
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    };
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</body>
+
+</html>
