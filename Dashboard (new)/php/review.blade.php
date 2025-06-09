@@ -208,21 +208,21 @@
       // 2. Summary row
       $('#scorecard-summary-row').html(`
         <div class="scorecard-summary-card">
-          <img src="/Icons/aim-1.svg" class="scorecard-summary-icon" alt="">
+          <img src="{{ asset('assets_dashboard/img/icons/aim.svg') }}" class="scorecard-summary-icon" alt="">
           <div>
             <div class="scorecard-summary-title">Correct questions</div>
             <div class="scorecard-summary-value">${res.practice.correct_answer}/${res.practice.total_question}</div>
           </div>
         </div>
         <div class="scorecard-summary-card">
-          <img src="/Icons/hourglass-3.svg" class="scorecard-summary-icon" alt="">
+          <img src="{{ asset('assets_dashboard/img/icons/hourglass.svg') }}" class="scorecard-summary-icon" alt="">
           <div>
             <div class="scorecard-summary-title">Total time spent</div>
             <div class="scorecard-summary-value">${res.practice.time_spent || '-'}</div>
           </div>
         </div>
         <div class="scorecard-summary-card">
-          <img src="/Icons/gem-2.svg" class="scorecard-summary-icon" alt="">
+          <img src="{{ asset('assets_dashboard/img/icons/gem.svg') }}" class="scorecard-summary-icon" alt="">
           <div>
             <div class="scorecard-summary-title">Gems earned</div>
             <div class="scorecard-summary-value">${res.practice.gems || '0'}</div>
