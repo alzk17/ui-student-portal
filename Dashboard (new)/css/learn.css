@@ -2,14 +2,13 @@
    Topic Card (Recommended Topics)
 ============================ */
 
-.learn-topic-row,
-.learn-jrny-row {
+.learn-topic-row {
   display: flex;
   gap: 20px;
   flex-wrap: wrap;
   justify-content: flex-start;
   border: transparent;
-  background-color: var(--white-main);
+  background-color: var(--grey-50);
   padding: 24px;
   border-radius: var(--radius-lg);
 }
@@ -18,8 +17,8 @@
 .learn-topic-card {
 
   width: 150px;
-  height: 150px;
-  padding: 8px;
+  min-height: 150px;
+  padding: 12px 12px 8px 12px;
   border: 2px solid var(--grey-200);
   border-radius: var(--radius-lg);
   background-color: var(--white-main);
@@ -40,6 +39,25 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
 }
 
+/* Completed Topic Card Style */
+.learn-topic-card--complete {
+  border-color: var(--green-200, #22a95b);      /* Your mid-green border */
+  background-color: var(--green-50, #eafaf1);   /* Your soft green bg */
+}
+
+/* Optional: Make the progress bar always fully green if complete */
+.learn-topic-card--complete .learn-topic-progress-bar {
+  background-color: var(--green-500, #168a45);
+  width: 100% !important;
+}
+
+.learn-topic-card--complete:hover {
+  border-color: var(--green-200, #22a95b);
+  background-color: var(--green-50, #eafaf1);
+  /* Optional: add a subtle green shadow if you want, or just leave it *
+  /* box-shadow: 0 2px 8px rgba(34, 169, 91, 0.07); */
+}
+
 /* Icon wrapper */
 .learn-topic-icon {
   position: relative;
@@ -53,8 +71,33 @@
   height: 100%;
   object-fit: contain;
 }
+/* Title */
+.learn-topic-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--black-main);
+  line-height: 1.2;
+  word-break: break-word;
+  height: 20px;
+}
 
-/* Badge */
+/* Progress Bar */
+.learn-topic-progress {
+  width: 100%;
+  height: 4px;
+  background-color: var(--grey-200);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+.learn-topic-progress-bar {
+  height: 100%;
+  background-color: var(--green-500);
+  border-radius: 2px;
+  transition: width 0.3s cubic-bezier(.4,0,.2,1);
+}
+
+/* Badge (for later use) */
 .learn-topic-badge-row {
   width: 100%;
   min-height: 20px;
@@ -70,7 +113,7 @@
 }
 
 .learn-topic-badge {
-  background-color: #fecd45;
+  background-color: var(--yellow-500);
   color: var(--black-main);
   font-size: 0.75rem;
   font-weight: 600;
@@ -83,12 +126,103 @@
   justify-content: center;
 }
 
-/* Title */
-.learn-topic-title {
-  font-size: 1rem;
-  font-weight: 600;
+/* Learn Journey */
+.learn-jrny-row {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  border: transparent;
+  background-color: var(--grey-50);
+  padding: 24px;
+  border-radius: var(--radius-lg);
+}
+
+.learn-jrny-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--white-main);
+  border: 2px solid var(--grey-200);
+  border-radius: var(--radius-lg);
+  padding: 24px 28px;
+  min-height: 120px;
+  width: 400px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.03);
+  transition: border-color 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+}
+
+.learn-jrny-card:hover {
+  border-color: var(--blue-500);
+  background-color: var(--blue-50);
+}
+
+.learn-jrny-content {
+  flex: 1 1 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.learn-jrny-title {
+  font-size: 1.125rem;
+  font-weight: 700;
   color: var(--black-main);
-  line-height: 1.2;
-  word-break: break-word;
-  height: 20px;
+}
+
+.learn-jrny-image {
+  flex: 0 0 80px;
+  margin-left: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.learn-jrny-image img {
+  width: 75px;
+  height: 75px;
+  object-fit: contain;
+}
+
+.learn-jrny-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--blue-main, #375ce3);
+  display: inline-block;
+  display: inline-block;
+  align-self: flex-start;
+  text-transform: uppercase;
+}
+
+.learn-jrny-meta {
+  font-size: 0.95rem;
+  color: var(--grey-600, #666);
+  margin-top: 12px;
+  display: flex;
+}
+
+.learn-jrny-count {
+  font-weight: 500;
+}
+
+.learn-jrny-levels {
+  background: var(--grey-200, #e5e5e5);
+  color: var(--grey-700, #4a4a4a);
+  border-radius: 8px;
+  padding: 1px 8px;
+  font-size: 0.85em;
+  font-weight: 500;
+}
+
+@media (max-width: 600px) {
+  .learn-jrny-card {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 18px;
+  }
+  .learn-jrny-image {
+    margin-left: 0;
+    margin-top: 16px;
+    align-self: center;
+  }
 }
