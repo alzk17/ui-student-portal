@@ -1,0 +1,83 @@
+.pml-header {
+  background: #fff;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+}
+
+.pml-header__row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 auto;
+  width: 100%;
+  height: 4rem;
+  padding: 0 .75rem;
+  gap: 0.5rem;
+}
+
+.pml-header__exit-btn {
+  background: #fff;
+  height: 40px;
+  width: 40px;
+  border: transparent;
+  border-radius: var(--radius-sm);
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+  color: var(--black-main);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 2.5rem;
+  min-width: 2.5rem;
+  padding: 0;
+}
+
+.pml-header__exit-btn:hover,
+.pml-header__exit-btn:focus {
+  background: var(--grey-200-alpha60);
+}
+
+.pml-header__title {
+  flex: 1 1 auto;
+  text-align: center;
+  font-size: 1.25rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  color: #141414;
+}
+
+.pml-header__side {
+  display: flex;
+  align-items: center;
+  width: 40px;
+}
+
+.pml-header__coins {
+  display: flex;
+  align-items: center;
+  font-size: 1.2rem;
+  gap: 0.5em;
+  color: #294bc6;
+  width: 40px;
+}
+
+.pml-header__progress-bar {
+  width: 100%;
+  max-width: 652px;
+  margin: 0 auto;
+  height: 8px;
+  background: #e5e5e5;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.pml-header__progress-fill {
+  height: 100%;
+  background: #375ce3;
+  border-radius: 4px;
+  width: 0%; /* JS can update this inline */
+  transition: width 0.3s;
+}

@@ -1,0 +1,58 @@
+.pml-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+  background: #fff;
+}
+
+.pml-footer--fixed {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1030;
+  background: #fff;
+  border-top: 2px solid var(--grey-200);
+  box-shadow: 0 -2px 10px rgba(0,0,0,0.03);
+  padding: 16.5px 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.pml-footer__side {
+  min-width: 2.5rem;
+}
+
+.pml-footer__btn--continue {
+  min-width: 350px;
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin: 0 auto;
+  border-radius: var(--radius-lg);
+}
+
+.pml-footer__btn--report {
+  background: #fff;
+  height: 40px;
+  width: 40px;
+  border: transparent;
+  border-radius: var(--radius-sm);
+  font-size: 1.125rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+  color: var(--black-main);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 2.5rem;
+  min-width: 2.5rem;
+  padding: 0;
+}
+
+.pml-footer__btn--report:hover,
+.pml-footer__btn--report:focus {
+  background: var(--grey-200-alpha60);
+}

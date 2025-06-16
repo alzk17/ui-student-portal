@@ -14,6 +14,8 @@
     <link rel="stylesheet" href="https://lambda.in.th/assets_dashboard/css/slick-custom.css?v=1749600419">
     <link rel="stylesheet" href="https://lambda.in.th/assets/cusmike/sweet2/sweetalert2.min.css?v=1749600419">
     <link rel="stylesheet" href="https://lambda.in.th/assets/cusmike/toastr/toastr.min.css?v=1749600419">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+
     <link rel="stylesheet" href="css/components.css">
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/buttons.css">
@@ -100,7 +102,6 @@
         </div>
         </aside>        
         <div class="main">
-
             <div class="border-header-page">
                 <div class="container-custom">
                     <div class="box-headerpage">
@@ -193,67 +194,71 @@
                         <!-- TOPIC ROW-->
                         <section class="portal-section">
                             <h2 class="portal-section-title">Recommended Topics</h2>
-                            <p class="portal-section-text">
+                            <p class="portal-section-text muted">
                                 Explore popular topics we think you'll enjoy.
                             </p>
-                            <div class="learn-topic-row">
-                                <!--Topic 1-->
-                                <div class="learn-topic-card">
-                                    <div class="learn-topic-progress">
-                                        <div class="learn-topic-progress-bar" style="width: 0%;"></div>
+                            <div class="learn-topic-row swiper">
+                                <div class="swiper-button-prev"></div>
+                                <div class="swiper-wrapper">
+                                    <!--Topic 1-->
+                                    <div class="learn-topic-card swiper-slide">
+                                        <div class="learn-topic-progress">
+                                            <div class="learn-topic-progress-bar" style="width: 0%;"></div>
+                                        </div>
+                                        <div class="learn-topic-icon">
+                                            <img src="Icons/Subject_Icon_6.png" alt="Topic Icon" />
+                                        </div>
+                                        <div class="learn-topic-title">Measurement</div>
                                     </div>
-                                    <div class="learn-topic-icon">
-                                        <img src="Icons/Subject_Icon_6.png" alt="Topic Icon" />
+                                    <!--Topic 2-->
+                                    <div class="learn-topic-card swiper-slide">
+                                        <div class="learn-topic-progress">
+                                            <div class="learn-topic-progress-bar" style="width: 25%;"></div>
+                                        </div>
+                                        <div class="learn-topic-icon">
+                                            <img src="Icons/Subject_Icon_1.png" alt="Topic Icon" />
+                                        </div>
+                                        <div class="learn-topic-title">Geometry</div>
                                     </div>
-                                    <div class="learn-topic-title">Measurement</div>
+                                    <!--Topic 3-->
+                                    <div class="learn-topic-card swiper-slide">
+                                        <div class="learn-topic-progress">
+                                            <div class="learn-topic-progress-bar" style="width: 28%;"></div>
+                                        </div>
+                                        <div class="learn-topic-icon">
+                                            <img src="Icons/Subject_Icon_3.png" alt="Topic Icon" />
+                                        </div>
+                                        <div class="learn-topic-title">Algebra</div>
+                                    </div>
+                                    <!--Topic 4-->
+                                    <div class="learn-topic-card swiper-slide">
+                                        <div class="learn-topic-progress">
+                                            <div class="learn-topic-progress-bar" style="width: 95%;"></div>
+                                        </div>
+                                        <div class="learn-topic-icon">
+                                            <img src="Icons/Subject_Icon_7.png" alt="Topic Icon" />
+                                        </div>
+                                        <div class="learn-topic-title">Times & Divide</div>
+                                    </div>
+                                    <!--Topic 5-->
+                                    <div class="learn-topic-card swiper-slide learn-topic-card--complete">
+                                        <div class="learn-topic-progress">
+                                            <div class="learn-topic-progress-bar" style="width: 100%;"></div>
+                                        </div>
+                                        <div class="learn-topic-icon">
+                                            <img src="Icons/Subject_Icon_4.png" alt="Topic Icon" />
+                                        </div>
+                                        <div class="learn-topic-title">Statistics</div>
+                                    </div>
                                 </div>
-                                <!--Topic 2-->
-                                <div class="learn-topic-card">
-                                    <div class="learn-topic-progress">
-                                        <div class="learn-topic-progress-bar" style="width: 25%;"></div>
-                                    </div>
-                                    <div class="learn-topic-icon">
-                                        <img src="Icons/Subject_Icon_1.png" alt="Topic Icon" />
-                                    </div>
-                                    <div class="learn-topic-title">Geometry</div>
-                                </div>
-                                <!--Topic 3-->
-                                <div class="learn-topic-card">
-                                    <div class="learn-topic-progress">
-                                        <div class="learn-topic-progress-bar" style="width: 28%;"></div>
-                                    </div>
-                                    <div class="learn-topic-icon">
-                                        <img src="Icons/Subject_Icon_3.png" alt="Topic Icon" />
-                                    </div>
-                                    <div class="learn-topic-title">Algebra</div>
-                                </div>
-                                <!--Topic 4-->
-                                <div class="learn-topic-card">
-                                    <div class="learn-topic-progress">
-                                        <div class="learn-topic-progress-bar" style="width: 95%;"></div>
-                                    </div>
-                                    <div class="learn-topic-icon">
-                                        <img src="Icons/Subject_Icon_7.png" alt="Topic Icon" />
-                                    </div>
-                                    <div class="learn-topic-title">Times & Divide</div>
-                                </div>
-                                <!--Topic 5-->
-                                <div class="learn-topic-card learn-topic-card--complete">
-                                    <div class="learn-topic-progress">
-                                        <div class="learn-topic-progress-bar" style="width: 100%;"></div>
-                                    </div>
-                                    <div class="learn-topic-icon">
-                                        <img src="Icons/Subject_Icon_4.png" alt="Topic Icon" />
-                                    </div>
-                                    <div class="learn-topic-title">Statistics</div>
-                                </div>
+                                <div class="swiper-button-next"></div>
                             </div>
                         </section>
 
                         <!-- LEARNING JOURNEY ROW-->
                         <section class="portal-section">
                             <h2 class="portal-section-title">Learning Journeys</h2>
-                            <p class="portal-section-text">
+                            <p class="portal-section-text muted">
                                 Complete each topic step-by-step to build a strong foundation in every subject.
                             </p>
                             <div class="learn-jrny-row">
@@ -298,6 +303,7 @@
         integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous">
     </script>
     <script src="https://lambda.in.th/assets_dashboard/js/bootstrap.min.js?v=1749600419"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="https://lambda.in.th/assets_dashboard/js/slick.min.js?v=1749600419"></script>
     <script src="https://lambda.in.th/assets_dashboard/js/main.js?v=1749600419"></script>
@@ -390,6 +396,26 @@
             v.href = url;
         })
     </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+        const topicSwiper = new Swiper('.learn-topic-row.swiper', {
+            slidesPerView: 3,            // Show 3 topic cards at once (adjust as needed)
+            spaceBetween: 24,            // Gap between slides (in px)
+            navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+            },
+            // Responsive breakpoints (optional)
+            breakpoints: {
+            900: { slidesPerView: 3 },
+            600: { slidesPerView: 2 },
+            0:   { slidesPerView: 1 }
+            }
+        });
+        });
+    </script>
+    
 
 </body>
 

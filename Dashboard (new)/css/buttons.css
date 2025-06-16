@@ -156,10 +156,10 @@
 
 /* White */
 .portal-btn3d--white {
-  --btn-color: #ffffff;
-  --btn-color-hover: #ffffff;
+  --btn-color: var(--white-main);
+  --btn-color-hover: var(--grey-50);
   --btn-color-text: #141414;
-  --btn-border: 1.5px solid #e5e5e5;
+  --btn-border: 2px solid #e5e5e5;
   --btn-color-lip: #e5e5e5;
   --btn-color-lip-hover: #999999;
   --btn-border-color: #e5e5e5;

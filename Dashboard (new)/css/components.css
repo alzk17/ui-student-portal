@@ -17,6 +17,11 @@
 .portal-section-text {
   font-size: 1rem;
   font-weight: 400;
+  color: var(--black-main);
+}
+
+.portal-section-text.muted {
+  color: var(--grey-600);
 }
 
 
