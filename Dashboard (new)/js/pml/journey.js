@@ -7,49 +7,64 @@ createApp({
       currentPage: 0,
       digestPages: [
         {
-          title: "What Are Equal Groups?",
-          content: `
-            <p>Equal groups are groups that have the same number of items in each group. Understanding equal groups helps us learn about multiplication and division!</p>
-            <img src="img/equal-groups-1.svg" alt="Equal Groups Example" style="width:300px; display:block; margin:1.5rem auto;">
-          `
+          type: "content",
+          title: "Equal Groups",
+          content: `<p>Multiplication means making equal groups of things. For example, if you have \\(3\\) plates and each plate has \\(4\\) apples, that is \\(3\\) equal groups of \\(4\\).</p>
+                    <p>We can write this as:</p>
+                    <p style="text-align: center;">\\( \\large{ 3 \\times 4 } \\)</p>`
         },
         {
-          title: "How Can We Show Equal Groups?",
-          content: `
-            <ul>
-              <li>Arrange objects in rows.</li>
-              <li>Make sure each row has the same number of objects.</li>
-              <li>For example: 3 rows of 4 apples each.</li>
-            </ul>
-            <img src="img/equal-groups-2.svg" alt="Rows of Apples" style="width:350px; display:block; margin:1.5rem auto;">
-          `
+          type: "content",
+          content: `<p>Here is an example of equal groups:</p>
+                    <p style="text-align:center;"><img src="img/fraction-test2.svg" style="width: 350px;"></p>
+                    <p>There are \\(4\\) groups and each group has \\(2\\) circles.</p>`
         },
         {
-          title: "Why Are Equal Groups Important?",
-          content: `
-            <p>Equal groups help us solve problems in sharing, grouping, and multiplication. Whenever you split objects evenly, you're using the idea of equal groups!</p>
-            <img src="img/equal-groups-3.svg" alt="Equal Sharing Example" style="width:350px; display:block; margin:1.5rem auto;">
-          `
+          type: "quiz",
+          quiz: {
+            question: "How many equal groups are there in the picture below?",
+            img: "img/fraction-test3.svg",
+            options: [
+              { value: "A", label: "\\(2\\)" },
+              { value: "B", label: "\\(3\\)" },
+              { value: "C", label: "\\(4\\)" },
+              { value: "D", label: "\\(5\\)" }
+            ],
+            selected: []
+          }
+        },
+        {
+          type: "content",
+          content: `<p>Understanding equal groups helps us solve multiplication problems easily. It’s the first step to learning more complex operations!</p>`
         }
       ]
     }
   },
   computed: {
     isLastPage() {
-        return this.currentPage === this.digestPages.length - 1;
+      return this.currentPage === this.digestPages.length - 1;
     },
     progressPercent() {
-        // +1 so the first page isn't zero percent
-        return Math.round(((this.currentPage + 1) / this.digestPages.length) * 100);
+      // +1 so the first page isn't zero percent
+      return Math.round(((this.currentPage + 1) / this.digestPages.length) * 100);
     }
   },
   methods: {
     revealNextPage() {
       if (!this.isLastPage) {
         this.currentPage += 1;
+        this.$nextTick(this.typesetMath); // Typeset math after updating
       } else {
         // Optionally trigger transition to practice/summary section here!
       }
+    },
+    typesetMath() {
+      if (window.MathJax && window.MathJax.typesetPromise) {
+        window.MathJax.typesetPromise();
+      }
     }
+  },
+  mounted() {
+    this.typesetMath();
   }
-}).mount('#lesson-app')
+}).mount('#lesson-app');

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 289.5 46.5">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #5271ff;
+      }
+
+      .cls-1, .cls-2, .cls-3 {
+        stroke: #000;
+        stroke-miterlimit: 10;
+        stroke-width: 1.5px;
+      }
+
+      .cls-2, .cls-3 {
+        fill: none;
+      }
+
+      .cls-3 {
+        stroke-dasharray: 4.44 4.44;
+      }
+    </style>
+  </defs>
+  <g id="Layer_1-2" data-name="Layer 1">
+    <rect class="cls-1" x=".75" y=".75" width="115.2" height="45"/>
+    <rect class="cls-2" x="115.95" y=".75" width="172.8" height="45"/>
+    <g>
+      <line class="cls-2" x1="259.95" y1="45.75" x2="259.95" y2="43.25"/>
+      <line class="cls-3" x1="259.95" y1="38.81" x2="259.95" y2="5.47"/>
+      <line class="cls-2" x1="259.95" y1="3.25" x2="259.95" y2=".75"/>
+    </g>
+    <line class="cls-2" x1="231.15" y1="45.75" x2="231.15" y2=".75"/>
+    <g>
+      <line class="cls-2" x1="202.35" y1="45.75" x2="202.35" y2="43.25"/>
+      <line class="cls-3" x1="202.35" y1="38.81" x2="202.35" y2="5.47"/>
+      <line class="cls-2" x1="202.35" y1="3.25" x2="202.35" y2=".75"/>
+    </g>
+    <line class="cls-2" x1="173.55" y1="45.75" x2="173.55" y2=".75"/>
+    <g>
+      <line class="cls-2" x1="144.75" y1="45.75" x2="144.75" y2="43.25"/>
+      <line class="cls-3" x1="144.75" y1="38.81" x2="144.75" y2="5.47"/>
+      <line class="cls-2" x1="144.75" y1="3.25" x2="144.75" y2=".75"/>
+    </g>
+    <line class="cls-2" x1="115.95" y1="45.75" x2="115.95" y2=".75"/>
+    <g>
+      <line class="cls-2" x1="87.15" y1="45.75" x2="87.15" y2="43.25"/>
+      <line class="cls-3" x1="87.15" y1="38.81" x2="87.15" y2="5.47"/>
+      <line class="cls-2" x1="87.15" y1="3.25" x2="87.15" y2=".75"/>
+    </g>
+    <line class="cls-2" x1="58.35" y1="45.75" x2="58.35" y2=".75"/>
+    <g>
+      <line class="cls-2" x1="29.55" y1="45.75" x2="29.55" y2="43.25"/>
+      <line class="cls-3" x1="29.55" y1="38.81" x2="29.55" y2="5.47"/>
+      <line class="cls-2" x1="29.55" y1="3.25" x2="29.55" y2=".75"/>
+    </g>
+  </g>
+</svg>
