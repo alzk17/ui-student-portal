@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://lambda.in.th/custom/update.css?v=1749953878">
     <link rel="stylesheet" href="https://lambda.in.th/custom/css/components/modal.css">
     <link rel="stylesheet" href="https://lambda.in.th/custom/css/pages/practice.css">
-
+    
     <link rel="stylesheet" href="css/variables.css">
     <link rel="stylesheet" href="css/buttons.css">
     <link rel="stylesheet" href="css/pml/pml-header.css">
@@ -32,6 +32,7 @@
         };
     </script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
 
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-9EB6W9ZNGT"></script>
@@ -53,181 +54,83 @@
     <!-- Document Wrapper ==================== -->
     <div id="wrapper" class="noice-effect overflow-hidden">
 
+        <!-- VUE LESSON APP -->
+        <div id="lesson-app">
+
         <!-- HEADER BAR -->
         <header class="pml-header">
-        <div class="pml-header__row">
-            <button type="button" class="pml-header__exit-btn" aria-label="Close modal">
+            <div class="pml-header__row">
+            <button
+                type="button"
+                class="pml-header__exit-btn"
+                aria-label="Close lesson"
+                @click="exitLesson"
+            >
                 <i class="fa-solid fa-close"></i>
             </button>
             <div class="pml-header__progress-bar">
-                <div class="pml-header__progress-fill" style="width: 35%;"></div>
+                <div
+                class="pml-header__progress-fill"
+                :style="{ width: progressPercent + '%' }"
+                ></div>
             </div>
-        <div class="pml-header__side"></div>
-        </div>
+            <div class="pml-header__side"></div>
+            </div>
         </header>
 
         <!-- MAIN CONTENT -->
-        <section id="content">
-        <div class="content-wrap">
-            <div class="row justify-content-center">
-            <div class="col-md-12 col-sm-12 mx-auto" style="max-width: 750px;">
-                <div class="p2 pt4">
-                <!-- Hidden Inputs -->
-                <input type="hidden" name="userId" value="16">
-                <input type="hidden" name="latest" value="7">
-                <input type="hidden" name="latest_type" value="lesson">
-                <input type="hidden" name="finished" value="0">
-
-                <div class="container-fluid py-5">
-                    <div class="lesson-body">
-                    <div data-delay="200">
-                        <div class="card-body">
-                        <div class="lesson-content">
-                            <div class="tab-content">
-                            <!-- Lesson Tab: Page 0 -->
-                            <div class="tab-pane active" data-first="true" id="canvas-tab-0" data-type="lesson" data-id="11">
-                                <div id="page00" class="page first-page min-vh-85">
-                                <p>
-                                    <img alt="" src="https://ed-tech.work/uploads/texteditor/lesson1-1_1729651897.png" style="width: 330px; height: 402px;">
-                                </p>
-                                <ul>
-                                    <li>The very basic of mathematics; it helps us know how many things there are.</li>
-                                    <li>Count from 0 to 10—forward and backward.</li>
-                                    <li>Count up to 10 objects.</li>
-                                </ul>
-                                <button type="button" class="button button-border rounded tab-btn-control px-4 m-0 me-2 mt-4" data-control="continue">
-                                    Continue <i class="uil uil-arrow-circle-down ms-1"></i>
-                                </button>
-                                </div>
-                                <div id="page01" class="page mt-4 min-vh-85 d-none" data-show="false">
-                                <div>
-                                    <p>
-                                    <img alt="" src="https://ed-tech.work/uploads/texteditor/lesson1-2_1729651936.png" style="width: 1000px; height: 473px;">
-                                    </p>
-                                </div>
-                                <button type="button" class="button button-border rounded tab-btn-control px-4 m-0 me-2 mt-4" data-control="continue" data-scrollto="page01">
-                                    Continue <i class="uil uil-arrow-circle-down ms-1"></i>
-                                </button>
-                                </div>
-                                <div id="page02" class="page mt-4 min-vh-85 d-none" data-show="false" data-last-page="true">
-                                <div>
-                                    <p>
-                                    <img alt="" src="https://ed-tech.work/uploads/texteditor/lesson1-3_1729651961.png" style="width: 1000px; height: 454px;">
-                                    </p>
-                                </div>
-                                </div>
-                            </div>
-
-                            <!-- Practice Tab: Multiple Choice -->
-                            <div class="tab-pane" id="canvas-tab-practice-00" data-type="practice" data-type-question="text" data-id="4" data-learning="false">
-                                <h2>Practice</h2>
-                                <h3>เลือกคำตอบในช่องเครื่องหมายคำถาม (Select one answer)</h3>
-                                <p>
-                                <img alt="" src="https://ed-tech.work/uploads/texteditor/lesson1-4_1729652071.png" style="width: 700px; height: 228px;">
-                                </p>
-                                <div class="answers-content">
-                                <div class="d-flex justify-content-center mt-3 mb-1 answers">
-                                    <div class="mx-1 answer-text">
-                                    <div>
-                                        <input name="answer[]" id="answer000" class="btn-check" type="checkbox" value="1" text="5">
-                                        <label for="answer000" class="btn btn-outline-primary m-1"><kbd>1</kbd> 5</label>
-                                    </div>
-                                    </div>
-                                    <div class="mx-1 answer-text">
-                                    <div>
-                                        <input name="answer[]" id="answer001" class="btn-check" type="checkbox" value="2" text="9">
-                                        <label for="answer001" class="btn btn-outline-primary m-1"><kbd>2</kbd> 9</label>
-                                    </div>
-                                    </div>
-                                    <div class="mx-1 answer-text">
-                                    <div>
-                                        <input name="answer[]" id="answer002" class="btn-check" type="checkbox" value="3" text="7">
-                                        <label for="answer002" class="btn btn-outline-primary m-1"><kbd>3</kbd> 7</label>
-                                    </div>
-                                    </div>
-                                    <div class="mx-1 answer-text">
-                                    <div>
-                                        <input name="answer[]" id="answer003" class="btn-check" type="checkbox" value="4" text="8">
-                                        <label for="answer003" class="btn btn-outline-primary m-1"><kbd>4</kbd> 8</label>
-                                    </div>
-                                    </div>
-                                </div>
-                                </div>
-                            </div>
-
-                            <!-- Lesson Tab: Page 1 -->
-                            <div class="tab-pane" id="canvas-tab-1" data-type="lesson" data-id="12" data-learning="false">
-                                <div id="page10" class="page first-page min-vh-85">
-                                <p>
-                                    <img alt="" src="https://ed-tech.work/uploads/texteditor/lesson1-5_1729652197.png" style="width: 800px; height: 376px;">
-                                </p>
-                                <button type="button" class="button button-border rounded tab-btn-control px-4 m-0 me-2 mt-4" data-control="continue">
-                                    Continue <i class="uil uil-arrow-circle-down ms-1"></i>
-                                </button>
-                                </div>
-                                <div id="page11" class="page mt-4 min-vh-85 d-none" data-show="false" data-last-page="true">
-                                <div>
-                                    <p>
-                                    <img alt="" src="https://ed-tech.work/uploads/texteditor/lesson1-6_1729652380.png" style="width: 800px; height: 591px;">
-                                    </p>
-                                </div>
-                                </div>
-                            </div>
-
-                            <!-- Practice Tab: Input -->
-                            <div class="tab-pane" id="canvas-tab-practice-10" data-type="practice" data-type-question="input-user" data-id="18" data-learning="false">
-                                <h2>Practice</h2>
-                                <p>
-                                <img alt="" src="https://ed-tech.work/uploads/texteditor/lesson1-7_1729665967.png" style="width: 600px; height: 450px;">
-                                </p>
-                                <div class="answers-content">
-                                <div class="d-flex justify-content-center mt-3 mb-1 answers">
-                                    <div class="mx-1 answer-text w-75">
-                                    <label>Answer </label>
-                                    <input type="text" name="math-field" disabled="" class="form-control d-none">
-                                    <math-field id="math-input-0" name="answer[]" virtual-keyboard-mode="auto" class="form-control mx-auto" contenteditable="true" tabindex="0"></math-field>
-                                    </div>
-                                </div>
-                                </div>
-                            </div>
-
-                            <!-- Summary Tab -->
-                            <div class="tab-pane" id="summary" data-type="summary" data-next="3" data-last="true" data-learning="false">
-                                <div class="alert center m-3">
-                                <img src="images/finish.png" width="500">
-                                <h2 class="center font-normal"> Lesson Complete </h2>
-                                <h3 class="font-normal text-secondary">Total Earned</h3>
-                                <div class="d-flex justify-content-center">
-                                    <h1 class="mr-4 earned">1</h1>
-                                    <i class="bi-coin"></i>
-                                </div>
-                                <button type="button" class="button button-black button-rounded tab-btn-control tab-btn-continue m-0" data-control="continue">
-                                    Continue
-                                </button>
-                                </div>
-                            </div>
-                            </div>
-                        </div>
-                        </div>
-                    </div>
-                    </div>
+        <main class="pml-main">
+            <section class="pml-main__container">
+            <div class="pml-main__lesson-body">
+                <div class="pml-section--digest" data-type="lesson" :data-id="lessonId">
+                <div
+                    v-for="(page, idx) in digestPages"
+                    :key="idx"
+                    class="digest-page"
+                    v-show="idx <= currentPage"
+                >
+                    <h2 v-if="page.title">{{ page.title }}</h2>
+                    <div v-html="page.content"></div>
                 </div>
                 </div>
             </div>
-            </div>
-        </div>
-        </section>
+            </section>
+        </main>
 
         <!-- FOOTER BAR -->
         <footer class="pml-footer pml-footer--fixed">
-        <button class="pml-footer__btn--report" aria-label="Report a problem">
+            <button
+            class="pml-footer__btn--report"
+            aria-label="Report a problem"
+            @click="reportProblem"
+            type="button"
+            >
             <i class="fa fa-bug"></i>
-        </button>
-        <button class="portal-btn3d portal-btn3d--white pml-footer__btn--continue" aria-label="Continue">
-            Start lesson
-        </button>
-        <div class="pml-footer__side"></div>
+            </button>
+            <button
+            class="portal-btn3d portal-btn3d--white pml-footer__btn--continue"
+            aria-label="Continue"
+            @click="revealNextPage"
+            :disabled="isLastPage"
+            v-if="!isLastPage"
+            type="button"
+            >
+            Continue
+            </button>
+            <button
+            class="portal-btn3d portal-btn3d--white pml-footer__btn--continue"
+            aria-label="Finish Lesson"
+            v-if="isLastPage"
+            @click="finishLesson"
+            type="button"
+            >
+            Finish Lesson
+            </button>
+            <div class="pml-footer__side"></div>
         </footer>
+        
+        </div>
+
     </div>
 
 
@@ -324,6 +227,8 @@
     </script>
 
     <script src="https://lambda.in.th/js/learning.js?v=1749953878"></script>
+    <script src="js/pml/journey.js"></script>
+
 </body>
 
 </html>

@@ -1,3 +1,76 @@
 body {
     font-family: 'rooney-sans';
 }
+
+.pml-main {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #fff; /* Or your site background */
+  width: 100%;
+}
+
+.pml-main__container {
+  width: 100%;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 4rem 0;
+  /* Responsive tweak */
+}
+
+.pml-main__lesson-body {
+  background: #fff;
+  padding: 0 0.5rem;
+  width: 100%;
+  /* Mobile friendly: */
+  /* @media (max-width: 600px) { padding: 16px 8px; } */
+}
+
+.pml-section--digest {
+  font-family: rooney-sans;
+  color: var(--black-main, #141414);
+}
+
+.pml-section--digest h2,
+.pml-section--digest h3 {
+  font-family: rooney-sans;
+  font-weight: 700;
+  color: var(--black-main);
+  margin-top: 0;
+  margin-bottom: 1.4rem;
+}
+
+.pml-section--digest p {
+  font-size: 1.125rem;
+  line-height: 1.6;
+  margin-bottom: 1.4rem;
+}
+
+.pml-section--digest a, 
+.pml-section--digest a img {
+  pointer-events: none;
+  cursor: default;
+}
+
+.digest-page {
+  margin-bottom: 5rem;
+}
+
+/* Animation example */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(24px);}
+  to   { opacity: 1; transform: none;}
+}
+
+/* Example for smaller screens */
+@media (max-width: 800px) {
+  .pml-main__container {
+    max-width: 100vw;
+    padding: 0;
+  }
+  .pml-main__lesson-body {
+    padding: 18px 6px 18px 6px;
+    border-radius: 0;
+  }
+}

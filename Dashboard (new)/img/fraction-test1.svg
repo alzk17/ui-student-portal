@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 350.78 145.5">
+  <defs>
+    <style>
+      .cls-1 {
+        font-family: LMRoman10-Regular, 'Latin Modern Roman';
+        font-size: 32px;
+      }
+
+      .cls-2 {
+        fill: #fcee21;
+      }
+
+      .cls-2, .cls-3 {
+        stroke: #000;
+        stroke-miterlimit: 10;
+        stroke-width: 1.5px;
+      }
+
+      .cls-3 {
+        fill: none;
+      }
+    </style>
+  </defs>
+  <g id="Layer_1-2" data-name="Layer 1">
+    <text class="cls-1" transform="translate(162.96 80.75)"><tspan x="0" y="0">=</tspan></text>
+    <g>
+      <rect class="cls-2" x=".75" y="108.75" width="144" height="36"/>
+      <rect class="cls-2" x=".75" y="36.75" width="144" height="36"/>
+      <rect class="cls-3" x=".75" y=".75" width="144" height="36"/>
+      <rect class="cls-2" x=".75" y="72.75" width="144" height="36"/>
+    </g>
+    <g>
+      <rect class="cls-2" x="206.03" y="108.75" width="36" height="36"/>
+      <rect class="cls-2" x="206.03" y="72.75" width="36" height="36"/>
+      <rect class="cls-2" x="206.03" y="36.75" width="36" height="36"/>
+      <rect class="cls-3" x="206.03" y=".75" width="36" height="36"/>
+      <rect class="cls-2" x="242.03" y="108.75" width="36" height="36"/>
+      <rect class="cls-2" x="242.03" y="72.75" width="36" height="36"/>
+      <rect class="cls-2" x="242.03" y="36.75" width="36" height="36"/>
+      <rect class="cls-3" x="242.03" y=".75" width="36" height="36"/>
+      <rect class="cls-2" x="278.03" y="108.75" width="36" height="36"/>
+      <rect class="cls-2" x="278.03" y="72.75" width="36" height="36"/>
+      <rect class="cls-2" x="278.03" y="36.75" width="36" height="36"/>
+      <rect class="cls-3" x="278.03" y=".75" width="36" height="36"/>
+      <rect class="cls-2" x="314.03" y="108.75" width="36" height="36"/>
+      <rect class="cls-2" x="314.03" y="72.75" width="36" height="36"/>
+      <rect class="cls-2" x="314.03" y="36.75" width="36" height="36"/>
+      <rect class="cls-3" x="314.03" y=".75" width="36" height="36"/>
+    </g>
+  </g>
+</svg>
