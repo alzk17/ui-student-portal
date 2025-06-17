@@ -82,6 +82,43 @@
         <main class="pml-main">
             <section class="pml-main__container">
             <div class="pml-main__lesson-body">
+
+
+                <!-- TEST QUIZ BLOCK -->
+                <div class="digest-quiz-block">
+                    <div class="digest-quiz-question">
+                    <div class="digest-quiz-question__text">
+                        <p><strong>How many equal parts are there in the shape below?</strong></p>
+                        <p style="text-align: center;"><span style="font-size:18px;"><a href="img/fraction-test1.svg"><img alt="" src="img/fraction-test1.svg" style="width: 350px;" /></a></span></p>
+                    </div>
+
+                    <div class="digest-quiz-options" role="list">
+                    <label class="digest-quiz-choice">
+                        <input type="checkbox" name="quiz1" value="A" class="digest-quiz-choice__input" />
+                        <span class="digest-quiz-choice__label">\(\dfrac{3}{4}\)</span>
+                    </label>
+                    <label class="digest-quiz-choice">
+                        <input type="checkbox" name="quiz1" value="B" class="digest-quiz-choice__input" />
+                        <span class="digest-quiz-choice__label">\(4\) tens</span>
+                    </label>
+                    <label class="digest-quiz-choice">
+                        <input type="checkbox" name="quiz1" value="C" class="digest-quiz-choice__input" />
+                        <span class="digest-quiz-choice__label">\(43\)</span>
+                    </label>
+                    <label class="digest-quiz-choice">
+                        <input type="checkbox" name="quiz1" value="D" class="digest-quiz-choice__input" />
+                        <span class="digest-quiz-choice__label">\(\dfrac{1}{8}\)</span>
+                    </label>
+                    <label class="digest-quiz-choice">
+                        <input type="checkbox" name="quiz1" value="E" class="digest-quiz-choice__input" />
+                        <span class="digest-quiz-choice__label">none of these</span>
+                    </label>
+                    </div>
+                    </div>
+                </div>
+                <!-- END TEST QUIZ BLOCK -->
+
+
                 <div class="pml-section--digest" data-type="lesson" :data-id="lessonId">
                 <div
                     v-for="(page, idx) in digestPages"
