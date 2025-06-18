@@ -2,6 +2,7 @@
 <html dir="ltr" lang="en-US">
 
 <head>
+    <meta charset="utf-8">
     <meta content="bgiy1JoSJD5jHQeHmjAVO59BgG4LUzJbiebQYwVa" name="csrf-token">
 
     <link rel="stylesheet" href="https://lambda.in.th/style.css?v=1749953878">
@@ -141,6 +142,7 @@
             class="portal-btn3d portal-btn3d--white pml-footer__btn--continue"
             aria-label="Continue"
             @click="revealNextPage"
+            @touchstart=""
             :disabled="isLastPage"
             v-if="!isLastPage"
             type="button"
@@ -152,6 +154,7 @@
             aria-label="Finish Lesson"
             v-if="isLastPage"
             @click="finishLesson"
+            @touchstart=""
             type="button"
             >
             Finish Lesson
@@ -257,7 +260,7 @@
     </script>
 
     <script src="https://lambda.in.th/js/learning.js?v=1749953878"></script>
-    <script src="js/pml/journey.js"></script>
+    <script type="module" src="js/pml/journey.js"></script>
 
 </body>
 

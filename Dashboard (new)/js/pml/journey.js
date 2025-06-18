@@ -1,3 +1,4 @@
+import { initKeywordTooltips } from './keywordTooltip.js';
 const { createApp } = Vue;
 
 createApp({
@@ -17,7 +18,7 @@ createApp({
           type: "content",
           content: `<p>Here is an example of equal groups:</p>
                     <p style="text-align:center;"><img src="img/fraction-test2.svg" style="width: 350px;"></p>
-                    <p>There are \\(4\\) groups and each group has \\(2\\) circles.</p>`
+                    <p>There are \\(4\\) groups and each group has \\(2\\) <span class="keyword" data-glossary="<b>Mass</b> is a measure of how much matter an object contains. It is usually measured in grams (g) or kilograms (kg).">circles</span>.</p>`
         },
         {
           type: "quiz",
@@ -35,7 +36,7 @@ createApp({
         },
         {
           type: "content",
-          content: `<p>Understanding equal groups helps us solve multiplication problems easily. It’s the first step to learning more complex operations!</p>`
+          content: `<p>Understanding equal groups helps us solve multiplication problems easily. It's the first step to learning more complex operations!</p>`
         }
       ]
     }
@@ -45,7 +46,6 @@ createApp({
       return this.currentPage === this.digestPages.length - 1;
     },
     progressPercent() {
-      // +1 so the first page isn't zero percent
       return Math.round(((this.currentPage + 1) / this.digestPages.length) * 100);
     }
   },
@@ -53,9 +53,7 @@ createApp({
     revealNextPage() {
       if (!this.isLastPage) {
         this.currentPage += 1;
-        this.$nextTick(this.typesetMath); // Typeset math after updating
-      } else {
-        // Optionally trigger transition to practice/summary section here!
+        this.$nextTick(this.typesetMath);
       }
     },
     typesetMath() {
@@ -65,6 +63,18 @@ createApp({
     }
   },
   mounted() {
-    this.typesetMath();
+    this.$nextTick(() => {
+      initKeywordTooltips(document.querySelector('.pml-main'));
+      this.typesetMath();
+    });
+  },
+  updated() {
+    this.$nextTick(() => {
+      const container = document.querySelector('.pml-main');
+      if (container) {
+        initKeywordTooltips(container);
+      }
+      this.typesetMath();
+    });
   }
 }).mount('#lesson-app');

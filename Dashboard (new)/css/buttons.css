@@ -85,6 +85,7 @@
 ================================= */
 
 .portal-btn3d {
+  position: relative; /*new testing button*/
   display: inline-flex;
   justify-content: center;
   align-items: center;
@@ -104,12 +105,22 @@
     background-color 0.1s ease-in-out,
     border-color 0.1s ease-in-out;
   transform: translateY(-2px);
+  z-index: 999; /*new testing button*/
 }
 
-.portal-btn3d:hover {
+/*.portal-btn3d:hover {
   background-color: var(--btn-color-hover);
   border-color: var(--btn-border-hover, var(--btn-border-color, transparent));
   box-shadow: 0 4px 0 0 var(--btn-color-lip-hover, var(--btn-color-lip));
+} Use later if needed*/
+
+/* Disable Hovering on touch devices such as iPad */
+@media (hover: hover) {
+  .portal-btn3d:hover {
+    background-color: var(--btn-color-hover);
+    border-color: var(--btn-border-hover, var(--btn-border-color, transparent));
+    box-shadow: 0 4px 0 0 var(--btn-color-lip-hover, var(--btn-color-lip));
+  }
 }
 
 .portal-btn3d:active {
@@ -173,6 +184,7 @@
   --btn-color-lip: #141414;
   --btn-color-text: #ffffff;
 }
+
 
 
 /* =====================================
