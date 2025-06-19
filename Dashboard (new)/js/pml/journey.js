@@ -4,6 +4,7 @@ const { createApp } = Vue;
 createApp({
   data() {
     return {
+      isSummaryPage: false,
       lessonId: 11,
       currentPage: 0,
       digestPages: [
@@ -54,13 +55,18 @@ createApp({
       if (!this.isLastPage) {
         this.currentPage += 1;
         this.$nextTick(this.typesetMath);
+      } else {
+        this.isSummaryPage = true;
       }
+    },
+    finishLesson() {
+      this.isSummaryPage = true;
     },
     typesetMath() {
       if (window.MathJax && window.MathJax.typesetPromise) {
         window.MathJax.typesetPromise();
       }
-    }
+    },
   },
   mounted() {
     this.$nextTick(() => {

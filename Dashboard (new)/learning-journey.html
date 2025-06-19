@@ -59,7 +59,7 @@
         <div id="lesson-app">
 
         <!-- HEADER BAR -->
-        <header class="pml-header">
+        <header class="pml-header" v-if="!isSummaryPage">
             <div class="pml-header__row">
             <button
                 type="button"
@@ -81,7 +81,8 @@
 
         <!-- MAIN CONTENT -->
         <main class="pml-main">
-            <section class="pml-main__container">
+            <!-- Learning Content -->
+            <section class="pml-main__container" v-if="!isSummaryPage">
             <div class="pml-main__lesson-body">
                 <div class="pml-section--digest" data-type="lesson" :data-id="lessonId">
                     <div
@@ -126,10 +127,22 @@
                 </div>
             </div>
             </section>
+            
+            <!-- Summary Section -->
+            <section class="pml-summary__container" v-if="isSummaryPage">
+                <div class="pml-summary">
+                    <h2>Lesson Complete!</h2>
+                    <p>Great job finishing this lesson.</p>
+                    <!-- Optionally add stats, next steps, links, etc. -->
+                    <button class="portal-btn3d" @click="returnToMap">
+                        Back to Lesson Map
+                    </button>
+                </div>
+            </section>
         </main>
 
         <!-- FOOTER BAR -->
-        <footer class="pml-footer pml-footer--fixed">
+        <footer class="pml-footer pml-footer--fixed" v-if="!isSummaryPage">
             <button
             class="pml-footer__btn--report"
             aria-label="Report a problem"
