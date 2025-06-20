@@ -30,9 +30,10 @@ createApp({
               { value: "A", label: "\\(2\\)" },
               { value: "B", label: "\\(3\\)" },
               { value: "C", label: "\\(4\\)" },
-              { value: "D", label: "\\(5\\)" }
+              { value: "D", label: "\\(5\\)" },
+              { value: "E", label: "\\(6\\)" }
             ],
-            correctAnswers: ["A"],
+            correctAnswers: ["A", "B"],
             selected: [],
             revealed: false
           }
