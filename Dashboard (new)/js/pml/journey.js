@@ -32,7 +32,9 @@ createApp({
               { value: "C", label: "\\(4\\)" },
               { value: "D", label: "\\(5\\)" }
             ],
-            selected: []
+            correctAnswers: ["B"],
+            selected: [],
+            revealed: false
           }
         },
         {
@@ -54,7 +56,21 @@ createApp({
     revealNextPage() {
       if (!this.isLastPage) {
         this.currentPage += 1;
-        this.$nextTick(this.typesetMath);
+        this.$nextTick(() => {
+          this.typesetMath();
+
+          // Find the DOM node of the newly revealed page
+          const pageSelector = `.digest-page:nth-child(${this.currentPage + 1})`;
+          const pageEl = document.querySelector(pageSelector);
+
+          // Only scroll if the page element is found
+          if (pageEl) {
+            pageEl.scrollIntoView({
+              behavior: "smooth",
+              block: "start"
+            });
+          }
+        });
       } else {
         this.isSummaryPage = true;
       }

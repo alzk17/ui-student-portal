@@ -50,133 +50,172 @@
     <script src="https://unpkg.com/mathlive"></script>
 </head>
 
-<body class="stretched side-panel-left">
+<body class="stretched">
     
     <!-- Document Wrapper ==================== -->
     <div id="wrapper" class="noice-effect">
-
         <!-- VUE LESSON APP -->
         <div id="lesson-app">
-
-        <!-- HEADER BAR -->
-        <header class="pml-header" v-if="!isSummaryPage">
-            <div class="pml-header__row">
-            <button
-                type="button"
-                class="pml-header__exit-btn"
-                aria-label="Close lesson"
-                @click="exitLesson"
-            >
-                <i class="fa-solid fa-close"></i>
-            </button>
-            <div class="pml-header__progress-bar">
-                <div
-                class="pml-header__progress-fill"
-                :style="{ width: progressPercent + '%' }"
-                ></div>
-            </div>
-            <div class="pml-header__side"></div>
-            </div>
-        </header>
-
-        <!-- MAIN CONTENT -->
-        <main class="pml-main">
-            <!-- Learning Content -->
-            <section class="pml-main__container" v-if="!isSummaryPage">
-            <div class="pml-main__lesson-body">
-                <div class="pml-section--digest" data-type="lesson" :data-id="lessonId">
+            <!-- HEADER BAR -->
+            <header class="pml-header" v-if="!isSummaryPage">
+                <div class="pml-header__row">
+                <button
+                    type="button"
+                    class="pml-header__exit-btn"
+                    aria-label="Close lesson"
+                    @click="exitLesson"
+                >
+                    <i class="fa-solid fa-close"></i>
+                </button>
+                <div class="pml-header__progress-bar">
                     <div
-                    v-for="(page, idx) in digestPages"
-                    :key="idx"
-                    class="digest-page"
-                    v-show="idx <= currentPage"
-                    >
-                        <!-- If it's a CONTENT page -->
-                        <template v-if="page.type === 'content'">
-                            <h2 v-if="page.title">{{ page.title }}</h2>
-                            <div v-html="page.content"></div>
-                        </template>
-                        <!-- If it's a QUIZ page -->
-                        <template v-else-if="page.type === 'quiz'">
-                            <div class="digest-quiz-block">
-                                <div class="digest-quiz-question__text">
-                                    <p><strong>{{ page.quiz.question }}</strong></p>
-                                    <p style="text-align: center;">
-                                        <img :src="page.quiz.img" style="width: 350px;">
-                                    </p>
-                                </div>
-                                <div class="digest-quiz-options" role="list">
-                                    <label
-                                        v-for="option in page.quiz.options"
-                                        :key="option.value"
-                                        class="digest-quiz-choice"
-                                        :class="{ 'is-selected': page.quiz.selected && page.quiz.selected.includes(option.value) }"
-                                    >
-                                        <input
+                    class="pml-header__progress-fill"
+                    :style="{ width: progressPercent + '%' }"
+                    ></div>
+                </div>
+                <div class="pml-header__side"></div>
+                </div>
+            </header>
+
+            <!-- MAIN CONTENT -->
+            <main class="pml-main">
+                <!-- Learning Content -->
+                <section class="pml-main__container" v-if="!isSummaryPage">
+                <div class="pml-main__lesson-body">
+                    <div class="pml-section--digest" data-type="lesson" :data-id="lessonId">
+                        <div
+                        v-for="(page, idx) in digestPages"
+                        :key="idx"
+                        class="digest-page"
+                        :class="{ 'last-visible': idx === currentPage }"
+                        v-show="idx <= currentPage"
+                        >
+                            <!-- If it's a CONTENT page -->
+                            <template v-if="page.type === 'content'">
+                                <h2 v-if="page.title">{{ page.title }}</h2>
+                                <div v-html="page.content"></div>
+                            </template>
+                            <!-- If it's a QUIZ page -->
+                            <template v-else-if="page.type === 'quiz'">
+                                <div class="digest-quiz-block">
+                                    <div class="digest-quiz-question__text">
+                                        <p><strong>{{ page.quiz.question }}</strong></p>
+                                        <p style="text-align: center;">
+                                            <img :src="page.quiz.img" style="width: 350px;">
+                                        </p>
+                                    </div>
+                                    <div class="digest-quiz-options" role="list">
+                                        <label
+                                            v-for="option in page.quiz.options"
+                                            :key="option.value"
+                                            class="digest-quiz-choice"
+                                            :class="{
+                                            'is-selected': page.quiz.selected && page.quiz.selected.includes(option.value),
+                                            'is-correct': page.quiz.revealed && page.quiz.correctAnswers.includes(option.value),
+                                            'is-incorrect': page.quiz.revealed && page.quiz.selected.includes(option.value) && !page.quiz.correctAnswers.includes(option.value),
+                                            'is-revealed-correct': page.quiz.revealed && page.quiz.correctAnswers.includes(option.value) && !page.quiz.selected.includes(option.value)
+                                            }"
+                                        >
+                                            <!-- Icon slot -->
+                                            <span v-if="page.quiz.revealed" class="digest-quiz-choice__icon">
+                                            <i
+                                                v-if="page.quiz.correctAnswers.includes(option.value)"
+                                                class="fa-solid fa-check"
+                                            ></i>
+                                            <i
+                                                v-else-if="page.quiz.selected.includes(option.value)"
+                                                class="fa-solid fa-xmark"
+                                            ></i>
+                                            </span>
+                                            <input
                                             type="checkbox"
                                             :value="option.value"
                                             v-model="page.quiz.selected"
                                             class="digest-quiz-choice__input"
-                                        />
-                                        <span class="digest-quiz-choice__label" v-html="option.label"></span>
-                                    </label>
+                                            :disabled="page.quiz.revealed ||
+                                                (
+                                                page.quiz.selected.length >= page.quiz.correctAnswers.length &&
+                                                !page.quiz.selected.includes(option.value)
+                                                )"
+                                            />
+                                            <span class="digest-quiz-choice__label" v-html="option.label"></span>
+                                        </label>
+                                    </div>
                                 </div>
-                            </div>
-                        </template>
+                            </template>
+                        </div>
+                        <!-- Persistent Spacer -->
+                        <div class="pml-lesson__spacer"></div>
                     </div>
                 </div>
-            </div>
-            </section>
-            
-            <!-- Summary Section -->
-            <section class="pml-summary__container" v-if="isSummaryPage">
-                <div class="pml-summary">
-                    <h2>Lesson Complete!</h2>
-                    <p>Great job finishing this lesson.</p>
-                    <!-- Optionally add stats, next steps, links, etc. -->
-                    <button class="portal-btn3d" @click="returnToMap">
-                        Back to Lesson Map
-                    </button>
-                </div>
-            </section>
-        </main>
+                </section>
+                
+                <!-- Summary Section -->
+                <section class="pml-summary__container" v-if="isSummaryPage">
+                    <div class="pml-summary">
+                        <h2 class="pml-summary__title">Lesson Complete</h2>
+                        <p class="pml-summary__subtitle">
+                        Great job completing this lesson! Keep up the fantastic work!
+                        </p>
 
-        <!-- FOOTER BAR -->
-        <footer class="pml-footer pml-footer--fixed" v-if="!isSummaryPage">
-            <button
-            class="pml-footer__btn--report"
-            aria-label="Report a problem"
-            @click="reportProblem"
-            type="button"
-            >
-            <i class="fa fa-bug"></i>
-            </button>
-            <button
-            class="portal-btn3d portal-btn3d--white pml-footer__btn--continue"
-            aria-label="Continue"
-            @click="revealNextPage"
-            @touchstart=""
-            :disabled="isLastPage"
-            v-if="!isLastPage"
-            type="button"
-            >
-            Continue
-            </button>
-            <button
-            class="portal-btn3d portal-btn3d--white pml-footer__btn--continue"
-            aria-label="Finish Lesson"
-            v-if="isLastPage"
-            @click="finishLesson"
-            @touchstart=""
-            type="button"
-            >
-            Finish Lesson
-            </button>
-            <div class="pml-footer__side"></div>
-        </footer>
-        
+                        <div class="pml-summary__stats-row">
+                            <div class="pml-summary__stat-box">
+                                <div class="pml-summary__stat-title">Time Taken</div>
+                                <div class="pml-summary__stat-value">999 min 25 sec</div>
+                                <div class="pml-summary__stat-img">
+                                <img src="Icons/hourglass-3.svg" alt="Hourglass" />
+                                </div>
+                            </div>
+                            <div class="pml-summary__stat-box">
+                                <div class="pml-summary__stat-title">Gems Earned</div>
+                                <div class="pml-summary__stat-value">+12</div>
+                                <div class="pml-summary__stat-img">
+                                <img src="Icons/gem-2.svg" alt="Gem" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <button class="portal-btn3d portal-btn3d--white pml-summary__btn--continue" @click="returnToMap">
+                        Continue
+                        </button>
+                    </div>
+                </section>
+            </main>
+
+            <!-- FOOTER BAR -->
+            <footer class="pml-footer pml-footer--fixed" v-if="!isSummaryPage">
+                <button
+                class="pml-footer__btn--report"
+                aria-label="Report a problem"
+                @click="reportProblem"
+                type="button"
+                >
+                <i class="fa fa-bug"></i>
+                </button>
+                <button
+                class="portal-btn3d portal-btn3d--white pml-footer__btn--continue"
+                aria-label="Continue"
+                @click="revealNextPage"
+                @touchstart=""
+                :disabled="isLastPage"
+                v-if="!isLastPage"
+                type="button"
+                >
+                Continue
+                </button>
+                <button
+                class="portal-btn3d portal-btn3d--white pml-footer__btn--continue"
+                aria-label="Finish Lesson"
+                v-if="isLastPage"
+                @click="finishLesson"
+                @touchstart=""
+                type="button"
+                >
+                Finish Lesson
+                </button>
+                <div class="pml-footer__side"></div>
+            </footer>
         </div>
-
     </div>
 
 
