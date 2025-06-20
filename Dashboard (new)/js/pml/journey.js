@@ -32,7 +32,7 @@ createApp({
               { value: "C", label: "\\(4\\)" },
               { value: "D", label: "\\(5\\)" }
             ],
-            correctAnswers: ["B"],
+            correctAnswers: ["A"],
             selected: [],
             revealed: false
           }
@@ -45,6 +45,9 @@ createApp({
     }
   },
   computed: {
+    activePage() {
+      return this.digestPages[this.currentPage];
+    },
     isLastPage() {
       return this.currentPage === this.digestPages.length - 1;
     },
@@ -53,6 +56,11 @@ createApp({
     }
   },
   methods: {
+    checkAnswer() {
+      if (this.activePage.type === 'quiz') {
+        this.activePage.quiz.revealed = true;
+      }
+    },
     revealNextPage() {
       if (!this.isLastPage) {
         this.currentPage += 1;
@@ -75,6 +83,29 @@ createApp({
         this.isSummaryPage = true;
       }
     },
+    selectOption(quiz, optionValue) {
+      if (quiz.revealed) {
+        return;
+      }
+      if (quiz.correctAnswers.length === 1) {
+        if (quiz.selected[0] === optionValue) {
+          quiz.selected = [];
+        } else {
+          quiz.selected = [optionValue];
+        }
+        return;
+      }
+      const selections = new Set(quiz.selected);
+
+      if (selections.has(optionValue)) {
+        selections.delete(optionValue);
+      } else {
+        if (selections.size < quiz.correctAnswers.length) {
+          selections.add(optionValue);
+        }
+      }
+      quiz.selected = Array.from(selections);
+    },
     finishLesson() {
       this.isSummaryPage = true;
     },
@@ -85,6 +116,7 @@ createApp({
     },
   },
   mounted() {
+    console.log("Initial Quiz Data:", this.digestPages);
     this.$nextTick(() => {
       initKeywordTooltips(document.querySelector('.pml-main'));
       this.typesetMath();

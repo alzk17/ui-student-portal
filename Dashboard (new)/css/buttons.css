@@ -123,12 +123,6 @@
   }
 }
 
-.portal-btn3d:active {
-  transform: translateY(2px);
-  box-shadow: 0 0 0 0 var(--btn-color-lip);
-}
-
-
 /* ================================
    3D Color Variants
 ================================= */
@@ -177,6 +171,14 @@
   --btn-border-hover: #999999;
 }
 
+.portal-btn3d--white:disabled {
+  --btn-color: var(--grey-100);
+  --btn-color-hover: var(--grey-100);
+  --btn-color-lip: var(--grey-300);
+  --btn-color-text: var(--grey-500);
+  --btn-border-color: var(--grey-200);
+}
+
 /* Black */
 .portal-btn3d--black {
   --btn-color: #303030;
@@ -186,6 +188,27 @@
 }
 
 
+.portal-btn3d:active {
+  transform: translateY(2px);
+  box-shadow: 0 0 0 0 var(--btn-color-lip);
+}
+
+.portal-btn3d:disabled:hover {
+  background-color: var(--btn-color);
+  border-color: var(--btn-border-color);
+  box-shadow: 0 4px 0 0 var(--btn-color-lip);
+  cursor: not-allowed;
+}
+
+.portal-btn3d:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.portal-btn3d:disabled:active {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 0 0 var(--btn-color-lip);
+}
 
 /* =====================================
    Accessibility: Focus Ring

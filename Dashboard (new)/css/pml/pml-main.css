@@ -106,6 +106,10 @@ body {
   font-size: 1.125rem;
 }
 
+.digest-quiz-question__text img {
+  user-select: none;
+}
+
 .digest-quiz-options {
   display: flex;
   gap: 12px;
@@ -232,6 +236,18 @@ body {
 
 .digest-quiz-choice .digest-quiz-choice__label {
   margin-left: 0px; /* Leaves space for the icon */
+}
+
+.digest-quiz-block.is-revealed .digest-quiz-choice {
+  opacity: 0.65;
+  transition: opacity 0.3s, transform 0.3s;
+  pointer-events: none;
+}
+
+.digest-quiz-block.is-revealed .digest-quiz-choice.is-revealed-correct,
+.digest-quiz-block.is-revealed .digest-quiz-choice.is-selected {
+  opacity: 1;
+  cursor: not-allowed;
 }
 
 /*--- Summary Page ---*/

@@ -97,7 +97,7 @@
                             </template>
                             <!-- If it's a QUIZ page -->
                             <template v-else-if="page.type === 'quiz'">
-                                <div class="digest-quiz-block">
+                                <div class="digest-quiz-block" :class="{ 'is-revealed': page.quiz.revealed }">
                                     <div class="digest-quiz-question__text">
                                         <p><strong>{{ page.quiz.question }}</strong></p>
                                         <p style="text-align: center;">
@@ -115,8 +115,8 @@
                                             'is-incorrect': page.quiz.revealed && page.quiz.selected.includes(option.value) && !page.quiz.correctAnswers.includes(option.value),
                                             'is-revealed-correct': page.quiz.revealed && page.quiz.correctAnswers.includes(option.value) && !page.quiz.selected.includes(option.value)
                                             }"
+                                            @click.prevent="selectOption(page.quiz, option.value)"
                                         >
-                                            <!-- Icon slot -->
                                             <span v-if="page.quiz.revealed" class="digest-quiz-choice__icon">
                                             <i
                                                 v-if="page.quiz.correctAnswers.includes(option.value)"
@@ -128,15 +128,15 @@
                                             ></i>
                                             </span>
                                             <input
-                                            type="checkbox"
-                                            :value="option.value"
-                                            v-model="page.quiz.selected"
-                                            class="digest-quiz-choice__input"
-                                            :disabled="page.quiz.revealed ||
-                                                (
-                                                page.quiz.selected.length >= page.quiz.correctAnswers.length &&
-                                                !page.quiz.selected.includes(option.value)
-                                                )"
+                                                type="checkbox"
+                                                :value="option.value"
+                                                :checked="page.quiz.selected.includes(option.value)"
+                                                class="digest-quiz-choice__input"
+                                                :disabled="page.quiz.revealed ||
+                                                    (
+                                                    page.quiz.selected.length >= page.quiz.correctAnswers.length &&
+                                                    !page.quiz.selected.includes(option.value)
+                                                    )"
                                             />
                                             <span class="digest-quiz-choice__label" v-html="option.label"></span>
                                         </label>
@@ -192,27 +192,44 @@
                 >
                 <i class="fa fa-bug"></i>
                 </button>
-                <button
-                class="portal-btn3d portal-btn3d--white pml-footer__btn--continue"
-                aria-label="Continue"
-                @click="revealNextPage"
-                @touchstart=""
-                :disabled="isLastPage"
-                v-if="!isLastPage"
-                type="button"
-                >
-                Continue
-                </button>
-                <button
-                class="portal-btn3d portal-btn3d--white pml-footer__btn--continue"
-                aria-label="Finish Lesson"
-                v-if="isLastPage"
-                @click="finishLesson"
-                @touchstart=""
-                type="button"
-                >
-                Finish Lesson
-                </button>
+
+                <template v-if="activePage.type === 'quiz' && !activePage.quiz.revealed">
+                    <button
+                        class="portal-btn3d portal-btn3d--white pml-footer__btn--continue"
+                        aria-label="Check Answer"
+                        @click="checkAnswer"
+                        @touchstart=""
+                        :disabled="activePage.quiz.selected.length === 0"
+                        type="button"
+                    >
+                        Check answer
+                    </button>
+                </template>
+
+                <template v-else>
+                    <button
+                        v-if="!isLastPage"
+                        class="portal-btn3d portal-btn3d--white pml-footer__btn--continue"
+                        aria-label="Continue"
+                        @click="revealNextPage"
+                        @touchstart=""
+                        type="button"
+                    >
+                        Continue
+                    </button>
+
+                    <button
+                        v-else
+                        class="portal-btn3d portal-btn3d--white pml-footer__btn--continue"
+                        aria-label="Finish Lesson"
+                        @click="finishLesson"
+                        @touchstart=""
+                        type="button"
+                    >
+                        Finish lesson
+                    </button>
+                </template>
+
                 <div class="pml-footer__side"></div>
             </footer>
         </div>
