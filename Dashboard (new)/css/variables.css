@@ -12,10 +12,16 @@
   --blue-700:       #294bc6;   /* Deep lip / shadow blue */
 
   /* === Red Palette === */
-  --red-50:         #fff3f3;   /* Light red background */
-  --red-500:        #ef5350;   /* Main red */
-  --red-600:        #d04040;   /* Hover red */
-  --red-700:        #b71c1c;   /* Deep lip / shadow red */
+  --red-50:   #fff3f3;   /* Light red background */
+  --red-100:  #ffe5e5;   /* Optional lighter hover */
+  --red-200:  #ffc9c9;   /* Soft hover or badge fill */
+  --red-300:  #ff9e9e;   /* Subtle attention state */
+  --red-400:  #f97a7a;   /* Hover tint (optional) */
+  --red-500:  #ef5350;   /* Main red */
+  --red-600:  #d04040;   /* Hover red */
+  --red-700:  #b71c1c;   /* Deep lip / shadow red */
+  --red-800:  #9a1a1a;   /* Optional pressed / dark state */
+  --red-900:  #7b1515;   /* Optional darkest tone */
 
   /* === Green Palette === */
   --green-50:       #eafaf1;   /* Light green background */

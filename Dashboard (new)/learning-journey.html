@@ -82,70 +82,107 @@
                 <!-- Learning Content -->
                 <section class="pml-main__container" v-if="!isSummaryPage">
                 <div class="pml-main__lesson-body">
-                    <div class="pml-section--digest" data-type="lesson" :data-id="lessonId">
-                        <div
-                        v-for="(page, idx) in digestPages"
+                    <div
+                    class="pml-section--digest"
+                    v-if="mode === 'digest'"
+                    data-type="lesson"
+                    :data-id="lessonId"
+                    >
+                    <div
+                        v-for="(page, idx) in lessonPages"
                         :key="idx"
                         class="digest-page"
                         :class="{ 'last-visible': idx === currentPage }"
                         v-show="idx <= currentPage"
-                        >
-                            <!-- If it's a CONTENT page -->
-                            <template v-if="page.type === 'content'">
-                                <h2 v-if="page.title">{{ page.title }}</h2>
-                                <div v-html="page.content"></div>
-                            </template>
-                            <!-- If it's a QUIZ page -->
-                            <template v-else-if="page.type === 'quiz'">
-                                <div class="digest-quiz-block" :class="{ 'is-revealed': page.quiz.revealed }">
-                                    <div class="digest-quiz-question__text">
-                                        <p><strong>{{ page.quiz.question }}</strong></p>
-                                        <p style="text-align: center;">
-                                            <img :src="page.quiz.img" style="width: 350px;">
-                                        </p>
-                                    </div>
-                                    <div class="digest-quiz-options" role="list">
-                                        <label
-                                            v-for="option in page.quiz.options"
-                                            :key="option.value"
-                                            class="digest-quiz-choice"
-                                            :class="{
-                                            'is-selected': page.quiz.selected && page.quiz.selected.includes(option.value),
-                                            'is-correct': page.quiz.revealed && page.quiz.correctAnswers.includes(option.value),
-                                            'is-incorrect': page.quiz.revealed && page.quiz.selected.includes(option.value) && !page.quiz.correctAnswers.includes(option.value),
-                                            'is-revealed-correct': page.quiz.revealed && page.quiz.correctAnswers.includes(option.value) && !page.quiz.selected.includes(option.value)
-                                            }"
-                                            @click.prevent="selectOption(page.quiz, option.value)"
-                                        >
-                                            <span v-if="page.quiz.revealed" class="digest-quiz-choice__icon">
-                                            <i
-                                                v-if="page.quiz.correctAnswers.includes(option.value)"
-                                                class="fa-solid fa-check"
-                                            ></i>
-                                            <i
-                                                v-else-if="page.quiz.selected.includes(option.value)"
-                                                class="fa-solid fa-xmark"
-                                            ></i>
-                                            </span>
-                                            <input
-                                                type="checkbox"
-                                                :value="option.value"
-                                                :checked="page.quiz.selected.includes(option.value)"
-                                                class="digest-quiz-choice__input"
-                                                :disabled="page.quiz.revealed ||
-                                                    (
-                                                    page.quiz.selected.length >= page.quiz.correctAnswers.length &&
-                                                    !page.quiz.selected.includes(option.value)
-                                                    )"
-                                            />
-                                            <span class="digest-quiz-choice__label" v-html="option.label"></span>
-                                        </label>
-                                    </div>
+                    >
+                        <template v-if="page.type === 'content'">
+                            <h2 v-if="page.title">{{ page.title }}</h2>
+                            <div v-html="page.content"></div>
+                        </template>
+                        <template v-else-if="page.type === 'quiz'">
+                            <div class="digest-quiz-block" :class="{ 'is-revealed': page.quiz.revealed }">
+                                <div class="digest-quiz-question__text">
+                                    <div v-html="page.quiz.question"></div>
                                 </div>
-                            </template>
-                        </div>
-                        <!-- Persistent Spacer -->
-                        <div class="pml-lesson__spacer"></div>
+                                <div class="digest-quiz-options" role="list">
+                                <label
+                                    v-for="option in page.quiz.options"
+                                    :key="option.value"
+                                    class="digest-quiz-choice"
+                                    :class="{ 
+                                    'is-selected': page.quiz.selected && page.quiz.selected.includes(option.value),
+                                    'is-correct': page.quiz.revealed && page.quiz.correctAnswers.includes(option.value),
+                                    'is-incorrect': page.quiz.revealed && page.quiz.selected.includes(option.value) && !page.quiz.correctAnswers.includes(option.value),
+                                    'is-revealed-correct': page.quiz.revealed && page.quiz.correctAnswers.includes(option.value) && !page.quiz.selected.includes(option.value)
+                                    }"
+                                    @click.prevent="selectOption(page.quiz, option.value)"
+                                >
+                                    <span v-if="page.quiz.revealed" class="digest-quiz-choice__icon">
+                                        <i v-if="page.quiz.correctAnswers.includes(option.value)" class="fa-solid fa-check"></i>
+                                        <i v-else-if="page.quiz.selected.includes(option.value)" class="fa-solid fa-xmark"></i>
+                                    </span>
+                                    <input
+                                        type="checkbox"
+                                        :value="option.value"
+                                        :checked="page.quiz.selected.includes(option.value)"
+                                        class="digest-quiz-choice__input"
+                                        :disabled="page.quiz.revealed"
+                                    />
+                                    <span class="digest-quiz-choice__label" v-html="option.label"></span>
+                                </label>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+                    <div class="pml-lesson__spacer"></div>
+                    </div>
+                    <div
+                        class="pml-section--application"
+                        v-if="mode === 'application'"
+                        data-type="application"
+                        :data-id="lessonId"
+                    >
+                    <div
+                        v-for="(page, idx) in lessonPages"
+                        :key="idx"
+                        class="application-page"
+                        v-show="idx === currentPage"
+                    >
+                        <template v-if="page.type === 'quiz'">
+                            <div class="digest-quiz-block" :class="{ 'is-revealed': page.quiz.revealed }">
+                                <div class="digest-quiz-question__text">
+                                    <div v-html="page.quiz.question"></div>
+                                </div>
+                                <div class="digest-quiz-options" role="list">
+                                <label
+                                    v-for="option in page.quiz.options"
+                                    :key="option.value"
+                                    class="digest-quiz-choice"
+                                    :class="{ 
+                                        'is-selected': page.quiz.selected && page.quiz.selected.includes(option.value),
+                                        'is-correct': page.quiz.revealed && page.quiz.correctAnswers.includes(option.value),
+                                        'is-incorrect': page.quiz.revealed && page.quiz.selected.includes(option.value) && !page.quiz.correctAnswers.includes(option.value),
+                                        'is-revealed-correct': page.quiz.revealed && page.quiz.correctAnswers.includes(option.value) && !page.quiz.selected.includes(option.value)
+                                    }"
+                                    @click.prevent="selectOption(page.quiz, option.value)"
+                                >
+                                    <span v-if="page.quiz.revealed" class="digest-quiz-choice__icon">
+                                        <i v-if="page.quiz.correctAnswers.includes(option.value)" class="fa-solid fa-check"></i>
+                                        <i v-else-if="page.quiz.selected.includes(option.value)" class="fa-solid fa-xmark"></i>
+                                    </span>
+                                    <input
+                                        type="checkbox"
+                                        :value="option.value"
+                                        :checked="page.quiz.selected.includes(option.value)"
+                                        class="digest-quiz-choice__input"
+                                        :disabled="page.quiz.revealed"
+                                    />
+                                    <span class="digest-quiz-choice__label" v-html="option.label"></span>
+                                </label>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
                     </div>
                 </div>
                 </section>

@@ -7,6 +7,7 @@ createApp({
       isSummaryPage: false,
       lessonId: 11,
       currentPage: 0,
+      mode: "application",
       digestPages: [
         {
           type: "content",
@@ -42,18 +43,53 @@ createApp({
           type: "content",
           content: `<p>Understanding equal groups helps us solve multiplication problems easily. It's the first step to learning more complex operations!</p>`
         }
+      ],
+      applicationPages: [
+        {
+          type: "quiz",
+          quiz: {
+            question: "<p>What is the value of \\(7 + 8\\)?</p>",
+            options: [
+              { value: "A", label: "\\(13\\)" },
+              { value: "B", label: "\\(15\\)" },
+              { value: "C", label: "\\(16\\)" },
+              { value: "D", label: "\\(17\\)" }
+            ],
+            correctAnswers: ["B"],
+            selected: [],
+            revealed: false
+          }
+        },
+        {
+          type: "quiz",
+          quiz: {
+            question: "<p>Which of the following are even numbers?</p>",
+            options: [
+              { value: "A", label: "\\(2\\)" },
+              { value: "B", label: "\\(3\\)" },
+              { value: "C", label: "\\(4\\)" },
+              { value: "D", label: "\\(5\\)" }
+            ],
+            correctAnswers: ["A", "C"],
+            selected: [],
+            revealed: false
+          }
+        }
       ]
     }
   },
   computed: {
+    lessonPages() {
+      return this.mode === "digest" ? this.digestPages : this.applicationPages;
+    },
     activePage() {
-      return this.digestPages[this.currentPage];
+      return this.lessonPages[this.currentPage];
     },
     isLastPage() {
-      return this.currentPage === this.digestPages.length - 1;
+      return this.currentPage === this.lessonPages.length - 1;
     },
     progressPercent() {
-      return Math.round(((this.currentPage + 1) / this.digestPages.length) * 100);
+      return Math.round(((this.currentPage + 1) / this.lessonPages.length) * 100);
     }
   },
   methods: {
@@ -68,7 +104,7 @@ createApp({
         this.$nextTick(() => {
           this.typesetMath();
 
-          // Find the DOM node of the newly revealed page
+          // Find the DOM node of the newly revealed page... digest-page can be a problem
           const pageSelector = `.digest-page:nth-child(${this.currentPage + 1})`;
           const pageEl = document.querySelector(pageSelector);
 
