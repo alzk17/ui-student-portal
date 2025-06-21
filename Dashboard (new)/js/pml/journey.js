@@ -7,7 +7,7 @@ createApp({
       isSummaryPage: false,
       lessonId: 11,
       currentPage: 0,
-      mode: "application",
+      mode: "digest",
       digestPages: [
         {
           type: "content",
@@ -28,7 +28,7 @@ createApp({
             question: "How many equal groups are there in the picture below?",
             img: "img/fraction-test3.svg",
             options: [
-              { value: "A", label: "\\(2\\)" },
+              { value: "A", label: "\\(7+5+3-5 \\times 18\\)" },
               { value: "B", label: "\\(3\\)" },
               { value: "C", label: "\\(4\\)" },
               { value: "D", label: "\\(5\\)" },
@@ -64,6 +64,30 @@ createApp({
           type: "quiz",
           quiz: {
             question: "<p>Which of the following are even numbers?</p>",
+            options: [
+              { value: "A", label: "\\(2\\)" },
+              { value: "B", label: "\\(3\\)" },
+              { value: "C", label: "\\(4\\)" },
+              { value: "D", label: "\\(5\\)" }
+            ],
+            correctAnswers: ["A", "C"],
+            selected: [],
+            revealed: false
+          }
+        },
+        {
+          type: "quiz",
+          quiz: {
+            question: `<p><span style="font-size:18px;">Find all the numbers that meets all the conditions below.</span></p>
+
+<ul style="margin-left: 40px;">
+	<li><span style="font-size:18px;">The number is less than \(40\) hundreds.</span></li>
+	<li><span style="font-size:18px;">All the digits are not the same.</span></li>
+	<li><span style="font-size:18px;">The tens digit is \(7\).</span></li>
+	<li><span style="font-size:18px;">The number is not an even number.</span></li>
+	<li><span style="font-size:18px;">The hundreds digit is twice the ones digit.</span></li>
+</ul>
+`,
             options: [
               { value: "A", label: "\\(2\\)" },
               { value: "B", label: "\\(3\\)" },

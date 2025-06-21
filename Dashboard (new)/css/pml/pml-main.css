@@ -157,6 +157,13 @@ body {
   /* If you want a subtle color or effect for the label, set it here */
 }
 
+.digest-quiz-choice__label img {
+  height: 120px;
+  object-fit: contain;
+  max-width: 100%;
+  display: inline-block;
+}
+
 .digest-quiz-choice.is-selected {
   background: var(--blue-50);
   color: var(--blue-500);
@@ -225,15 +232,15 @@ body {
 
 .digest-quiz-choice__icon {
   position: absolute;
-  left: 68px;
-  top: 20%;
-  transform: translateY(-50%);
-  width: 24px;
-  height: 24px;
+  top: 2px;
+  right: 2px;
+  width: 16px;
+  height: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
   pointer-events: none;
+  z-index: 2;
 }
 
 .digest-quiz-choice.is-correct .digest-quiz-choice__icon i {

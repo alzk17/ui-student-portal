@@ -101,9 +101,7 @@
                         </template>
                         <template v-else-if="page.type === 'quiz'">
                             <div class="digest-quiz-block" :class="{ 'is-revealed': page.quiz.revealed }">
-                                <div class="digest-quiz-question__text">
-                                    <div v-html="page.quiz.question"></div>
-                                </div>
+                                <div class="digest-quiz-question__text" v-html="page.quiz.question"></div>
                                 <div class="digest-quiz-options" role="list">
                                 <label
                                     v-for="option in page.quiz.options"
@@ -150,9 +148,7 @@
                     >
                         <template v-if="page.type === 'quiz'">
                             <div class="digest-quiz-block" :class="{ 'is-revealed': page.quiz.revealed }">
-                                <div class="digest-quiz-question__text">
-                                    <div v-html="page.quiz.question"></div>
-                                </div>
+                                <div class="digest-quiz-question__text" v-html="page.quiz.question"></div>
                                 <div class="digest-quiz-options" role="list">
                                 <label
                                     v-for="option in page.quiz.options"
