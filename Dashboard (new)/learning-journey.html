@@ -219,8 +219,8 @@
             <footer class="pml-footer pml-footer--fixed" v-if="!isSummaryPage">
                 <button
                 class="pml-footer__btn--report"
+                id="report-button"
                 aria-label="Report a problem"
-                @click="reportProblem"
                 type="button"
                 >
                 <i class="fa fa-bug"></i>
@@ -318,6 +318,34 @@
     <script src="https://lambda.in.th/assets/cusmike/toastr/toastr.min.js?v=1749953878"></script>
     <script src="https://lambda.in.th/assets_dashboard/js/tooltip.js?v=1749953878"></script>
     <script src="https://lambda.in.th/assets_dashboard/js/viewport-fix.js?v=1749953878"></script>
+
+    <script type="module">
+        import Shake, { ShakeScreen } from 'https://cdn.jsdelivr.net/npm/@shakebugs/browser@latest/+esm';
+        window.Shake = Shake;
+      
+        document.addEventListener('DOMContentLoaded', () => {
+          window.Shake.start('SxUWRrQizRwyanXIDJw3UiFva1HQhaICUOGIKAJf8C20pzc2xPeQeQc');
+          window.Shake.config.floatingButtonEnabled = false;
+          window.Shake.config.defaultScreen = ShakeScreen.NEW_TICKET;
+      
+            const questionId = document.getElementById('question_id');
+            const skuId = document.getElementById('sku');
+            const metadataFields = ['question_id', 'sku', 'subject', 'topic', 'email'];
+            metadataFields.forEach(id => {
+                const el = document.getElementById(id);
+                if (el && el.value) {
+                    window.Shake.setMetadata(id, el.value);
+                }
+            });
+
+            const reportBtn = document.getElementById('report-button');
+            if (reportBtn) {
+                reportBtn.addEventListener('click', () => {
+                    window.Shake.show(ShakeScreen.NEW_TICKET);
+                });
+            }
+        });
+    </script>
 
     <script>
         $(document).ready(function() {

@@ -53,7 +53,15 @@
   padding: 0;
 }
 
-.pml-footer__btn--report:hover,
-.pml-footer__btn--report:focus {
+.pml-footer__btn--report:hover {
   background: var(--grey-200-alpha60);
+}
+
+.pml-footer__btn--report:focus {
+  outline: none;
+}
+
+.pml-footer__btn--report:focus-visible {
+  outline: 2px solid var(--blue-500);
+  background: var(--blue-50);
 }
