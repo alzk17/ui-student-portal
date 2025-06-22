@@ -41,9 +41,17 @@
   padding: 0;
 }
 
-.pml-header__exit-btn:hover,
-.pml-header__exit-btn:focus {
+.pml-header__exit-btn:hover {
   background: var(--grey-200-alpha60);
+}
+
+.pml-header__exit-btn:focus {
+  outline: none;
+}
+
+.pml-header__exit-btn:focus-visible {
+  outline: 2px solid var(--blue-500);
+  background: var(--blue-50);
 }
 
 .pml-header__title {
@@ -53,7 +61,7 @@
   text-transform: uppercase;
   font-weight: 700;
   letter-spacing: 0.03em;
-  color: #141414;
+  color: var(--black-main);
 }
 
 .pml-header__side {
@@ -83,8 +91,8 @@
 
 .pml-header__progress-fill {
   height: 100%;
-  background: #375ce3;
+  background: var(--blue-500);
   border-radius: 4px;
-  width: 0%; /* JS can update this inline */
+  width: 0%;
   transition: width 0.3s;
 }

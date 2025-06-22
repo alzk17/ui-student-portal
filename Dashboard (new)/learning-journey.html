@@ -265,6 +265,43 @@
 
                 <div class="pml-footer__side"></div>
             </footer>
+
+            <!-- Overlay and Modal Dialog -->
+            <div
+                class="portal-modal-overlay"
+                :class="{ active: showExitModal }"
+                @click="closeExitModal"
+                tabindex="-1"
+            >
+            </div>
+            <div
+                id="exit-modal"
+                class="portal-modal"
+                :class="{ active: showExitModal }"
+                tabindex="-1"
+                @click.self="closeExitModal"
+                role="dialog"
+                aria-modal="true"
+                >
+                <div class="portal-modal-content exit-modal-content">
+                    <div class="modal-header-row">
+                    <h2 class="portal-modal-title exit-modal-title">Exit Practice?</h2>
+                    </div>
+
+                    <div class="modal-body portal-modal-body">
+                    <p>Your progress has been saved. Continue this practice anytime from your dashboard.</p>
+                    </div>
+
+                    <div class="portal-modal-actions exit-modal-actions">
+                    <button type="button" class="button button-3d lmd-grey" @click="closeExitModal">
+                        Cancel
+                    </button>
+                    <button class="button button-3d lmd-red" @click="exitLessonConfirmed">
+                        Exit practice
+                    </button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 

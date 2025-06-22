@@ -25,16 +25,16 @@ createApp({
         {
           type: "quiz",
           quiz: {
-            question: "How many equal groups are there in the picture below?",
+            question: "Which of the following numbers are even?</br>You may select more than one option.",
             img: "img/fraction-test3.svg",
             options: [
-              { value: "A", label: "\\(7+5+3-5 \\times 18\\)" },
-              { value: "B", label: "\\(3\\)" },
-              { value: "C", label: "\\(4\\)" },
-              { value: "D", label: "\\(5\\)" },
-              { value: "E", label: "\\(6\\)" }
+              { value: "A", label: "\\(11\\)" },
+              { value: "B", label: "\\(17\\)" },
+              { value: "C", label: "\\(27\\)" },
+              { value: "D", label: "\\(88\\)" },
+              { value: "E", label: "\\(42\\)" }
             ],
-            correctAnswers: ["A", "B"],
+            correctAnswers: ["D", "E"],
             selected: [],
             revealed: false
           }
@@ -99,7 +99,8 @@ createApp({
             revealed: false
           }
         }
-      ]
+      ],
+      showExitModal: false,
     }
   },
   computed: {
@@ -175,6 +176,16 @@ createApp({
         window.MathJax.typesetPromise();
       }
     },
+    exitLesson() {
+      this.showExitModal = true;
+    },
+    exitLessonConfirmed() {
+      // Example: Go back to dashboard
+      window.location.href = "/dashboard-child";
+    },
+    closeExitModal() {
+      this.showExitModal = false;
+    }
   },
   mounted() {
     console.log("Initial Quiz Data:", this.digestPages);
