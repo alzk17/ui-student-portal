@@ -7,7 +7,7 @@ createApp({
       isSummaryPage: false,
       lessonId: 11,
       currentPage: 0,
-      mode: "digest",
+      mode: "application",
       digestPages: [
         {
           type: "content",
@@ -57,7 +57,11 @@ createApp({
             ],
             correctAnswers: ["B"],
             selected: [],
-            revealed: false
+            revealed: false,
+            explanation: [
+              "To solve \\(7 + 8\\), add the numbers to get \\(15\\).",
+              "You can count on your fingers or use mental math."
+            ]
           }
         },
         {
@@ -72,7 +76,11 @@ createApp({
             ],
             correctAnswers: ["A", "C"],
             selected: [],
-            revealed: false
+            revealed: false,
+            explanation: [
+              "To solve \\(7 + 8\\), add the numbers to get \\(15\\).",
+              "You can count on your fingers or use mental math."
+            ]
           }
         },
         {
@@ -80,14 +88,14 @@ createApp({
           quiz: {
             question: `<p><span style="font-size:18px;">Find all the numbers that meets all the conditions below.</span></p>
 
-<ul style="margin-left: 40px;">
-	<li><span style="font-size:18px;">The number is less than \(40\) hundreds.</span></li>
-	<li><span style="font-size:18px;">All the digits are not the same.</span></li>
-	<li><span style="font-size:18px;">The tens digit is \(7\).</span></li>
-	<li><span style="font-size:18px;">The number is not an even number.</span></li>
-	<li><span style="font-size:18px;">The hundreds digit is twice the ones digit.</span></li>
-</ul>
-`,
+              <ul style="margin-left: 40px;">
+                <li><span style="font-size:18px;">The number is less than \(40\) hundreds.</span></li>
+                <li><span style="font-size:18px;">All the digits are not the same.</span></li>
+                <li><span style="font-size:18px;">The tens digit is \(7\).</span></li>
+                <li><span style="font-size:18px;">The number is not an even number.</span></li>
+                <li><span style="font-size:18px;">The hundreds digit is twice the ones digit.</span></li>
+              </ul>
+              `,
             options: [
               { value: "A", label: "\\(2\\)" },
               { value: "B", label: "\\(3\\)" },
@@ -96,11 +104,21 @@ createApp({
             ],
             correctAnswers: ["A", "C"],
             selected: [],
-            revealed: false
+            revealed: false,
+            explanation: [
+              "To solve \\(7 + 8\\), add the numbers to get \\(15\\).",
+              "You can count on your fingers or use mental math."
+            ]
           }
         }
       ],
       showExitModal: false,
+      showExplanationModal: false,
+      explanationSlides: [],
+      explanationSlideIndex: 0,
+      startTime: null,
+      endTime: null,
+      elapsedTime: 0
     }
   },
   computed: {
@@ -115,12 +133,26 @@ createApp({
     },
     progressPercent() {
       return Math.round(((this.currentPage + 1) / this.lessonPages.length) * 100);
-    }
+    },
+    formattedElapsedTime() {
+      // Fallback to 0 if not set yet
+      let ms = this.elapsedTime || 0;
+      let totalSeconds = Math.floor(ms / 1000);
+      let minutes = Math.floor(totalSeconds / 60);
+      let seconds = totalSeconds % 60;
+
+      // Show "X min Y sec"
+      return `${minutes} min ${seconds} sec`;
+    },
   },
   methods: {
     checkAnswer() {
       if (this.activePage.type === 'quiz') {
         this.activePage.quiz.revealed = true;
+        // Check if all selected answers are correct
+        const selected = this.activePage.quiz.selected.sort().join(',');
+        const correct = this.activePage.quiz.correctAnswers.sort().join(',');
+        this.activePage.quiz.isCorrect = (selected === correct);
       }
     },
     revealNextPage() {
@@ -169,6 +201,9 @@ createApp({
       quiz.selected = Array.from(selections);
     },
     finishLesson() {
+      this.endTime = Date.now();
+      this.elapsedTime = this.endTime - this.startTime;
+      if (this._timer) clearInterval(this._timer);
       this.isSummaryPage = true;
     },
     typesetMath() {
@@ -185,9 +220,38 @@ createApp({
     },
     closeExitModal() {
       this.showExitModal = false;
+    },
+    // Modals
+    openExplanationModal() {
+      let explanation = this.activePage.quiz.explanation;
+      if (typeof explanation === 'string') {
+        // If using [new-pagination] in backend, split here:
+        this.explanationSlides = explanation.split('[new-pagination]');
+      } else {
+        this.explanationSlides = explanation || [];
+      }
+      this.explanationSlideIndex = 0;
+      this.showExplanationModal = true;
+    },
+    closeExplanationModal() {
+      this.showExplanationModal = false;
+    },
+    nextExplanationSlide() {
+      if (this.explanationSlideIndex < this.explanationSlides.length - 1) {
+        this.explanationSlideIndex++;
+      }
+    },
+    prevExplanationSlide() {
+      if (this.explanationSlideIndex > 0) {
+        this.explanationSlideIndex--;
+      }
+    },
+    goToExplanationSlide(idx) {
+      this.explanationSlideIndex = idx;
     }
   },
   mounted() {
+    this.startTime = Date.now();
     console.log("Initial Quiz Data:", this.digestPages);
     this.$nextTick(() => {
       initKeywordTooltips(document.querySelector('.pml-main'));

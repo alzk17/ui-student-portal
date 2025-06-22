@@ -20,8 +20,6 @@
     <link rel="stylesheet" href="css/pml/pml-footer.css">
     <link rel="stylesheet" href="css/pml/pml-main.css">
     
-
-
     <script>
         MathJax = {
         options: {
@@ -194,7 +192,7 @@
                         <div class="pml-summary__stats-row">
                             <div class="pml-summary__stat-box">
                                 <div class="pml-summary__stat-title">Time Taken</div>
-                                <div class="pml-summary__stat-value">999 min 25 sec</div>
+                                <div class="pml-summary__stat-value">{{ formattedElapsedTime }}</div>
                                 <div class="pml-summary__stat-img">
                                 <img src="Icons/hourglass-3.svg" alt="Hourglass" />
                                 </div>
@@ -216,63 +214,99 @@
             </main>
 
             <!-- FOOTER BAR -->
-            <footer class="pml-footer pml-footer--fixed" v-if="!isSummaryPage">
-                <button
+             
+            <footer
+            class="pml-footer pml-footer--fixed"
+            :class="{
+                'pml-footer--feedback-correct': mode === 'application' && activePage.type === 'quiz' && activePage.quiz.revealed && activePage.quiz.isCorrect,
+                'pml-footer--feedback-incorrect': mode === 'application' && activePage.type === 'quiz' && activePage.quiz.revealed && !activePage.quiz.isCorrect
+            }"
+            v-if="!isSummaryPage"
+            >
+            <button
                 class="pml-footer__btn--report"
                 id="report-button"
                 aria-label="Report a problem"
                 type="button"
-                >
+            >
                 <i class="fa fa-bug"></i>
-                </button>
+            </button>
 
-                <template v-if="activePage.type === 'quiz' && !activePage.quiz.revealed">
+            <!-- APPLICATION PAGE FEEDBACK (when quiz is revealed) -->
+            <template v-if="mode === 'application' && activePage.type === 'quiz' && activePage.quiz.revealed">
+                <div class="pml-footer__feedback-group">
+                    <span class="pml-footer__feedback-message">
+                    {{ activePage.quiz.isCorrect ? 'Great job! 🎉' : 'Give it another try next time.' }}
+                    </span>
+                    <div class="pml-footer__feedback-actions">
                     <button
-                        class="portal-btn3d portal-btn3d--white pml-footer__btn--continue"
-                        aria-label="Check Answer"
-                        @click="checkAnswer"
-                        @touchstart=""
-                        :disabled="activePage.quiz.selected.length === 0"
-                        type="button"
+                        class="portal-btn3d portal-btn3d--white pml-footer__btn--duo"
+                        @click="openExplanationModal"
                     >
-                        Check answer
+                        Explanation
                     </button>
-                </template>
-
-                <template v-else>
                     <button
                         v-if="!isLastPage"
-                        class="portal-btn3d portal-btn3d--white pml-footer__btn--continue"
-                        aria-label="Continue"
+                        class="portal-btn3d portal-btn3d--white pml-footer__btn--duo"
                         @click="revealNextPage"
-                        @touchstart=""
-                        type="button"
                     >
                         Continue
                     </button>
-
                     <button
                         v-else
-                        class="portal-btn3d portal-btn3d--white pml-footer__btn--continue"
-                        aria-label="Finish Lesson"
+                        class="portal-btn3d portal-btn3d--white pml-footer__btn--duo"
                         @click="finishLesson"
-                        @touchstart=""
-                        type="button"
                     >
-                        Finish lesson
+                        Finish practice
                     </button>
-                </template>
+                    </div>
+                </div>
+            </template>
 
-                <div class="pml-footer__side"></div>
+            <!-- DEFAULT: Digest page, or Application (quiz not revealed) -->
+            <template v-else>
+                <template v-if="activePage.type === 'quiz' && !activePage.quiz.revealed">
+                <button
+                    class="portal-btn3d portal-btn3d--white pml-footer__btn--continue"
+                    aria-label="Check Answer"
+                    @click="checkAnswer"
+                    :disabled="activePage.quiz.selected.length === 0"
+                    type="button"
+                >
+                    Check answer
+                </button>
+                </template>
+                <template v-else>
+                <button
+                    v-if="!isLastPage"
+                    class="portal-btn3d portal-btn3d--white pml-footer__btn--continue"
+                    aria-label="Continue"
+                    @click="revealNextPage"
+                    type="button"
+                >
+                    Continue
+                </button>
+                <button
+                    v-else
+                    class="portal-btn3d portal-btn3d--white pml-footer__btn--continue"
+                    aria-label="Finish Lesson"
+                    @click="finishLesson"
+                    type="button"
+                >
+                    Finish lesson
+                </button>
+                </template>
+            </template>
+
+            <div class="pml-footer__side"></div>
             </footer>
 
             <!-- Overlay and Modal Dialog -->
             <div
-                class="portal-modal-overlay"
-                :class="{ active: showExitModal }"
-                @click="closeExitModal"
-                tabindex="-1"
-            >
+            class="portal-modal-overlay"
+            :class="{ active: showExitModal || showExplanationModal }"
+            @click="showExitModal ? closeExitModal() : showExplanationModal ? closeExplanationModal() : null"
+            tabindex="-1">
             </div>
             <div
                 id="exit-modal"
@@ -298,6 +332,53 @@
                     </button>
                     <button class="button button-3d lmd-red" @click="exitLessonConfirmed">
                         Exit practice
+                    </button>
+                    </div>
+                </div>
+            </div>
+            <div
+                class="portal-modal"
+                id="explanation-modal"
+                :class="{ active: showExplanationModal }"
+                tabindex="-1"
+                @click.self="closeExplanationModal"
+                role="dialog"
+                aria-modal="true"
+                >
+                <div class="portal-modal-content explanation-modal-content">
+                    <div class="modal-header-row">
+                    <h2 class="portal-modal-title explanation-modal-title">Explanation</h2>
+                    <div class="exit-button-wrapper">
+                        <button type="button" class="btn-close-modal" aria-label="Close modal" @click="closeExplanationModal">
+                        <i class="fa-solid fa-xmark"></i>
+                        </button>
+                    </div>
+                    </div>
+                    <div class="modal-slider">
+                    <div
+                        v-for="(slide, idx) in explanationSlides"
+                        :key="idx"
+                        class="modal-slide"
+                        :class="{ active: idx === explanationSlideIndex }"
+                    >
+                        <div v-html="slide"></div>
+                    </div>
+                    </div>
+                    <div class="modal-navigation-row" v-if="explanationSlides.length > 1">
+                    <button class="btn-prev" aria-label="Previous" :disabled="explanationSlideIndex === 0" @click="prevExplanationSlide">
+                        <i class="fa-solid fa-chevron-left"></i>
+                    </button>
+                    <div class="modal-pagination-dots">
+                        <span
+                        v-for="(dot, idx) in explanationSlides"
+                        :key="idx"
+                        class="dot"
+                        :class="{ active: idx === explanationSlideIndex }"
+                        @click="goToExplanationSlide(idx)"
+                        ></span>
+                    </div>
+                    <button class="btn-next" aria-label="Next" :disabled="explanationSlideIndex === explanationSlides.length - 1" @click="nextExplanationSlide">
+                        <i class="fa-solid fa-chevron-right"></i>
                     </button>
                     </div>
                 </div>

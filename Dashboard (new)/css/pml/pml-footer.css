@@ -65,3 +65,52 @@
   outline: 2px solid var(--blue-500);
   background: var(--blue-50);
 }
+
+/* Application Quiz Feedback Footer */
+.pml-footer--feedback-correct {
+  background: var(--green-50);
+}
+
+.pml-footer--feedback-incorrect {
+  background: var(--red-50);
+}
+
+.pml-footer__feedback-group {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Center as a group horizontally */
+  gap: 32px; /* Adjust spacing between message and button group */
+  width: 100%; /* Optional: makes it take up the full footer width */
+}
+
+.pml-footer__feedback-message {
+  font-size: 1.125rem;
+  font-weight: 500;
+  min-width: 180px; /* To keep message readable; adjust as needed */
+}
+
+.pml-footer__feedback-actions {
+  display: flex;
+  gap: 12px; /* Space between Explanation and Continue/Finish */
+}
+
+.pml-footer__btn--duo {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin: 0 auto;
+  border-radius: var(--radius-lg);
+  padding: 0 12px;
+  user-select: none !important;
+}
+
+@media (max-width: 600px) {
+  .pml-footer__feedback-group {
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+  }
+  .pml-footer__feedback-message {
+    text-align: center;
+    min-width: unset;
+  }
+}
