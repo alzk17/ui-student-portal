@@ -7,7 +7,7 @@ createApp({
       isSummaryPage: false,
       lessonId: 11,
       currentPage: 0,
-      mode: "application",
+      mode: "digest",
       digestPages: [
         {
           type: "content",
@@ -89,9 +89,9 @@ createApp({
             question: `<p><span style="font-size:18px;">Find all the numbers that meets all the conditions below.</span></p>
 
               <ul style="margin-left: 40px;">
-                <li><span style="font-size:18px;">The number is less than \(40\) hundreds.</span></li>
+                <li><span style="font-size:18px;">The number is less than \\(40\\) hundreds.</span></li>
                 <li><span style="font-size:18px;">All the digits are not the same.</span></li>
-                <li><span style="font-size:18px;">The tens digit is \(7\).</span></li>
+                <li><span style="font-size:18px;">The tens digit is \\(7\\).</span></li>
                 <li><span style="font-size:18px;">The number is not an even number.</span></li>
                 <li><span style="font-size:18px;">The hundreds digit is twice the ones digit.</span></li>
               </ul>
