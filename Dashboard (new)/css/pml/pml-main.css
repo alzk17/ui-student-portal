@@ -271,6 +271,37 @@ body {
   cursor: not-allowed;
 }
 
+.digest-explanation-toggle-btn {
+  display: inline-block;
+  margin: 16px 0;
+  background: #edf2ff;
+  border: 1px solid #91a3fa;
+  color: #375ce3;
+  padding: 6px 16px;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.digest-explanation-toggle-btn:hover,
+.digest-explanation-toggle-btn:focus {
+  background: #d9e6fd;
+}
+.digest-explanation-content {
+  background: #fafbff;
+  border-left: 4px solid #375ce3;
+  padding: 16px 24px;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.digest-explanation-toggle-row {
+  min-height: 48px; /* or whatever your button height is */
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* or center if you want */
+}
+
 /*--- Summary Page ---*/
 .pml-summary__container {
   display: flex;

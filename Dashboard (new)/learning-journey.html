@@ -101,31 +101,48 @@
                             <div class="digest-quiz-block" :class="{ 'is-revealed': page.quiz.revealed }">
                                 <div class="digest-quiz-question__text" v-html="page.quiz.question"></div>
                                 <div class="digest-quiz-options" role="list">
-                                <label
-                                    v-for="option in page.quiz.options"
-                                    :key="option.value"
-                                    class="digest-quiz-choice"
-                                    :class="{ 
-                                    'is-selected': page.quiz.selected && page.quiz.selected.includes(option.value),
-                                    'is-correct': page.quiz.revealed && page.quiz.correctAnswers.includes(option.value),
-                                    'is-incorrect': page.quiz.revealed && page.quiz.selected.includes(option.value) && !page.quiz.correctAnswers.includes(option.value),
-                                    'is-revealed-correct': page.quiz.revealed && page.quiz.correctAnswers.includes(option.value) && !page.quiz.selected.includes(option.value)
-                                    }"
-                                    @click.prevent="selectOption(page.quiz, option.value)"
-                                >
-                                    <span v-if="page.quiz.revealed" class="digest-quiz-choice__icon">
-                                        <i v-if="page.quiz.correctAnswers.includes(option.value)" class="fa-solid fa-check"></i>
-                                        <i v-else-if="page.quiz.selected.includes(option.value)" class="fa-solid fa-xmark"></i>
-                                    </span>
-                                    <input
-                                        type="checkbox"
-                                        :value="option.value"
-                                        :checked="page.quiz.selected.includes(option.value)"
-                                        class="digest-quiz-choice__input"
-                                        :disabled="page.quiz.revealed"
-                                    />
-                                    <span class="digest-quiz-choice__label" v-html="option.label"></span>
-                                </label>
+                                    <label
+                                        v-for="option in page.quiz.options"
+                                        :key="option.value"
+                                        class="digest-quiz-choice"
+                                        :class="{ 
+                                        'is-selected': page.quiz.selected && page.quiz.selected.includes(option.value),
+                                        'is-correct': page.quiz.revealed && page.quiz.correctAnswers.includes(option.value),
+                                        'is-incorrect': page.quiz.revealed && page.quiz.selected.includes(option.value) && !page.quiz.correctAnswers.includes(option.value),
+                                        'is-revealed-correct': page.quiz.revealed && page.quiz.correctAnswers.includes(option.value) && !page.quiz.selected.includes(option.value)
+                                        }"
+                                        @click.prevent="selectOption(page.quiz, option.value)"
+                                    >
+                                        <span v-if="page.quiz.revealed" class="digest-quiz-choice__icon">
+                                            <i v-if="page.quiz.correctAnswers.includes(option.value)" class="fa-solid fa-check"></i>
+                                            <i v-else-if="page.quiz.selected.includes(option.value)" class="fa-solid fa-xmark"></i>
+                                        </span>
+                                        <input
+                                            type="checkbox"
+                                            :value="option.value"
+                                            :checked="page.quiz.selected.includes(option.value)"
+                                            class="digest-quiz-choice__input"
+                                            :disabled="page.quiz.revealed"
+                                        />
+                                        <span class="digest-quiz-choice__label" v-html="option.label"></span>
+                                    </label>
+                                </div>
+
+                                <!-- Inside the digest-quiz-block, after the options -->
+                                <div class="digest-explanation-toggle-row">
+                                    <button
+                                        v-show="page.quiz.revealed && idx !== currentPage && page.quiz.explanation"
+                                        class="digest-explanation-toggle-btn"
+                                        @click="page.quiz.showExplanation = !page.quiz.showExplanation"
+                                        :aria-expanded="page.quiz.showExplanation"
+                                    >
+                                        {{ page.quiz.showExplanation ? 'Hide Explanation' : 'Show Explanation' }}
+                                    </button>
+                                </div>
+                                <div
+                                    v-if="page.quiz.revealed && page.quiz.showExplanation"
+                                    class="digest-explanation-content"
+                                    v-html="page.quiz.explanation">
                                 </div>
                             </div>
                         </template>
@@ -218,8 +235,8 @@
             <footer
             class="pml-footer pml-footer--fixed"
             :class="{
-                'pml-footer--feedback-correct': mode === 'application' && activePage.type === 'quiz' && activePage.quiz.revealed && activePage.quiz.isCorrect,
-                'pml-footer--feedback-incorrect': mode === 'application' && activePage.type === 'quiz' && activePage.quiz.revealed && !activePage.quiz.isCorrect
+                'pml-footer--feedback-correct': activePage.type === 'quiz' && activePage.quiz.revealed && activePage.quiz.isCorrect,
+                'pml-footer--feedback-incorrect': activePage.type === 'quiz' && activePage.quiz.revealed && !activePage.quiz.isCorrect
             }"
             v-if="!isSummaryPage"
             >
@@ -232,73 +249,86 @@
                 <i class="fa fa-bug"></i>
             </button>
 
-            <!-- APPLICATION PAGE FEEDBACK (when quiz is revealed) -->
-            <template v-if="mode === 'application' && activePage.type === 'quiz' && activePage.quiz.revealed">
+            <template v-if="activePage.type === 'quiz' && activePage.quiz.revealed && !activePage.quiz.showExplanation">
                 <div class="pml-footer__feedback-group">
-                    <span class="pml-footer__feedback-message">
+                <span class="pml-footer__feedback-message">
                     {{ activePage.quiz.isCorrect ? 'Great job! 🎉' : 'Give it another try next time.' }}
-                    </span>
-                    <div class="pml-footer__feedback-actions">
+                </span>
+                <div class="pml-footer__feedback-actions">
+                    <template v-if="activePage.quiz.explanation">
+                        <button
+                            v-if="mode === 'digest'"
+                            class="portal-btn3d portal-btn3d--white pml-footer__btn--duo"
+                            @click="activePage.quiz.showExplanation = true"
+                        >
+                            Explanation
+                        </button>
+                        <button
+                            v-else
+                            class="portal-btn3d portal-btn3d--white pml-footer__btn--duo"
+                            @click="openExplanationModal"
+                        >
+                            Explanation
+                        </button>
+                    </template>
                     <button
-                        class="portal-btn3d portal-btn3d--white pml-footer__btn--duo"
-                        @click="openExplanationModal"
+                    v-if="!isLastPage"
+                    class="portal-btn3d portal-btn3d--white pml-footer__btn--duo"
+                    @click="revealNextPage"
                     >
-                        Explanation
+                    Continue
                     </button>
                     <button
-                        v-if="!isLastPage"
-                        class="portal-btn3d portal-btn3d--white pml-footer__btn--duo"
-                        @click="revealNextPage"
+                    v-else
+                    class="portal-btn3d portal-btn3d--white pml-footer__btn--duo"
+                    @click="finishLesson"
                     >
-                        Continue
+                    Finish lesson
                     </button>
-                    <button
-                        v-else
-                        class="portal-btn3d portal-btn3d--white pml-footer__btn--duo"
-                        @click="finishLesson"
-                    >
-                        Finish practice
-                    </button>
-                    </div>
+                </div>
                 </div>
             </template>
 
-            <!-- DEFAULT: Digest page, or Application (quiz not revealed) -->
-            <template v-else>
-                <template v-if="activePage.type === 'quiz' && !activePage.quiz.revealed">
-                <button
-                    class="portal-btn3d portal-btn3d--white pml-footer__btn--continue"
-                    aria-label="Check Answer"
-                    @click="checkAnswer"
-                    :disabled="activePage.quiz.selected.length === 0"
-                    type="button"
-                >
-                    Check answer
-                </button>
-                </template>
-                <template v-else>
-                <button
-                    v-if="!isLastPage"
-                    class="portal-btn3d portal-btn3d--white pml-footer__btn--continue"
-                    aria-label="Continue"
-                    @click="revealNextPage"
-                    type="button"
-                >
-                    Continue
-                </button>
-                <button
-                    v-else
-                    class="portal-btn3d portal-btn3d--white pml-footer__btn--continue"
-                    aria-label="Finish Lesson"
-                    @click="finishLesson"
-                    type="button"
-                >
-                    Finish lesson
-                </button>
-                </template>
-            </template>
+  <!-- Default footer: appears if quiz is revealed and showExplanation is true, or if not revealed -->
+  <template v-else>
+    <template v-if="activePage.type === 'quiz' && !activePage.quiz.revealed">
+      <button
+        class="portal-btn3d portal-btn3d--white pml-footer__btn--continue"
+        aria-label="Check Answer"
+        @click="checkAnswer"
+        :disabled="activePage.quiz.selected.length === 0"
+        type="button"
+      >
+        Check answer
+      </button>
+    </template>
+    <template v-else>
+      <button
+        v-if="!isLastPage"
+        class="portal-btn3d portal-btn3d--white pml-footer__btn--continue"
+        aria-label="Continue"
+        @click="revealNextPage"
+        type="button"
+      >
+        Continue
+      </button>
+      <button
+        v-else
+        class="portal-btn3d portal-btn3d--white pml-footer__btn--continue"
+        aria-label="Finish Lesson"
+        @click="finishLesson"
+        type="button"
+      >
+        Finish lesson
+      </button>
+    </template>
+  </template>
 
-            <div class="pml-footer__side"></div>
+  <div class="pml-footer__side"></div>
+
+
+
+
             </footer>
 
             <!-- Overlay and Modal Dialog -->

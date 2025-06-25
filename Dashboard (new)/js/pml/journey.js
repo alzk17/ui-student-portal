@@ -36,7 +36,9 @@ createApp({
             ],
             correctAnswers: ["D", "E"],
             selected: [],
-            revealed: false
+            revealed: false,
+            showExplanation: false,  // <--- Add this!
+            explanation: `<p>This is where your explanation goes. You can include MathJax and HTML here.</p>`
           }
         },
         {
@@ -60,7 +62,7 @@ createApp({
             revealed: false,
             explanation: [
               "To solve \\(7 + 8\\), add the numbers to get \\(15\\).",
-              "You can count on your fingers or use mental math."
+              "We beat up cunts like yourself for money!"
             ]
           }
         },
@@ -199,6 +201,10 @@ createApp({
         }
       }
       quiz.selected = Array.from(selections);
+    },
+    showDigestExplanation(page) {
+      // Toggle showExplanation for the given page/quiz
+      page.quiz.showExplanation = true;
     },
     finishLesson() {
       this.endTime = Date.now();
