@@ -1,4 +1,5 @@
 import { initKeywordTooltips } from './keywordTooltip.js';
+import { setupMathliveKeyboard } from './mathliveKeyboard.js';
 const { createApp } = Vue;
 
 createApp({
@@ -34,10 +35,11 @@ createApp({
               { value: "D", label: "\\(88\\)" },
               { value: "E", label: "\\(42\\)" }
             ],
+            answerType: "MCQ",
             correctAnswers: ["D", "E"],
             selected: [],
             revealed: false,
-            showExplanation: false,  // <--- Add this!
+            showExplanation: false,
             explanation: `<p>This is where your explanation goes. You can include MathJax and HTML here.</p>`
           }
         },
@@ -50,6 +52,22 @@ createApp({
         {
           type: "quiz",
           quiz: {
+            answerType: "INP",
+            inputMode: "text", // plain text input
+            question: "<p>What is the capital city of Thailand?</p>",
+            inputValue: "",
+            correctAnswers: ["haMMer"],
+            ignoreCase: true,
+            selected: [],
+            revealed: false,
+            showExplanation: false,
+            explanation: "Bangkok is the capital city of Thailand."
+          }
+        },
+        {
+          type: "quiz",
+          quiz: {
+            answerType: "MCQ",
             question: "<p>What is the value of \\(7 + 8\\)?</p>",
             options: [
               { value: "A", label: "\\(13\\)" },
@@ -60,15 +78,14 @@ createApp({
             correctAnswers: ["B"],
             selected: [],
             revealed: false,
-            explanation: [
-              "To solve \\(7 + 8\\), add the numbers to get \\(15\\).",
-              "We beat up cunts like yourself for money!"
-            ]
+            showExplanation: false,
+            explanation: "To solve \\(7 + 8\\), add the numbers to get \\(15\\)."
           }
         },
         {
           type: "quiz",
           quiz: {
+            answerType: "MCQ",
             question: "<p>Which of the following are even numbers?</p>",
             options: [
               { value: "A", label: "\\(2\\)" },
@@ -79,38 +96,22 @@ createApp({
             correctAnswers: ["A", "C"],
             selected: [],
             revealed: false,
-            explanation: [
-              "To solve \\(7 + 8\\), add the numbers to get \\(15\\).",
-              "You can count on your fingers or use mental math."
-            ]
+            showExplanation: false,
+            explanation: "Even numbers are multiples of 2: 2 and 4."
           }
         },
         {
           type: "quiz",
           quiz: {
-            question: `<p><span style="font-size:18px;">Find all the numbers that meets all the conditions below.</span></p>
-
-              <ul style="margin-left: 40px;">
-                <li><span style="font-size:18px;">The number is less than \\(40\\) hundreds.</span></li>
-                <li><span style="font-size:18px;">All the digits are not the same.</span></li>
-                <li><span style="font-size:18px;">The tens digit is \\(7\\).</span></li>
-                <li><span style="font-size:18px;">The number is not an even number.</span></li>
-                <li><span style="font-size:18px;">The hundreds digit is twice the ones digit.</span></li>
-              </ul>
-              `,
-            options: [
-              { value: "A", label: "\\(2\\)" },
-              { value: "B", label: "\\(3\\)" },
-              { value: "C", label: "\\(4\\)" },
-              { value: "D", label: "\\(5\\)" }
-            ],
-            correctAnswers: ["A", "C"],
+            answerType: "INP",
+            inputMode: "text", // plain text input
+            question: "<p>What is the capital city of Thailand?</p>",
+            inputValue: "",
+            correctAnswers: ["Bangkok", "BANGKOK", "bangkok"],
             selected: [],
             revealed: false,
-            explanation: [
-              "To solve \\(7 + 8\\), add the numbers to get \\(15\\).",
-              "You can count on your fingers or use mental math."
-            ]
+            showExplanation: false,
+            explanation: "Bangkok is the capital city of Thailand."
           }
         }
       ],
@@ -120,7 +121,8 @@ createApp({
       explanationSlideIndex: 0,
       startTime: null,
       endTime: null,
-      elapsedTime: 0
+      elapsedTime: 0,
+      _timer: null
     }
   },
   computed: {
@@ -137,24 +139,51 @@ createApp({
       return Math.round(((this.currentPage + 1) / this.lessonPages.length) * 100);
     },
     formattedElapsedTime() {
-      // Fallback to 0 if not set yet
       let ms = this.elapsedTime || 0;
       let totalSeconds = Math.floor(ms / 1000);
       let minutes = Math.floor(totalSeconds / 60);
       let seconds = totalSeconds % 60;
-
-      // Show "X min Y sec"
       return `${minutes} min ${seconds} sec`;
     },
   },
   methods: {
     checkAnswer() {
       if (this.activePage.type === 'quiz') {
-        this.activePage.quiz.revealed = true;
-        // Check if all selected answers are correct
-        const selected = this.activePage.quiz.selected.sort().join(',');
-        const correct = this.activePage.quiz.correctAnswers.sort().join(',');
-        this.activePage.quiz.isCorrect = (selected === correct);
+        const quiz = this.activePage.quiz;
+        quiz.revealed = true;
+        
+        if (quiz.answerType === 'MCQ') {
+          // Check MCQ answers
+          const selected = quiz.selected.sort().join(',');
+          const correct = quiz.correctAnswers.sort().join(',');
+          quiz.isCorrect = (selected === correct);
+        } else if (quiz.answerType === 'INP') {
+          // Check input answers
+          const userAnswer = quiz.inputValue.trim();
+          if (quiz.ignoreCase) {
+            quiz.isCorrect = quiz.correctAnswers.some(ans => 
+              userAnswer.toLowerCase() === ans.toLowerCase()
+            );
+          } else {
+            quiz.isCorrect = quiz.correctAnswers.includes(userAnswer);
+          };
+        }
+      }
+    },
+    checkInputAnswer() {
+      if (this.activePage.type === 'quiz' && this.activePage.quiz.answerType === 'INP') {
+        const quiz = this.activePage.quiz;
+        const userAnswer = quiz.inputValue.trim();
+
+        if (userAnswer) {
+          if (quiz.ignoreCase) {
+            quiz.isCorrect = quiz.correctAnswers.some(ans =>
+              userAnswer.toLowerCase() === ans.toLowerCase()
+            );
+          } else {
+            quiz.isCorrect = quiz.correctAnswers.includes(userAnswer);
+          }
+        }
       }
     },
     revealNextPage() {
@@ -163,81 +192,97 @@ createApp({
         this.$nextTick(() => {
           this.typesetMath();
 
-          // Find the DOM node of the newly revealed page... digest-page can be a problem
-          const pageSelector = `.digest-page:nth-child(${this.currentPage + 1})`;
-          const pageEl = document.querySelector(pageSelector);
-
-          // Only scroll if the page element is found
-          if (pageEl) {
-            pageEl.scrollIntoView({
-              behavior: "smooth",
-              block: "start"
-            });
+          if (this.mode === 'digest') {
+            // For digest mode, scroll to the newly revealed page
+            const pageSelector = `.digest-page:nth-child(${this.currentPage + 1})`;
+            const pageEl = document.querySelector(pageSelector);
+            
+            if (pageEl) {
+              pageEl.scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+              });
+            }
           }
         });
       } else {
-        this.isSummaryPage = true;
+        this.finishLesson();
       }
     },
     selectOption(quiz, optionValue) {
       if (quiz.revealed) {
         return;
       }
+      
+      // Handle single-select vs multi-select
       if (quiz.correctAnswers.length === 1) {
+        // Single select
         if (quiz.selected[0] === optionValue) {
           quiz.selected = [];
         } else {
           quiz.selected = [optionValue];
         }
-        return;
-      }
-      const selections = new Set(quiz.selected);
-
-      if (selections.has(optionValue)) {
-        selections.delete(optionValue);
       } else {
-        if (selections.size < quiz.correctAnswers.length) {
-          selections.add(optionValue);
+        // Multi-select
+        const selections = new Set(quiz.selected);
+        
+        if (selections.has(optionValue)) {
+          selections.delete(optionValue);
+        } else {
+          // Allow selection up to the number of correct answers
+          if (selections.size < quiz.correctAnswers.length) {
+            selections.add(optionValue);
+          }
         }
+        quiz.selected = Array.from(selections);
       }
-      quiz.selected = Array.from(selections);
     },
     showDigestExplanation(page) {
-      // Toggle showExplanation for the given page/quiz
-      page.quiz.showExplanation = true;
+      if (page.quiz) {
+        page.quiz.showExplanation = true;
+      }
     },
     finishLesson() {
       this.endTime = Date.now();
       this.elapsedTime = this.endTime - this.startTime;
-      if (this._timer) clearInterval(this._timer);
+      if (this._timer) {
+        clearInterval(this._timer);
+      }
       this.isSummaryPage = true;
     },
     typesetMath() {
       if (window.MathJax && window.MathJax.typesetPromise) {
-        window.MathJax.typesetPromise();
+        window.MathJax.typesetPromise().catch(err => {
+          console.warn('MathJax typeset error:', err);
+        });
       }
     },
     exitLesson() {
       this.showExitModal = true;
     },
     exitLessonConfirmed() {
-      // Example: Go back to dashboard
       window.location.href = "/dashboard-child";
     },
     closeExitModal() {
       this.showExitModal = false;
     },
-    // Modals
+    // Modal methods
     openExplanationModal() {
       let explanation = this.activePage.quiz.explanation;
       if (typeof explanation === 'string') {
-        // If using [new-pagination] in backend, split here:
         this.explanationSlides = explanation.split('[new-pagination]');
+      } else if (Array.isArray(explanation)) {
+        this.explanationSlides = explanation;
       } else {
-        this.explanationSlides = explanation || [];
+        this.explanationSlides = [explanation || 'No explanation available'];
       }
       this.explanationSlideIndex = 0;
       this.showExplanationModal = true;
+      
+      // Typeset math in modal after it opens
+      this.$nextTick(() => {
+        this.typesetMath();
+      });
     },
     closeExplanationModal() {
       this.showExplanationModal = false;
@@ -245,23 +290,72 @@ createApp({
     nextExplanationSlide() {
       if (this.explanationSlideIndex < this.explanationSlides.length - 1) {
         this.explanationSlideIndex++;
+        this.$nextTick(() => {
+          this.typesetMath();
+        });
       }
     },
     prevExplanationSlide() {
       if (this.explanationSlideIndex > 0) {
         this.explanationSlideIndex--;
+        this.$nextTick(() => {
+          this.typesetMath();
+        });
       }
     },
     goToExplanationSlide(idx) {
-      this.explanationSlideIndex = idx;
+      if (idx >= 0 && idx < this.explanationSlides.length) {
+        this.explanationSlideIndex = idx;
+        this.$nextTick(() => {
+          this.typesetMath();
+        });
+      }
+    },
+    attachMathFieldListeners() {
+      this.$nextTick(() => {
+        const mathFields = document.querySelectorAll('math-field');
+        mathFields.forEach(mathField => {
+          // More robust check
+          if (!mathField._keyboardSetup) {
+            setupMathliveKeyboard(mathField);
+          }
+        });
+      });
+    }
+  },
+  watch: {
+    // Watch for changes in input values for INP type questions
+    'activePage.quiz.inputValue': {
+      handler() {
+        if (this.activePage && this.activePage.type === 'quiz' && 
+            this.activePage.quiz.answerType === 'INP') {
+          this.checkInputAnswer();
+        }
+      },
+      deep: true
     }
   },
   mounted() {
     this.startTime = Date.now();
-    console.log("Initial Quiz Data:", this.digestPages);
+
+    // Initialize timer for elapsed time tracking
+    this._timer = setInterval(() => {
+      if (this.startTime) {
+        this.elapsedTime = Date.now() - this.startTime;
+      }
+    }, 1000);
+
     this.$nextTick(() => {
-      initKeywordTooltips(document.querySelector('.pml-main'));
+      // Initialize components
+      const container = document.querySelector('.pml-main');
+      if (container) {
+        initKeywordTooltips(container);
+      }
       this.typesetMath();
+
+      // Setup MathLive keyboard for initial math fields
+      this.attachMathFieldListeners();
+
     });
   },
   updated() {
@@ -271,6 +365,13 @@ createApp({
         initKeywordTooltips(container);
       }
       this.typesetMath();
+      this.attachMathFieldListeners(); // This ensures new math fields get keyboard setup
     });
+  },
+  beforeUnmount() {
+    // Clean up timer
+    if (this._timer) {
+      clearInterval(this._timer);
+    }
   }
 }).mount('#lesson-app');
