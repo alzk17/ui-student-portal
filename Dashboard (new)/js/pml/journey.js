@@ -79,7 +79,7 @@ createApp({
             inputMode: "math", // plain text input
             question: "<p>What is the capital city of Thailand?</p>",
             inputValue: "",
-            correctAnswers: ["BAngkok"],
+            correctAnswers: ["\\frac56"],
             ignoreCase: true,
             selected: [],
             revealed: false,
