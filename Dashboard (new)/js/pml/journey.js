@@ -1,5 +1,6 @@
 import { initKeywordTooltips } from './keywordTooltip.js';
 import { setupMathliveKeyboard } from './mathliveKeyboard.js';
+import { initDndHandler } from './dnd-handler.js';
 const { createApp } = Vue;
 
 createApp({
@@ -8,7 +9,7 @@ createApp({
       isSummaryPage: false,
       lessonId: 11,
       currentPage: 0,
-      mode: "digest",
+      mode: "application",
       digestPages: [
         {
           type: "content",
@@ -52,11 +53,33 @@ createApp({
         {
           type: "quiz",
           quiz: {
+            answerType: "DND",
+            question: "<p>Arrange the following time durations from shortest to longest.</p>",
+            options: [
+              { value: "1", label: "\\(49\\) seconds" },
+              { value: "2", label: "\\(12\\) weeks" },
+              { value: "3", label: "\\(96\\) hours" },
+              { value: "4", label: "\\(4\\) days" },
+              { value: "5", label: "\\(126\\) minutes" }
+            ],
+            correctAnswers: [
+                              ["1", "2", "3", "4", "5"],
+                              ["5", "4", "3", "2", "1"]
+                            ],
+            selected: [],
+            revealed: false,
+            isCorrect: false,
+            explanation: "Time increases from seconds to minutes, hours, days, then weeks."
+          }
+        },
+        {
+          type: "quiz",
+          quiz: {
             answerType: "INP",
-            inputMode: "text", // plain text input
+            inputMode: "math", // plain text input
             question: "<p>What is the capital city of Thailand?</p>",
             inputValue: "",
-            correctAnswers: ["haMMer"],
+            correctAnswers: ["BAngkok"],
             ignoreCase: true,
             selected: [],
             revealed: false,
@@ -145,29 +168,64 @@ createApp({
       let seconds = totalSeconds % 60;
       return `${minutes} min ${seconds} sec`;
     },
+    isCheckDisabled() {
+      const quiz = this.activePage?.quiz;
+      if (!quiz) return true;
+
+      switch (quiz.answerType) {
+        case 'MCQ':
+          return quiz.selected.length === 0;
+        case 'INP':
+          return !quiz.inputValue.trim();
+        case 'DND':
+          return quiz.selected.length === 0;
+        default:
+          return true;
+      }
+    },
   },
   methods: {
     checkAnswer() {
       if (this.activePage.type === 'quiz') {
         const quiz = this.activePage.quiz;
         quiz.revealed = true;
-        
+
         if (quiz.answerType === 'MCQ') {
-          // Check MCQ answers
+          // Check MCQ answers (unordered)
           const selected = quiz.selected.sort().join(',');
           const correct = quiz.correctAnswers.sort().join(',');
           quiz.isCorrect = (selected === correct);
+
         } else if (quiz.answerType === 'INP') {
           // Check input answers
           const userAnswer = quiz.inputValue.trim();
           if (quiz.ignoreCase) {
-            quiz.isCorrect = quiz.correctAnswers.some(ans => 
+            quiz.isCorrect = quiz.correctAnswers.some(ans =>
               userAnswer.toLowerCase() === ans.toLowerCase()
             );
           } else {
             quiz.isCorrect = quiz.correctAnswers.includes(userAnswer);
-          };
-        }
+          }
+
+        } else if (quiz.answerType === 'DND') {
+            const selected = quiz.selected || [];
+            const correctOrders = quiz.correctAnswers || [];
+            
+            if (!correctOrders.length) {
+              // No correct answers specified: never allow correct
+              quiz.isCorrect = false;
+              console.warn('No correct answers specified for this DND question!');
+            } else if (Array.isArray(correctOrders[0])) {
+              quiz.isCorrect = correctOrders.some(
+                order => JSON.stringify(selected) === JSON.stringify(order)
+              );
+            } else {
+              quiz.isCorrect = JSON.stringify(selected) === JSON.stringify(correctOrders);
+            }
+            this.$nextTick(() => {
+              this.updateDndFeedbackClasses();
+            });
+          }
       }
     },
     checkInputAnswer() {
@@ -235,6 +293,55 @@ createApp({
           }
         }
         quiz.selected = Array.from(selections);
+      }
+    },
+    dndFeedbackClass(quiz, idx, value) {
+      if (!quiz.revealed) return '';
+      
+      let classes = ['answer-active', 'locked'];
+      if (quiz.isCorrect) {
+        classes.push('answer-correct');
+      } else {
+        classes.push('answer-incorrect');
+      }
+      return classes.join(' ');
+    },
+    updateDndFeedbackClasses() {
+      if (
+        this.activePage &&
+        this.activePage.type === 'quiz' &&
+        this.activePage.quiz.answerType === 'DND' &&
+        this.activePage.quiz.revealed
+      ) {
+        const quiz = this.activePage.quiz;
+        const answerContainer = document.getElementById('answerContainer');
+        const originalSlot = document.getElementById('originalSlot');
+
+        // Update answer boxes in the drop zone (answerContainer)
+        if (answerContainer) {
+          const answerBoxes = answerContainer.querySelectorAll('.answer-box');
+          answerBoxes.forEach((box, idx) => {
+            // All-or-nothing feedback: all correct or all incorrect
+            let classes = ['answer-active', 'locked'];
+            if (quiz.isCorrect) {
+              classes.push('answer-correct');
+            } else {
+              classes.push('answer-incorrect');
+            }
+            box.className = `answer-box ${classes.join(' ')}`;
+          });
+        }
+
+        // Lock answer boxes in the original slot (originalSlot)
+        if (originalSlot) {
+          const originalBoxes = originalSlot.querySelectorAll('.answer-box');
+          originalBoxes.forEach((box) => {
+            // Add "locked" if not already present
+            if (!box.classList.contains('locked')) {
+              box.classList.add('locked');
+            }
+          });
+        }
       }
     },
     showDigestExplanation(page) {
@@ -348,6 +455,8 @@ createApp({
     this.$nextTick(() => {
       // Initialize components
       const container = document.querySelector('.pml-main');
+      const original = document.getElementById('originalSlot');
+      const answer = document.getElementById('answerContainer');
       if (container) {
         initKeywordTooltips(container);
       }
@@ -356,6 +465,18 @@ createApp({
       // Setup MathLive keyboard for initial math fields
       this.attachMathFieldListeners();
 
+      if (original && answer) {
+        initDndHandler(original, answer);
+      }
+
+    });
+
+    document.addEventListener('dnd-updated', (e) => {
+      if (this.activePage && this.activePage.type === 'quiz' && 
+          this.activePage.quiz.answerType === 'DND') {
+        this.activePage.quiz.selected = e.detail.selected;
+        console.log('DND updated:', e.detail.selected); // temporary debug log
+      }
     });
   },
   updated() {
@@ -373,5 +494,7 @@ createApp({
     if (this._timer) {
       clearInterval(this._timer);
     }
+
+    document.removeEventListener('dnd-updated', this.handleDndUpdate);
   }
 }).mount('#lesson-app');

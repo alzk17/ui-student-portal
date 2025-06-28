@@ -346,6 +346,10 @@ input[disabled] {
   color: #b71c1c;
 }
 
+.locked {
+  pointer-events: none;
+}
+
 .digest-explanation-toggle-btn {
   display: inline-block;
   margin: 16px 0;

@@ -260,8 +260,24 @@
                                     </div>
                                 </div>
 
-
-
+                                <!-- DND block -->
+                                <div v-else-if="page.quiz.answerType === 'DND'" class="digest-dnd-block">
+                                    <div class="drop-zone" id="dropZone">
+                                        <div class="guideline top"></div>
+                                        <div class="answer-container" id="answerContainer"></div>
+                                        <div class="guideline bottom"></div>
+                                    </div>
+                                    <div class="word-slot" id="originalSlot">
+                                        <div
+                                        class="answer-box"
+                                        v-for="(option, i) in page.quiz.options"
+                                        :key="option.value"
+                                        :data-answer="option.value"
+                                        v-html="option.label"
+                                        ></div>
+                                    </div>
+                                </div>
+                                
                             </div>
                         </template>
 
@@ -366,7 +382,7 @@
                         class="portal-btn3d portal-btn3d--white pml-footer__btn--continue"
                         aria-label="Check Answer"
                         @click="checkAnswer"
-                        :disabled="(activePage.quiz.answerType === 'MCQ' && activePage.quiz.selected.length === 0) || (activePage.quiz.answerType === 'INP' && !activePage.quiz.inputValue.trim())"
+                        :disabled="isCheckDisabled"
                         type="button"
                     >
                         Check answer
