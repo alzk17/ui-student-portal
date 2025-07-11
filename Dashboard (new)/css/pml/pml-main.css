@@ -1,6 +1,35 @@
 body {
-    font-family: 'rooney-sans';
-    --keyboard-zindex: 1035;
+  font-family: 'rooney-sans';
+  --keyboard-zindex: 1035;
+  margin: 0;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+#wrapper {
+    position: relative;
+    float: none;
+    width: 100%;
+    margin: 0 auto;
+    /* background-color: var(--cnvs-body-bg);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);*/
+}
+@media (min-width: 1200px) {
+    body:not(.stretched) #wrapper {
+        max-width: 1200px;
+}
+}
+@media (min-width: 1400px) {
+    body:not(.stretched) #wrapper {
+        max-width: 1400px;
+}
+}
+.stretched #wrapper {
+    width: 100%;
+    margin: 0;
+    box-shadow: none;
 }
 
 [v-cloak] {

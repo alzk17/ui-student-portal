@@ -49,7 +49,8 @@
   --font-heading:   'Sarabun', sans-serif;
 
   /* === Spacing === */
-  --spacing-sm:     8px;
+  --spacing-xs:     8px;
+  --spacing-sm:     12px;
   --spacing-md:     16px;
   --spacing-lg:     24px;
   --spacing-xl:     32px;
@@ -60,4 +61,8 @@
   --radius-xl:      16px;
   --radius-pill:      999px;
   --shadow-card:    0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+[hidden] {
+  display: none !important;
 }

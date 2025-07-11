@@ -83,24 +83,16 @@ Route::group(['middleware' => ['Child']], function () {
             Route::prefix('{journeyId}/{subjectId}')
             ->where(['journeyId'=> '[0-9]+','subjectId'=> '[0-9]+'])
             ->group(function(){
-                Route::get('/', [Frontend\Child\JourneyCtrl::class, 'index']);
-                Route::get('/reset', [Frontend\Child\JourneyCtrl::class, 'learningReset']);
-                Route::get('/get/lessons', [Frontend\Child\JourneyCtrl::class, 'getLessons']);
-                Route::post('/set-latest', [Frontend\Child\JourneyCtrl::class, 'setLatest']);
-                Route::get('/learning', [Frontend\Child\JourneyCtrl::class, 'learning']);
-                Route::post('/learning/finished', [Frontend\Child\JourneyCtrl::class, 'finishedLearning']);
-                Route::post('/learning/answer', [Frontend\Child\JourneyCtrl::class, 'sendAnswer']);
-                Route::get('/examination/results', [Frontend\Child\JourneyCtrl::class, 'getExamination']);
-                
-
-                // Corrected route for getting user learning progress data
-                Route::get('/learning/get', [Frontend\Child\JourneyLearningCtrl::class, 'get']);
-
-                Route::get('/learning/lessons', [Frontend\Child\JourneyLearningCtrl::class, 'getLessons']);
-                Route::get('/learning/lesson/{lessonId}', [Frontend\Child\JourneyLearningCtrl::class, 'getLesson'])->where('lessonId', '[0-9]+');
-                Route::post('/learning/set-latest', [Frontend\Child\JourneyLearningCtrl::class, 'setLatest']);
-                Route::get('/learning/lesson/{lessonId}/digest-content', [Frontend\Child\JourneyLearningCtrl::class, 'getDigestContent'])
-                    ->where('lessonId', '[0-9]+');
+                Route::get('/',[Frontend\Child\JourneyCtrl::class,'index']);
+                Route::get('/reset',[Frontend\Child\JourneyCtrl::class,'learningReset']);
+                Route::get('/get/lessons',[Frontend\Child\JourneyCtrl::class,'getLessons']);
+                Route::post('/set-latest',[Frontend\Child\JourneyCtrl::class,'setLatest']);
+                Route::get('/learning',[Frontend\Child\JourneyCtrl::class,'learning']);
+                Route::post('/learning/finished',[Frontend\Child\JourneyCtrl::class,'finishedLearning']);
+                Route::post('/learning/answer',[Frontend\Child\JourneyCtrl::class,'sendAnswer']);
+                Route::get('/examination/results',[Frontend\Child\JourneyCtrl::class,'getExamination']);
+                // get learning data
+                Route::get('/get',[Frontend\Child\JourneyLearningCtrl::class,'getExamination'])->where(['lessonId'=>'[0-9]+']);
             });
         });
 

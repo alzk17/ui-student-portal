@@ -12,16 +12,53 @@ createApp({
       userId: Number(document.getElementById('lesson-app').dataset.userId),
       journeyId: Number(document.getElementById('lesson-app').dataset.journeyId),
       subjectId: Number(document.getElementById('lesson-app').dataset.subjectId),
-      lessonId: Number(document.getElementById('lesson-app').dataset.lessonId),
       lessons: [],
       learningProgress: null,
       currentLesson: null,
-      currentLessonIndex: 0,
       currentPractices: [],
       isSummaryPage: false,
+      lessonId: 11,
       currentPage: 0,
       mode: "digest",
-      digestPages: [],
+      digestPages: [
+        {
+          type: "content",
+          title: "Equal Groups",
+          content: `<p>Multiplication means making equal groups of things. For example, if you have \\(3\\) plates and each plate has \\(4\\) apples, that is \\(3\\) equal groups of \\(4\\).</p>
+                    <p>We can write this as:</p>
+                    <p style="text-align: center;">\\( \\large{ 3 \\times 4 } \\)</p>`
+        },
+        {
+          type: "content",
+          content: `<p>Here is an example of equal groups:</p>
+                    <p style="text-align:center;"><img src="img/fraction-test2.svg" style="width: 350px;"></p>
+                    <p>There are \\(4\\) groups and each group has \\(2\\) <span class="keyword" data-glossary="<b>Mass</b> is a measure of how much matter an object contains. It is usually measured in grams (g) or kilograms (kg).">circles</span>.</p>`
+        },
+        {
+          type: "quiz",
+          quiz: {
+            question: "Which of the following numbers are even?</br>You may select more than one option.",
+            img: "img/fraction-test3.svg",
+            options: [
+              { value: "A", label: "\\(11\\)" },
+              { value: "B", label: "\\(17\\)" },
+              { value: "C", label: "\\(27\\)" },
+              { value: "D", label: "\\(88\\)" },
+              { value: "E", label: "\\(42\\)" }
+            ],
+            answerType: "MCQ",
+            correctAnswers: ["D", "E"],
+            selected: [],
+            revealed: false,
+            showExplanation: false,
+            explanation: `<p>This is where your explanation goes. You can include MathJax and HTML here.</p>`
+          }
+        },
+        {
+          type: "content",
+          content: `<p>Understanding equal groups helps us solve multiplication problems easily. It's the first step to learning more complex operations!</p>`
+        }
+      ],
       applicationPages: [
         {
           type: "quiz",
@@ -111,7 +148,6 @@ createApp({
           }
         }
       ],
-      nextLessonId: null, // Add this line
       showExitModal: false,
       showExplanationModal: false,
       explanationSlides: [],
@@ -127,11 +163,7 @@ createApp({
       return this.mode === "digest" ? this.digestPages : this.applicationPages;
     },
     activePage() {
-      // Return the current lesson page if available, else return an empty object to avoid undefined
-      if (this.lessonPages && this.lessonPages.length > 0 && this.currentPage >= 0 && this.currentPage < this.lessonPages.length) {
-        return this.lessonPages[this.currentPage];
-      }
-      return {}; // fallback empty object to prevent errors in template
+      return this.lessonPages[this.currentPage];
     },
     isLastPage() {
       return this.currentPage === this.lessonPages.length - 1;
@@ -163,10 +195,11 @@ createApp({
     },
   },
   methods: {
+    // 1. Fetch user learning progress data
     fetchLearningProgress(journeyId, subjectId) {
-      console.log('Fetching learning progress for journey:', journeyId, 'subject:', subjectId);
-      axios.get(`/journey/${journeyId}/${subjectId}/learning/get`)
+      axios.get(`/journey/${journeyId}/${subjectId}/get`)
         .then(response => {
+          // Assuming you want to save this in your data, e.g. this.learningProgress
           this.learningProgress = response.data;
           console.log('Learning progress loaded:', response.data);
         })
@@ -174,31 +207,39 @@ createApp({
           console.error('Error fetching learning progress:', error);
         });
     },
+
+    // 2. Fetch all lessons for a subject
     fetchLessons(journeyId, subjectId) {
-      axios.get(`/journey/${journeyId}/${subjectId}/learning/lessons`)
+      axios.get(`/journey/${journeyId}/${subjectId}/getLessons`)
         .then(response => {
-          this.lessons = response.data || [];
-          // Ensure lessonId is in lessons, otherwise default to first
-          const foundIdx = this.lessons.findIndex(l => l.id === this.lessonId);
-          this.currentLessonIndex = foundIdx !== -1 ? foundIdx : 0;
-          // Always update lessonId to match array!
-          this.lessonId = this.lessons[this.currentLessonIndex]?.id || null;
-          // Now fetch digest for correct lesson
-          if (this.lessonId) {
-            this.fetchDigestContent(this.journeyId, this.subjectId, this.lessonId);
-          }
-          console.log('Lessons loaded:', this.lessons);
+          this.lessons = response.data;
+          console.log('Lessons loaded:', response.data);
         })
         .catch(error => {
           console.error('Error fetching lessons:', error);
         });
     },
-    fetchDigestContent(journeyId, subjectId, lessonId) {
-      console.log('Fetching digest content for lessonId:', this.lessonId);
-      axios.get(`/journey/${journeyId}/${subjectId}/learning/lesson/${lessonId}/digest-content`)
+
+    // 3. Fetch lesson content and related practices
+    fetchLessonContent(journeyId, subjectId, lessonId) {
+      axios.get(`/journey/${journeyId}/${subjectId}/${lessonId}/getLesson`)
         .then(response => {
+          this.currentLesson = response.data.lesson;
+          this.currentPractices = response.data.practice;
+          console.log('Lesson content and practices loaded:', response.data);
+        })
+        .catch(error => {
+          console.error('Error fetching lesson content:', error);
+        });
+    },
+
+    fetchDigestContent(journeyId, subjectId, lessonId) {
+      axios.get(`/journey/${journeyId}/${subjectId}/${lessonId}/getDigestContent`)
+        .then(response => {
+          // Response contains lesson info and pages array
           const data = response.data;
           this.currentLesson = data.lesson;
+          // Use pages for digestPages dynamically
           this.digestPages = data.pages.map(page => ({
             type: page.type || 'content',
             title: page.title || '',
@@ -206,6 +247,7 @@ createApp({
             list_order: page.list_order || 0,
             id: page.id
           }));
+          // Reset page index to start from first page
           this.currentPage = 0;
           this.$nextTick(() => {
             this.typesetMath();
@@ -215,6 +257,8 @@ createApp({
           console.error('Failed to fetch digest content:', error);
         });
     },
+
+    // 4. Update latest lesson user has viewed (progress tracking)
     updateLatestLesson(journeyId, subjectId, lessonId) {
       axios.post(`/journey/${journeyId}/${subjectId}/setLatest`, {
         lessonId: lessonId
@@ -226,25 +270,7 @@ createApp({
         console.error('Error updating latest lesson:', error);
       });
     },
-    returnToMap() {
-      window.location.href = `/dashboard-child/journey/${this.journeyId}/${this.subjectId}`;
-    },
-    goToNextLesson() {
-      if (this.currentLessonIndex + 1 < this.lessons.length) {
-        this.currentLessonIndex++;
-        this.lessonId = this.lessons[this.currentLessonIndex].id;
-        this.fetchDigestContent(this.journeyId, this.subjectId, this.lessonId);
-        this.isSummaryPage = false;
-        this.currentPage = 0;
-        this.startTime = Date.now();
-        this.elapsedTime = 0;
-        // Any other resets as needed...
-      } else {
-        // End of lesson map!
-        this.nextLessonId = null;
-        // Show end screen or return to map, etc.
-      }
-    },
+
     // Optional: Central error handler
     handleError(error) {
       console.error('API error:', error);
@@ -421,33 +447,6 @@ createApp({
         clearInterval(this._timer);
       }
       this.isSummaryPage = true;
-
-      const currentLesson = this.lessons[this.currentLessonIndex];
-      if (!currentLesson) {
-        alert("No current lesson found.");
-        return;
-      }
-
-      // The URL for the API call
-      const url = `/journey/${this.journeyId}/${this.subjectId}/learning/finished`;
-
-      // The data to send. This now uses the correct lesson ID from the array
-      const data = {
-        lessonId: this.lessonId, // This is correct
-        timer: this.elapsedTime
-      };
-
-      axios.post(url, data)
-        .then(response => {
-          if (response.data.status) {
-            this.nextLessonId = response.data.nextLessonId;
-            console.log('Lesson marked as complete. Next lesson ID:', this.nextLessonId);
-            this.updateLatestLesson(this.journeyId, this.subjectId, currentLesson.id);
-          }
-        })
-        .catch(error => {
-          console.error('Error marking lesson as complete:', error);
-        });
     },
     typesetMath() {
       if (window.MathJax && window.MathJax.typesetPromise) {
@@ -535,13 +534,10 @@ createApp({
     }
   },
   mounted() {
-    console.log('User ID:', this.userId);
-    console.log('Journey ID:', this.journeyId);
-    console.log('Subject ID:', this.subjectId);
-    console.log('Lesson ID:', this.lessonId);
 
     this.fetchLearningProgress(this.journeyId, this.subjectId);
-    this.fetchLessons(this.journeyId, this.subjectId);   // fetchLessons will trigger the first digest load
+    this.fetchLessons(this.journeyId, this.subjectId);
+    this.fetchDigestContent(this.journeyId, this.subjectId, this.lessonId);
     this.startTime = Date.now();
 
     // Initialize timer for elapsed time tracking
