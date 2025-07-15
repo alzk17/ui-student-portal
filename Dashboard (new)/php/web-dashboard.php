@@ -28,8 +28,6 @@ Route::group(['middleware' => ['User']], function () {
         Route::get('/review', [Frontend\DashboardController::class, 'review']);
         Route::get('/worksheet', [Frontend\DashboardController::class, 'worksheet']);
 
-
-
         Route::get('/transcript/{id}', [Frontend\DashboardController::class, 'transcript'])->where(['id' => '[0-9]+']);
         Route::get('/set-work', [Frontend\DashboardController::class, 'set_work']);
         Route::get('/topup', [Frontend\DashboardController::class, 'topup']);
@@ -63,6 +61,7 @@ Route::group(['middleware' => ['User']], function () {
 
         Route::get('/practice/review/{practice_id}', [Frontend\PracticeController::class, 'review'])->where(['practice_id' => '[0-9]+']);
         Route::get('/practice-transcript/{practice_id}', [Frontend\PracticeController::class, 'transcript'])->whereUuid(['practice_id']);
+
     });
 });
 
@@ -101,6 +100,7 @@ Route::group(['middleware' => ['Child']], function () {
                 Route::post('/learning/set-latest', [Frontend\Child\JourneyLearningCtrl::class, 'setLatest']);
                 Route::get('/learning/lesson/{lessonId}/digest-content', [Frontend\Child\JourneyLearningCtrl::class, 'getDigestContent'])
                     ->where('lessonId', '[0-9]+');
+                Route::get('/learning/lesson/{lessonId}/application-content', [App\Http\Controllers\Frontend\Child\JourneyLearningCtrl::class, 'getApplicationContent'])->where('lessonId', '[0-9]+');
             });
         });
 

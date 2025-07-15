@@ -52,30 +52,32 @@ class JourneyCtrl extends Controller
     {
         try {
             $user = Auth::guard('child')->user();
-            $lessons = new JourneyLessonMd;
-            $data = ($subjectId) ? $lessons
-            ->where(['journey_id' => $journeyId, 'journey_subject_id' => $subjectId])
-            ->orderBy('list_order', 'asc')
-            ->get()
-            ->toArray()
-            : [];
+            
+            // UPDATED: This now explicitly selects all the columns we need, including 'type'
+            $data = JourneyLessonMd::select('id', 'name', 'type', 'list_order')
+                ->where(['journey_id' => $journeyId, 'journey_subject_id' => $subjectId])
+                ->orderBy('list_order', 'asc')
+                ->get();
+
             $learingQuery = JourneyLearningMd::where(['subjectId' => $subjectId, 'journeyId' => $journeyId, 'userId' => $user->id])->first();
             $current = JourneySubjectMd::where(['journey_id' => $journeyId, 'id' => $subjectId])->select('id', 'name', 'timer')->first();
             $next = JourneySubjectMd::where(['journey_id' => $journeyId, 'list_order' => $current->list_order + 1])->select('id')->first();
-            if (@$learingQuery->id) {
-                $learning = $learingQuery;
-            } else {
+            
+            if (!@$learingQuery->id) {
                 $learning = new JourneyLearningMd;
                 $learning->journeyId = $journeyId;
                 $learning->subjectId = $subjectId;
                 $learning->userId = $user->id;
                 $learning->save();
+            } else {
+                $learning = $learingQuery;
             }
+
             return response()->json([
                 'subject' => $current,
                 'learning' => $learning,
                 'next' => $next,
-                'lessons' => LessonsResource::collection($data)
+                'lessons' => $data // Directly use the collection
             ]);
         } catch (\Exception $e) {
             return response()->json($e->getMessage());
@@ -138,12 +140,25 @@ class JourneyCtrl extends Controller
 
             if (@$data->id) {
                 $all = ($data->all_latest) ? json_decode($data->all_latest) : [];
-                array_push($all, $request->latest);
+                
+                // CORRECTED: Use lessonId here
+                array_push($all, $request->lessonId); 
+
                 $data->latest_type = $request->latest_type;
                 $data->all_latest = json_encode($all);
-                $data->latest = $request->latest;
+
+                // This is the main fix you already made
+                $data->latest = $request->lessonId; 
+
                 if ($data->save()) {
-                    $res = ['status' => true, 'statusText' => 'Data has been updated.', 'statusCode' => 200, 'latest' => $request->latest, 'latest_type' => $request->latest_type];
+                    $res = [
+                        'status' => true, 
+                        'statusText' => 'Data has been updated.', 
+                        'statusCode' => 200, 
+                        // CORRECTED: Use lessonId here as well for the response
+                        'latest' => $request->lessonId, 
+                        'latest_type' => $request->latest_type
+                    ];
                 } else {
                     $res = ['status' => false, 'statusText' => 'Not Modified.', 'statusCode' => 304];
                 }

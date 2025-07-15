@@ -3,141 +3,27 @@ import { setupMathliveKeyboard } from './mathliveKeyboard.js';
 import { initDndHandler } from './dnd-handler.js';
 const { createApp } = Vue;
 
-createApp({
+axios.defaults.baseURL = 'https://lambda.in.th/dashboard-child';
+axios.defaults.headers.common['X-CSRF-TOKEN'] = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+const lessonApp = createApp({
   data() {
     return {
+      userId: Number(document.getElementById('lesson-app').dataset.userId),
+      journeyId: Number(document.getElementById('lesson-app').dataset.journeyId),
+      subjectId: Number(document.getElementById('lesson-app').dataset.subjectId),
+      lessonId: Number(document.getElementById('lesson-app').dataset.lessonId),
+      lessons: [],
+      learningProgress: null,
+      currentLesson: null,
+      currentLessonIndex: 0,
+      currentPractices: [],
       isSummaryPage: false,
-      lessonId: 11,
       currentPage: 0,
       mode: "digest",
-      digestPages: [
-        {
-          type: "content",
-          title: "Equal Groups",
-          content: `<p>Multiplication means making equal groups of things. For example, if you have \\(3\\) plates and each plate has \\(4\\) apples, that is \\(3\\) equal groups of \\(4\\).</p>
-                    <p>We can write this as:</p>
-                    <p style="text-align: center;">\\( \\large{ 3 \\times 4 } \\)</p>`
-        },
-        {
-          type: "content",
-          content: `<p>Here is an example of equal groups:</p>
-                    <p style="text-align:center;"><img src="img/fraction-test2.svg" style="width: 350px;"></p>
-                    <p>There are \\(4\\) groups and each group has \\(2\\) <span class="keyword" data-glossary="<b>Mass</b> is a measure of how much matter an object contains. It is usually measured in grams (g) or kilograms (kg).">circles</span>.</p>`
-        },
-        {
-          type: "quiz",
-          quiz: {
-            question: "Which of the following numbers are even?</br>You may select more than one option.",
-            img: "img/fraction-test3.svg",
-            options: [
-              { value: "A", label: "\\(11\\)" },
-              { value: "B", label: "\\(17\\)" },
-              { value: "C", label: "\\(27\\)" },
-              { value: "D", label: "\\(88\\)" },
-              { value: "E", label: "\\(42\\)" }
-            ],
-            answerType: "MCQ",
-            correctAnswers: ["D", "E"],
-            selected: [],
-            revealed: false,
-            showExplanation: false,
-            explanation: `<p>This is where your explanation goes. You can include MathJax and HTML here.</p>`
-          }
-        },
-        {
-          type: "content",
-          content: `<p>Understanding equal groups helps us solve multiplication problems easily. It's the first step to learning more complex operations!</p>`
-        }
-      ],
-      applicationPages: [
-        {
-          type: "quiz",
-          quiz: {
-            answerType: "DND",
-            question: "<p>Arrange the following time durations from shortest to longest.</p>",
-            options: [
-              { value: "1", label: "\\(49\\) seconds" },
-              { value: "2", label: "\\(12\\) weeks" },
-              { value: "3", label: "\\(96\\) hours" },
-              { value: "4", label: "\\(4\\) days" },
-              { value: "5", label: "\\(126\\) minutes" }
-            ],
-            correctAnswers: [
-                              ["1", "2", "3", "4", "5"],
-                              ["5", "4", "3", "2", "1"]
-                            ],
-            selected: [],
-            revealed: false,
-            isCorrect: false,
-            explanation: "Time increases from seconds to minutes, hours, days, then weeks."
-          }
-        },
-        {
-          type: "quiz",
-          quiz: {
-            answerType: "INP",
-            inputMode: "math", // plain text input
-            question: "<p>What is the capital city of Thailand?</p>",
-            inputValue: "",
-            correctAnswers: ["BAngkok"],
-            ignoreCase: true,
-            selected: [],
-            revealed: false,
-            showExplanation: false,
-            explanation: "Bangkok is the capital city of Thailand."
-          }
-        },
-        {
-          type: "quiz",
-          quiz: {
-            answerType: "MCQ",
-            question: "<p>What is the value of \\(7 + 8\\)?</p>",
-            options: [
-              { value: "A", label: "\\(13\\)" },
-              { value: "B", label: "\\(15\\)" },
-              { value: "C", label: "\\(16\\)" },
-              { value: "D", label: "\\(17\\)" }
-            ],
-            correctAnswers: ["B"],
-            selected: [],
-            revealed: false,
-            showExplanation: false,
-            explanation: "To solve \\(7 + 8\\), add the numbers to get \\(15\\)."
-          }
-        },
-        {
-          type: "quiz",
-          quiz: {
-            answerType: "MCQ",
-            question: "<p>Which of the following are even numbers?</p>",
-            options: [
-              { value: "A", label: "\\(2\\)" },
-              { value: "B", label: "\\(3\\)" },
-              { value: "C", label: "\\(4\\)" },
-              { value: "D", label: "\\(5\\)" }
-            ],
-            correctAnswers: ["A", "C"],
-            selected: [],
-            revealed: false,
-            showExplanation: false,
-            explanation: "Even numbers are multiples of 2: 2 and 4."
-          }
-        },
-        {
-          type: "quiz",
-          quiz: {
-            answerType: "INP",
-            inputMode: "text", // plain text input
-            question: "<p>What is the capital city of Thailand?</p>",
-            inputValue: "",
-            correctAnswers: ["Bangkok", "BANGKOK", "bangkok"],
-            selected: [],
-            revealed: false,
-            showExplanation: false,
-            explanation: "Bangkok is the capital city of Thailand."
-          }
-        }
-      ],
+      digestPages: [],
+      applicationPages: [],
+      nextLessonId: null, // Add this line
       showExitModal: false,
       showExplanationModal: false,
       explanationSlides: [],
@@ -153,7 +39,11 @@ createApp({
       return this.mode === "digest" ? this.digestPages : this.applicationPages;
     },
     activePage() {
-      return this.lessonPages[this.currentPage];
+      // Return the current lesson page if available, else return an empty object to avoid undefined
+      if (this.lessonPages && this.lessonPages.length > 0 && this.currentPage >= 0 && this.currentPage < this.lessonPages.length) {
+        return this.lessonPages[this.currentPage];
+      }
+      return {}; // fallback empty object to prevent errors in template
     },
     isLastPage() {
       return this.currentPage === this.lessonPages.length - 1;
@@ -185,6 +75,133 @@ createApp({
     },
   },
   methods: {
+    fetchLearningProgress(journeyId, subjectId) {
+      console.log('Fetching learning progress for journey:', journeyId, 'subject:', subjectId);
+      axios.get(`/journey/${journeyId}/${subjectId}/learning/get`)
+        .then(response => {
+          this.learningProgress = response.data;
+          console.log('Learning progress loaded:', response.data);
+        })
+        .catch(error => {
+          console.error('Error fetching learning progress:', error);
+        });
+    },
+    fetchLessons(journeyId, subjectId) {
+        // CORRECTED: This URL now matches the route defined in web.php
+        const url = `/journey/${journeyId}/${subjectId}/learning/lessons`;
+
+        axios.get(url)
+            .then(response => {
+                this.lessons = response.data || [];
+                console.log('Lessons loaded:', this.lessons);
+                this.lessons.forEach(lesson => console.log('Lesson', lesson.id, 'type:', lesson.type));
+
+                // If an initial lessonId is set from the URL, load it.
+                // Otherwise, load the very first lesson in the list.
+                const initialLessonId = this.lessonId || (this.lessons.length > 0 ? this.lessons[0].id : null);
+
+                if (initialLessonId) {
+                    this.loadLessonNode(initialLessonId);
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching lessons:', error);
+            });
+    },
+    fetchDigestContent(journeyId, subjectId, lessonId) {
+      console.log('Fetching digest content for lessonId:', this.lessonId);
+      axios.get(`/journey/${journeyId}/${subjectId}/learning/lesson/${lessonId}/digest-content`)
+        .then(response => {
+          const data = response.data;
+          this.currentLesson = data.lesson;
+          this.digestPages = data.pages.map(page => ({ ...page }));
+          this.currentPage = 0;
+          this.$nextTick(() => {
+            this.typesetMath();
+          });
+        })
+        .catch(error => {
+          console.error('Failed to fetch digest content:', error);
+        });
+    },
+    updateLatestLesson(journeyId, subjectId, lessonId) {
+      axios.post(`/journey/${journeyId}/${subjectId}/set-latest`, {
+          lessonId: lessonId
+      })
+      .then(response => {
+        console.log('Progress updated:', response.data);
+      })
+      .catch(error => {
+        console.error('Error updating latest lesson:', error);
+      });
+    },
+    fetchApplicationContent(lessonId) {
+        console.log('Fetching application content for lessonId:', lessonId);
+        const url = `/journey/${this.journeyId}/${this.subjectId}/learning/lesson/${lessonId}/application-content`;
+
+        axios.get(url)
+            .then(response => {
+                this.applicationPages = response.data;
+                this.mode = 'application'; // Switch to application mode
+                this.isSummaryPage = false; // Ensure summary page is hidden
+                this.currentPage = 0; // Reset to the first question
+            })
+            .catch(error => {
+                console.error('Error fetching application content:', error);
+            });
+    },
+    loadLessonNode(lessonId) {
+        // Find the full lesson object from our list
+        const lesson = this.lessons.find(l => l.id === lessonId);
+
+        if (!lesson) {
+            console.error('Could not find lesson with ID:', lessonId);
+            return;
+        }
+
+        // Update the main lessonId and start the timer
+        this.lessonId = lesson.id;
+        this.startTime = Date.now();
+
+        // Check the type and call the appropriate content function
+        if (lesson.type === 'application') {
+            this.fetchApplicationContent(lesson.id);
+        } else {
+            // Default to digest mode
+            this.fetchDigestContent(this.journeyId, this.subjectId, lesson.id);
+        }
+    },
+    returnToMap() {
+      window.location.href = `/dashboard-child/journey/${this.journeyId}/${this.subjectId}`;
+    },
+    goToNextLesson() {
+      if (this.currentLessonIndex + 1 < this.lessons.length) {
+        this.currentLessonIndex++;
+        const nextLesson = this.lessons[this.currentLessonIndex];
+        console.log('Going to lesson', nextLesson.id, 'type:', nextLesson.type);
+        this.lessonId = nextLesson.id;
+        this.isSummaryPage = false;
+        this.currentPage = 0;
+        this.startTime = Date.now();
+        this.elapsedTime = 0;
+
+        if (nextLesson.type === 'application') {
+          this.fetchApplicationContent(nextLesson.id);
+          this.mode = 'application';
+        } else {
+          this.fetchDigestContent(this.journeyId, this.subjectId, nextLesson.id);
+          this.mode = 'digest';
+        }
+      } else {
+        this.nextLessonId = null;
+        // Show end screen or return to map, etc.
+      }
+    },
+    // Optional: Central error handler
+    handleError(error) {
+      console.error('API error:', error);
+      // You can also add user notifications here if desired
+    },
     checkAnswer() {
       if (this.activePage.type === 'quiz') {
         const quiz = this.activePage.quiz;
@@ -356,6 +373,33 @@ createApp({
         clearInterval(this._timer);
       }
       this.isSummaryPage = true;
+
+      const currentLesson = this.lessons[this.currentLessonIndex];
+      if (!currentLesson) {
+        alert("No current lesson found.");
+        return;
+      }
+
+      // The URL for the API call
+      const url = `/journey/${this.journeyId}/${this.subjectId}/learning/finished`;
+
+      // The data to send. This now uses the correct lesson ID from the array
+      const data = {
+        lessonId: this.lessonId, // This is correct
+        timer: this.elapsedTime
+      };
+
+      axios.post(url, data)
+        .then(response => {
+          if (response.data.status) {
+            this.nextLessonId = response.data.nextLessonId;
+            console.log('Lesson marked as complete. Next lesson ID:', this.nextLessonId);
+            this.updateLatestLesson(this.journeyId, this.subjectId, currentLesson.id);
+          }
+        })
+        .catch(error => {
+          console.error('Error marking lesson as complete:', error);
+        });
     },
     typesetMath() {
       if (window.MathJax && window.MathJax.typesetPromise) {
@@ -428,14 +472,38 @@ createApp({
           }
         });
       });
+    },
+    initDndOnPage() {
+      this.$nextTick(() => {
+        // This now safely checks the full path
+        if (
+          this.activePage?.type === 'quiz' &&
+          this.activePage?.quiz?.answerType === 'DND'
+        ) {
+          const original = document.getElementById('originalSlot');
+          const answer = document.getElementById('answerContainer');
+          if (original && answer) {
+            initDndHandler(original, answer);
+          }
+        }
+      });
     }
   },
   watch: {
-    // Watch for changes in input values for INP type questions
-    'activePage.quiz.inputValue': {
-      handler() {
-        if (this.activePage && this.activePage.type === 'quiz' && 
-            this.activePage.quiz.answerType === 'INP') {
+    // Your watcher for currentPage is fine and can stay
+    currentPage(newVal, oldVal) {
+      this.$nextTick(() => {
+        if (typeof this.initDndOnPage === 'function') {
+          this.initDndOnPage();
+        }
+      });
+    },
+    
+    // REPLACE your activePage watcher with this one
+    activePage: {
+      handler(newPage) {
+        // This safely checks if the new page is an INP quiz before doing anything.
+        if (newPage?.quiz?.answerType === 'INP') {
           this.checkInputAnswer();
         }
       },
@@ -443,9 +511,18 @@ createApp({
     }
   },
   mounted() {
-    this.startTime = Date.now();
+    console.log('User ID:', this.userId);
+    console.log('Journey ID:', this.journeyId);
+    console.log('Subject ID:', this.subjectId);
+    console.log('Initial Lesson ID:', this.lessonId);
 
-    // Initialize timer for elapsed time tracking
+    // Fetches the user's overall progress record
+    this.fetchLearningProgress(this.journeyId, this.subjectId);
+    
+    // This single function now handles fetching the lesson list AND loading the first node
+    this.fetchLessons(this.journeyId, this.subjectId);
+    
+    // The global timer is still managed here
     this._timer = setInterval(() => {
       if (this.startTime) {
         this.elapsedTime = Date.now() - this.startTime;
@@ -464,11 +541,7 @@ createApp({
 
       // Setup MathLive keyboard for initial math fields
       this.attachMathFieldListeners();
-
-      if (original && answer) {
-        initDndHandler(original, answer);
-      }
-
+      // Removed initDndHandler(original, answer); and this.initDndOnPage();
     });
 
     document.addEventListener('dnd-updated', (e) => {
@@ -498,3 +571,4 @@ createApp({
     document.removeEventListener('dnd-updated', this.handleDndUpdate);
   }
 }).mount('#lesson-app');
+window.lessonApp = lessonApp;

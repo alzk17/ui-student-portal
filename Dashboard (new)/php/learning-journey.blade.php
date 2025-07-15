@@ -66,11 +66,10 @@
                                 v-show="idx <= currentPage"
                             >
                                 <template v-if="page.type === 'content'">
-                                    <h2 v-if="page.title">@{{ page.title }}</h2>
                                     <div v-html="page.content"></div>
                                 </template>
                                 <template v-else-if="page.type === 'quiz'">
-                                    <div class="digest-quiz-block" :class="{ 'is-revealed': page.quiz.revealed }">
+                                    <div v-if="page.quiz" class="digest-quiz-block" :class="{ 'is-revealed': page.quiz.revealed }">
                                         <div class="digest-quiz-question__text" v-html="page.quiz.question"></div>
                                         <div class="digest-quiz-options" role="list">
                                             <label
@@ -100,10 +99,9 @@
                                             </label>
                                         </div>
 
-                                        <!-- Inside the digest-quiz-block, after the options -->
                                         <div class="digest-explanation-toggle-row">
                                             <button
-                                                v-show="page.quiz.revealed && idx !== currentPage && page.quiz.explanation"
+                                                v-show="page.quiz.revealed && page.quiz.explanation"
                                                 class="digest-explanation-toggle-btn"
                                                 @click="page.quiz.showExplanation = !page.quiz.showExplanation"
                                                 :aria-expanded="page.quiz.showExplanation"
@@ -301,15 +299,15 @@
                             
                         </div>
                     </section>
-                </main>
+            </main>
 
                 <!-- FOOTER BAR -->
                 <footer
                     v-if="activePage && !isSummaryPage"
                     class="pml-footer pml-footer--fixed"
                     :class="{
-                        'pml-footer--feedback-correct': activePage.type === 'quiz' && activePage.quiz?.revealed && activePage.quiz?.isCorrect,
-                        'pml-footer--feedback-incorrect': activePage.type === 'quiz' && activePage.quiz?.revealed && !activePage.quiz?.isCorrect
+                        'pml-footer--feedback-correct': activePage.quiz?.revealed && activePage.quiz?.isCorrect,
+                        'pml-footer--feedback-incorrect': activePage.quiz?.revealed && !activePage.quiz?.isCorrect
                     }"
                 >
                     <button
@@ -320,13 +318,14 @@
                     >
                         <i class="fa fa-bug"></i>
                     </button>
-                    <template v-if="activePage.type === 'quiz' && activePage.quiz.revealed && !activePage.quiz.showExplanation">
+                    
+                    <template v-if="activePage.type === 'quiz' && activePage.quiz?.revealed && !activePage.quiz?.showExplanation">
                         <div class="pml-footer__feedback-group">
                             <span class="pml-footer__feedback-message">
-                                @{{ activePage.quiz.isCorrect ? 'Great job! 🎉' : 'Give it another try next time.' }}
+                                @{{ activePage.quiz?.isCorrect ? 'Great job! 🎉' : 'Give it another try next time.' }}
                             </span>
                             <div class="pml-footer__feedback-actions">
-                                <template v-if="activePage.quiz.explanation">
+                                <template v-if="activePage.quiz?.explanation">
                                     <button
                                         v-if="mode === 'digest'"
                                         class="portal-btn3d portal-btn3d--white pml-footer__btn--duo"
@@ -360,9 +359,8 @@
                         </div>
                     </template>
 
-                    <!-- Default footer: appears if quiz is revealed and showExplanation is true, or if not revealed -->
                     <template v-else>
-                        <template v-if="activePage.type === 'quiz' && !activePage.quiz.revealed">
+                        <template v-if="activePage.type === 'quiz' && !activePage.quiz?.revealed">
                             <button
                                 class="portal-btn3d portal-btn3d--white pml-footer__btn--continue"
                                 aria-label="Check Answer"
@@ -484,7 +482,7 @@
 
         @include("$prefix.dashboard-child.layout.javascript")
         <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-        <script type="module" src="{{ asset('vue-pml/js/journey.js') }}?v=1.5"></script>
+        <script type="module" src="{{ asset('vue-pml/js/journey.js') }}?v={{ time() }}"></script>
 
 </body>
 

@@ -151,7 +151,6 @@ class JourneyLearningCtrl extends Controller
             $lesson = JourneyLessonMd::findOrFail($lessonId);
 
             // Fetch subsequent pages/sections for the lesson
-            // NO CHANGE NEEDED: This function correctly uses snake_case for the tb_journey_subject_lessons_section table
             $sections = JourneyLessonSectionMd::where('journey_lesson_id', $lessonId)
                 ->orderBy('list_order', 'asc')
                 ->get();
@@ -165,16 +164,61 @@ class JourneyLearningCtrl extends Controller
                 'title' => $lesson->name,
                 'content' => $lesson->content,
                 'list_order' => 0,  // main page first
+                'quiz' => null
             ];
 
             foreach ($sections as $section) {
-                $pages[] = [
-                    'id' => $section->id,
-                    'type' => 'content',
-                    'title' => null,
-                    'content' => $section->detail,
-                    'list_order' => $section->list_order,
-                ];
+                // --- NEW LOGIC STARTS HERE ---
+                if ($section->type === 'quiz' && $section->practice_id) {
+                    // This section is a quiz, so fetch the practice question data
+                    $practice = \App\Models\Backend\JourneyPracticeMd::find($section->practice_id);
+
+                    if ($practice) {
+                        $options = \App\Models\Backend\JourneyTestAnswerMd::where('practice_id', $practice->id)->orderBy('list_answer', 'asc')->get();
+                        
+                        $formattedOptions = $options->map(function ($opt) {
+                            return ['value' => (string)$opt->id, 'label' => $opt->answer_text];
+                        });
+
+                        $correctAnswers = $options->where('correct_status', 1)->pluck('id')->map(function ($id) {
+                            return (string)$id;
+                        })->all();
+                        
+                        $answerType = strtoupper($practice->type_question);
+
+                        // Add a quiz page to our results
+                        $pages[] = [
+                            'id' => $section->id,
+                            'type' => 'quiz',
+                            'title' => null,
+                            'content' => null,
+                            'list_order' => $section->list_order,
+                            'quiz' => [
+                                'id' => $practice->id,
+                                'answerType' => $answerType,
+                                'question' => $practice->question,
+                                'options' => $formattedOptions,
+                                'correctAnswers' => $correctAnswers,
+                                'explanation' => $practice->hint,
+                                'selected' => [],
+                                'revealed' => false,
+                                'isCorrect' => false,
+                                'inputValue' => '',
+                            ]
+                        ];
+                    }
+                } else {
+                    // This is a normal content section
+                    $pages[] = [
+                        'id' => $section->id,
+                        'type' => 'content',
+                        'title' => null,
+                        'content' => $section->detail,
+                        'list_order' => $section->list_order,
+                        'quiz' => null
+                    ];
+                }
+                // --- NEW LOGIC ENDS HERE ---
             }
 
             // Sort pages by list_order just in case
@@ -192,6 +236,76 @@ class JourneyLearningCtrl extends Controller
                 ],
                 'pages' => $pages,
             ]);
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+    }
+
+    public function getApplicationContent($journeyId, $subjectId, $lessonId)
+    {
+        try {
+            // Find all practice questions linked to this application node ID
+            $practices = \App\Models\Backend\JourneyPracticeMd::where('lesson_id', $lessonId)
+                ->orderBy('list_order', 'asc')
+                ->get();
+
+            $applicationPages = [];
+
+            foreach ($practices as $practice) {
+                // For each practice, get its answer options
+                $options = \App\Models\Backend\JourneyTestAnswerMd::where('practice_id', $practice->id)
+                    ->orderBy('list_answer', 'asc')
+                    ->get();
+
+                $formattedOptions = [];
+                foreach ($options as $option) {
+                    $formattedOptions[] = [
+                        'value' => (string)$option->id,
+                        'label' => $option->answer_text,
+                    ];
+                }
+               
+                // Map database question type to the Vue app's answerType
+                $answerType = strtoupper($practice->type_question); // MCQ, INP, DND
+
+                if ($answerType === 'INP') {
+                    // Use answer_text (actual values) for input-type questions
+                    $correctAnswers = $options->where('correct_status', 1)->pluck('answer_text')->values()->all();
+                } else {
+                    // Use IDs for MCQ and DND
+                    $correctAnswers = $options->where('correct_status', 1)->pluck('id')->map(function ($id) {
+                        return (string)$id;
+                    })->values()->all();
+                }
+
+                // Build the final quiz object for the front-end
+                $quizData = [
+                    'id' => $practice->id,
+                    'answerType' => $answerType,
+                    'question' => $practice->question,
+                    'options' => $formattedOptions,
+                    'correctAnswers' => $correctAnswers,
+                    'explanation' => $practice->hint,
+                    // Front-end state properties that we add here
+                    'selected' => [],
+                    'revealed' => false,
+                    'isCorrect' => false,
+                    'inputValue' => '',
+                ];
+
+                // Add inputMode only for INP type
+                if ($answerType === 'INP') {
+                    $quizData['inputMode'] = $practice->inputMode ?? 'text';
+                }
+
+                $applicationPages[] = [
+                    'type' => 'quiz',
+                    'quiz' => $quizData
+                ];
+            }
+
+            return response()->json($applicationPages);
+
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
         }
