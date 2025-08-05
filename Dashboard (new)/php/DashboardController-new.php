@@ -84,20 +84,36 @@ class DashboardController extends Controller
 
     public function journey(Request $request)
     {
-        $child = ChildModel::findOrFail(Auth::guard('child')->id());
+        $child = \App\Models\Backend\ChildModel::findOrFail(Auth::guard('child')->id());
 
-        $keyword = Arr::get($request, 'keyword');
-        $status = Arr::get($request, 'status');
-        $paginate = Arr::get($request, 'total', 15);
-        $query = new JourneyMd;
+        // --- NEW LOGIC STARTS HERE ---
+
+        // 1. Query the JourneySubjectMd model to get all individual subjects.
+        // We are no longer querying JourneyMd.
+        $query = \App\Models\Backend\JourneySubjectMd::query();
+
+        // 2. Add a condition to only show active subjects (optional but recommended).
+        $query->where('isActive', 'Y');
+        
+        // 3. (Optional) If you have a search/filter on this page, you can keep this part.
+        // Otherwise, you can remove the 'if ($keyword)' block.
+        $keyword = \Illuminate\Support\Arr::get($request, 'keyword');
         if ($keyword) {
-            $query = $query->where('name', 'LIKE', '%' . trim($keyword) . '%');
-        }
-        if ($status) {
-            $query = $query->where('isActive', $status);
+            $query->where('name', 'LIKE', '%' . trim($keyword) . '%');
         }
 
-        $data = $query->orderBy('list_order')->paginate($paginate);
+        // 4. Eager load the count of topics for each subject.
+        // This will create a 'topics_count' property on each subject object.
+        // Note: This assumes you have a 'topics' relationship on your JourneySubjectMd model.
+        // If not, we will adjust the Blade template in the next step.
+        // For now, let's assume the relationship exists.
+        // $query->withCount('topics');
+        
+        // 5. Get all the subjects, ordered by their list_order.
+        // We use get() instead of paginate() to show all subjects on one page.
+        $subjects = $query->orderBy('list_order', 'asc')->get();
+
+        // --- NEW LOGIC ENDS HERE ---
 
 
         return view("$this->prefix.$this->folder.journey", [
@@ -106,7 +122,11 @@ class DashboardController extends Controller
             'title_page' => "Learning Journey",
             'sub_title_page' => "Step-by-step journeys to mastery.",
             'child' => $child,
-            'rows' => $data,
+            
+            // Pass the collection of subjects to the view.
+            // We are still naming it 'journeys' so you don't have to edit your Blade file.
+            'journeys' => $subjects,
+            
             'navbar_name' => "Learning Journey",
             'navbar_detail' => 'Step-by-step journeys to mastery.',
         ]);
