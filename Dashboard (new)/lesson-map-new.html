@@ -180,39 +180,52 @@
                     <div class="portal-main portal-main--fullwidth">
                         <!-- Section 1: Course Overview -->
                         <section class="portal-section course-overview">
-                            <!-- Course Title & Level Badge -->
-                            <div class="course-header">
-                                <h1>Foundational Maths</h1>
-                                <span class="course-badge">Primary 1–3</span>
-                            </div>
-
-                            <div class="course-btn-row" style="display: flex; gap: 16px; margin: 16px 0 16px 0;">
-                                <button class="portal-btn portal-btn--primary">
-                                    Start learning
+                            <div class="course-details">
+                                <h1 class="course-title">Foundational Maths</h1>
+                                <p class="course-description">
+                                    Build a strong foundation in maths through bite-sized, interactive lessons. Designed to grow with each learner, step by step.
+                                </p>
+                                <button class="btn btn-primary btn-start-learning">
+                                    Continue Learning <i class="fa-solid fa-arrow-right"></i>
                                 </button>
-                                <a href="/dashboard-child/set-work" class="portal-btn portal-btn--green" style="text-decoration: none;">
-                                    Set custom practice
-                                </a>
                             </div>
 
-                            <!-- Description -->
-                            <div class="course-summary">
-                                <p>Build a strong foundation in maths through bite-sized, interactive lessons. Designed to grow with each learner, step by step.</p>
-                            </div>
-
-                            <!-- Progress Bar -->
-                            <div class="course-progress">
-                                <div class="progress-header">
-                                    <span class="progress-label">Course Progress</span>
-                                    <span class="progress-percent">32% Complete</span>
+                            <div class="course-dashboard">
+                                <div class="progress-card">
+                                    <div class="progress-header">
+                                        <span class="progress-label">Course Progress</span>
+                                        <span class="progress-percent">32%</span>
+                                    </div>
+                                    <div class="progress-bar-bg">
+                                        <div class="progress-bar-fill" style="width: 32%;"></div>
+                                    </div>
                                 </div>
-                                <div class="progress-bar-bg">
-                                    <div class="progress-bar-fill" style="width: 32%"></div>
+
+                                <div class="stats-grid">
+                                    <div class="stat-card">
+                                        <div class="stat-icon"><i class="fa-solid fa-layer-group"></i></div>
+                                        <div class="stat-value">Beginner</div>
+                                        <div class="stat-label">Skill Level</div>
+                                    </div>
+                                    <div class="stat-card">
+                                        <div class="stat-icon"><i class="fa-solid fa-book-open"></i></div>
+                                        <div class="stat-value">12</div>
+                                        <div class="stat-label">Lessons</div>
+                                    </div>
+                                    <div class="stat-card">
+                                        <div class="stat-icon"><i class="fa-solid fa-pen-to-square"></i></div>
+                                        <div class="stat-value">5</div>
+                                        <div class="stat-label">Practices</div>
+                                    </div>
+                                    <div class="stat-card">
+                                        <div class="stat-icon"><i class="fa-solid fa-clock"></i></div>
+                                        <div class="stat-value">8 Hours</div>
+                                        <div class="stat-label">Est. Time</div>
+                                    </div>
                                 </div>
                             </div>
-
                         </section>
-
+                        
                         <!-- Section 2: Syllabus/Lesson Map -->
                         <section class="portal-section syllabus-map">
                             <!-- For each topic:
