@@ -24,6 +24,7 @@
     <link rel="stylesheet" href="css/sidebar.css?v=123123123">
     <link rel="stylesheet" href="css/tooltip.css">
     <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/modal.css">
     <link rel="stylesheet" href="css/tooltip-widgets.css">
     <link rel="stylesheet" href="css/lesson-map.css">
 </head>
@@ -185,15 +186,20 @@
                                 <p class="course-description">
                                     Build a strong foundation in maths through bite-sized, interactive lessons. Designed to grow with each learner, step by step.
                                 </p>
-                                <button class="btn btn-primary btn-start-learning">
-                                    Continue Learning <i class="fa-solid fa-arrow-right"></i>
+                                <button type="button" class="portal-btn3d portal-btn3d--blue portal-btn3d--primary btn-start-learning">
+                                  Continue learning
                                 </button>
                             </div>
 
                             <div class="course-dashboard">
                                 <div class="progress-card">
                                     <div class="progress-header">
-                                        <span class="progress-label">Course Progress</span>
+                                        <div class="progress-title-wrapper">
+                                            <span class="progress-label">Course Progress</span>
+                                            <button class="btn-reset-progress" title="Reset course progress">
+                                                <i class="fa-solid fa-rotate-left"></i>
+                                            </button>
+                                        </div>
                                         <span class="progress-percent">32%</span>
                                     </div>
                                     <div class="progress-bar-bg">
@@ -203,40 +209,130 @@
 
                                 <div class="stats-grid">
                                     <div class="stat-card">
-                                        <div class="stat-icon"><i class="fa-solid fa-layer-group"></i></div>
-                                        <div class="stat-value">Beginner</div>
-                                        <div class="stat-label">Skill Level</div>
-                                    </div>
-                                    <div class="stat-card">
-                                        <div class="stat-icon"><i class="fa-solid fa-book-open"></i></div>
-                                        <div class="stat-value">12</div>
-                                        <div class="stat-label">Lessons</div>
-                                    </div>
-                                    <div class="stat-card">
-                                        <div class="stat-icon"><i class="fa-solid fa-pen-to-square"></i></div>
-                                        <div class="stat-value">5</div>
                                         <div class="stat-label">Practices</div>
+                                        <div class="stat-value">5</div>
                                     </div>
                                     <div class="stat-card">
-                                        <div class="stat-icon"><i class="fa-solid fa-clock"></i></div>
-                                        <div class="stat-value">8 Hours</div>
-                                        <div class="stat-label">Est. Time</div>
+                                        <div class="stat-label">Lessons</div>
+                                        <div class="stat-value">12</div>
+                                    </div>
+                                    <div class="stat-card">
+                                        <div class="stat-label">Level</div>
+                                        <div class="stat-value">Grades 1 to 6</div>
+                                    </div>
+                                    <div class="stat-card">
+                                        <div class="stat-label">Time to complete</div>
+                                        <div class="stat-value">8 hours</div>
                                     </div>
                                 </div>
                             </div>
                         </section>
                         
-                        <!-- Section 2: Syllabus/Lesson Map -->
+                        <!-- Section 2: Syllabus / Lesson Cards -->
                         <section class="portal-section syllabus-map">
-                            <!-- For each topic:
-                            - Divider/label for difficulty/year
-                            - List of lessons/nodes/cards
-                            -->
+                        <div class="lesson-card-container">
+
+                            <a class="lesson-card is-completed card-link" href="#" aria-label="Review: Ones and Tens (completed)"
+                               data-title="Ones and Tens"
+                               data-review-url="/course/foundations/lesson/1/review"
+                               data-restart-url="/course/foundations/lesson/1/start">
+                                <div class="card-index" aria-hidden="true">1</div>
+                                <div class="card-content">
+                                    <div class="card-tags">
+                                        <span class="tag tag--type">Lesson</span>
+                                    </div>
+                                    <h3 class="card-title">Ones and Tens</h3>
+                                    <p class="card-meta">You’ve completed this lesson.</p>
+                                </div>
+                                <div class="card-state-icon" aria-hidden="true"><i class="fa-solid fa-circle-check"></i></div>
+                            </a>
+
+                            <a class="lesson-card is-completed card-link" href="#" aria-label="Review: 3‑Digit Numbers (completed)"
+                               data-title="3‑Digit Numbers"
+                               data-review-url="/course/foundations/lesson/2/review"
+                               data-restart-url="/course/foundations/lesson/2/start">
+                                <div class="card-index" aria-hidden="true">2</div>
+                                <div class="card-content">
+                                    <div class="card-tags">
+                                        <span class="tag tag--type">Practice</span>
+                                    </div>
+                                    <h3 class="card-title">3‑Digit Numbers</h3>
+                                    <p class="card-meta">Practice makes perfect!</p>
+                                </div>
+                                <div class="card-state-icon" aria-hidden="true"><i class="fa-solid fa-circle-check"></i></div>
+                            </a>
+
+                            <a class="lesson-card is-current card-link" href="#" aria-label="Start: Thousands (current)" aria-current="step">
+                                <div class="card-index" aria-hidden="true">3</div>
+                                <div class="card-content">
+                                    <div class="card-tags">
+                                        <span class="tag tag--type">Lesson</span>
+                                    </div>
+                                    <h3 class="card-title">Thousands</h3>
+                                    <p class="card-meta">This is your next lesson.</p>
+                                </div>
+                                <div class="card-state-icon" aria-hidden="true"><i class="fa-solid fa-play"></i></div>
+                            </a>
+
+                            
+
+                            <div class="lesson-card is-locked" aria-label="Locked: Place Value Mastery" role="button" tabindex="0"
+                                 data-title="Place Value Mastery"
+                                 data-start-url="/course/foundations/lesson/4/start"
+                                 data-current-url="/course/foundations/lesson/3/resume"
+                                 data-current-title="Thousands">
+                                <div class="card-index" aria-hidden="true">4</div>
+                                <div class="card-content">
+                                    <div class="card-tags">
+                                        <span class="tag tag--type">Mastery Test</span>
+                                    </div>
+                                    <h3 class="card-title">Place Value Mastery</h3>
+                                    <p class="card-meta">Complete the previous lesson to unlock.</p>
+                                </div>
+                                <div class="card-state-icon" aria-hidden="true"><i class="fa-solid fa-lock"></i></div>
+                            </div>
+
+                        </div>
                         </section>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+
+    <!-- Modal Overlay (shared) -->
+    <div id="modal-overlay" class="portal-modal-overlay" hidden></div>
+
+    <!-- Completed Lesson Modal -->
+    <div id="lesson-completed-modal"
+        class="portal-modal lesson-modal lesson-modal--completed"
+        role="dialog" aria-modal="true" aria-labelledby="completed-title" hidden>
+    <div class="portal-modal-content">
+        <h2 id="completed-title" class="portal-modal-title">Lesson Complete!</h2>
+        <p class="portal-modal-description">
+        You’ve already finished this lesson. Would you like to review or start fresh?
+        </p>
+        <div class="portal-modal-actions">
+        <button type="button" class="btn-portal-primary" data-action="review">Review lesson</button>
+        <button type="button" class="btn-portal-exit" data-action="reset">Reset progress</button>
+        </div>
+    </div>
+    </div>
+
+    <!-- Locked Lesson Modal -->
+    <div id="lesson-locked-modal"
+        class="portal-modal lesson-modal lesson-modal--locked"
+        role="dialog" aria-modal="true" aria-labelledby="locked-title" hidden>
+    <div class="portal-modal-content">
+        <h2 id="locked-title" class="portal-modal-title">Jump to this lesson?</h2>
+        <p class="portal-modal-description">
+        Earlier lessons stay locked. 100% requires finishing all lessons.
+        </p>
+        <div class="portal-modal-actions">
+        <button type="button" class="btn-portal-primary" data-action="jump">Jump anyway</button>
+        <button type="button" class="btn-portal-exit" data-action="goto-current">Go to current</button>
+        </div>
+    </div>
     </div>
 
     <!-- Vendor Scripts -->
@@ -249,6 +345,125 @@
     <script src="https://lambda.in.th/assets/cusmike/toastr/toastr.min.js?v=1754330467"></script>
     <script src="https://lambda.in.th/assets_dashboard/js/tooltip.js?v=1754330467"></script>
     <script src="https://lambda.in.th/assets_dashboard/js/viewport-fix.js?v=1754330467"></script>
+    <script src="js/modal-handler.js"></script>
+    <script>
+(function(){
+  function ensureShowHideShim(){
+    const originalOpen = window.openModal;
+    window.openModal = function(id, trigger){
+      const modal = document.getElementById(id);
+      const overlay = document.getElementById('modal-overlay');
+      if (!modal || !overlay) return;
+      overlay.removeAttribute('hidden');
+      modal.removeAttribute('hidden');
+      if (originalOpen) { originalOpen(id, trigger); }
+      else {
+        overlay.classList.add('active');
+        modal.classList.add('active');
+        document.body.setAttribute('data-current-modal', id);
+      }
+      const firstBtn = modal.querySelector('.portal-modal-actions button,[data-action]');
+      if (firstBtn) firstBtn.focus();
+    };
+
+    const originalClose = window.closeModal;
+    window.closeModal = function(){
+      const id = document.body.getAttribute('data-current-modal');
+      const modal = id ? document.getElementById(id) : null;
+      const overlay = document.getElementById('modal-overlay');
+      if (originalClose) { originalClose(); }
+      else {
+        modal && modal.classList.remove('active');
+        overlay && overlay.classList.remove('active');
+        document.body.removeAttribute('data-current-modal');
+      }
+      if (modal) modal.setAttribute('hidden','');
+      if (overlay) overlay.setAttribute('hidden','');
+    };
+  }
+
+  ensureShowHideShim();
+
+  function populateCompleted(card){
+    const modal = document.getElementById('lesson-completed-modal');
+    const titleEl = document.getElementById('completed-title');
+    const descEl  = modal.querySelector('.portal-modal-description');
+    const name = card.dataset.title || card.querySelector('.card-title')?.textContent || 'this lesson';
+    titleEl.textContent = 'Lesson Complete!';
+    descEl.textContent = 'You\'ve already finished this lesson. Would you like to review or start fresh?';
+    modal.dataset.reviewUrl  = card.dataset.reviewUrl  || '#';
+    modal.dataset.restartUrl = card.dataset.restartUrl || '#';
+  }
+
+  function populateLocked(card){
+    const modal = document.getElementById('lesson-locked-modal');
+    const titleEl = document.getElementById('locked-title');
+    const descEl  = modal.querySelector('.portal-modal-description');
+    titleEl.textContent = 'Jump to this lesson?';
+    descEl.textContent = 'Earlier lessons stay locked. 100% requires finishing all lessons.';
+    modal.dataset.startUrl   = card.dataset.startUrl   || '#';
+    modal.dataset.currentUrl = card.dataset.currentUrl || '#';
+  }
+
+  // Delegate clicks on lesson cards
+  document.addEventListener('click', function(e){
+    const card = e.target.closest('.lesson-card');
+    if (!card) return;
+
+    if (card.classList.contains('is-current')) {
+      // allow normal navigation
+      return;
+    }
+
+    if (card.classList.contains('is-completed')) {
+      e.preventDefault();
+      populateCompleted(card);
+      openModal('lesson-completed-modal', card);
+      return;
+    }
+
+    if (card.classList.contains('is-locked')) {
+      e.preventDefault();
+      populateLocked(card);
+      openModal('lesson-locked-modal', card);
+      return;
+    }
+  });
+
+  // Keyboard support for locked card (Enter/Space)
+  document.addEventListener('keydown', function(e){
+    if (e.key !== 'Enter' && e.key !== ' ') return;
+    const card = document.activeElement && document.activeElement.closest ? document.activeElement.closest('.lesson-card.is-locked') : null;
+    if (!card) return;
+    e.preventDefault();
+    populateLocked(card);
+    openModal('lesson-locked-modal', card);
+  });
+
+  // Wire modal buttons
+  document.getElementById('lesson-completed-modal')
+    .addEventListener('click', function(e){
+      const btn = e.target.closest('button'); if (!btn) return;
+      const modal = e.currentTarget;
+      if (btn.dataset.action === 'review') {
+        btn.disabled = true; window.location.assign(modal.dataset.reviewUrl || '#');
+      } else if (btn.dataset.action === 'reset') {
+        btn.disabled = true; window.location.assign(modal.dataset.restartUrl || '#');
+      }
+    });
+
+  document.getElementById('lesson-locked-modal')
+    .addEventListener('click', function(e){
+      const btn = e.target.closest('button'); if (!btn) return;
+      const modal = e.currentTarget;
+      if (btn.dataset.action === 'jump') {
+        btn.disabled = true; window.location.assign(modal.dataset.startUrl || '#');
+      } else if (btn.dataset.action === 'goto-current') {
+        btn.disabled = true; window.location.assign(modal.dataset.currentUrl || '#');
+      }
+    });
+})();
+</script>
 
     <!-- Sidebar and UI Interactions -->
     <script>
