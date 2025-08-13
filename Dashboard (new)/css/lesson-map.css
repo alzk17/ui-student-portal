@@ -13,7 +13,6 @@ Course & Topic Overview
     border-radius: var(--radius-xl);
     padding: 32px;
     box-shadow: var(--shadow-card);
-    border: 2px solid var(--grey-200);
 }
 
 /* Left Column: Details & CTA */
@@ -102,18 +101,55 @@ Course & Topic Overview
     font-size: 0.9rem;
     color: var(--blue-500);
 }
+
+/* Added flex row for progress bar + button */
+.progress-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
 .progress-bar-bg {
-    height: 10px;
-    width: 100%;
-    background-color: var(--grey-200);
-    border-radius: 999px;
-    overflow: hidden;
+  position: relative;
+  height: 16px; /* You can adjust this value */
+  width: 100%;
+  background-color: var(--grey-200);
+  border-radius: 999px;
+  overflow: hidden;
+  flex: 1;
 }
 .progress-bar-fill {
     height: 100%;
-    background: var(--blue-500);
+    background-color: var(--blue-500);
     border-radius: 999px;
     transition: width 0.5s ease-out;
+    z-index: 1; /* sits behind the percent text */
+}
+.progress-bar-percent {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  pointer-events: none;
+  color: var(--grey-450);
+  font-weight: 600;
+  font-size: 0.8rem; /* You can adjust this value */
+  line-height: 1;
+}
+
+/* Removed .progress-bar-bg .btn-reset-progress block */
+
+.progress-row .btn-reset-progress {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--white-main);
+  border: 1px solid var(--grey-300);
+  color: var(--grey-600);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* Reset Progress Button Styling */
@@ -131,13 +167,20 @@ Course & Topic Overview
     transition: all 0.2s ease;
 }
 .btn-reset-progress i { font-size: 12px; }
-.btn-reset-progress:hover {
+@media (hover: hover) {
+  .progress-row .btn-reset-progress:hover,
+  .btn-reset-progress:hover {
     background-color: var(--red-50);
     color: var(--red-600);
     border-color: var(--red-200);
+  }
 }
 .btn-reset-progress:focus {
   outline: 2px solid var(--blue-400);
+  outline-offset: 2px;
+}
+.progress-row .btn-reset-progress:focus-visible {
+  outline: 3px solid var(--blue-400);
   outline-offset: 2px;
 }
 
@@ -159,7 +202,7 @@ Course & Topic Overview
 .stat-value {
     font-size: 1.25rem;
     font-weight: 700;
-    color: var(--grey-700);
+    color: var(--black-main);
     line-height: 1.2;
 }
 .stat-label {

@@ -38,6 +38,7 @@
   --grey-200:       #e5e5e5;   /* Neutral background */
   --grey-300:       #dcdcdc;   /* Progress bars */
   --grey-400:       #c4c4c4;   /* Borders / lips */
+  --grey-450:       #b0b0b0;   /* Soft mid-grey (close to Duolingo grey, adjusted) */
   --grey-500:       #999999;   /* Muted text */
   --grey-600:       #666666;   /* Stronger border or dark muted text */
   --grey-700:       #4a4a4a;   /* Dark strong grey for labels or headings */
