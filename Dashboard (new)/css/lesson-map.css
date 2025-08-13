@@ -10,10 +10,10 @@ Course & Topic Overview
     grid-template-columns: 1fr 0.8fr;
     gap: 48px;
     background: var(--white-main);
-    border: 1px solid var(--grey-200);
-    border-radius: 16px;
+    border-radius: var(--radius-xl);
     padding: 32px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+    box-shadow: var(--shadow-card);
+    border: 2px solid var(--grey-200);
 }
 
 /* Left Column: Details & CTA */
@@ -26,7 +26,7 @@ Course & Topic Overview
 .course-title {
     font-size: 2.25rem;
     font-weight: 700;
-    color: var(--grey-700);
+    color: var(--black-main);
     margin: 0 0 12px 0;
 }
 
@@ -77,8 +77,8 @@ Course & Topic Overview
 
 .progress-card {
     background-color: var(--grey-50);
-    border: 1px solid var(--grey-200);
-    border-radius: 12px;
+    border: 2px solid var(--grey-200);
+    border-radius: var(--radius-lg);
     padding: 16px;
 }
 .progress-header {
@@ -95,7 +95,7 @@ Course & Topic Overview
 .progress-label {
     font-weight: 600;
     font-size: 0.9rem;
-    color: var(--grey-700);
+    color: var(--black-main);
 }
 .progress-percent {
     font-weight: 600;
@@ -103,16 +103,16 @@ Course & Topic Overview
     color: var(--blue-500);
 }
 .progress-bar-bg {
-    height: 12px;
+    height: 10px;
     width: 100%;
     background-color: var(--grey-200);
-    border-radius: 6px;
+    border-radius: 999px;
     overflow: hidden;
 }
 .progress-bar-fill {
     height: 100%;
     background: var(--blue-500);
-    border-radius: 6px;
+    border-radius: 999px;
     transition: width 0.5s ease-out;
 }
 
@@ -136,6 +136,10 @@ Course & Topic Overview
     color: var(--red-600);
     border-color: var(--red-200);
 }
+.btn-reset-progress:focus {
+  outline: 2px solid var(--blue-400);
+  outline-offset: 2px;
+}
 
 /* Stats Grid */
 .stats-grid {
@@ -145,8 +149,8 @@ Course & Topic Overview
 }
 .stat-card {
     background-color: var(--white-main);
-    border: 1px solid var(--grey-200);
-    border-radius: 12px;
+    border: 2px solid var(--grey-200);
+    border-radius: var(--radius-lg);
     padding: 16px;
     display: flex;
     flex-direction: column;
@@ -243,7 +247,7 @@ LESSON CARD LAYOUT (FINAL "BOX-SHADOW LIP" VERSION)
 .card-title {
   font-size: 1.2rem;
   font-weight: 600;
-  color: var(--grey-700);
+  color: var(--black-main);
   margin: 0;
 }
 .card-meta {
@@ -263,7 +267,7 @@ LESSON CARD LAYOUT (FINAL "BOX-SHADOW LIP" VERSION)
   border: 2px solid var(--green-500);
   box-shadow: 0 3px 0 0 var(--green-500); /* lip */
 }
-.lesson-card.is-completed .card-title { color: var(--grey-600); }
+.lesson-card.is-completed .card-title { color: var(--black-main); }
 .lesson-card.is-completed .card-state-icon { color: var(--green-500); }
 
 @media (hover: hover) {
@@ -341,4 +345,20 @@ Responsiveness
   .course-title { font-size: 1.75rem; }
   .course-overview { padding: 16px; }
   .stats-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 640px) {
+  .course-overview {
+    grid-template-columns: 1fr;
+    padding: 24px;
+  }
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .progress-bar-fill {
+    transition: none;
+  }
 }
