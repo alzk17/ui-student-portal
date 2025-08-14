@@ -1,7 +1,14 @@
+.learn-title {
+  margin: 0px;
+}
+.learn-subtext {
+  margin-top: 4px;
+  color: var(--grey-600);
+}
+
 /* ============================
    Courses Page: Course Sections — Heading + Topic Cards Grid
 ============================ */
-
 .course-list {
   display: flex;
   flex-direction: column;
