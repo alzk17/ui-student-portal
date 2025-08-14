@@ -1,243 +1,112 @@
 /* ============================
-   Topic Card (Recommended Topics)
+   Courses Page: Course Sections — Heading + Topic Cards Grid
 ============================ */
 
-.learn-topic-row {
-  display: flex;
-  gap: 20px;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  border: transparent;
-  background-color: var(--grey-50);
-  padding: 24px;
-  border-radius: var(--radius-lg);
-}
-
-/* Base card */
-.learn-topic-card {
-
-  min-width: 180px;
-  max-width: 220px;
-  width: 100%;
-  padding: 12px 12px 8px 12px;
-  border: 2px solid var(--grey-200);
-  border-radius: var(--radius-lg);
-  background-color: var(--white-main);
-  text-align: center;
-  position: relative;
-  cursor: pointer;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
-
+.course-list {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: space-between; /* or 'center' if you want uniform vertical balance */
+  margin-top: 48px
 }
 
-.learn-topic-card:hover {
-  border-color: var(--blue-500);
-  background-color: var(--blue-50);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-}
-
-/* Completed Topic Card Style */
-.learn-topic-card--complete {
-  border-color: var(--green-200, #22a95b);      /* Your mid-green border */
-  background-color: var(--green-50, #eafaf1);   /* Your soft green bg */
-}
-
-/* Optional: Make the progress bar always fully green if complete */
-.learn-topic-card--complete .learn-topic-progress-bar {
-  background-color: var(--green-500, #168a45);
-  width: 100% !important;
-}
-
-.learn-topic-card--complete:hover {
-  border-color: var(--green-200, #22a95b);
-  background-color: var(--green-50, #eafaf1);
-  /* Optional: add a subtle green shadow if you want, or just leave it *
-  /* box-shadow: 0 2px 8px rgba(34, 169, 91, 0.07); */
-}
-
-/* Icon wrapper */
-.learn-topic-icon {
-  position: relative;
-  width: 75px;
-  height: 75px;
-  margin: auto;
-}
-
-.learn-topic-icon img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
-/* Title */
-.learn-topic-title {
-  font-size: 1rem;
-  font-weight: 600;
-  color: var(--black-main);
-  line-height: 1.2;
-  word-break: break-word;
-  height: 20px;
-}
-
-/* Progress Bar */
-.learn-topic-progress {
-  width: 100%;
-  height: 4px;
-  background-color: var(--grey-200);
-  border-radius: 2px;
-  overflow: hidden;
-  margin-bottom: 8px;
-}
-.learn-topic-progress-bar {
-  height: 100%;
-  background-color: var(--green-500);
-  border-radius: 2px;
-  transition: width 0.3s cubic-bezier(.4,0,.2,1);
-}
-
-/* Badge (for later use) */
-.learn-topic-badge-row {
-  width: 100%;
-  min-height: 20px;
-  display: flex;
-  justify-content: flex-end;
-}
-
-.learn-topic-badge-row:empty::before {
-  content: '';
+.course-section {
   display: block;
-  width: 100%;
-  height: 20px;
+  padding: 0 0 32px;
 }
 
-.learn-topic-badge {
-  background-color: var(--yellow-500);
+/* Heading row: title on left, thin rule extends to the right */
+.course-section__heading {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 32px;
+}
+.course-section__title {
+  margin: 0;
+  font-size: 1.125rem;
+  font-weight: 800;
   color: var(--black-main);
-  font-size: 0.75rem;
-  font-weight: 600;
-  border-radius: 30px;
-  text-transform: uppercase;
-  padding: 4px 8px;
-  line-height: 1;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+  white-space: nowrap;
+}
+.course-section__heading::after {
+  content: "";
+  height: 1px;
+  background: var(--grey-200);
+  flex: 1 1 auto;
 }
 
-/* Learn Journey */
-.learn-jrny-row {
-  display: flex;
-  gap: 20px;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  border: transparent;
-  background-color: var(--grey-50);
-  padding: 24px;
-  border-radius: var(--radius-lg);
+/* Bottom divider matching the heading rule */
+.course-section__divider {
+  height: 1px;
+  background: var(--grey-200);
 }
 
-.learn-jrny-card {
-  flex: 1 1 0;
-  min-width: 320px;
-  max-width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+/* Topic cards grid (leaner rows) */
+.topic-cards {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  /* ↓ narrower min size = more cards per row on wide screens */
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 16px;
+}
+
+/* Card shell (unchanged border/radius; feels tighter via content) */
+.topic-card {
   background: var(--white-main);
   border: 2px solid var(--grey-200);
   border-radius: var(--radius-lg);
-  padding: 24px 28px;
-  min-height: 120px;
-  width: 400px;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.03);
-  transition: border-color 0.2s, box-shadow 0.2s;
-  cursor: pointer;
+  transition: border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-.learn-jrny-card:hover {
-  border-color: var(--blue-500);
-  background-color: var(--blue-50);
-}
-
-.learn-jrny-content {
-  flex: 1 1 0;
+/* Inner layout: slightly less padding + leaner height */
+.topic-card__link {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 16px 14px; /* was 20px 16px */
+  gap: 16px;          /* was 12px */
+  text-decoration: none;
+  color: inherit;
+  min-height: 200px;  /* was 200px */
 }
 
-.learn-jrny-title {
-  font-size: 1.125rem;
+/* Icon: just a touch smaller to reduce bulk */
+.topic-card__icon {
+  width: 85px;  /* was 80px */
+  height: 85px; /* was 80px */
+  object-fit: contain;
+  display: block;
+  margin-top: 24px;
+}
+
+/* Title: keep 2-line clamp; tiny size tweak for density */
+.topic-card__title {
+  margin: 0;
+  font-size: 0.95rem; /* was 1rem */
   font-weight: 700;
   color: var(--black-main);
+  text-align: center;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  line-height: 1.3;
+  min-height: calc(1.3em * 2); /* reserves space for up to 2 lines */
 }
 
-.learn-jrny-image {
-  flex: 0 0 80px;
-  margin-left: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.learn-jrny-image img {
-  width: 75px;
-  height: 75px;
-  object-fit: contain;
-}
-
-.learn-jrny-label {
-  font-size: 0.75rem;
-  font-weight: 600;
-  color: var(--blue-main, #375ce3);
-  display: inline-block;
-  display: inline-block;
-  align-self: flex-start;
-  text-transform: uppercase;
-}
-
-.learn-jrny-meta {
-  font-size: 0.95rem;
-  color: var(--grey-600, #666);
-  margin-top: 12px;
-  display: flex;
-}
-
-.learn-jrny-count {
-  font-weight: 500;
-}
-
-.learn-jrny-levels {
-  background: var(--grey-200, #e5e5e5);
-  color: var(--grey-700, #4a4a4a);
-  border-radius: 8px;
-  padding: 1px 8px;
-  font-size: 0.85em;
-  font-weight: 500;
-}
-
-@media (max-width: 600px) {
-  .learn-jrny-card {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 18px;
-  }
-  .learn-jrny-image {
-    margin-left: 0;
-    margin-top: 16px;
-    align-self: center;
+/* Hover remains the same; optional: slightly lighter shadow for lean vibe */
+@media (hover:hover) {
+  .topic-card:hover {
+    background: var(--blue-50);
+    border-color: var(--blue-200);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05); /* was 0.06 */
   }
 }
 
-
-.swiper-button-disabled {
-  opacity: 0;
-  pointer-events: none;
-  visibility: hidden;
-  /* Or: display: none; (but this can cause layout shift) */
+/* Mobile tweaks: keep proportions nice and touch-friendly */
+@media (max-width: 560px) {
+  .topic-card__link { min-height: 160px; }          /* was 180px */
+  .topic-card__icon { width: 64px; height: 64px; }  /* same as before or keep 64 */
 }
-
-
-
