@@ -91,7 +91,7 @@
 /* Title: keep 2-line clamp; tiny size tweak for density */
 .topic-card__title {
   margin: 0;
-  font-size: 0.95rem; /* was 1rem */
+  font-size: 1rem;
   font-weight: 700;
   color: var(--black-main);
   text-align: center;
