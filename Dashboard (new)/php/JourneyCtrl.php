@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Frontend\Child;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Resources\LessonsResource;
 use App\Models\Backend\JourneyAnswerMd;
 use App\Models\Backend\JourneyTestAnswerMd;
 use App\Models\Backend\JourneyMd;
@@ -15,14 +14,61 @@ use App\Models\Backend\JourneyLearningMd;
 use App\Models\Backend\JourneyLessonCompletionMd;
 use App\Models\Backend\JourneyPracticeMd;
 use App\Models\Backend\PracticeModel;
-use Svg\Tag\Rect;
+use Illuminate\Support\Str;
 
 class JourneyCtrl extends Controller
 {
     protected $prefix = 'front-end';
     protected $folder = 'dashboard-child';
     
-    public function index(Request $reqest, $journeyId = null, $subjectId = null)
+    /**
+     * Learn landing page – builds $courses = [{ title, topics: [{title, icon, url}] }]
+     */
+    public function learnLanding()
+    {
+        $navs = [
+            ["url" => url('/dashboard-child/journey'), "name" => "Learning Journey"]
+        ];
+
+        // Fetch active journeys (courses), ordered
+        $journeys = JourneyMd::where('isActive', 'Y')
+            ->orderBy('list_order', 'asc')
+            ->get();
+
+        $courses = $journeys->map(function ($j) {
+            $topics = JourneySubjectMd::where('journey_id', $j->id)
+                ->where('isActive', 'Y')
+                ->orderBy('list_order', 'asc')
+                ->get()
+                ->map(function ($s) use ($j) {
+                    $rawIcon = $s->image ?: '';
+                    $icon = $rawIcon
+                        ? (Str::startsWith($rawIcon, ['http://', 'https://', '//']) ? $rawIcon : asset($rawIcon))
+                        : asset('assets_dashboard/img/icons/placeholder-topic.png');
+
+                    return [
+                        'title' => $s->name,
+                        'icon'  => $icon,
+                        'url'   => url('dashboard-child/journey/' . $j->id . '/' . $s->id),
+                    ];
+                })->toArray();
+
+            return [
+                'title'  => $j->name,
+                'topics' => $topics,
+            ];
+        })->toArray();
+
+        return view("front-end.dashboard-child.journey", [
+            'prefix'  => $this->prefix,
+            'folder'  => $this->folder,
+            'nav'     => $navs,
+            'courses' => $courses,
+            'user'    => Auth::guard('user'),
+        ]);
+    }
+
+    public function index(Request $request, $journeyId = null, $subjectId = null)
     {
         $navs = [
             ["url" => url('/dashboard-child/journey'), "name" => "Learning Journey"]
@@ -48,7 +94,7 @@ class JourneyCtrl extends Controller
         ]);
     }
 
-    public function getLessons(Request $reqest, $journeyId = null, $subjectId = null)
+    public function getLessons(Request $request, $journeyId = null, $subjectId = null)
     {
         try {
             $user = Auth::guard('child')->user();
@@ -60,8 +106,18 @@ class JourneyCtrl extends Controller
                 ->get();
 
             $learingQuery = JourneyLearningMd::where(['subjectId' => $subjectId, 'journeyId' => $journeyId, 'userId' => $user->id])->first();
-            $current = JourneySubjectMd::where(['journey_id' => $journeyId, 'id' => $subjectId])->select('id', 'name', 'timer')->first();
-            $next = JourneySubjectMd::where(['journey_id' => $journeyId, 'list_order' => $current->list_order + 1])->select('id')->first();
+
+            $current = JourneySubjectMd::where(['journey_id' => $journeyId, 'id' => $subjectId])
+                ->select('id', 'name', 'timer', 'list_order')
+                ->first();
+
+            $next = null;
+            if ($current) {
+                $next = JourneySubjectMd::where([
+                    'journey_id' => $journeyId,
+                    'list_order' => $current->list_order + 1
+                ])->select('id')->first();
+            }
             
             if (!@$learingQuery->id) {
                 $learning = new JourneyLearningMd;
@@ -210,9 +266,9 @@ class JourneyCtrl extends Controller
             ])->get();
             foreach($practice as $k => $v){
                 $answer = JourneyAnswerMd::where([
-                    'practice_id'=>$v->id,
-                    'subject_id',
-                    'userId'=>Auth::guard('child')->user()->id
+                    'practice_id' => $v->id,
+                    'subject_id'  => $subjectId,
+                    'userId'      => Auth::guard('child')->user()->id
                 ])->first();
                 $testCorrect = '';
                 if($v->type_question == 'drag-drop'){
@@ -304,6 +360,7 @@ class JourneyCtrl extends Controller
         $subject = JourneySubjectMd::findOrFail($subjectId);
         if ($learning->id) {
             $lesson = JourneyLessonMd::where('journey_subject_id', $subject->id)->get();
+            $delete = [];
             foreach ($lesson as $v) {
                 foreach (
                     JourneyPracticeMd::where([
@@ -312,9 +369,9 @@ class JourneyCtrl extends Controller
                     ])->get() as $k => $p
                 ) {
                     $delete[$k] = JourneyAnswerMd::where([
-                        'subjectId' => $subjectId,
+                        'subjectId'  => $subjectId,
                         'practiceId' => $p->id,
-                        'userId' => Auth::guard('child')->user()->id
+                        'userId'     => Auth::guard('child')->user()->id
                     ])->delete();
                 }
             }
@@ -325,11 +382,8 @@ class JourneyCtrl extends Controller
             $learning->finished = 0;
             $learning->timer = NULL;
             $learning->save();
-            if (@in_array(true, $delete) >= 0) {
-                $response = ['status' => 200, 'statusText' => 'Data has been deleted.'];
-            } else {
-                $response = ['status' => 500, 'statusText' => 'Your request was unsuccessful.'];
-            }
+
+            $response = ['status' => 200, 'statusText' => 'Progress has been reset.'];
         } else {
             $response = ['status' => 500, 'statusText' => 'Learning not found.'];
         }
