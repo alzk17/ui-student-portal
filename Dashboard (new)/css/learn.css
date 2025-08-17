@@ -53,8 +53,8 @@
   margin: 0;
   padding: 0;
   display: grid;
-  /* ↓ narrower min size = more cards per row on wide screens */
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  
+  grid-template-columns: repeat(auto-fill, 172px);
   gap: 16px;
 }
 

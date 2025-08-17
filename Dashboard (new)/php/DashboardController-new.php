@@ -31,6 +31,7 @@ use App\Models\Backend\Grade_levelModel;
 use App\Models\Backend\Mocktest_topicModel;
 use App\Models\Backend\JourneyMd;
 use App\Models\Backend\Question_groupModel;
+use Illuminate\Support\Str;
 
 class DashboardController extends Controller
 {
@@ -86,35 +87,37 @@ class DashboardController extends Controller
     {
         $child = \App\Models\Backend\ChildModel::findOrFail(Auth::guard('child')->id());
 
-        // --- NEW LOGIC STARTS HERE ---
+        // Use eager loading to fetch journeys WITH their subjects in one efficient query.
+        $journeys = \App\Models\Backend\JourneyMd::where('isActive', 'Y')
+            ->with(['subjects' => function ($query) {
+                // Ensure we only get active subjects and order them correctly.
+                $query->where('isActive', 'Y')->orderBy('list_order', 'asc');
+            }])
+            ->orderBy('list_order', 'asc')
+            ->get()
+            ->map(function ($journey) {
+                // Map the eager-loaded subjects to the desired format for the view.
+                $topics = $journey->subjects->map(function ($subject) use ($journey) {
+                    $rawIcon = $subject->image ?: '';
+                    $icon = $rawIcon
+                        ? (Str::startsWith($rawIcon, ['http://', 'https://', '//']) ? $rawIcon : asset($rawIcon))
+                        : asset('assets_dashboard/img/icons/placeholder-topic.png');
 
-        // 1. Query the JourneySubjectMd model to get all individual subjects.
-        // We are no longer querying JourneyMd.
-        $query = \App\Models\Backend\JourneySubjectMd::query();
+                    return [
+                        'id'    => $subject->id,
+                        'title' => $subject->name,
+                        'icon'  => $icon,
+                        'url'   => url('dashboard-child/journey/' . $journey->id . '/' . $subject->id),
+                    ];
+                });
 
-        // 2. Add a condition to only show active subjects (optional but recommended).
-        $query->where('isActive', 'Y');
-        
-        // 3. (Optional) If you have a search/filter on this page, you can keep this part.
-        // Otherwise, you can remove the 'if ($keyword)' block.
-        $keyword = \Illuminate\Support\Arr::get($request, 'keyword');
-        if ($keyword) {
-            $query->where('name', 'LIKE', '%' . trim($keyword) . '%');
-        }
-
-        // 4. Eager load the count of topics for each subject.
-        // This will create a 'topics_count' property on each subject object.
-        // Note: This assumes you have a 'topics' relationship on your JourneySubjectMd model.
-        // If not, we will adjust the Blade template in the next step.
-        // For now, let's assume the relationship exists.
-        // $query->withCount('topics');
-        
-        // 5. Get all the subjects, ordered by their list_order.
-        // We use get() instead of paginate() to show all subjects on one page.
-        $subjects = $query->orderBy('list_order', 'asc')->get();
-
-        // --- NEW LOGIC ENDS HERE ---
-
+                return [
+                    'id'     => $journey->id,
+                    'title'  => $journey->name,
+                    'topics' => $topics->all(),
+                ];
+            })
+            ->toArray();
 
         return view("$this->prefix.$this->folder.journey", [
             'prefix' => $this->prefix,
@@ -122,11 +125,7 @@ class DashboardController extends Controller
             'title_page' => "Learning Journey",
             'sub_title_page' => "Step-by-step journeys to mastery.",
             'child' => $child,
-            
-            // Pass the collection of subjects to the view.
-            // We are still naming it 'journeys' so you don't have to edit your Blade file.
-            'journeys' => $subjects,
-            
+            'journeys' => $journeys,
             'navbar_name' => "Learning Journey",
             'navbar_detail' => 'Step-by-step journeys to mastery.',
         ]);

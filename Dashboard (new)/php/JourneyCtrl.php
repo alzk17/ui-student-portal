@@ -21,53 +21,6 @@ class JourneyCtrl extends Controller
     protected $prefix = 'front-end';
     protected $folder = 'dashboard-child';
     
-    /**
-     * Learn landing page – builds $courses = [{ title, topics: [{title, icon, url}] }]
-     */
-    public function learnLanding()
-    {
-        $navs = [
-            ["url" => url('/dashboard-child/journey'), "name" => "Learning Journey"]
-        ];
-
-        // Fetch active journeys (courses), ordered
-        $journeys = JourneyMd::where('isActive', 'Y')
-            ->orderBy('list_order', 'asc')
-            ->get();
-
-        $courses = $journeys->map(function ($j) {
-            $topics = JourneySubjectMd::where('journey_id', $j->id)
-                ->where('isActive', 'Y')
-                ->orderBy('list_order', 'asc')
-                ->get()
-                ->map(function ($s) use ($j) {
-                    $rawIcon = $s->image ?: '';
-                    $icon = $rawIcon
-                        ? (Str::startsWith($rawIcon, ['http://', 'https://', '//']) ? $rawIcon : asset($rawIcon))
-                        : asset('assets_dashboard/img/icons/placeholder-topic.png');
-
-                    return [
-                        'title' => $s->name,
-                        'icon'  => $icon,
-                        'url'   => url('dashboard-child/journey/' . $j->id . '/' . $s->id),
-                    ];
-                })->toArray();
-
-            return [
-                'title'  => $j->name,
-                'topics' => $topics,
-            ];
-        })->toArray();
-
-        return view("front-end.dashboard-child.journey", [
-            'prefix'  => $this->prefix,
-            'folder'  => $this->folder,
-            'nav'     => $navs,
-            'courses' => $courses,
-            'user'    => Auth::guard('user'),
-        ]);
-    }
-
     public function index(Request $request, $journeyId = null, $subjectId = null)
     {
         $navs = [
@@ -84,13 +37,12 @@ class JourneyCtrl extends Controller
             ->first();
 
         return view("front-end.dashboard-child.subject-overview", [
-            'prefix' => 'front-end',
+            'prefix' => $this->prefix,
             'folder' => $this->folder,
             'nav' => $navs,
             'subject' => $subject,
             'user' => Auth::guard('user'),
 			'child' => Auth::guard('child')->user() // ✅ Add this line (to temporary fix accessing journey page)
-
         ]);
     }
 
@@ -105,7 +57,7 @@ class JourneyCtrl extends Controller
                 ->orderBy('list_order', 'asc')
                 ->get();
 
-            $learingQuery = JourneyLearningMd::where(['subjectId' => $subjectId, 'journeyId' => $journeyId, 'userId' => $user->id])->first();
+            $learningQuery = JourneyLearningMd::where(['subjectId' => $subjectId, 'journeyId' => $journeyId, 'userId' => $user->id])->first();
 
             $current = JourneySubjectMd::where(['journey_id' => $journeyId, 'id' => $subjectId])
                 ->select('id', 'name', 'timer', 'list_order')
@@ -119,14 +71,14 @@ class JourneyCtrl extends Controller
                 ])->select('id')->first();
             }
             
-            if (!@$learingQuery->id) {
+            if (!@$learningQuery->id) {
                 $learning = new JourneyLearningMd;
                 $learning->journeyId = $journeyId;
                 $learning->subjectId = $subjectId;
                 $learning->userId = $user->id;
                 $learning->save();
             } else {
-                $learning = $learingQuery;
+                $learning = $learningQuery;
             }
 
             return response()->json([
@@ -195,24 +147,23 @@ class JourneyCtrl extends Controller
             ])->first();
 
             if (@$data->id) {
-                $all = ($data->all_latest) ? json_decode($data->all_latest) : [];
-                
-                // CORRECTED: Use lessonId here
-                array_push($all, $request->lessonId); 
+                $all = ($data->all_latest) ? json_decode($data->all_latest, true) : [];
+                if (!is_array($all)) { $all = []; }
+                $lessonId = (int) $request->lessonId;
+                if ($lessonId && !in_array($lessonId, $all, true)) {
+                    $all[] = $lessonId;
+                }
 
                 $data->latest_type = $request->latest_type;
                 $data->all_latest = json_encode($all);
-
-                // This is the main fix you already made
-                $data->latest = $request->lessonId; 
+                $data->latest = $lessonId;
 
                 if ($data->save()) {
                     $res = [
-                        'status' => true, 
-                        'statusText' => 'Data has been updated.', 
-                        'statusCode' => 200, 
-                        // CORRECTED: Use lessonId here as well for the response
-                        'latest' => $request->lessonId, 
+                        'status' => true,
+                        'statusText' => 'Data has been updated.',
+                        'statusCode' => 200,
+                        'latest' => $lessonId,
                         'latest_type' => $request->latest_type
                     ];
                 } else {
@@ -265,17 +216,18 @@ class JourneyCtrl extends Controller
                 'subject_id' => $subjectId
             ])->get();
             foreach($practice as $k => $v){
-                $answer = JourneyAnswerMd::where([
-                    'practice_id' => $v->id,
-                    'subject_id'  => $subjectId,
-                    'userId'      => Auth::guard('child')->user()->id
+                $userAnswer = JourneyAnswerMd::where([
+                    'practiceId' => $v->id,
+                    'subjectId'  => $subjectId,
+                    'userId'     => Auth::guard('child')->user()->id
                 ])->first();
+                if (!$userAnswer) { continue; }
                 $testCorrect = '';
                 if($v->type_question == 'drag-drop'){
                     $testAnswer = JourneyTestAnswerMd::Where(['practice_id'=>$v->id])->orderBy('list_answer')->get();
                     $array = [];
-                    foreach($testAnswer as $answer) {
-                        $array[] = $answer->answer_text;
+                    foreach($testAnswer as $ans) {
+                        $array[] = $ans->answer_text;
                     }
                     $testCorrect = json_encode($array);
                     $testCorrect = str_replace($testCorrect,"{","[");
@@ -286,7 +238,7 @@ class JourneyCtrl extends Controller
                         $testCorrect = '["'.$testAnswer->answer_text.'"]';
                     }
                 }
-                if($answer->answer_text == $testCorrect){
+                if($userAnswer->answer_text == $testCorrect){
                     $correct++;
                 }
             }
