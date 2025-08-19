@@ -27,22 +27,29 @@ class JourneyCtrl extends Controller
             ["url" => url('/dashboard-child/journey'), "name" => "Learning Journey"]
         ];
 
-        $subject = JourneySubjectMd::leftJoin('tb_journey as jn', 'tb_journey_subject.journey_id', 'jn.id')
-            ->where('tb_journey_subject.journey_id', $journeyId)
-            ->where('tb_journey_subject.id', $subjectId)
-            ->select([
-                'tb_journey_subject.*',
-                'jn.name as journey'
-            ])
-            ->first();
+        // This 'with('journey')' fetches the parent journey relationship.
+        $subject = \App\Models\Backend\JourneySubjectMd::with('journey')
+            ->where('id', $subjectId)
+            ->where('journey_id', $journeyId)
+            ->firstOrFail();
 
+        $lessons = \App\Models\Backend\JourneyLessonMd::where('journey_subject_id', $subjectId)
+            ->orderBy('list_order', 'asc')
+            ->get();
+        
         return view("front-end.dashboard-child.subject-overview", [
             'prefix' => $this->prefix,
             'folder' => $this->folder,
             'nav' => $navs,
             'subject' => $subject,
+            'lessons' => $lessons,
+            
+            // Because of eager loading, '$subject->journey' is now available.
+            // We pass it to the view here for the link in the breadcrumb.
+            'journey' => $subject->journey, 
+            
             'user' => Auth::guard('user'),
-			'child' => Auth::guard('child')->user() // ✅ Add this line (to temporary fix accessing journey page)
+            'child' => Auth::guard('child')->user(),
         ]);
     }
 

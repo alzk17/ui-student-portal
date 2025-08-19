@@ -2,10 +2,21 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>lambda</title>
-    @include("$prefix.dashboard-child.layout.stylesheet")
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>hello brother</title>
+  @include("$prefix.dashboard-child.layout.stylesheet")
+
+  <link rel="stylesheet" href="{{ asset('assets_dashboard/css/components.css') }}?v={{ time() }}">
+  <link rel="stylesheet" href="{{ asset('assets_dashboard/css/header.css') }}?v={{ time() }}">
+  <link rel="stylesheet" href="{{ asset('assets_dashboard/css/buttons.css') }}?v={{ time() }}">
+  <link rel="stylesheet" href="{{ asset('assets_dashboard/css/layout.css') }}?v={{ time() }}">
+  <link rel="stylesheet" href="{{ asset('assets_dashboard/css/sidebar.css') }}?v={{ time() }}">
+  <link rel="stylesheet" href="{{ asset('assets_dashboard/css/tooltip.css') }}?v={{ time() }}">
+  <link rel="stylesheet" href="{{ asset('assets_dashboard/css/variables.css') }}?v={{ time() }}">
+  <link rel="stylesheet" href="{{ asset('assets_dashboard/css/modal.css') }}?v={{ time() }}">
+  <link rel="stylesheet" href="{{ asset('assets_dashboard/css/tooltip-widgets.css') }}?v={{ time() }}">
+  <link rel="stylesheet" href="{{ asset('assets_dashboard/css/lesson-map.css') }}?v={{ time() }}">
 </head>
 
 <body>
@@ -19,79 +30,127 @@
             </div>
 
             <div class="container-custom">
-                <div class="learning-journey">
-                    <input type="hidden" name="userId" value="{{ Auth::guard('child')->user()->id }}">
-                    <div class="row">
-                        @if (@$navs)
-                            <div class="my-4 text-smaller text-info">
-                                @for ($i = 0; $i < count($navs); $i++)
-                                    @if ($i > 0)
-                                        &gt; {{ $navs[$i]->name }}
-                                    @else
-                                        {{ $navs[$i]->name }}
-                                    @endif
-                                @endfor
+                <div class="portal-layout">
+                    <div class="portal-main portal-main--fullwidth">
+                        
+                        {{-- Section 1: Topic Overview --}}
+                        <section class="portal-section course-overview">
+                            <div class="course-details">
+                                <div class="topic-breadcrumb">
+                                    {{-- Use the 'journey' relationship to get the parent course name --}}
+                                    <a href="{{ url('dashboard-child/journey') }}">{{ $subject->journey->name ?? 'Course' }}</a>
+                                    <i class="fa-solid fa-chevron-right"></i>
+                                    <span>{{ $subject->name ?? 'Topic' }}</span>
+                                </div>
+                                <h1 class="course-title">{{ $subject->name ?? 'Topic Title' }}</h1>
+                                <p class="course-description">
+                                    {{ $subject->description ?? 'Learn the basics of this topic step-by-step.' }}
+                                </p>
+                                <button type="button" class="portal-btn3d portal-btn3d--blue portal-btn3d--primary btn-start-learning">
+                                  Continue learning
+                                </button>
                             </div>
-                        @endif
-                    </div>
 
-
-                    <div class="lesson-body row justify-content-between mt-5">
-				
-                        <div class="card backInLeft animated my-3 position-relative" data-delay="200" style="max-width: 500px; background-color: rgba(255,255,255,0.45)"> 
-                            <div class="card-body float-start ">
-                                @if($subject->image !='')
-                                    <div><img src="{{$subject->image}}" width="200"></div>
-                                @else
-                                    <div><img src="images/learning-journey.png" width="200"></div>
-                                @endif
-                                <h5 class="mt-3"><span>{{$subject->journey}}</span></h5>
-                                <h3 class="fw-bold text-black fs-4 ">{{$subject->name}} </h3>
-                            
-                                <div class="font-secondary fw-normal fs-6 mb-3 ">
-                                    Start your algebra Journey here with an introduction to variable and equations. 
-                                </div>
-                                <div class="d-flex count">
-                                    <div> <i class="uil-book-open"></i> <span class="lesson">0</span> Lessons  </div> 
-                                    <div><i class="uil-file-edit-alt ms-2"></i> <span class="practice">0</span> Practices </div> 
-                                </div>
-								<div class="my-3 d-flex justify-content-between">
-                                    <a href="javascript:" id="back" class="btn button-border btn-light"><i class="bi-chevron-left"></i> Back </a> 
-                                    <div>
-                                        <a href="javascript:" id="jumpto" class="btn button-border btn-light"> <i class="uil-plus"></i> Jump to ... </a> 
-                                        <a href="javascript:" id="reset" class="btn button-border btn-primary ms-2"> Reset </a> 
+                            <div class="course-dashboard">
+                                <div class="progress-card">
+                                    <div class="progress-header">
+                                        <span class="progress-label">Topic Progress</span>
+                                        <span class="progress-percent">{{-- $progressPercent --}}%</span>
+                                    </div>
+                                    <div class="progress-bar-bg">
+                                        <div class="progress-bar-fill" style="width: {{-- $progressPercent --}}%;"></div>
                                     </div>
                                 </div>
-                                
-								<div class="skill-progress mt-2" data-percent="40" data-speed="500">
-									<div class="progress" style="height: 10px">
-										<div class="progress-bar progress-bar-custom skill-progress-percent" role="progressbar" style="width: 45%;" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100">
-										</div>
-									</div>
-								</div>
-                            
-                            </div> 
-                        </div>
 
-                        
-						<div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 overflow-x-scroll max-vh-100 animate__animated animate__fadeInUp" data-delay="300">
-                            <div class="d-flex justify-content-start">
-                                <div class="my-3">
-                                    <h2 class="fw-bold title-start"> Start <span>Journey</span> </h2>
+                                <div class="stats-grid">
+                                    <div class="stat-card">
+                                        <div class="stat-label">Lessons</div>
+                                        <div class="stat-value">{{-- $lessonCount --}}</div>
+                                    </div>
+                                    <div class="stat-card">
+                                        <div class="stat-label">Practices</div>
+                                        <div class="stat-value">{{-- $practiceCount --}}</div>
+                                    </div>
+                                    <div class="stat-card">
+                                        <div class="stat-label">Level</div>
+                                        <div class="stat-value">{{ $subject->level ?? 'Beginner' }}</div>
+                                    </div>
+                                    <div class="stat-card">
+                                        <div class="stat-label">Est. Time</div>
+                                        <div class="stat-value">{{ $subject->estimated_time ?? '2 hours' }}</div>
+                                    </div>
                                 </div>
                             </div>
-                            <main class="postcontent order-lg-last ms-3">		
-                                <!-- Posts ========================== -->
-                                <div id="posts" class="post-timeline">
-                                </div>
-                            </main>
-                        </div>
-                    </div>		
+                        </section>
+                        
+                        {{-- Section 2: Syllabus / Lesson Cards --}}
+                        <section class="portal-section syllabus-map">
+                            <div class="lesson-card-container">
 
+                                @forelse($lessons as $lesson)
+                                    @php
+                                        // This is where you would add your logic to determine the lesson's status
+                                        // For example:
+                                        // $isCompleted = in_array($lesson->id, $completedLessonIds);
+                                        // $isCurrent = ($lesson->id == $currentLessonId);
+                                        // $isLocked = (!$isCompleted && !$isCurrent);
+                                        
+                                        // For this template, we'll just use a placeholder status
+                                        $status = 'locked';
+                                        if ($loop->iteration < 3) $status = 'completed';
+                                        if ($loop->iteration == 3) $status = 'current';
+                                    @endphp
 
+                                    @if($status === 'locked')
+                                        <div class="lesson-card is-locked" aria-label="Locked: {{ $lesson->name }}">
+                                    @else
+                                        <a class="lesson-card is-{{$status}} card-link" href="{{ url('dashboard-child/journey/' . $journey->id . '/' . $subject->id . '/learning?lesson=' . $lesson->id) }}">
+                                    @endif
 
+                                        <div class="card-index" aria-hidden="true">{{ $loop->iteration }}</div>
+                                        <div class="card-content">
+                                            <div class="card-tags">
+                                                {{-- Assuming your lesson object has a 'type' property --}}
+                                                <span class="tag tag--type">{{ ucfirst($lesson->type) }}</span>
+                                            </div>
+                                            <h3 class="card-title">{{ $lesson->name }}</h3>
+                                            <p class="card-meta">
+                                                @if($status === 'completed')
+                                                    You've completed this.
+                                                @elseif($status === 'current')
+                                                    This is your next step.
+                                                @else
+                                                    Complete the previous step to unlock.
+                                                @endif
+                                            </p>
+                                        </div>
+                                        <div class="card-state-icon" aria-hidden="true">
+                                            @if($status === 'completed')
+                                                <i class="fa-solid fa-circle-check"></i>
+                                            @elseif($status === 'current')
+                                                <i class="fa-solid fa-play"></i>
+                                            @else
+                                                <i class="fa-solid fa-lock"></i>
+                                            @endif
+                                        </div>
+
+                                    @if($status === 'locked')
+                                        </div>
+                                    @else
+                                        </a>
+                                    @endif
+                                @empty
+                                    <p style="text-align: center; color: var(--grey-600);">No lessons have been added to this topic yet.</p>
+                                @endforelse
+
+                            </div>
+                        </section>
+                    </div>
                 </div>
             </div>
+
+            {{-- Modals can go here if needed --}}
+
         </div>
     </div>
     @include("$prefix.dashboard-child.layout.javascript")
