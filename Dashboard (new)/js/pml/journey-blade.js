@@ -412,7 +412,10 @@ const lessonApp = createApp({
       this.showExitModal = true;
     },
     exitLessonConfirmed() {
-      window.location.href = "/dashboard-child";
+      const el = document.getElementById('lesson-app');
+      const journeyId = el?.dataset.journeyId;
+      const subjectId = el?.dataset.subjectId;
+      window.location.href = `/dashboard-child/journey/${journeyId}/${subjectId}`;
     },
     closeExitModal() {
       this.showExitModal = false;

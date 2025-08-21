@@ -16,7 +16,7 @@
                 <img src="{{ asset('assets_dashboard/img/icons/home.svg') }}" class="img-fluid img-icon" alt=""> <span>Home</span>
             </a>
         </li>
-        <li class="sidebar-item {{ request()->is("$folder/journey") ? 'active' : '' }}">
+        <li class="sidebar-item {{ (request()->is("$folder/journey") || request()->is("$folder/journey/*")) ? 'active' : '' }}">
             <a href="{{ url("$folder/journey") }}" class="sidebar-link">
                 <img src="{{ asset('assets_dashboard/img/icons/hat.svg') }}" class="img-fluid img-icon" alt="">
                 <span>Learn</span>

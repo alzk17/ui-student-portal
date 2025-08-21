@@ -20,14 +20,14 @@ class JourneyCtrl extends Controller
 {
     protected $prefix = 'front-end';
     protected $folder = 'dashboard-child';
-    
+
     public function index(Request $request, $journeyId = null, $subjectId = null)
     {
+        $child = Auth::guard('child')->user();
         $navs = [
             ["url" => url('/dashboard-child/journey'), "name" => "Learning Journey"]
         ];
 
-        // This 'with('journey')' fetches the parent journey relationship.
         $subject = \App\Models\Backend\JourneySubjectMd::with('journey')
             ->where('id', $subjectId)
             ->where('journey_id', $journeyId)
@@ -36,20 +36,51 @@ class JourneyCtrl extends Controller
         $lessons = \App\Models\Backend\JourneyLessonMd::where('journey_subject_id', $subjectId)
             ->orderBy('list_order', 'asc')
             ->get();
-        
+
+        $learningProgress = \App\Models\Backend\JourneyLearningMd::firstOrCreate([
+            'journeyId' => $journeyId,
+            'subjectId' => $subjectId,
+            'userId'    => $child->id
+        ]);
+
+        $lessonIdsInThisTopic = $lessons->pluck('id');
+        $completedLessonIds = \App\Models\Backend\JourneyLessonCompletionMd::where('user_id', $child->id)
+            ->whereIn('lesson_id', $lessonIdsInThisTopic)
+            ->pluck('lesson_id')
+            ->toArray();
+
+        $firstIncomplete = $lessons->first(function ($lesson) use ($completedLessonIds) {
+            return !in_array($lesson->id, $completedLessonIds, true);
+        });
+
+        // Always derive current from the first incomplete lesson (ignoring any stale flags)
+        $currentLessonId = $firstIncomplete->id ?? null;
+
+        $totalLessons = $lessons->count();
+        $completedCount = count($completedLessonIds);
+        $topicProgressPercent = ($totalLessons > 0)
+            ? round(($completedCount / $totalLessons) * 100)
+            : 0;
+
+        // Build a continue URL only when there is something left to learn
+        $continueUrl = null;
+        if ($currentLessonId && $topicProgressPercent < 100) {
+            $continueUrl = url('dashboard-child/journey/' . $subject->journey->id . '/' . $subject->id . '/learning?lesson=' . $currentLessonId);
+        }
+
         return view("front-end.dashboard-child.subject-overview", [
-            'prefix' => $this->prefix,
-            'folder' => $this->folder,
-            'nav' => $navs,
-            'subject' => $subject,
-            'lessons' => $lessons,
-            
-            // Because of eager loading, '$subject->journey' is now available.
-            // We pass it to the view here for the link in the breadcrumb.
-            'journey' => $subject->journey, 
-            
-            'user' => Auth::guard('user'),
-            'child' => Auth::guard('child')->user(),
+            'prefix'             => $this->prefix,
+            'folder'             => $this->folder,
+            'nav'                => $navs,
+            'subject'            => $subject,
+            'lessons'            => $lessons,
+            'journey'            => $subject->journey,
+            'user'               => Auth::guard('user'),
+            'child'              => $child,
+            'completedLessonIds' => $completedLessonIds,
+            'currentLessonId'    => $currentLessonId,
+            'topicProgressPercent' => $topicProgressPercent,
+            'continueUrl'        => $continueUrl, // Pass the new URL to the view
         ]);
     }
 
@@ -104,45 +135,38 @@ class JourneyCtrl extends Controller
         $navs = [
             ["url" => url('/dashboard-child/journey'), "name" => "Learning Journey"]
         ];
-        $subject = JourneySubjectMd::leftJoin('tb_journey as journey', 'tb_journey_subject.journey_id', 'journey.id')
-            ->where('tb_journey_subject.id', $subjectId)
-            ->select([
-                'tb_journey_subject.*',
-                'journey.id as journeyId',
-                'journey.name as journey'
-            ])
+        $subject = \App\Models\Backend\JourneySubjectMd::with('journey')
+            ->where('id', $subjectId)
+            ->firstOrFail();
+
+        // --- THE FIX ---
+        // 1. Get the lesson ID that the user clicked on from the request URL.
+        $clickedLessonId = $request->query('lesson');
+
+        // 2. Validate that this lesson actually belongs to the topic.
+        $lesson = \App\Models\Backend\JourneyLessonMd::where('id', $clickedLessonId)
+            ->where('journey_subject_id', $subjectId)
             ->first();
 
-        // Only fetch lessons for this journey AND this subject, ordered!
-        $lessons = JourneyLessonMd::where('journey_id', $journeyId)
-            ->where('journey_subject_id', $subjectId)
-            ->orderBy('list_order', 'asc')
-            ->get();
-
-        $latest = JourneyLearningMd::where([
-            'journeyId' => $journeyId,
-            'subjectId' => $subjectId,
-            'userId' => Auth::guard('child')->user()->id
-        ])->first();
-
-        // Always start with the lowest list_order lesson unless user progress exists
-        $firstLesson = $lessons->first();
-        $lessonId = $latest->latest ?? ($firstLesson ? $firstLesson->id : null);
+        // 3. If the clicked lesson is not valid, redirect back to the map.
+        //    This is a security measure to prevent users from accessing lessons from other topics.
+        if (!$lesson) {
+            return redirect('dashboard-child/journey/' . $journeyId . '/' . $subjectId);
+        }
+        // --- END OF FIX ---
 
         return view("front-end.dashboard-child.learning-journey", [
-            'prefix' => 'front-end',
-            'folder' => $this->folder,
-            'nav' => $navs,
-            'journey' => \App\Models\Backend\JourneyMd::findOrFail($journeyId),
-            'subject' => $subject,
-            'user' => Auth::guard('user'),
-            'latest' => $latest,
+            'prefix'    => 'front-end',
+            'folder'    => $this->folder,
+            'nav'       => $navs,
+            'journey'   => $subject->journey,
+            'subject'   => $subject,
+            'user'      => Auth::guard('user'),
             'journeyId' => $journeyId,
             'subjectId' => $subjectId,
-            'lessonId' => $lessonId
+            'lessonId'  => $lesson->id, // Pass the CORRECT lesson ID to the view
         ]);
     }
-
 
     public function setLatest(Request $request, $journeyId = null, $subjectId = null)
     {
@@ -256,54 +280,48 @@ class JourneyCtrl extends Controller
 
     function finishedLearning(Request $request, $journeyId = null, $subjectId = null)
     {
-        // Find the user's main progress record for this topic
-        $learningProgress = JourneyLearningMd::where([
+        $child = Auth::guard('child')->user();
+        $learningProgress = \App\Models\Backend\JourneyLearningMd::where([
             'journeyId' => $journeyId,
             'subjectId' => $subjectId,
-            'userId' => Auth::guard('child')->user()->id
+            'userId'    => $child->id
         ])->first();
 
         if ($learningProgress) {
-            $learningProgress->timer = $request->timer;
-            $learningProgress->save();
-
-            // Update user's streak points
-            $child = Auth::guard('child')->user();
-            $child->streak_point = $child->streak_point + 1;
-            $child->save();
-
-            // Record the specific lesson completion in our new table.
-            \App\Models\Backend\JourneyLessonCompletionMd::create([
-                'user_id' => $child->id,
+            \App\Models\Backend\JourneyLessonCompletionMd::firstOrCreate([
+                'user_id'   => $child->id,
                 'lesson_id' => $request->lessonId,
             ]);
 
-            // Find the ID of the next lesson in the sequence
             $currentLesson = \App\Models\Backend\JourneyLessonMd::find($request->lessonId);
-            $nextLessonId = null;
-
+            $nextLesson = null;
             if ($currentLesson) {
                 $nextLesson = \App\Models\Backend\JourneyLessonMd::where('journey_id', $journeyId)
                     ->where('journey_subject_id', $subjectId)
                     ->where('list_order', '>', $currentLesson->list_order)
                     ->orderBy('list_order', 'asc')
                     ->first();
-
-                if ($nextLesson) {
-                    $nextLessonId = $nextLesson->id;
-                }
             }
 
-            // Return a success response with the next lesson's ID
-            $res = [
-                'status' => true,
-                'statusCode' => 200,
-                'message' => 'Lesson completion recorded.',
-                'nextLessonId' => $nextLessonId
-            ];
+            $learningProgress->latest = $nextLesson ? $nextLesson->id : null;
 
+            // --- THE FIX ---
+            // If there is no next lesson, mark the entire topic as finished.
+            if (!$nextLesson) {
+                $learningProgress->finished = 1; // Mark as complete
+            }
+            // --- END OF FIX ---
+            
+            $learningProgress->save();
+
+            $res = [
+                'status'       => true,
+                'statusCode'   => 200,
+                'message'      => 'Lesson completion recorded.',
+                'nextLessonId' => $nextLesson ? $nextLesson->id : null,
+            ];
         } else {
-            $res = ['status' => false, 'statusCode' => 500, 'message' => 'Learning progress record not found.'];
+            $res = ['status' => false, 'statusCode' => 404, 'message' => 'Learning progress record not found.'];
         }
 
         return response()->json($res);
@@ -311,41 +329,33 @@ class JourneyCtrl extends Controller
 
     public function learningReset(Request $request, $journeyId = null, $subjectId = null)
     {
-        $learning = JourneyLearningMd::where([
+        $childId = Auth::guard('child')->id();
+
+        // Find the student's "bookmark" for this topic
+        $learning = \App\Models\Backend\JourneyLearningMd::where([
             'journeyId' => $journeyId,
             'subjectId' => $subjectId,
-            'userId' => Auth::guard('child')->user()->id
+            'userId'    => $childId
         ])->first();
-        $subject = JourneySubjectMd::findOrFail($subjectId);
-        if ($learning->id) {
-            $lesson = JourneyLessonMd::where('journey_subject_id', $subject->id)->get();
-            $delete = [];
-            foreach ($lesson as $v) {
-                foreach (
-                    JourneyPracticeMd::where([
-                        'subject_id' => $v->journey_subject_id,
-                        'lesson_id' => $v->id
-                    ])->get() as $k => $p
-                ) {
-                    $delete[$k] = JourneyAnswerMd::where([
-                        'subjectId'  => $subjectId,
-                        'practiceId' => $p->id,
-                        'userId'     => Auth::guard('child')->user()->id
-                    ])->delete();
-                }
-            }
-            $learning->learning = NULL;
-            $learning->all_latest = NULL;
-            $learning->latest = NULL;
-            $learning->latest_type = NULL;
-            $learning->finished = 0;
-            $learning->timer = NULL;
-            $learning->save();
 
-            $response = ['status' => 200, 'statusText' => 'Progress has been reset.'];
+        if ($learning) {
+            // Find all lesson IDs in this topic to clear completions
+            $lessonIds = \App\Models\Backend\JourneyLessonMd::where('journey_subject_id', $subjectId)->pluck('id');
+
+            // 1. Clear the "checklist" of completed lessons for this topic
+            \App\Models\Backend\JourneyLessonCompletionMd::where('user_id', $childId)
+                ->whereIn('lesson_id', $lessonIds)
+                ->delete();
+
+            // 2. Clear the "bookmark" by resetting the main progress record
+            $learning->latest = null;
+            $learning->save();
+            
+            $response = ['status' => 200, 'message' => 'Progress has been reset.'];
         } else {
-            $response = ['status' => 500, 'statusText' => 'Learning not found.'];
+            $response = ['status' => 404, 'message' => 'Learning progress not found.'];
         }
+        
         return response()->json($response);
     }
 }
