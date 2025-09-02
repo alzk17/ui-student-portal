@@ -113,12 +113,14 @@ Route::group(['middleware' => ['Child']], function () {
 
 
         Route::get('/set-work', [Frontend\Child\DashboardController::class, 'setwork']);
-        Route::get('/setting-profile', [Frontend\Child\DashboardController::class, 'setting_profile']);
-        Route::post('/setting-profile', [Frontend\Child\DashboardController::class, 'profileUpdate']);
 
+        Route::prefix('settings')->group(function () {
+            // This creates the URL: /dashboard-child/settings/profile
+            Route::get('/profile', [Frontend\Child\DashboardController::class, 'setting_profile'])->name('child.settings.profile');
+            Route::post('/profile', [Frontend\Child\DashboardController::class, 'profileUpdate'])->name('child.settings.profile.update');
+        });
 
-        Route::get('/profile', [Frontend\Child\DashboardController::class, 'profile']);
-        Route::post('/profile', [Frontend\Child\DashboardController::class, 'profileUpdate']);
+        Route::get('/profile', [Frontend\Child\DashboardController::class, 'profile'])->name('child.profile.view');
 
 
         // Setwork
