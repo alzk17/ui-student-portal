@@ -1,0 +1,547 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile • Lambda</title>
+    
+    <link rel="stylesheet" href="https://lambda.in.th/assets_dashboard/css/bootstrap.css?v=1755783459" />
+    <link rel="stylesheet" href="https://cdn.lineicons.com/5.0/lineicons.css" />
+    <link rel="stylesheet" href="https://lambda.in.th/assets_dashboard/css/icofont.css?v=1755783459" />
+    <link rel="stylesheet" href="https://lambda.in.th/assets_dashboard/css/styles.css?v=1755783459" />
+    <link rel="stylesheet" href="https://lambda.in.th/assets_dashboard/css/font-icon.css?v=1755783459">
+    <link rel="stylesheet" href="https://lambda.in.th/assets_dashboard/css/slick.min.css?v=1755783459">
+    <link rel="stylesheet" href="https://lambda.in.th/assets_dashboard/css/slick-custom.css?v=1755783459">
+    <link rel="stylesheet" href="https://lambda.in.th/assets/cusmike/sweet2/sweetalert2.min.css?v=1755783459">
+    <link rel="stylesheet" href="https://lambda.in.th/assets/cusmike/toastr/toastr.min.css?v=1755783459">
+
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/buttons.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/tooltip-widgets.css">
+    <link rel="stylesheet" href="css/tooltip.css">
+    <link rel="stylesheet" href="css/profile.css">
+
+</head>
+
+<body>
+    <div class="wrapper">
+        <aside id="sidebar" class="expand">
+            <!-- Sidebar logo section -->
+            <div class="logo-sidebar">
+                <div class="sidebar-logo">
+                    <a href="https://lambda.in.th/dashboard-child">
+                        <img src="https://lambda.in.th/assets_dashboard/img/logos/logo-big.svg" class="logo-expanded" alt="">
+                        <img src="https://lambda.in.th/assets_dashboard/img/logos/logo-small.svg" class="logo-collapsed" alt="Small Logo">
+                    </a>
+                </div>
+            </div>
+
+            <!-- Sidebar navigation menu -->
+            <ul class="sidebar-nav">
+                <li class="sidebar-item ">
+                    <a href="https://lambda.in.th/dashboard-child" class="sidebar-link">
+                        <img src="https://lambda.in.th/assets_dashboard/img/icons/home.svg" class="img-fluid img-icon" alt=""> <span>Home</span>
+                    </a>
+                </li>
+                <li class="sidebar-item ">
+                    <a href="https://lambda.in.th/dashboard-child/journey" class="sidebar-link">
+                        <img src="https://lambda.in.th/assets_dashboard/img/icons/hat.svg" class="img-fluid img-icon" alt="">
+                        <span>Learn</span>
+                    </a>
+                </li>
+                <li class="sidebar-item ">
+                    <a href="https://lambda.in.th/dashboard-child/set-work" class="sidebar-link">
+                        <img src="https://lambda.in.th/assets_dashboard/img/icons/target.svg" class="img-fluid img-icon" alt=""> <span>Set Tasks</span>
+                    </a>
+                </li>
+                <li class="sidebar-item ">
+                    <a href="https://lambda.in.th/dashboard-child/review" class="sidebar-link">
+                        <img src="https://lambda.in.th/assets_dashboard/img/icons/magnifier.svg" class="img-fluid img-icon" alt="">
+                        <span>Review</span>
+                    </a>
+                </li>
+                <li class="sidebar-item ">
+                    <a href="https://lambda.in.th/dashboard-child/worksheet" class="sidebar-link">
+                        <img src="https://lambda.in.th/assets_dashboard/img/icons/binders.svg" class="img-fluid img-icon" alt="">
+                        <span>Resources</span>
+                    </a>
+                </li>
+                <li class="sidebar-item ">
+                    <a href="https://lambda.in.th/dashboard-child/hangouts" class="sidebar-link">
+                        <img src="https://lambda.in.th/assets_dashboard/img/icons/shop.svg" class="img-fluid img-icon-step2" alt="">
+                        <span>Shop</span>
+                    </a>
+                </li>
+                <li class="sidebar-item active">
+                    <a href="https://lambda.in.th/dashboard-child/profile" class="sidebar-link">
+                        <img src="https://lambda.in.th/assets_dashboard/img/icons/id.svg" class="img-fluid img-icon-step2" alt="">
+                        <span>Profile</span>
+                    </a>
+                </li>
+            </ul>
+
+            <!-- Sidebar footer with dropdown menu -->
+            <div class="sidebar-footer">
+                <div class="dropdown">
+                    <a class="dropdown-toggle sidebar-link" href="javascript:void(0)" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img src="https://lambda.in.th/assets_dashboard/img/icons/more-test.svg" class="img-fluid img-icon" alt=""> <span>More</span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="https://lambda.in.th/dashboard-child/settings"><span>Settings</span></a></li>
+                        <li><a class="dropdown-item" href="https://lambda.in.th/dashboard-child/help"><span>Help</span></a></li>
+                        <li><a class="dropdown-item" href="#" onclick="openProblemReportModal();"><span>Report a problem</span></a></li>
+                        <li><div class="dropdown-divider"></div></li>
+                        <li><a class="dropdown-item" href="https://lambda.in.th/dashboard-parent"><span>Switch to parent account</span></a></li>
+                        <li><a class="dropdown-item" href="javascript:void(0)" onclick="logoutChild();"><span>Log out</span></a></li>
+                    </ul>
+                </div>
+            </div>
+        </aside>         
+
+        <div class="main">
+            <div class="border-header-page">
+                <div class="container-custom">
+                    <div class="box-headerpage">
+                        <div class="search-bar-wrapper">
+                            <div class="profile-mini" data-tooltip-id="profile-tooltip">
+                                <div class="box-image">
+                                    <img src="https://lambda.in.th/uploads/child/child27012025-141619.jpeg" class="img-fluid" alt="Profile">
+                                </div>
+                                <div class="profile-name">
+                                    Kwannpat
+                                </div>
+
+                                <div class="portal-tooltip portal-tooltip--profile" id="profile-tooltip">
+                                    <div class="tooltip-profile-header">
+                                        <img src="https://lambda.in.th/uploads/child/child27012025-141619.jpeg" alt="Profile" class="tooltip-profile-image" />
+                                        <div class="tooltip-profile-info">
+                                            <p class="tooltip-title">Kwannpat Kotiram</p>
+                                            <div class="tooltip-info-pair">
+                                                <span class="tooltip-label">Age:</span>
+                                                <span class="tooltip-value">8</span>
+                                            </div>
+                                            <div class="tooltip-info-pair">
+                                                <span class="tooltip-label">Plan:</span>
+                                                <span class="tooltip-value">No Plan</span>
+                                            </div>
+                                            <p class="tooltip-value">You have 0 days remaining.</p>
+                                        </div>
+                                    </div>
+                                    <div class="tooltip-cta-wrapper">
+                                        <a href="/top-up" class="portal-btn portal-btn--primary" style="width: 100%;">Top up now</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="right-icons-wrapper">
+                            <div class="box-streak">
+                                <div><img src="https://lambda.in.th/assets_dashboard/img/icons/bolt.svg" alt="Streak Icon" /></div>
+                                <div class="streak-counter">236</div>
+                            </div>
+
+                            <div class="box-gem" data-tooltip-id="gem-tooltip">
+                                <div>
+                                    <img src="https://lambda.in.th/assets_dashboard/img/icons/gem.svg" class="img-fluid" alt="Gem Icon">
+                                </div>
+                                <div class="gem-counter">90</div>
+
+                                <div class="portal-tooltip portal-tooltip--gem" id="gem-tooltip">
+                                    <div class="tooltip-gem-content">
+                                        <div class="tooltip-gem-icon">
+                                            <img src="https://lambda.in.th/assets_dashboard/img/icons/gem.svg" alt="Gem Icon" />
+                                        </div>
+                                        <div class="tooltip-gem-text">
+                                            <p class="gem-count"><span style="color: #375ce3">90</span> Gems</p>
+                                            <p class="tooltip-info" style="margin: 0;">
+                                                Use them to buy streak shields or items at the
+                                                <a href="/dashboard-child/hangouts" class="tooltip-link">Shop</a>.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="box-notification has-unread" data-tooltip-id="notification-tooltip">
+                                <img src="https://lambda.in.th/assets_dashboard/img/icons/bell.svg" alt="Notification Icon" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container-custom">
+            <div class="portal-layout">
+                <!-- LEFT: Primary (≈560px) -->
+                <div class="portal-main">
+                
+                    <!-- Profile Hero -->
+                    <div class="portal-card profile-hero" role="region" aria-labelledby="profile-hero-title">
+                    <div class="hero-row">
+                        <div class="hero-left">
+                        <div class="hero-avatar">
+                        <img src="https://lambda.in.th/uploads/child/child27012025-141619.jpeg" alt="Profile picture of Kwannpat" />
+                        <button class="avatar-edit-btn" type="button" aria-label="Change profile picture">
+                            <i class="fa-solid fa-pen"></i>
+                        </button>
+                        </div>
+                        <div class="hero-meta">
+                            <h1 id="profile-hero-title" class="hero-name">Kwannpat Kotiram</h1>
+                            <div class="hero-subtitle hero-username">@kwannpat</div>
+                            <div class="hero-subtitle hero-status">Grade 3 • Lambda Pro</div>
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+
+                    <!-- Stats (Lifetime) -->
+                    <div class="portal-card stats-card" aria-labelledby="stats-card-title">
+                    <div class="portal-section-header">
+                        <h2 id="stats-card-title" class="portal-section-title">Platform statistics</h2>
+                    </div>
+
+                    <ul class="stats-list">
+                        <!-- Career Gems -->
+                        <li class="stat-row" role="status" aria-label="Career gems 1,180">
+                        <div class="stat-icon">
+                            <img src="https://lambda.in.th/assets_dashboard/img/icons/gem.svg" alt="" aria-hidden="true" />
+                        </div>
+                        <div class="stat-text">
+                            <div class="stat-label">Career gems</div>
+                            <div class="stat-value">1,180</div>
+                        </div>
+                        </li>
+
+                        <!-- Total Lessons (unique) -->
+                        <li class="stat-row" role="status" aria-label="Total lessons completed 245">
+                        <div class="stat-icon">
+                            <img src="https://lambda.in.th/assets_dashboard/img/icons/hat.svg" alt="" aria-hidden="true" />
+                        </div>
+                        <div class="stat-text">
+                            <div class="stat-label">Lessons completed</div>
+                            <div class="stat-value">245</div>
+                        </div>
+                        </li>
+
+                        <!-- Total Questions (includes repeats) -->
+                        <li class="stat-row" role="status" aria-label="Questions answered 9,834">
+                        <div class="stat-icon">
+                            <img src="https://lambda.in.th/assets_dashboard/img/icons/target.svg" alt="" aria-hidden="true" />
+                        </div>
+                        <div class="stat-text">
+                            <div class="stat-label">Questions answered</div>
+                            <div class="stat-value">9,834</div>
+                        </div>
+                        </li>
+
+                        <!-- Best Streak (all-time record) -->
+                        <li class="stat-row" role="status" aria-label="Best streak 236 days">
+                        <div class="stat-icon">
+                            <img src="https://lambda.in.th/assets_dashboard/img/icons/bolt.svg" alt="" aria-hidden="true" />
+                        </div>
+                        <div class="stat-text">
+                            <div class="stat-label">Longest streak</div>
+                            <div class="stat-value">236 days</div>
+                        </div>
+                        </li>
+                    </ul>
+                    </div>
+
+                    <!-- Achievements - LIST LAYOUT -->
+                    <div class="portal-card achievements-card" aria-labelledby="achievements-card-title">
+                      <div class="portal-section-header">
+                        <h2 id="achievements-card-title" class="portal-section-title">Achievements</h2>
+                        <a class="link-under" href="javascript:void(0)">See all</a>
+                      </div>
+
+                      <div class="badge-list">
+                        <!-- Questions Correct (multi-level, always visible) -->
+                        <div class="badge-list-item" role="status" aria-label="Questions correct, 236 of 500.">
+                          <div class="list-item-main">
+                            <div class="list-item-art">
+                              <img src="https://lambda.in.th/assets_dashboard/img/icons/target.svg" alt="" aria-hidden="true" />
+                            </div>
+                            <div class="list-item-details">
+                              <div class="list-item-head">
+                                <h3 class="list-item-title">Questions Correct</h3>
+                                <span class="progress-count" aria-hidden="true">236/500</span>
+                              </div>
+                              <p class="list-item-desc">Total correct answers across practice &amp; mock tests.</p>
+                              <div class="badge-progress" role="progressbar" aria-valuenow="236" aria-valuemin="0" aria-valuemax="500">
+                                <span class="badge-progress__fill" style="width:47%"></span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <!-- Streak Days (multi-level, always visible) -->
+                        <div class="badge-list-item" role="status" aria-label="Streak days, 124 of 200.">
+                          <div class="list-item-main">
+                            <div class="list-item-art">
+                              <img src="https://lambda.in.th/assets_dashboard/img/icons/bolt.svg" alt="" aria-hidden="true" />
+                            </div>
+                            <div class="list-item-details">
+                              <div class="list-item-head">
+                                <h3 class="list-item-title">Streak Days</h3>
+                                <span class="progress-count" aria-hidden="true">124/200</span>
+                              </div>
+                              <p class="list-item-desc">Consecutive days with at least one activity.</p>
+                              <div class="badge-progress" role="progressbar" aria-valuenow="124" aria-valuemin="0" aria-valuemax="200">
+                                <span class="badge-progress__fill" style="width:62%"></span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                </div>
+
+                <!-- RIGHT: Secondary (≈380px) -->
+                <div class="portal-side">
+
+                    <div class="portal-card portal-card--cta portal-card--gem">
+                        <div class="cta-icon">
+                            <img src="https://lambda.in.th/assets_dashboard/img/icons/gem.svg" alt="" aria-hidden="true">
+                        </div>
+                        <h3 class="cta-title">Unlock Cool Rewards!</h3>
+                        <p class="cta-desc">You've got <strong>90 gems</strong>. Visit the shop to buy avatar items, shields, and more!</p>
+                        <a href="/dashboard-child/hangouts" class="portal-btn3d portal-btn3d--blue portal-btn--full">Visit the Shop</a>
+                    </div>
+
+                    <!-- Leaderboard (weekly, 20-person leagues) -->
+                    <div class="portal-card leaderboard-card" id="leaderboard-card" aria-labelledby="leaderboard-card-title">
+                    <div class="lb-overview" role="group" aria-labelledby="lb-title">
+                        <div class="lb-league-icon" aria-hidden="true">
+                            <img src="Icons/trophy-1.svg" alt="" />
+                        </div>
+                        <div class="lb-details">
+                            <h2 id="lb-title" class="lb-title">Gold League</h2>
+                            <div class="lb-subtitle">
+                                <span class="lb-advancement">Top 10 advance</span>
+                                <span class="lb-dot" aria-hidden="true">•</span>
+                                <span class="lb-time">4 days left</span>
+                            </div>
+                        </div>
+                        <button class="lb-resize-btn" id="leaderboard-resize-btn" type="button" aria-label="Expand leaderboard" aria-expanded="false">
+                            <i class="fa-solid fa-expand"></i>
+                        </button>
+                    </div>
+
+                    <div class="lb-scroll" role="region" aria-label="Leaderboard rankings" tabindex="0">
+                        <ol class="lb-list" role="list">
+                            <li class="lb-row" aria-label="1. Lane J., 610 XP.">
+                            <span class="lb-rank">1</span>
+                            <div class="lb-avatar" aria-hidden="true"><img src="https://lambda.in.th/assets_dashboard/img/avatars/a5.png" alt=""></div>
+                            <span class="lb-name">Lane J.</span>
+                            <span class="lb-score">610 XP</span>
+                            </li>
+                            <li class="lb-row" aria-label="2. Sidney P., 600 XP.">
+                            <span class="lb-rank">2</span>
+                            <div class="lb-avatar" aria-hidden="true"><img src="https://lambda.in.th/assets_dashboard/img/avatars/default.svg" alt=""></div>
+                            <span class="lb-name">Sidney P.</span>
+                            <span class="lb-score">600 XP</span>
+                            </li>
+                            <li class="lb-row is-you" aria-label="3. You, 480 XP.">
+                            <span class="lb-rank">3</span>
+                            <div class="lb-avatar" aria-hidden="true"><img src="https://lambda.in.th/uploads/child/child27012025-141619.jpeg" alt=""></div>
+                            <span class="lb-name">Kwannpat K.</span>
+                            <span class="lb-score">480 XP</span>
+                            </li>
+                            <li class="lb-row" aria-label="4. Lionel M., 460 XP.">
+                            <span class="lb-rank">4</span>
+                            <div class="lb-avatar" aria-hidden="true"><img src="https://lambda.in.th/assets_dashboard/img/avatars/a6.png" alt=""></div>
+                            <span class="lb-name">Lionel M.</span>
+                            <span class="lb-score">460 XP</span>
+                            </li>
+                            <li class="lb-row" aria-label="5. Barack O., 420 XP.">
+                            <span class="lb-rank">5</span>
+                            <div class="lb-avatar" aria-hidden="true"><img src="https://lambda.in.th/assets_dashboard/img/avatars/a7.png" alt=""></div>
+                            <span class="lb-name">Barack O.</span>
+                            <span class="lb-score">420 XP</span>
+                            </li>
+
+                            <li class="lb-row is-hidden" aria-label="6. Player F, 410 XP.">
+                            <span class="lb-rank">6</span>
+                            <div class="lb-avatar" aria-hidden="true"><img src="https://lambda.in.th/assets_dashboard/img/avatars/a1.png" alt=""></div>
+                            <span class="lb-name">Player F</span>
+                            <span class="lb-score">410 XP</span>
+                            </li>
+                            <li class="lb-row is-hidden" aria-label="7. Player G, 390 XP.">
+                            <span class="lb-rank">7</span>
+                            <div class="lb-avatar" aria-hidden="true"><img src="https://lambda.in.th/assets_dashboard/img/avatars/a2.png" alt=""></div>
+                            <span class="lb-name">Player G</span>
+                            <span class="lb-score">390 XP</span>
+                            </li>
+                        </ol>
+                    </div>
+
+                    </div>
+
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://lambda.in.th/assets_dashboard/js/bootstrap.min.js?v=1755783459"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://lambda.in.th/assets_dashboard/js/slick.min.js?v=1755783459"></script>
+    <script src="https://lambda.in.th/assets_dashboard/js/main.js?v=1755783459"></script>
+    <script src="https://lambda.in.th/assets/cusmike/sweet2/sweetalert2.min.js?v=1755783459"></script>
+    <script src="https://lambda.in.th/assets/cusmike/toastr/toastr.min.js?v=1755783459"></script>
+    <script src="https://lambda.in.th/assets_dashboard/js/tooltip.js?v=1755783459"></script>
+    <script src="https://lambda.in.th/assets_dashboard/js/viewport-fix.js?v=1755783459"></script>
+    <script>
+        $(document).ready(function() {
+            const handleSidebar = () => {
+                if (window.matchMedia("screen and (max-width: 1024px)").matches) {
+                    const _sidebar = $("#sidebar");
+                    if (_sidebar.length) {
+                        _sidebar.removeClass("expand");
+                    }
+                } else {
+                    const _sidebar = $("#sidebar");
+                    if (_sidebar.length) {
+                        _sidebar.addClass("expand");
+                    }
+                }
+            };
+
+            handleSidebar();
+
+            $(window).resize(function() {
+                handleSidebar();
+            });
+        });
+
+        const _boxJourneys = document.querySelectorAll('.box-item-journey');
+        _boxJourneys.forEach(box => {
+            box.addEventListener('click', () => {
+                _boxJourneys.forEach(b => b.classList.remove('active-journey'));
+                box.classList.add('active-journey');
+            });
+        });
+
+        const _boxContentChoices = document.querySelectorAll('.box-content-choice');
+        _boxContentChoices.forEach(box => {
+            box.addEventListener('click', () => {
+                _boxContentChoices.forEach(b => b.classList.remove('answer-success'));
+                box.classList.add('answer-success');
+            });
+        });
+
+        const _boxContentFilterReview = document.querySelectorAll('.box-border');
+        _boxContentFilterReview.forEach(box => {
+            box.addEventListener('click', () => {
+                _boxContentFilterReview.forEach(b => b.classList.remove('active-box-filter-review'));
+                box.classList.add('active-box-filter-review');
+            });
+        });
+
+        function logoutChild() {
+            var parent_id = localStorage.getItem('parent_id');
+            if (parent_id != 0) {
+                $.ajax({
+                    type: 'POST',
+                    url: "dashboard-child/parent/logout",
+                    data: {
+                        "_token": "OXSXpziWcZ05bjahhP7oNTaf3m90v7vb94Bfz0vK",
+                        parent_id: parent_id,
+                    },
+                    dataType: 'json',
+                    success: function(data) {
+                        if (data.status == 200) {
+                            localStorage.removeItem('parent_id');
+                            location.href = "https://lambda.in.th/dashboard";
+                        } else {
+                            localStorage.removeItem('parent_id');
+                            location.reload();
+                        }
+                    }
+                });
+            }
+        }
+
+        function openQuestionModal() {
+            var myModal = new bootstrap.Modal(document.getElementById('myQuestionModal'));
+            myModal.show();
+        }
+    </script>
+    <script src="https://lambda.in.th/assets_dashboard/js/bs-switches.js"></script>
+    <script>
+        var fullUrl = window.location.origin + window.location.pathname;
+        function checkPass(){
+            var password = $('#password').val();
+            if (password.length != 6) {
+                $('#show_alert_01').attr('hidden', false);
+            }else{
+                $('#show_alert_01').attr('hidden', true);
+            }
+        }
+        function updateProfile() {
+            var formData = new FormData($("#form_submit")[0]);
+            var username = $('#username').val();
+            var password = $('#password').val();
+            var confirmpassword = $('#confirmpassword').val();
+            if(username == ""){
+                toastr.error("Sorry, please complete the information.");
+                return false;
+            }
+            $('#show_pass_format').attr('hidden',true);
+            $('#show_pass_not_match').attr('hidden',true);
+
+            if(password != ""){
+                if(password != confirmpassword){
+                    $('#show_pass_not_match').attr('hidden',false);
+                    return false;
+                }
+            }
+            
+            $.ajax({
+                type: 'POST',
+                url: fullUrl,
+                data: formData,
+                processData: false,
+                contentType: false,
+                dataType: 'json',
+                success: function(data) {
+                    if (data.status == 200) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: data.message,
+                            text: data.desc,
+                            showCancelButton: false,
+                            confirmButtonText: 'Close',
+                            timer: 1000
+                        }).then((result) => {
+                            location.reload();
+                        });
+                    } 
+                    else if (data.status == 500) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: data.message,
+                            text: data.desc,
+                            showCancelButton: false,
+                            confirmButtonText: 'Close',
+                        }).then((result) => {
+                            location.reload();
+                        });
+                    }
+                    else if (data.status == 501) {
+                        $('#show_duplicate').attr('hidden',false);
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>

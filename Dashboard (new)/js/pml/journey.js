@@ -13,6 +13,54 @@ createApp({
       digestPages: [
         {
           type: "content",
+          content: `<h2>Counting to 10</h2>
+                    <p>We use numbers to help us count things around us.</p>
+                    <p>Zero means nothing. Then, we count as follows.</p>`
+        },
+        {
+          type: "quiz",
+          quiz: {
+            question: "<p>Count the bananas.<br/> <strong>How many are there?</strong></p>",
+            img: "img/fraction-test3.svg",
+            options: [
+              { value: "A", label: "\\(3\\)" },
+              { value: "B", label: "\\(5\\)" },
+              { value: "C", label: "\\(6\\)" },
+              { value: "D", label: "\\(0\\)" },
+            ],
+            answerType: "MCQ",
+            correctAnswers: ["B"],
+            selected: [],
+            revealed: false,
+            showExplanation: false,
+            explanation: `<p>Count each banana once. There are \\(5\\) bananas.</p>`
+          }
+        },
+        {
+          type: "quiz",
+          quiz: {
+            question: "<p>Jenny picked up some strawberries from the field. <br/> <strong>How many strawberries did she pick?</strong></p>",
+            img: "img/fraction-test3.svg",
+            options: [
+              { value: "A", label: "\\(4\\)" },
+              { value: "B", label: "\\(6\\)" },
+              { value: "C", label: "\\(7\\)" },
+              { value: "D", label: "\\(9\\)" },
+            ],
+            answerType: "MCQ",
+            correctAnswers: ["D"],
+            selected: [],
+            revealed: false,
+            showExplanation: false,
+            explanation: `<p>Count each strawberry once. There are \\(9\\) strawberries.</p>`
+          }
+        },
+        {
+          type: "content",
+          content: `<p>We can arrange numbers in <strong>number lines</strong> to help us count.</p>`
+        },
+        {
+          type: "content",
           title: "Equal Groups",
           content: `<p>Multiplication means making equal groups of things. For example, if you have \\(3\\) plates and each plate has \\(4\\) apples, that is \\(3\\) equal groups of \\(4\\).</p>
                     <p>We can write this as:</p>

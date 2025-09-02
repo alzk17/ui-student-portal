@@ -49,6 +49,15 @@
   --font-main:      'Lato', sans-serif;
   --font-heading:   'Sarabun', sans-serif;
 
+  /* === Font sizes === */
+  --font-size-xs: 0.75rem;   /* 12px */
+  --font-size-sm: 0.875rem;  /* 14px */
+  --font-size-md: 1rem;      /* 16px (base) */
+  --font-size-lg: 1.125rem;  /* 18px */
+  --font-size-xl: 1.25rem;   /* 20px */
+  --font-size-2xl: 1.4rem;   /* 22.4px */
+  --font-size-3xl: 1.875rem; /* 30px */
+
   /* === Spacing === */
   --spacing-xs:     8px;
   --spacing-sm:     12px;
